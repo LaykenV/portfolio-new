@@ -3,6 +3,74 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Palette — Light mode (off-white base, charcoal text) */
+  --background: #FAF9F6; /* off-white neutral */
+  --foreground: #222222; /* charcoal */
+  /* Tinted border (no dull gray) */
+  --border: #F3EAE4;     /* peach-tinted border */
+  --muted: hsl(24 8% 34%);      /* warm, not gray */
+
+  /* Accents — shared tokens */
+  --accent-blue: #E9F1FF;   /* pale sky blue */
+  --accent-peach: #FFEDE4;  /* warm peach */
+  --accent-peach-2: #FFF8F3;/* warm off-white */
+
+  /* HSL tokens for richer UI composition */
+  /* Core accents (light) */
+  --blue-soft: 218 100% 94%;   /* #E9F1FF */
+  --blue-strong: 218 88% 74%;  /* visible on light + dark */
+  --peach-soft: 20 100% 93%;   /* #FFEDE4 */
+  --peach-strong: 20 86% 78%;  /* visible on light + dark */
+  /* Aliases for compatibility */
+  --primary: var(--blue-soft);
+  --accent: var(--peach-soft);
+  --foreground-hsl: 0 0% 13%;
+  --card: 36 50% 98%;       /* warm off-white card base */
+  --sidebar: 36 50% 98%;
+
+  /* RGB tuples for alpha overlays */
+  --background-rgb: 250 249 246;
+  --foreground-rgb: 34 34 34;
+  --accent-blue-rgb: 233 241 255;
+  --accent-peach-rgb: 255 237 228;
+
+  /* Gradient tuning (light) */
+  --gradient-left-alpha: 0.85;   /* visible yet soft */
+  --gradient-right-alpha: 0.70;
+
+  /* Surfaces and shadows */
+  --surface: rgb(255 255 255 / 0.6);
+  --shadow-color: rgb(0 0 0 / 0.07);
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  /* Palette — Dark mode (off-black base, soft light text) */
+  --background: #0A0A0A; /* off-black */
+  --foreground: #EDEDED; /* soft light */
+  --border: #2A1F1B;     /* warm, peach-tinted dark border */
+  --muted: #D1D1D1;
+
+  /* HSL tokens (dark) */
+  --blue-soft: 218 100% 86%;
+  --blue-strong: 218 90% 72%;
+  --peach-soft: 20 100% 86%;
+  --peach-strong: 20 90% 72%;
+  /* Aliases for compatibility */
+  --primary: var(--blue-soft);
+  --accent: var(--peach-soft);
+  --foreground-hsl: 0 0% 93%;
+  --card: 24 12% 10%;
+  --sidebar: 24 12% 8%;
+
+  /* Gradient tuning (dark) — slightly stronger but still subtle */
+  --gradient-left-alpha: 0.34;
+  --gradient-right-alpha: 0.24;
+
+  /* Surfaces and shadows */
+  --surface: rgb(16 16 16 / 0.6);
+  --shadow-color: rgb(0 0 0 / 0.35);
 }
 
 @theme inline {
@@ -10,17 +78,236 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Expose additional colors to utilities if needed */
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-peach: var(--accent-peach);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* View Transitions reset for theme animations */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/*
+  App background: subtle dual radial gradients over warm base.
+  Uses alpha-tuned accents for minimal, elegant atmosphere.
+*/
+.app-background {
+  background-color: var(--background);
+  color: var(--foreground);
+  background-image:
+    radial-gradient(680px 440px at 14% 14%, hsl(var(--blue-soft) / var(--gradient-left-alpha)), transparent 62%),
+    radial-gradient(760px 500px at 86% 22%, hsl(var(--peach-soft) / var(--gradient-right-alpha)), transparent 66%),
+    radial-gradient(820px 560px at 50% 100%, hsl(var(--peach-soft) / 0.28), transparent 66%);
+  background-attachment: fixed, fixed, fixed;
+}
+
+/* Dark mode background gradients with stronger accents to avoid gray */
+html.dark .app-background {
+  background-image:
+    radial-gradient(720px 480px at 14% 16%, hsl(var(--blue-strong) / 0.32), transparent 62%),
+    radial-gradient(800px 560px at 86% 24%, hsl(var(--peach-strong) / 0.26), transparent 66%),
+    radial-gradient(900px 620px at 50% 100%, hsl(var(--peach-strong) / 0.18), transparent 70%);
+}
+
+/* Subtle border color helper */
+.border-subtle {
+  border-color: var(--border);
+}
+
+/* Floating card with subtle blue/peach gradient and glow */
+.card {
+  position: relative;
+  background:
+    linear-gradient(180deg, hsl(var(--blue-soft) / 0.14) 0%, hsl(var(--peach-soft) / 0.10) 100%),
+    hsl(var(--card));
+  border: 1px solid hsl(var(--blue-soft) / 0.38);
+  border-radius: 0.5rem; /* md */
+  padding: 1rem; /* p-4 */
+  box-shadow:
+    0 24px 60px -22px hsl(var(--blue-soft) / 0.22),
+    0 8px 26px -10px hsl(var(--peach-soft) / 0.18),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.06);
+  backdrop-filter: saturate(130%) blur(6px);
+  transform: translateY(0);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 28px 70px -26px hsl(var(--blue-soft) / 0.28),
+    0 12px 34px -16px hsl(var(--peach-soft) / 0.22),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.08);
+}
+
+html.dark .card {
+  background:
+    linear-gradient(180deg, hsl(var(--blue-strong) / 0.18) 0%, hsl(var(--peach-strong) / 0.12) 100%),
+    hsl(var(--card));
+  border-color: hsl(var(--blue-strong) / 0.34);
+  box-shadow:
+    0 24px 60px -22px hsl(var(--blue-strong) / 0.28),
+    0 8px 26px -10px hsl(var(--peach-strong) / 0.22),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.06);
+}
+
+/* Removed explicit active state; all cards get the subtle gradient/glow */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 2.25rem; /* ~36px */
+  padding: 0 0.875rem;
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--blue-soft) / 0.28);
+  background:
+    linear-gradient(
+      180deg,
+      hsl(var(--blue-soft) / 0.12) 0%,
+      hsl(var(--blue-soft) / 0.08) 55%,
+      hsl(var(--blue-soft) / 0.06) 100%
+    ),
+    linear-gradient(135deg, hsl(var(--blue-soft) / 0.16), hsl(var(--peach-soft) / 0.12));
+  color: var(--foreground);
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease, border-color 150ms ease;
+}
+
+.btn:hover {
+  border-color: hsl(var(--blue-soft) / 0.38);
+  background:
+    linear-gradient(
+      180deg,
+      hsl(var(--blue-soft) / 0.16) 0%,
+      hsl(var(--blue-soft) / 0.12) 52%,
+      hsl(var(--blue-soft) / 0.10) 100%
+    ),
+    linear-gradient(135deg, hsl(var(--blue-soft) / 0.20), hsl(var(--peach-soft) / 0.16));
+  box-shadow:
+    inset 0 1px 0 0 hsl(var(--blue-soft) / 0.30),
+    inset 0 -1px 0 0 hsl(var(--blue-soft) / 0.15),
+    0 16px 32px -14px hsl(var(--blue-soft) / 0.28),
+    0 6px 12px -3px hsl(var(--peach-soft) / 0.18);
+}
+
+/* Beautiful accent button based on provided example */
+.btn-accent {
+  position: relative;
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid hsl(var(--blue-soft) / 0.28);
+  background:
+    linear-gradient(
+      180deg,
+      hsl(var(--blue-soft) / 0.15) 0%,
+      hsl(var(--blue-soft) / 0.10) 55%,
+      hsl(var(--blue-soft) / 0.08) 100%
+    ),
+    linear-gradient(135deg, hsl(var(--blue-soft) / 0.18), hsl(var(--peach-soft) / 0.15));
+  color: var(--foreground);
+  box-shadow:
+    inset 0 1px 0 0 hsl(var(--blue-soft) / 0.25),
+    inset 0 -1px 0 0 hsl(var(--blue-soft) / 0.12),
+    0 12px 28px -14px hsl(var(--blue-soft) / 0.25),
+    0 4px 10px -2px hsl(var(--blue-soft) / 0.15);
+}
+
+.btn-accent:hover {
+  border-color: hsl(var(--blue-soft) / 0.38);
+  background:
+    linear-gradient(
+      180deg,
+      hsl(var(--blue-soft) / 0.20) 0%,
+      hsl(var(--blue-soft) / 0.15) 52%,
+      hsl(var(--blue-soft) / 0.12) 100%
+    ),
+    linear-gradient(135deg, hsl(var(--blue-soft) / 0.22), hsl(var(--peach-soft) / 0.18));
+  box-shadow:
+    inset 0 1px 0 0 hsl(var(--blue-soft) / 0.30),
+    inset 0 -1px 0 0 hsl(var(--blue-soft) / 0.15),
+    0 16px 32px -14px hsl(var(--blue-soft) / 0.30),
+    0 6px 12px -3px hsl(var(--blue-soft) / 0.18);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--foreground);
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--blue-soft) / 0.28);
+  background:
+    linear-gradient(180deg, hsl(var(--blue-soft) / 0.12), hsl(var(--blue-soft) / 0.05));
+  box-shadow:
+    0 12px 28px -16px hsl(var(--blue-soft) / 0.22),
+    0 6px 18px -12px hsl(var(--peach-soft) / 0.16);
+}
+
+.btn-icon:hover {
+  transform: translateY(-1px);
+}
+
+/* Dark mode variants of key components */
+.dark .btn,
+.dark .btn-icon {
+  border-color: hsl(var(--blue-strong) / 0.26);
+  background:
+    linear-gradient(180deg, hsl(var(--blue-strong) / 0.14), hsl(var(--blue-strong) / 0.08));
+}
+
+.dark .btn-accent {
+  background:
+    linear-gradient(
+      180deg,
+      hsl(var(--blue-strong) / 0.18) 0%,
+      hsl(var(--blue-strong) / 0.10) 55%,
+      hsl(var(--blue-strong) / 0.07) 100%
+    ),
+    hsl(var(--sidebar));
+  color: var(--foreground);
+  border: 1px solid hsl(var(--blue-strong) / 0.24);
+  box-shadow:
+    0 20px 50px -20px hsl(var(--blue-strong) / 0.3),
+    inset 0 1px 0 0 hsl(var(--blue-strong) / 0.1);
+}
+
+.dark .btn-accent:hover {
+  border-color: hsl(var(--blue-strong) / 0.3);
+  background:
+    linear-gradient(
+      180deg,
+      hsl(var(--blue-strong) / 0.22) 0%,
+      hsl(var(--blue-strong) / 0.14) 55%,
+      hsl(var(--blue-strong) / 0.10) 100%
+    ),
+    hsl(var(--sidebar));
 }
