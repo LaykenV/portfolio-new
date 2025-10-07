@@ -139,12 +139,10 @@ html.dark .app-background {
     0 8px 26px -10px hsl(var(--peach-strong) / 0.20),
     inset 0 1px 0 hsl(var(--foreground-hsl) / 0.06);
   backdrop-filter: saturate(130%) blur(6px);
-  transform: translateY(0);
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  transition: box-shadow 220ms ease, border-color 220ms ease;
 }
 
 .card:hover {
-  transform: translateY(-2px);
   box-shadow:
     0 28px 70px -26px hsl(var(--blue-strong) / 0.30),
     0 12px 34px -16px hsl(var(--peach-strong) / 0.24),
@@ -271,10 +269,6 @@ html.dark .card {
   box-shadow:
     0 12px 28px -16px hsl(var(--blue-strong) / 0.26),
     0 6px 18px -12px hsl(var(--peach-strong) / 0.18);
-}
-
-.btn-icon:hover {
-  transform: translateY(-1px);
 }
 
 /* Dark mode variants of key components */
@@ -595,5 +589,90 @@ html.dark .index-dot {
 
 html.dark .index-dot-active {
   background: linear-gradient(90deg, hsl(var(--blue-soft) / 0.70), hsl(var(--peach-soft) / 0.70));
+}
+
+/* Custom animations for replacing Framer Motion */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-top {
+  from {
+    transform: translateY(-0.5rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(0.5rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(0.5rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Animation utility classes */
+.animate-in {
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fade-in;
+}
+
+.slide-in-from-top-2 {
+  animation-name: fade-in, slide-in-from-top;
+}
+
+.slide-in-from-bottom-2 {
+  animation-name: fade-in, slide-in-from-bottom;
+}
+
+.slide-in-from-bottom-3 {
+  animation-name: fade-in, slide-in-from-bottom;
+}
+
+.slide-in-from-right-2 {
+  animation-name: fade-in, slide-in-from-right;
+}
+
+.zoom-in-95 {
+  animation-name: fade-in, zoom-in;
+}
+
+.duration-200 {
+  animation-duration: 200ms;
+}
+
+.duration-300 {
+  animation-duration: 300ms;
 }
 

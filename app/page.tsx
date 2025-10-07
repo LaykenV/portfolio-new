@@ -6,14 +6,14 @@ import Image from 'next/image'
 import { Github, Linkedin } from 'lucide-react'
 import { Globe as GlobeViz } from '@/components/globe'
 
-//export const dynamic = 'force-static' as const
+export const dynamic = 'force-static'
 
 export default function Home() {
   const projects = (projectsData as { projects: Project[] }).projects
   return (
-    <div className="font-sans mx-auto max-w-[110rem] h-screen">
-      <div className="flex flex-col md:flex-row h-full md:overflow-hidden md:items-stretch">
-        <aside className="relative md:sticky md:top-0 md:self-stretch md:h-full p-6 pt-8 md:pt-6 flex flex-col gap-6 md:border-r border-subtle md:w-[42%] md:shrink-0">
+    <div className="font-sans mx-auto max-w-[110rem] min-h-dvh overflow-hidden">
+      <div className="flex flex-col md:flex-row h-full">
+        <aside className="relative md:h-screen md:overflow-y-auto md:overflow-x-hidden p-6 pt-8 md:pt-6 flex flex-col gap-6 md:border-r border-subtle md:w-[42%] md:shrink-0">
           {/* Theme toggle pinned to top-right */}
           <div className="absolute top-4 right-4">
             <AnimatedThemeToggler className="btn-icon" />
@@ -75,10 +75,8 @@ export default function Home() {
           </div>
         </aside>
 
-        <section className="flex-1 h-full md:h-full md:overflow-hidden p-4 pt-0 md:pt-6 md:px-4">
-          <div className="h-full md:h-full">
-            <ProjectsScroller projects={projects} />
-          </div>
+        <section className="flex-1 h-full md:h-screen overflow-hidden">
+          <ProjectsScroller projects={projects} />
         </section>
       </div>
     </div>

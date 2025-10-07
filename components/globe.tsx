@@ -77,6 +77,7 @@ export function Globe({
 
   useEffect(() => {
     let destroyed = false
+    const prefersReduce = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
     const hslToRgbNormalized = (h: number, s: number, l: number): [number, number, number] => {
@@ -144,7 +145,7 @@ export function Globe({
               state.glowColor = accentNow
             }
 
-            if (!pointerInteracting.current) phiRef.current += 0.005
+            if (!prefersReduce && !pointerInteracting.current) phiRef.current += 0.005
             state.phi = phiRef.current + rs.get()
             state.width = widthRef.current * 2
             state.height = widthRef.current * 2

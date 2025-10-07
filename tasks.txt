@@ -1,4 +1,18 @@
 //color pallette and card button styles
 //fix bg gradient and light mode
-style left side and add buttons
-make project card and expandable
+//style left side and add buttons
+//make project card and expandable
+//expanded styles
+//expand animation
+//weird hover on card and scroll
+//reorder projects
+//extra imgs in expanded
+//top being clipped
+//no scroll on mobile
+//layout
+
+//optimize
+
+//framer motion on load?
+
+deploy and test mobile

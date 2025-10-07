@@ -7,63 +7,68 @@
             "description": "A multi-model chat interface that coordinates multiple AI models in a single conversation, running a 'research and debate' process to synthesize a final, concise answer.",
             "longDescription": "Mesh Mind showcases advanced AI orchestration using Convex workflows. Users select a 'master' model and secondary models which then engage in a two-round process: parallel initial responses followed by a debate round where each model refines its answer based on its peers. The final output is a synthesized summary. The app features real-time streaming, file-based grounding for prompts, and a lightweight subscription and usage-tracking model.",
             "image": "/MeshMind.png",
+            "secondaryImage": "/MeshMindSecondary.png",
             "techStack": ["Next.js", "React 19", "Convex", "OpenAI", "Anthropic", "Google Gemini"],
             "links": {
               "github": "https://github.com/LaykenV/master-prompt",
               "live": "https://meshmind.chat"
             }
           },
-      {
-        "slug": "food-truck-flow",
-        "title": "FoodTruckFlow",
-        "tagline": "A Full-Stack B2B Multi-Tenant SaaS Platform",
-        "description": "A comprehensive SaaS platform that empowers food truck owners to create professional websites with integrated online ordering, featuring a sophisticated multi-tenant architecture.",
-        "longDescription": "FoodTruckFlow is a complete digital solution for mobile food businesses. Its multi-tenant architecture uses Supabase's Row-Level Security (RLS) for complete data isolation between tenants. The platform handles automatic subdomain generation, custom domain mapping via Vercel, and a JSON-based configuration for a live, real-time website builder. It also features a full subscription system with Stripe, including freemium and pro tiers with recurring billing.",
-        "image": "/FoodTruckFlowSS.png",
-        "techStack": ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Stripe", "Vercel"],
-        "links": {
-          "github": "https://github.com/LaykenV/food-truck-flow",
-          "live": "https://foodtruckflow.com"
-        }
-      },
-      {
-        "slug": "teach-magic",
-        "title": "TeachMagic",
-        "tagline": "AI-Powered Educational Content Platform",
-        "description": "An AI platform for educators that instantly generates structured slides, quizzes, and custom images on any subject using OpenAI and Stability AI, with seamless export capabilities.",
-        "longDescription": "TeachMagic leverages OpenAI's GPT-4o for structured content generation and Stability AI for creating contextually relevant images. The backend uses Drizzle ORM with a PostgreSQL database, optimized with a memory caching layer. The platform is secured with Clerk Authentication and processes payments via Stripe, providing a robust, enterprise-ready solution for modern educational content creation.",
-        "image": "/TeachMagicSS.png",
-        "techStack": ["Next.js", "TypeScript", "PostgreSQL", "Drizzle ORM", "OpenAI", "Clerk", "Stripe"],
-        "links": {
-          "github": "https://github.com/LaykenV/teach-magic",
-          "live": "https://teachmagic.us"
-        }
-      },
-      {
-        "slug": "civicly",
-        "title": "Civicly",
-        "tagline": "AI-Powered Legislative Data Engine & Analysis",
-        "description": "A real-time data engine that ingests and processes U.S. congressional bills, using AI to provide summaries, semantic search, and chat-based analysis for complex legislative information.",
-        "longDescription": "Civicly's core is a fully implemented data pipeline built on Convex. It uses cron jobs to discover new bill manifests from govinfo.gov, processes XML files, and enriches the data with AI-generated summaries and categorizations from GPT-4o. The data is then vectorized for advanced semantic search (RAG), allowing users to interact with and understand complex legislation through a simple chat interface.",
-        "image": "/civicly.png",
-        "techStack": ["Next.js", "Convex", "TypeScript", "OpenAI", "React", "Vercel"],
-        "links": {
-          "github": "https://github.com/LaykenV/civicly",
-          "live": "https://civicly.chat"
-        }
-      },
-      {
-        "slug": "atlas-outbound",
-        "title": "Atlas Outbound",
-        "tagline": "AI-Powered Sales Calls for Digital Agencies",
-        "description": "A hackathon-winning AI platform that automates sales prospecting for agencies by finding qualified local clients and initiating a trust-based AI sales call to book discovery meetings.",
-        "longDescription": "Built in just 12 days for the Convex Modern Stack Hackathon, Atlas Outbound solves a critical agency pain point. It uses Google Places API for lead sourcing, Firecrawl to analyze websites for marketing gaps, and OpenAI for intelligence. The core feature is its context-aware AI sales agent, powered by Vapi, which uses the agency's own case studies to build immediate trust and book calls. The real-time dashboard is powered by Convex, showcasing a complete end-to-end user flow.",
-        "image": "/atlasOutbound.png",
-        "techStack": ["Next.js", "Convex", "TypeScript", "OpenAI", "Vapi", "Google Places API"],
-        "links": {
-          "github": "https://github.com/LaykenV/modern-hack",
-          "live": "https://atlasoutbound.app"
-        }
-      }
+          {
+            "slug": "atlas-outbound",
+            "title": "Atlas Outbound",
+            "tagline": "AI-Powered Sales Calls for Digital Agencies",
+            "description": "A hackathon-winning AI platform that automates sales prospecting for agencies by finding qualified local clients and initiating a trust-based AI sales call to book discovery meetings.",
+            "longDescription": "Built in just 12 days for the Convex Modern Stack Hackathon, Atlas Outbound solves a critical agency pain point. It uses Google Places API for lead sourcing, Firecrawl to analyze websites for marketing gaps, and OpenAI for intelligence. The core feature is its context-aware AI sales agent, powered by Vapi, which uses the agency's own case studies to build immediate trust and book calls. The real-time dashboard is powered by Convex, showcasing a complete end-to-end user flow.",
+            "image": "/atlasOutbound.png",
+            "secondaryImage": "/atlasOutboundSecondary.png",
+            "techStack": ["Next.js", "Convex", "TypeScript", "OpenAI", "Vapi", "Google Places API"],
+            "links": {
+              "github": "https://github.com/LaykenV/modern-hack",
+              "live": "https://atlasoutbound.app"
+            }
+          },
+          {
+            "slug": "civicly",
+            "title": "Civicly",
+            "tagline": "AI-Powered Legislative Data Engine & Analysis",
+            "description": "A real-time data engine that ingests and processes U.S. congressional bills, using AI to provide summaries, semantic search, and chat-based analysis for complex legislative information.",
+            "longDescription": "Civicly's core is a fully implemented data pipeline built on Convex. It uses cron jobs to discover new bill manifests from govinfo.gov, processes XML files, and enriches the data with AI-generated summaries and categorizations from GPT-4o. The data is then vectorized for advanced semantic search (RAG), allowing users to interact with and understand complex legislation through a simple chat interface.",
+            "image": "/civicly.png",
+            "secondaryImage": "/civiclySecondary.png",
+            "techStack": ["Next.js", "Convex", "TypeScript", "OpenAI", "React", "Vercel"],
+            "links": {
+              "github": "https://github.com/LaykenV/civicly",
+              "live": "https://civicly.chat"
+            }
+          },
+          {
+            "slug": "food-truck-flow",
+            "title": "FoodTruckFlow",
+            "tagline": "A Full-Stack B2B Multi-Tenant SaaS Platform",
+            "description": "A comprehensive SaaS platform that empowers food truck owners to create professional websites with integrated online ordering, featuring a sophisticated multi-tenant architecture.",
+            "longDescription": "FoodTruckFlow is a complete digital solution for mobile food businesses. Its multi-tenant architecture uses Supabase's Row-Level Security (RLS) for complete data isolation between tenants. The platform handles automatic subdomain generation, custom domain mapping via Vercel, and a JSON-based configuration for a live, real-time website builder. It also features a full subscription system with Stripe, including freemium and pro tiers with recurring billing.",
+            "image": "/FoodTruckFlowSS.png",
+            "secondaryImage": "/FoodTruckFlowSecondary.png",
+            "techStack": ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Stripe", "Vercel"],
+            "links": {
+              "github": "https://github.com/LaykenV/food-truck-flow",
+              "live": "https://foodtruckflow.com"
+            }
+          },
+          {
+            "slug": "teach-magic",
+            "title": "TeachMagic",
+            "tagline": "AI-Powered Educational Content Platform",
+            "description": "An AI platform for educators that instantly generates structured slides, quizzes, and custom images on any subject using OpenAI and Stability AI, with seamless export capabilities.",
+            "longDescription": "TeachMagic leverages OpenAI's GPT-4o for structured content generation and Stability AI for creating contextually relevant images. The backend uses Drizzle ORM with a PostgreSQL database, optimized with a memory caching layer. The platform is secured with Clerk Authentication and processes payments via Stripe, providing a robust, enterprise-ready solution for modern educational content creation.",
+            "image": "/TeachMagicSS.png",
+            "secondaryImage": "/TeachMagicSecondary.png",
+            "techStack": ["Next.js", "TypeScript", "PostgreSQL", "Drizzle ORM", "OpenAI", "Clerk", "Stripe"],
+            "links": {
+              "github": "https://github.com/LaykenV/teach-magic",
+              "live": "https://teachmagic.us"
+            }
+          }
     ]
   }
