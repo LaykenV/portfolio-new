@@ -1,4 +1,4 @@
-color pallette and card button styles
-fix bg gradient and light mode
+//color pallette and card button styles
+//fix bg gradient and light mode
 style left side and add buttons
 make project card and expandable
