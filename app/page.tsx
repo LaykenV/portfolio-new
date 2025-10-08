@@ -24,7 +24,7 @@ export default function Home() {
 
           {/* Header: avatar + name/role */}
           <div className="flex flex-row md:flex-row items-center md:items-start gap-4 sm:gap-5 md:gap-4 justify-center md:justify-start md:pr-0">
-            <div className="h-28 w-28 sm:h-32 sm:w-32 md:h-28 md:w-28 border border-subtle overflow-hidden flex-shrink-0 mx-0" aria-hidden="true">
+            <div className="h-32 w-32 md:h-28 md:w-28 border border-subtle overflow-hidden flex-shrink-0 mx-0" aria-hidden="true">
               <Image src="/portrait.jpeg" alt="Profile" width={128} height={128} className="object-cover" />
             </div>
             <div className="min-w-0 text-left">
