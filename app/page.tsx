@@ -24,12 +24,12 @@ export default function Home() {
 
           {/* Header: avatar + name/role */}
           <div className="flex flex-row md:flex-row items-center md:items-start gap-5 md:gap-4 justify-center md:justify-start md:pr-0">
-            <div className="h-32 w-32 md:h-28 md:w-28 border border-subtle overflow-hidden flex-shrink-0 mx-0" aria-hidden="true">
+            <div className="h-24 w-24 sm:h-28 sm:w-28 md:h-28 md:w-28 border border-subtle overflow-hidden flex-shrink-0 mx-0" aria-hidden="true">
               <Image src="/portrait.jpeg" alt="Profile" width={128} height={128} className="object-cover" />
             </div>
             <div className="min-w-0 text-left">
-              <h1 className="text-3xl md:text-3xl font-semibold tracking-tight">Layken Varholdt</h1>
-              <p className="text-lg md:text-base opacity-80">Software Engineer @ DOL</p>
+              <h1 className="text-2xl sm:text-3xl md:text-3xl font-semibold tracking-tight">Layken Varholdt</h1>
+              <p className="text-base sm:text-lg md:text-base opacity-80">Software Engineer @ DOL</p>
               {/* Social links */}
               <div className="mt-2 md:mt-3 hidden md:flex flex-wrap items-center gap-2 justify-start">
                 <a href="https://x.com/LLVarholdt" aria-label="Twitter" className="btn-icon" target="_blank" rel="noreferrer">
@@ -49,10 +49,10 @@ export default function Home() {
 
           {/* Big marketing copy */}
           <div className="mt-3 space-y-2 md:space-y-2 text-center md:text-left px-2 md:px-0">
-            <p className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-balance">
-              Building Web Applicaitons with cutting edge technology
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-balance">
+              Building Web Applications with cutting edge technology
             </p>
-            <p className="text-lg md:text-xl opacity-90 text-balance">
+            <p className="text-base sm:text-lg md:text-xl opacity-90 text-balance">
               I work with teams that move fast and want stunning websites done right
             </p>
           </div>
