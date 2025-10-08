@@ -1,154 +1,194 @@
-## Portfolio performance upgrade plan (Next.js 15 / React 19, App Router)
+## Mobile layout upgrade plan
 
-### Objectives
-- Maximize static generation (SSG) for the `/` route.
-- Minimize shipped client JavaScript (hydrate only what’s interactive, lazy-load the rest).
-- Optimize Largest Contentful Paint (LCP) and interactivity (TTI/TBT) on mobile and desktop.
-- Keep UI/UX identical, keeping globe and theme transitions, while gating heavy widgets.
+### Goals
+- Improve vertical fit on mobile so project media isn’t cropped and content feels intentional.
+- Preserve current desktop/tablet layout.
+- Keep primary CTAs visible: “Schedule call” and “Chat” stay as-is in the header area.
+- Replace theme toggle button with a burger menu; the menu uses glassmorphism and matches the color scheme in both themes.
 
-### Current snapshot (as of today)
-- `app/page.tsx`: Server Component page reading static data from `data/projects.json`. SSG-ready. Imports `AnimatedThemeToggler` (client), `ProjectsScroller` (client), and `Globe` (client) for md+ only.
-- `components/projects-scroller.tsx`: Client Component rendering all cards, overlay details, and mobile scroll snapping behavior via JS + inline styles.
-- `components/globe.tsx`: Client Component using `cobe` and `motion/react`, created lazily via `ResizeObserver` and destroyed when hidden; md+ only in UI.
-- `components/animated-theme-toggler.tsx` + `components/theme-provider.tsx`: Client; theme transitions implemented via `document.startViewTransition` where available.
-- `next.config.ts`: Minimal; no image format config or import optimizations.
+### Constraints (per request)
+- Keep the “Schedule call” and “Chat” buttons as they are (visible and in the header area on mobile).
+- Burger menu must be glassmorphic and themed for both light and dark.
 
-### Quick wins (do now: ~30–60 min)
-1) Enforce static generation on the home route
-   - In `app/page.tsx`, uncomment or add:
-```tsx
-export const dynamic = 'force-static' as const
-```
-   - Rationale: Locks the page to SSG and prevents accidental dynamic rendering.
+---
 
-2) Make the first visible project image a priority (improves LCP)
-   - In `components/projects-scroller.tsx`, when mapping projects, set `priority` on the first image only:
-```tsx
-{items.map((project, i) => (
-  // ...
-  <Image
-    src={project.image}
-    alt={project.title}
-    fill
-    className="object-contain select-none"
-    draggable={false}
-    sizes={isMobile ? '92vw' : '(min-width: 768px) 100vw, 0vw'}
-    priority={i === 0}
-  />
-))}
-```
-   - Rationale: Prioritizes the top hero media for faster LCP.
+## Recommended approach (mobile-first)
+- Adopt a docked bottom index tracker that visually attaches to the bottom edge (fixed, with safe-area support). Extend cards down toward it so the page reads as “header → cards → dock”, with the cards floating just above the dock.
+- Rework the top header into a compact horizontal layout: larger avatar on the left, name/title on the right, and a burger in the top-right. Primary CTAs remain directly below the header text as they are now.
+- Ensure the projects scroller occupies precise remaining vertical space using dynamic viewport units and safe-area insets. Adjust card media aspect/height so media is fully visible.
 
-3) Replace JS-driven scroll snapping with CSS snapping (cuts client JS work)
-   - Container: add classes and remove render-time `window.matchMedia` checks and inline `style.scrollSnapType`:
-```tsx
-<div
-  ref={containerRef}
-  onScroll={handleMobileScroll}
-  className="flex flex-row md:flex-col gap-6 md:gap-8 overflow-x-auto md:overflow-x-hidden md:overflow-y-auto h-full no-scrollbar md:p-6 md:pt-6 snap-x snap-mandatory md:snap-none"
-  style={{ WebkitOverflowScrolling: 'touch' }}
->
-```
-   - Each card/article: add `snap-center` and drop conditional inline snap props:
-```tsx
-<article className="shrink-0 w-[92vw] md:w-full md:max-w-none card relative overflow-hidden flex flex-col ml-4 first:ml-4 md:ml-0 md:first:ml-0 snap-center">
-```
-   - Rationale: Lets the browser handle snapping declaratively; avoids access to `window` during render.
+Why docked bottom? It saves vertical space inside each card, provides a consistent thumb-reachable target, and avoids layout shift across devices with differing safe-area insets.
 
-4) Remove trivial `useMemo`
-   - Replace `const items = useMemo(() => projects, [projects])` with `const items = projects`.
-   - Rationale: Saves bytes and avoids unnecessary indirection.
+---
 
-5) Switch `h-screen` to `min-h-dvh` on the root page container
-   - In `app/page.tsx`, change the outer wrapper class from `h-screen` to `min-h-dvh`.
-   - Rationale: Avoids mobile 100vh chrome jank for better CLS and smoother layout on iOS/Android.
+## Information architecture (mobile)
+1) Header: avatar (left) + name/title (right), burger top-right; keep CTAs under the header text.
+2) Projects scroller: fills the remaining space between header and dock.
+3) Bottom dock: fixed tracker with safe-area padding; visually “grows out” of the bottom edge.
 
-### Medium changes (half day)
-6) Split `ProjectsScroller` into server-rendered markup + tiny client controller
-   - Goal: Ship static markup and images as Server Components; isolate client state and overlay into minimal client code.
-   - Proposed structure:
-     - `components/projects/projects-list.server.tsx` (Server): Maps `projects` to static card markup and images.
-     - `components/projects/scroller.client.tsx` (Client): Handles `activeIndex`, mobile scroll tracking, and toggling `expandedSlug`.
-     - `components/projects/project-details.client.tsx` (Client, lazy): The expanding overlay content.
-   - Usage: The page renders the server list and wraps it in the small client scroller for interactions.
-   - Lazy-load the details overlay:
-```tsx
-'use client'
-import dynamic from 'next/dynamic'
-const ProjectDetails = dynamic(() => import('./project-details.client'), { ssr: false })
-// Render only when expandedSlug is set
-{expandedSlug && <ProjectDetails project={project} onClose={() => setExpandedSlug(null)} />}
-```
-   - Rationale: Keeps most UI server-rendered, defers heavy interactive UI until needed.
+---
 
-7) Lazy-load the globe client-only
-   - In `app/page.tsx`, dynamically import the globe and disable SSR:
-```tsx
-import dynamic from 'next/dynamic'
-const GlobeViz = dynamic(() => import('@/components/globe'), { ssr: false, loading: () => null })
-```
-   - Keep md+ visibility in layout as is; this keeps `cobe` and `motion` out of the initial client bundle.
+## Header (mobile)
+- Layout
+  - Avatar 64–72px; larger but compact.
+  - Name/title stacked to the right, 1–2 lines max.
+  - Burger button replaces the theme toggle. Theme toggle moves into the burger menu.
+  - Header height target: clamp(64px–88px).
 
-8) Respect `prefers-reduced-motion` for globe rotation
-   - In `components/globe.tsx`, skip incrementing `phiRef` when reduced motion is requested:
-```tsx
-const prefersReduce = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-// inside onRender
-if (!prefersReduce && !pointerInteracting.current) phiRef.current += 0.005
-```
-   - Rationale: Accessibility + marginal CPU savings.
+- Primary CTAs
+  - Keep “Schedule call” and “Chat” exactly as they are today (same placement, style, and visibility). If vertical space is tight on the smallest devices, allow a 2-line wrap instead of moving these into the menu.
 
-### Config improvements (low risk)
-9) Optimize images and imports in `next.config.ts`
-```ts
-import type { NextConfig } from 'next'
+- Burger menu (glassmorphism)
+  - Slide-over from right; focus-trapped; `aria-expanded`/`aria-controls`; closes on overlay tap and Esc.
+  - Contents: Theme toggle, social links (X/Twitter, GitHub, LinkedIn), plus redundant access to “Schedule call” and “Chat” is optional (but not required, since CTAs remain visible).
+  - Visuals: blurred/translucent panel, soft gradient that matches light/dark palettes, warm 1px border, subtle shadow/glow consistent with existing tokens.
 
-const nextConfig: NextConfig = {
-  reactStrictMode: true,
-  images: { formats: ['image/avif', 'image/webp'] },
-  experimental: {
-    optimizePackageImports: ['lucide-react'],
-  },
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
+Example style tokens (reference only; implement in globals when coding):
+
+```css
+:root {
+  /* New sizing tokens */
+  --header-h: clamp(64px, 10svh, 88px);
+  --dock-h: clamp(48px, 8svh, 64px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
-export default nextConfig
+
+.mobile-menu-panel {
+  /* Glassmorphism */
+  background:
+    radial-gradient(120% 120% at 0% 0%, hsl(var(--blue-strong) / 0.14), transparent 62%),
+    radial-gradient(120% 120% at 100% 0%, hsl(var(--peach-strong) / 0.12), transparent 62%),
+    hsl(var(--card));
+  border: 1px solid hsl(var(--blue-strong) / 0.22);
+  backdrop-filter: saturate(140%) blur(12px);
+  box-shadow:
+    0 28px 72px -24px hsl(var(--blue-strong) / 0.30),
+    0 14px 36px -16px hsl(var(--peach-strong) / 0.22),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.06);
+}
+html.dark .mobile-menu-panel {
+  background:
+    radial-gradient(120% 120% at 0% 0%, hsl(var(--blue-soft) / 0.12), transparent 62%),
+    radial-gradient(120% 120% at 100% 0%, hsl(var(--peach-soft) / 0.10), transparent 62%),
+    hsl(var(--card));
+  border-color: hsl(var(--blue-soft) / 0.18);
+  box-shadow:
+    0 28px 72px -24px hsl(var(--blue-soft) / 0.22),
+    0 14px 36px -16px hsl(var(--peach-soft) / 0.18),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.05);
+}
 ```
-   - Rationale: Smaller images (AVIF/WebP) where supported; smaller icon imports; drop stray console calls in prod.
 
-10) Optional: static import for key images to enable blur placeholders
-   - If you want blur-up placeholders for the top hero image, statically import it instead of using public path strings:
-```tsx
-import HeroImage from '@/public/MeshMind.png'
-<Image src={HeroImage} alt="Mesh Mind" placeholder="blur" priority />
+Accessibility: large tap targets (≥44px), focus-visible ring, semantic labeling.
+
+---
+
+## Projects scroller and cards (mobile)
+- Scroller height
+  - Compute available height as `100dvh - var(--header-h) - var(--dock-h) - var(--safe-bottom)`.
+  - Apply this as the scroller container height (not the whole page), and add bottom padding equal to `var(--dock-h) + var(--safe-bottom)` so the dock never covers content.
+
+- Card height
+  - Each card should have `min-height` that fits the scroller area; avoid parent `overflow-hidden` clipping the card.
+  - Preserve horizontal scroll on mobile; vertical scroll on desktop remains unchanged.
+
+- Media sizing (prevent cropping)
+  - Replace strict `aspect-[16/9]` on mobile with a friendlier mobile ratio or flexible media region height:
+    - Option A: `aspect-[4/3]` + `object-contain` (simple, consistent).
+    - Option B: fixed media frame height like `min(48svh, 360px)` with `object-contain`.
+  - Provide a subtle gradient backdrop in the media frame so letterboxing looks intentional.
+
+- Content stack
+  - Title → tagline → short description (1–2 lines on small screens) → actions → overlay trigger.
+  - “Learn More” retains the current overlay behavior but must open above the dock without obstruction.
+
+---
+
+## Bottom index tracker (docked, recommended)
+- Behavior
+  - Fixed at bottom; respects `env(safe-area-inset-bottom)`; non-overlapping with content (scroller adds matching bottom padding).
+  - Accurate index reflection during horizontal scrolling.
+
+- Visuals
+  - Rounded top corners, 1px warm border, dual-gradient background, light inner glow to “grow out of the screen”.
+  - Active dot expands into a pill with gradient and glow; inactive dots remain small with lower opacity.
+
+Example style tokens (reference only; implement in globals when coding):
+
+```css
+.mobile-dock {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: calc(var(--dock-h) + var(--safe-bottom));
+  padding-bottom: var(--safe-bottom);
+  border-top: 1px solid hsl(var(--blue-strong) / 0.22);
+  background:
+    linear-gradient(180deg, hsl(var(--blue-strong) / 0.12), hsl(var(--peach-strong) / 0.10)),
+    hsl(var(--sidebar));
+  box-shadow:
+    0 -10px 24px -18px hsl(var(--blue-strong) / 0.26),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.06);
+}
+html.dark .mobile-dock {
+  border-top-color: hsl(var(--blue-soft) / 0.18);
+  background:
+    linear-gradient(180deg, hsl(var(--blue-soft) / 0.10), hsl(var(--peach-soft) / 0.08)),
+    hsl(var(--card));
+  box-shadow:
+    0 -10px 24px -18px hsl(var(--blue-soft) / 0.24),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.05);
+}
 ```
-   - Rationale: Next can auto-generate `blurDataURL` for statically imported images.
 
-### Verification checklist
-- Build remains SSG: `next build` shows the `/` route as static, no dynamic functions.
-- Lighthouse Mobile Performance ≥ 95, LCP < 1.8s on 4G simulated, CLS ≈ 0, TBT low.
-- Initial JS bundle shrinks after lazy-loading globe/details; confirm via bundle analyzer.
-- No hydration warnings in console; theme toggle still transitions correctly.
-- Globe loads only on md+ after hydration; no CPU spikes when hidden.
+Alternative (inline in card): reserve a bottom section in each card for the tracker. Pros: per-card context; Cons: uses more vertical space and repeats UI. Keep as fallback only.
 
-### Rollout order
-1) Quick wins (1–5 above).
-2) Globe dynamic import (7) + reduced motion (8).
-3) Config changes (9) and rebuild.
-4) Scroller split and overlay lazy-load (6).
-5) Optional static image imports with blur (10).
+---
 
-### Risks / trade-offs
-- Over-aggressive lazy-loading could delay overlay content; ensure `loading` placeholders are acceptable.
-- Static image imports add import lines; keep only for top LCP media to avoid churn.
-- CSS snapping may behave differently across browsers; verify touch UX on iOS/Android.
+## Responsive rules
+- ≤375px: Avatar 64px; description 1 line; CTAs wrap if needed; dock height on the lower end of clamp.
+- 376–430px: Avatar 72px; description up to 2 lines; dock height mid clamp.
+- ≥md: Unchanged desktop/tablet layout (current implementation preserved).
 
-### References (Next.js official guidance)
-- Server vs Client Components and composing for smaller bundles: [Next.js Docs – Server and Client Components](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns)
-- Lazy-loading Client Components: [Next.js Docs – Lazy Loading](https://nextjs.org/docs/app/building-your-application/optimizing/lazy-loading)
-- Data caching and SSG in App Router: [Next.js Docs – Data Fetching and Caching](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating)
-- Image optimization and static imports: [Next.js Docs – Images](https://nextjs.org/docs/app/building-your-application/optimizing/images)
-- Turbopack and performance instrumentation (for dev/build): [Next.js Docs – Turbopack](https://nextjs.org/docs/app/building-your-application/optimizing/turbopack)
+---
+
+## Implementation outline (no code changes yet)
+1) Header updates (`app/page.tsx`)
+   - Convert mobile header to a horizontal stack: avatar left, name/title right; keep the “Schedule call” and “Chat” buttons where they are now (below the header text).
+   - Replace the theme toggle with a burger button (top-right). Burger opens a slide-over menu.
+
+2) Burger menu component (new or integrated in header)
+   - Build an accessible slide-over with the glassmorphic panel. Include: theme toggle and social links.
+   - Use focus trap, `aria` attributes, and Esc/overlay close.
+
+3) Scroller sizing (`components/projects-scroller.tsx`)
+   - Apply scroller height: `calc(100dvh - var(--header-h) - var(--dock-h) - var(--safe-bottom))`.
+   - Add bottom padding to the scroller equal to `var(--dock-h) + var(--safe-bottom)`.
+   - Ensure the section that wraps the scroller doesn’t clip content on mobile.
+
+4) Media frame adjustments (`components/projects-scroller.tsx`)
+   - Swap mobile `aspect-[16/9]` for `aspect-[4/3]` or fixed svh-based height.
+   - Keep `object-contain`; add a subtle gradient background behind the image.
+
+5) Bottom dock (`app/page.tsx` and `app/globals.css`)
+   - Create the fixed dock container. Move/duplicate the existing index tracker into this dock for mobile.
+   - Add safe-area padding. Style to match the app’s current gradient and shadow language.
+
+6) Tokens and styles (`app/globals.css`)
+   - Add `--header-h`, `--dock-h`, `--safe-bottom` and the `.mobile-menu-panel` and `.mobile-dock` classes (and any helpers like `.media-frame`).
+   - Respect `prefers-reduced-motion` (fall back to fades instead of slides/zooms).
+
+7) QA pass
+   - Test on iOS Safari (with/without URL bar), iPhone SE/mini/Plus/Max, Android Chrome, and desktop devtools.
+   - Verify: no content hidden by the dock, overlay above dock, menu focus trap works, and index dots are tappable.
+
+---
+
+## Acceptance criteria
+- No visible image cropping on mobile; hero media is fully visible within its frame.
+- Header fits comfortably; avatar larger with name/title to its right; burger present top-right.
+- “Schedule call” and “Chat” remain visible and unchanged in look/placement.
+- Burger menu uses glassmorphism, matches both themes, and includes theme toggle + socials.
+- Cards extend toward a docked bottom index; dock respects safe-area and appears attached to the bottom edge.
+- Smooth scrolling and index tracking remain accurate; overlay and menu interactions are accessible.
 
 

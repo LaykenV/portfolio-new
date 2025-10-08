@@ -1,0 +1,122 @@
+:root {
+  --header-h: clamp(64px, 10svh, 88px);
+  --dock-h: clamp(48px, 8svh, 64px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Animated hamburger menu */
+.hamburger {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger input {
+  display: none;
+}
+
+.hamburger svg {
+  height: 32px;
+  width: 32px;
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+  stroke-dasharray: 12 63;
+}
+
+.hamburger input:checked + svg {
+  transform: rotate(-45deg);
+}
+
+.hamburger input:checked + svg .line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
+}
+
+/* Glassmorphic mobile menu panel */
+.mobile-menu-panel {
+  background:
+    radial-gradient(120% 120% at 50% 0%, hsl(var(--blue-strong) / 0.14), transparent 62%),
+    radial-gradient(120% 120% at 100% 100%, hsl(var(--peach-strong) / 0.12), transparent 62%),
+    hsl(var(--card));
+  border: 1px solid hsl(var(--blue-strong) / 0.22);
+  backdrop-filter: saturate(140%) blur(16px);
+  -webkit-backdrop-filter: saturate(140%) blur(16px);
+  box-shadow:
+    0 28px 64px -28px hsl(var(--blue-strong) / 0.45),
+    0 14px 36px -16px hsl(var(--peach-strong) / 0.22),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.06);
+}
+
+html.dark .mobile-menu-panel {
+  background:
+    radial-gradient(120% 120% at 50% 0%, hsl(var(--blue-soft) / 0.12), transparent 62%),
+    radial-gradient(120% 120% at 100% 100%, hsl(var(--peach-soft) / 0.10), transparent 62%),
+    hsl(var(--card));
+  border-color: hsl(var(--blue-soft) / 0.18);
+  box-shadow:
+    0 28px 64px -28px hsl(var(--blue-soft) / 0.45),
+    0 14px 36px -16px hsl(var(--peach-soft) / 0.18),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.05);
+}
+
+/* Mobile bottom dock for index tracker */
+.mobile-dock {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 30;
+  height: calc(var(--dock-h) + var(--safe-bottom));
+  padding-bottom: var(--safe-bottom);
+  border-top: 1px solid hsl(var(--blue-strong) / 0.22);
+  background:
+    linear-gradient(180deg, hsl(var(--blue-strong) / 0.12), hsl(var(--peach-strong) / 0.10)),
+    hsl(var(--sidebar));
+  box-shadow:
+    0 -10px 24px -18px hsl(var(--blue-strong) / 0.26),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.06);
+}
+html.dark .mobile-dock {
+  border-top-color: hsl(var(--blue-soft) / 0.18);
+  background:
+    linear-gradient(180deg, hsl(var(--blue-soft) / 0.10), hsl(var(--peach-soft) / 0.08)),
+    hsl(var(--card));
+  box-shadow:
+    0 -10px 24px -18px hsl(var(--blue-soft) / 0.24),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.05);
+}
+
+/* Mobile scroller sizing helper */
+.mobile-scroller {
+  height: calc(100dvh - var(--header-h) - var(--dock-h) - var(--safe-bottom));
+}
+
+@media (min-width: 768px) {
+  .mobile-scroller {
+    height: auto;
+  }
+}
+
+/* Flatten card bottom on mobile; restore on md+ */
+.card-flat-bottom {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+@media (min-width: 768px) {
+  .card-flat-bottom {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+}
+
+

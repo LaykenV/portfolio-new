@@ -60,7 +60,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
       <div
         ref={containerRef}
         onScroll={handleScroll}
-        className="flex flex-row md:flex-col gap-6 md:gap-8 overflow-x-auto md:overflow-x-hidden md:overflow-y-auto h-full md:p-6 md:pt-6 snap-x snap-mandatory md:snap-none [&::-webkit-scrollbar]:hidden"
+        className="flex flex-row md:flex-col gap-6 md:gap-8 overflow-x-auto md:overflow-x-hidden md:overflow-y-auto h-full md:p-6 md:pt-6 snap-x snap-mandatory md:snap-none [&::-webkit-scrollbar]:hidden mobile-scroller md:h-full"
         style={{ 
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
@@ -70,13 +70,13 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
       {items.map((project, i) => (
         <article
           key={project.slug}
-          className="min-w-[280px] w-[85vw] max-w-[360px] md:w-full md:max-w-none flex-shrink-0 snap-center card md:cursor-default relative overflow-hidden flex flex-col first:ml-6 last:mr-6 md:ml-0 md:mr-0 md:first:ml-0 md:last:mr-0"
+          className="min-w-[280px] w-[85vw] max-w-[360px] md:w-full md:max-w-none flex-shrink-0 snap-center card card-flat-bottom md:cursor-default relative overflow-hidden flex flex-col first:ml-6 last:mr-6 md:ml-0 md:mr-0 md:first:ml-0 md:last:mr-0"
           aria-current={undefined}
         >
           {/* Media */}
-          {/* Mobile: 16:9 hero image */}
+          {/* Mobile: friendlier aspect / flexible height */}
           <div className="relative block md:hidden w-full overflow-hidden rounded-md">
-            <div className="relative w-full aspect-[16/9]">
+            <div className="relative w-full aspect-[4/3]">
               <Image
                 src={project.image}
                 alt={project.title}
@@ -263,8 +263,8 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
       ))}
       </div>
 
-      {/* Mobile index footer - non-fixed, positioned at bottom */}
-      <div className="md:hidden flex-shrink-0 py-4 px-4">
+      {/* Mobile bottom dock (fixed) */}
+      <div className="md:hidden mobile-dock">
         <div className="index-footer">
           <div className="index-footer-track">
             {items.map((_, i) => (
