@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./mobile.css";
@@ -90,13 +90,16 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
+  icons: {
+    icon: '/icon',
+  },
+};
+
+export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#FAF9F6' },
     { media: '(prefers-color-scheme: dark)', color: '#0A0A0A' },
   ],
-  icons: {
-    icon: '/icon',
-  },
 };
 
 export default function RootLayout({

@@ -51,8 +51,8 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
           </div>
           <div className="h-px" style={{ background: 'hsl(var(--blue-strong) / 0.2)' }} />
           <div className="flex flex-wrap gap-2">
-            <a className="btn-accent-invert btn-compact btn-equal text-sm flex-1" href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>Schedule call</a>
-            <a className="btn-accent btn-compact btn-equal text-sm flex-1" href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>
+            <a className="btn-accent-invert btn-compact btn-equal text-sm flex-1" href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer">Schedule call</a>
+            <a className="btn-accent btn-compact btn-equal text-sm flex-1" href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer">
               <Image src="/telegram.png" alt="Telegram" width={20} height={20} /> Chat
             </a>
           </div>

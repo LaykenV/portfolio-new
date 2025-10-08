@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { Home, ArrowLeft } from 'lucide-react'
 
@@ -16,7 +18,7 @@ export default function NotFound() {
                 Page Not Found
               </h2>
               <p className="text-sm opacity-80">
-                The page you're looking for doesn't exist or has been moved.
+                The page you&apos;re looking for doesn&apos;t exist or has been moved.
               </p>
             </div>
           </div>
