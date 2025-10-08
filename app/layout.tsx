@@ -35,13 +35,24 @@ export const metadata: Metadata = {
     'PostgreSQL',
     'AI',
     'SaaS',
+    'full stack developer',
+    'frontend developer',
+    'backend developer',
   ],
   authors: [{ name: 'Layken Varholdt', url: 'https://x.com/LLVarholdt' }],
   creator: 'Layken Varholdt',
   publisher: 'Layken Varholdt',
   applicationName: 'Layken Varholdt Portfolio',
+  category: 'Portfolio',
+  classification: 'Personal Website',
   alternates: {
     canonical: '/',
+  },
+  verification: {
+    // Add verification codes when you have them
+    // google: 'your-google-verification-code',
+    // yandex: 'your-yandex-verification-code',
+    // bing: 'your-bing-verification-code',
   },
   openGraph: {
     title: 'Layken Varholdt — Software Engineer',

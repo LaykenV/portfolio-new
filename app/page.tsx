@@ -1,6 +1,7 @@
 import { AnimatedThemeToggler } from '@/components/animated-theme-toggler'
 import { ProjectsScroller } from '@/components/projects-scroller'
-import type { Project } from '@/components/projects-scroller'
+import { StructuredData } from '@/components/structured-data'
+import type { Project } from '@/types/project'
 import projectsData from '@/data/projects.json'
 import Image from 'next/image'
 import { Github, Linkedin, Globe, Rocket, MonitorSmartphone } from 'lucide-react'
@@ -11,6 +12,8 @@ export const dynamic = 'force-static'
 export default function Home() {
   const projects = (projectsData as { projects: Project[] }).projects
   return (
+    <>
+      <StructuredData projects={projects} />
     <div className="font-sans mx-auto max-w-[110rem] h-dvh overflow-hidden">
       <div className="flex flex-col md:flex-row h-full">
         <aside className="relative flex-shrink-0 md:h-screen md:overflow-y-auto md:overflow-x-hidden p-8 pt-8 md:p-6 md:pt-6 flex flex-col gap-6 md:gap-6 md:border-r border-subtle md:w-[42%] md:shrink-0">
@@ -23,8 +26,8 @@ export default function Home() {
 
           {/* Header: avatar + name/role */}
           <div className="flex flex-row md:flex-row items-center md:items-start gap-4 sm:gap-5 md:gap-4 justify-center md:justify-start md:pr-0">
-            <div className="h-32 w-32 md:h-28 md:w-28 border border-subtle overflow-hidden flex-shrink-0 mx-0" aria-hidden="true">
-              <Image src="/portrait.jpeg" alt="Profile" width={128} height={128} className="object-cover" />
+            <div className="h-32 w-32 md:h-28 md:w-28 border border-subtle overflow-hidden flex-shrink-0 mx-0">
+              <Image src="/portrait.jpeg" alt="Layken Varholdt's profile portrait" width={128} height={128} className="object-cover" priority />
             </div>
             <div className="min-w-0 text-left">
               <h1 className="text-3xl md:text-3xl font-semibold tracking-tight">Layken Varholdt</h1>
@@ -100,5 +103,6 @@ export default function Home() {
 
       {/* Mobile slide-over menu is handled by MobileMenuController (client) */}
     </div>
+    </>
   )
 }
