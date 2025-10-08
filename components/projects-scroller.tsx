@@ -26,12 +26,24 @@ interface ProjectsScrollerProps {
 export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null)
+  const [imageLoaded, setImageLoaded] = useState<Record<string, boolean>>({})
 
   // Horizontal scroll on mobile; vertical on desktop
   const containerRef = useRef<HTMLDivElement>(null)
 
   const items = projects
   
+  // Preload image on hover/focus for instant display
+  const preloadImage = (src: string, slug: string) => {
+    if (imageLoaded[slug]) return
+    
+    const img = new window.Image()
+    img.src = src
+    img.onload = () => {
+      setImageLoaded(prev => ({ ...prev, [slug]: true }))
+    }
+  }
+
   // Simplified scroll handler like the example - no debouncing for smoother feel
   const handleScroll = (e: UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget
@@ -132,6 +144,8 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                   e.stopPropagation()
                   setExpandedSlug(project.slug)
                 }}
+                onMouseEnter={() => preloadImage(project.secondaryImage, project.slug)}
+                onFocus={() => preloadImage(project.secondaryImage, project.slug)}
                 aria-expanded={expandedSlug === project.slug}
               >
                 Learn More
@@ -178,6 +192,12 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                     style={{ animationDelay: '120ms', animationFillMode: 'backwards' }}
                   >
                     <div className="relative w-full aspect-[16/9]">
+                      {/* Loading spinner - shows until image loads */}
+                      {!imageLoaded[project.slug] && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/5 dark:bg-white/5 backdrop-blur-sm">
+                          <div className="w-8 h-8 border-2 border-current border-t-transparent rounded-full animate-spin opacity-50" />
+                        </div>
+                      )}
                       <Image
                         src={project.secondaryImage}
                         alt={`${project.title} - additional view`}
@@ -185,6 +205,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                         className="object-contain select-none"
                         draggable={false}
                         sizes="(min-width: 768px) 100vw, 92vw"
+                        onLoad={() => setImageLoaded(prev => ({ ...prev, [project.slug]: true }))}
                       />
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/8 via-black/0 to-black/0 dark:from-black/15" />
                     </div>
@@ -270,6 +291,21 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
             <span key={i} className={cn('index-dot', i === activeIndex && 'index-dot-active')} />
           ))}
         </div>
+      </div>
+
+      {/* Hidden images for background preloading - lazy loaded after main content */}
+      <div className="hidden">
+        {items.map((project) => (
+          <Image
+            key={`preload-${project.slug}`}
+            src={project.secondaryImage}
+            alt=""
+            width={1}
+            height={1}
+            loading="lazy"
+            onLoad={() => setImageLoaded(prev => ({ ...prev, [project.slug]: true }))}
+          />
+        ))}
       </div>
     </div>
   )
