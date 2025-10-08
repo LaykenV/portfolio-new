@@ -48,7 +48,7 @@ export default function Home() {
           </div>
 
           {/* Big marketing copy */}
-          <div className="mt-2 sm:mt-3 space-y-1.5 sm:space-y-2 md:space-y-2 text-center md:text-left px-2 md:px-0 pb-2 sm:pb-0">
+          <div className="mt-2 sm:mt-3 space-y-1.5 sm:space-y-2 md:space-y-2 text-center md:text-left px-0 pb-2 sm:pb-0">
             <p className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-balance">
               Building Web Applications with cutting edge technology
             </p>
