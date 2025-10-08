@@ -50,10 +50,10 @@ export default function Home() {
           {/* Big marketing copy */}
           <div className="mt-3 space-y-2 md:space-y-2 text-center md:text-left px-2 md:px-0">
             <p className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-balance">
-              Building Web Applicaitons with state of the art technology
+              Building Web Applicaitons with cutting edge technology
             </p>
             <p className="text-lg md:text-xl opacity-90 text-balance">
-              I work with teams that move fast and want cutting edge websites
+              I work with teams that move fast and want stunning websites done right
             </p>
           </div>
 
