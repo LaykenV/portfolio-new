@@ -3,8 +3,7 @@ import { ProjectsScroller } from '@/components/projects-scroller'
 import type { Project } from '@/components/projects-scroller'
 import projectsData from '@/data/projects.json'
 import Image from 'next/image'
-import { Github, Linkedin } from 'lucide-react'
-import { Globe as GlobeViz } from '@/components/globe'
+import { Github, Linkedin, Globe, Rocket, MonitorSmartphone } from 'lucide-react'
 import { MobileMenuController } from '@/components/mobile-menu-controller'
 
 export const dynamic = 'force-static'
@@ -63,18 +62,33 @@ export default function Home() {
             <a className="btn-accent btn-compact btn-equal text-sm md:text-base" href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer"> <Image src="/telegram.png" alt="Telegram" width={20} height={20} /> Chat</a>
           </div>
 
-          {/* Bottom highlight: Centered globe + statement (md+) */}
-          <div className="hidden md:flex mt-auto pt-3 pb-2 flex-col items-center text-center">
-            <div className="relative w-full max-w-[160px] lg:max-w-[220px] xl:max-w-[260px] aspect-square">
-              <div className="globe-aura absolute inset-0" aria-hidden="true" />
-              <GlobeViz className="mx-auto max-w-[160px] lg:max-w-[220px] xl:max-w-[260px]" />
+          {/* Sidebar footer (md+): compact, polished value section */}
+          <div className="hidden md:block mt-auto pt-3 pb-2">
+            <div className="aside-footer mt-3" role="contentinfo" aria-labelledby="aside-footer-title">
+              <div className="flex items-center justify-between">
+                <p id="aside-footer-title" className="text-xs font-semibold tracking-wider uppercase opacity-70">What I deliver</p>
+              </div>
+              <ul className="mt-2 space-y-2">
+                <li className="footer-item">
+                  <span className="footer-icon" aria-hidden="true"><Globe className="h-3.5 w-3.5" /></span>
+                  <span className="text-sm md:text-base font-medium tracking-tight text-balance">
+                    Realtime apps that stay perfectly in sync worldwide
+                  </span>
+                </li>
+                <li className="footer-item">
+                  <span className="footer-icon" aria-hidden="true"><Rocket className="h-3.5 w-3.5" /></span>
+                  <span className="text-sm md:text-base font-medium tracking-tight text-balance">
+                    Ship faster with modern tooling without sacrificing quality
+                  </span>
+                </li>
+                <li className="footer-item">
+                  <span className="footer-icon" aria-hidden="true"><MonitorSmartphone className="h-3.5 w-3.5" /></span>
+                  <span className="text-sm md:text-base font-medium tracking-tight text-balance">
+                    Smooth, performant experiences on desktop, laptop, and mobile
+                  </span>
+                </li>
+              </ul>
             </div>
-            <div className="w-full flex justify-center mt-2">
-              <div className="separator-accent w-[68%] max-w-[220px] lg:max-w-[260px]" />
-            </div>
-            <p className="mt-4 max-w-[28ch] text-base lg:text-lg font-semibold tracking-tight opacity-95">
-              I build websites with realtime sync across the whole internet
-            </p>
           </div>
         </aside>
 
