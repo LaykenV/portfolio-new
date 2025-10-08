@@ -4,7 +4,7 @@ import { StructuredData } from '@/components/structured-data'
 import type { Project } from '@/types/project'
 import projectsData from '@/data/projects.json'
 import Image from 'next/image'
-import { Github, Linkedin, Globe, Rocket, MonitorSmartphone } from 'lucide-react'
+import { Github, Linkedin, Globe, Rocket, MonitorSmartphone, FileText } from 'lucide-react'
 import { MobileMenuController } from '@/components/mobile-menu-controller'
 
 export const dynamic = 'force-static'
@@ -44,6 +44,10 @@ export default function Home() {
                 </a>
                 <a href="https://www.linkedin.com/in/layken-varholdt-a78687230/" aria-label="LinkedIn" className="btn-icon" target="_blank" rel="noreferrer">
                   <Linkedin className="h-4 w-4" />
+                </a>
+                <a href="/LLVarholdt-Resume.pdf" aria-label="Resume" title="Resume" className="btn text-xs md:text-sm" target="_blank" rel="noreferrer">
+                  <FileText className="h-4 w-4" />
+                  <span>Resume</span>
                 </a>
               </div>
             </div>

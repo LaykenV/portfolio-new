@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { MobileMenu } from '@/components/mobile-menu'
 import { AnimatedThemeToggler } from '@/components/animated-theme-toggler'
-import { Github, Linkedin } from 'lucide-react'
+import { Github, Linkedin, FileText } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
@@ -47,6 +47,10 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
             </a>
             <a href="https://www.linkedin.com/in/layken-varholdt-a78687230/" aria-label="LinkedIn" className="btn-icon" target="_blank" rel="noreferrer">
               <Linkedin className="h-4 w-4" />
+            </a>
+            <a href="/LLVarholdt-Resume.pdf" aria-label="Resume" title="Resume" className="btn text-xs" target="_blank" rel="noreferrer">
+              <FileText className="h-4 w-4" />
+              <span>Resume</span>
             </a>
           </div>
           <div className="h-px" style={{ background: 'hsl(var(--blue-strong) / 0.2)' }} />
