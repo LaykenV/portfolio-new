@@ -15,4 +15,7 @@
 
 //framer motion on load?
 
+//no scroll on mobile
+//scroll logic
+
 deploy and test mobile

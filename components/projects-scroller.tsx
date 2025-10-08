@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, UIEvent } from 'react'
+import { useState, useRef, UIEvent } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
@@ -30,67 +30,47 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
   // Horizontal scroll on mobile; vertical on desktop
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Only auto-scroll on mobile when activeIndex changes
-  useEffect(() => {
-    const el = containerRef.current
-    if (!el) return
-    // Only apply auto-scroll behavior on mobile
-    if (!window.matchMedia('(max-width: 767px)').matches) return
-    
-    const child = el.children[activeIndex] as HTMLElement | undefined
-    if (!child) return
-    
-    el.scrollTo({ left: child.offsetLeft, behavior: 'smooth' })
-  }, [activeIndex])
-
   const items = projects
+  
+  // Simplified scroll handler like the example - no debouncing for smoother feel
+  const handleScroll = (e: UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget
+    if (!container) return
 
-  // Debounce scroll tracking to reduce jerkiness
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  
-  // Track active index during mobile horizontal scroll with debouncing
-  const handleMobileScroll = (e: UIEvent<HTMLDivElement>) => {
-    const el = e.currentTarget
-    if (!el) return
+    const scrollLeft = container.scrollLeft
+    const totalWidth = container.scrollWidth - container.clientWidth
     
-    // Clear previous timeout
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current)
+    if (totalWidth <= 0) return
+
+    // Estimate card width based on the number of projects
+    const cardWidthEstimate = container.scrollWidth / items.length
+    
+    const centerScrollPosition = scrollLeft + container.clientWidth / 2
+    let newIndex = Math.floor(centerScrollPosition / cardWidthEstimate)
+
+    newIndex = Math.max(0, Math.min(items.length - 1, newIndex))
+
+    if (newIndex !== activeIndex) {
+      setActiveIndex(newIndex)
     }
-    
-    // Debounce the state update to reduce jerkiness
-    scrollTimeoutRef.current = setTimeout(() => {
-      const totalChildren = items.length
-      if (totalChildren === 0) return
-      const approxCardWidth = el.scrollWidth / totalChildren
-      const center = el.scrollLeft + el.clientWidth / 2
-      let newIndex = Math.floor(center / Math.max(1, approxCardWidth))
-      newIndex = Math.max(0, Math.min(totalChildren - 1, newIndex))
-      if (newIndex !== activeIndex) setActiveIndex(newIndex)
-    }, 50)
   }
-  
-  // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current)
-      }
-    }
-  }, [])
 
   return (
     <div className="h-full flex flex-col">
       <div
         ref={containerRef}
-        onScroll={handleMobileScroll}
-        className="flex flex-row md:flex-col gap-6 md:gap-8 overflow-x-auto md:overflow-x-hidden md:overflow-y-auto h-full no-scrollbar md:p-6 md:pt-6 snap-x snap-mandatory md:snap-none"
-        style={{ WebkitOverflowScrolling: 'touch' }}
+        onScroll={handleScroll}
+        className="flex flex-row md:flex-col gap-6 md:gap-8 overflow-x-auto md:overflow-x-hidden md:overflow-y-auto h-full md:p-6 md:pt-6 snap-x snap-mandatory md:snap-none [&::-webkit-scrollbar]:hidden"
+        style={{ 
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          WebkitOverflowScrolling: 'touch'
+        }}
       >
       {items.map((project, i) => (
         <article
           key={project.slug}
-          className="shrink-0 w-[92vw] md:w-full md:shrink-0 md:max-w-none card md:cursor-default relative overflow-hidden flex-shrink-0 flex flex-col ml-4 first:ml-4 md:ml-0 md:first:ml-0 snap-center"
+          className="min-w-[280px] w-[85vw] max-w-[360px] md:w-full flex-shrink-0 snap-center card md:cursor-default relative overflow-hidden flex flex-col first:ml-6 last:mr-6 md:ml-0 md:mr-0 md:first:ml-0 md:last:mr-0"
           aria-current={undefined}
         >
           {/* Media */}
