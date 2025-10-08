@@ -14,22 +14,22 @@ export default function Home() {
   return (
     <div className="font-sans mx-auto max-w-[110rem] h-dvh overflow-hidden">
       <div className="flex flex-col md:flex-row h-full">
-        <aside className="relative flex-shrink-0 md:h-screen md:overflow-y-auto md:overflow-x-hidden p-6 pt-6 md:pt-6 flex flex-col gap-3 md:gap-6 md:border-r border-subtle md:w-[42%] md:shrink-0">
+        <aside className="relative flex-shrink-0 md:h-screen md:overflow-y-auto md:overflow-x-hidden p-8 pt-8 md:p-6 md:pt-6 flex flex-col gap-6 md:gap-6 md:border-r border-subtle md:w-[42%] md:shrink-0">
           {/* Burger menu button (mobile) */}
-          <MobileMenuController className="absolute top-4 right-4 md:hidden" />
+          <MobileMenuController className="absolute top-6 right-6 md:top-4 md:right-4 md:hidden" />
           {/* Keep theme toggle visible on desktop */}
           <div className="hidden md:block absolute top-4 right-4">
             <AnimatedThemeToggler className="btn-icon" />
           </div>
 
           {/* Header: avatar + name/role */}
-          <div className="flex flex-row md:flex-row items-center md:items-start gap-4 md:gap-4 justify-center md:justify-start md:pr-0">
-            <div className="h-20 w-20 md:h-28 md:w-28 border border-subtle overflow-hidden flex-shrink-0 mx-0" aria-hidden="true">
-              <Image src="/portrait.jpeg" alt="Profile" width={112} height={112} className="object-cover" />
+          <div className="flex flex-row md:flex-row items-center md:items-start gap-5 md:gap-4 justify-center md:justify-start md:pr-0">
+            <div className="h-32 w-32 md:h-28 md:w-28 border border-subtle overflow-hidden flex-shrink-0 mx-0" aria-hidden="true">
+              <Image src="/portrait.jpeg" alt="Profile" width={128} height={128} className="object-cover" />
             </div>
             <div className="min-w-0 text-left">
-              <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">Layken Varholdt</h1>
-              <p className="text-base md:text-base opacity-80">Software Engineer @ DOL</p>
+              <h1 className="text-3xl md:text-3xl font-semibold tracking-tight">Layken Varholdt</h1>
+              <p className="text-lg md:text-base opacity-80">Software Engineer @ DOL</p>
               {/* Social links */}
               <div className="mt-2 md:mt-3 hidden md:flex flex-wrap items-center gap-2 justify-start">
                 <a href="https://x.com/LLVarholdt" aria-label="Twitter" className="btn-icon" target="_blank" rel="noreferrer">
@@ -48,17 +48,17 @@ export default function Home() {
           </div>
 
           {/* Big marketing copy */}
-          <div className="mt-1 space-y-1 md:space-y-2 text-center md:text-left">
-            <p className="text-xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-balance">
+          <div className="mt-3 space-y-2 md:space-y-2 text-center md:text-left px-2 md:px-0">
+            <p className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-balance">
               Building Web Applicaitons with state of the art technology
             </p>
-            <p className="text-base md:text-xl opacity-90 text-balance">
+            <p className="text-lg md:text-xl opacity-90 text-balance">
               I work with teams that move fast and want cutting edge websites
             </p>
           </div>
 
-          {/* Primary actions */}
-          <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+          {/* Primary actions - hidden on mobile, shown in menu instead */}
+          <div className="hidden md:flex flex-wrap gap-2 justify-center md:justify-start">
             <a className="btn-accent-invert btn-compact btn-equal text-sm md:text-base" href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer">Schedule call</a>
             <a className="btn-accent btn-compact btn-equal text-sm md:text-base" href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer"> <Image src="/telegram.png" alt="Telegram" width={20} height={20} /> Chat</a>
           </div>
