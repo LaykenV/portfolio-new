@@ -531,27 +531,21 @@ html.dark .tech-badge {
 }
 
 /* Mobile index footer with subtle accent styling */
-.index-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-}
-
 .index-footer-track {
   display: inline-flex;
   gap: 0.4rem;
-  padding: 0.35rem 0.5rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 9999px;
   border: 1px solid hsl(var(--blue-strong) / 0.22);
   background:
     linear-gradient(180deg, hsl(var(--blue-strong) / 0.12), hsl(var(--peach-strong) / 0.10)),
     hsl(var(--sidebar));
   box-shadow:
-    0 10px 26px -18px hsl(var(--blue-strong) / 0.28),
-    0 6px 16px -12px hsl(var(--peach-strong) / 0.18),
-    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.06);
+    0 16px 38px -20px hsl(var(--blue-strong) / 0.40),
+    0 8px 20px -12px hsl(var(--peach-strong) / 0.28),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.08);
+  backdrop-filter: saturate(130%) blur(8px);
+  -webkit-backdrop-filter: saturate(130%) blur(8px);
 }
 
 .index-dot {
@@ -579,8 +573,9 @@ html.dark .index-footer-track {
     linear-gradient(180deg, hsl(var(--blue-soft) / 0.10), hsl(var(--peach-soft) / 0.08)),
     hsl(var(--card));
   box-shadow:
-    0 10px 24px -18px hsl(var(--blue-soft) / 0.26),
-    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.05);
+    0 16px 38px -20px hsl(var(--blue-soft) / 0.36),
+    0 8px 20px -12px hsl(var(--peach-soft) / 0.24),
+    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.06);
 }
 
 html.dark .index-dot {

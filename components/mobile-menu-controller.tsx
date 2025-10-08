@@ -35,7 +35,7 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
             <span className="text-sm font-semibold opacity-80">Menu</span>
             <AnimatedThemeToggler className="btn-icon" />
           </div>
-          <div className="h-px bg-black/10 dark:bg-white/10" />
+          <div className="h-px" style={{ background: 'hsl(var(--blue-strong) / 0.2)' }} />
           <div className="flex items-center gap-2">
             <a href="https://x.com/LLVarholdt" aria-label="Twitter" className="btn-icon" target="_blank" rel="noreferrer">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-twitter-x" viewBox="0 0 16 16">
@@ -49,7 +49,7 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
               <Linkedin className="h-4 w-4" />
             </a>
           </div>
-          <div className="h-px bg-black/10 dark:bg-white/10" />
+          <div className="h-px" style={{ background: 'hsl(var(--blue-strong) / 0.2)' }} />
           <div className="flex flex-wrap gap-2">
             <a className="btn-accent-invert btn-compact btn-equal text-sm flex-1" href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>Schedule call</a>
             <a className="btn-accent btn-compact btn-equal text-sm flex-1" href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>

@@ -263,14 +263,12 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
       ))}
       </div>
 
-      {/* Mobile bottom dock (fixed) */}
-      <div className="md:hidden mobile-dock">
-        <div className="index-footer">
-          <div className="index-footer-track">
-            {items.map((_, i) => (
-              <span key={i} className={cn('index-dot', i === activeIndex && 'index-dot-active')} />
-            ))}
-          </div>
+      {/* Mobile bottom dock (floating) */}
+      <div className="md:hidden mobile-dock-floating">
+        <div className="index-footer-track">
+          {items.map((_, i) => (
+            <span key={i} className={cn('index-dot', i === activeIndex && 'index-dot-active')} />
+          ))}
         </div>
       </div>
     </div>

@@ -71,52 +71,37 @@ html.dark .mobile-menu-panel {
     inset 0 1px 0 hsl(var(--foreground-hsl) / 0.05);
 }
 
-/* Mobile bottom dock for index tracker */
-.mobile-dock {
+/* Mobile bottom dock for index tracker - floating style */
+.mobile-dock-floating {
   position: fixed;
-  left: 0; right: 0; bottom: 0;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
   z-index: 30;
-  height: calc(var(--dock-h) + var(--safe-bottom));
-  padding-bottom: var(--safe-bottom);
-  border-top: 1px solid hsl(var(--blue-strong) / 0.22);
-  background:
-    linear-gradient(180deg, hsl(var(--blue-strong) / 0.12), hsl(var(--peach-strong) / 0.10)),
-    hsl(var(--sidebar));
-  box-shadow:
-    0 -10px 24px -18px hsl(var(--blue-strong) / 0.26),
-    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.06);
-}
-html.dark .mobile-dock {
-  border-top-color: hsl(var(--blue-soft) / 0.18);
-  background:
-    linear-gradient(180deg, hsl(var(--blue-soft) / 0.10), hsl(var(--peach-soft) / 0.08)),
-    hsl(var(--card));
-  box-shadow:
-    0 -10px 24px -18px hsl(var(--blue-soft) / 0.24),
-    inset 0 1px 0 hsl(var(--foreground-hsl) / 0.05);
+  padding-bottom: calc(var(--safe-bottom) + 0.75rem);
+  pointer-events: none;
 }
 
-/* Mobile scroller sizing helper */
+.mobile-dock-floating .index-footer-track {
+  pointer-events: auto;
+}
+
+/* Mobile scroller sizing helper - now with padding for floating tracker */
 .mobile-scroller {
-  height: calc(100dvh - var(--header-h) - var(--dock-h) - var(--safe-bottom));
+  height: calc(100dvh - var(--header-h));
+  padding-bottom: 3.5rem; /* Space for floating tracker */
 }
 
 @media (min-width: 768px) {
   .mobile-scroller {
     height: auto;
+    padding-bottom: 0;
   }
 }
 
-/* Flatten card bottom on mobile; restore on md+ */
+/* Cards now have rounded corners on all sides since they float */
 .card-flat-bottom {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-@media (min-width: 768px) {
-  .card-flat-bottom {
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-  }
+  border-radius: 0.5rem;
 }
 
 
