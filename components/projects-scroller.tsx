@@ -70,7 +70,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
       {items.map((project, i) => (
         <article
           key={project.slug}
-          className="min-w-[280px] w-[85vw] max-w-[360px] md:w-full flex-shrink-0 snap-center card md:cursor-default relative overflow-hidden flex flex-col first:ml-6 last:mr-6 md:ml-0 md:mr-0 md:first:ml-0 md:last:mr-0"
+          className="min-w-[280px] w-[85vw] max-w-[360px] md:w-full md:max-w-none flex-shrink-0 snap-center card md:cursor-default relative overflow-hidden flex flex-col first:ml-6 last:mr-6 md:ml-0 md:mr-0 md:first:ml-0 md:last:mr-0"
           aria-current={undefined}
         >
           {/* Media */}
