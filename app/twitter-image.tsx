@@ -68,7 +68,7 @@ export default function Image() {
         >
           <div
             style={{
-              display: 'inline-flex',
+              display: 'flex',
               alignItems: 'center',
               gap: '14px',
               padding: '12px 18px',
@@ -84,7 +84,7 @@ export default function Image() {
           >
             <span
               style={{
-                display: 'inline-flex',
+                display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 width: '28px',
@@ -131,10 +131,10 @@ export default function Image() {
               opacity: 0.85,
             }}
           >
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span
                 style={{
-                  display: 'inline-flex',
+                  display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   width: '12px',
@@ -146,10 +146,10 @@ export default function Image() {
               />
               Realtime apps
             </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span
                 style={{
-                  display: 'inline-flex',
+                  display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   width: '12px',
@@ -161,10 +161,10 @@ export default function Image() {
               />
               Fast iterations
             </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span
                 style={{
-                  display: 'inline-flex',
+                  display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   width: '12px',
