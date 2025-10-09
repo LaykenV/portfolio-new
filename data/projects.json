@@ -36,7 +36,7 @@
             "longDescription": "Civicly's core is a fully implemented data pipeline built on Convex. It uses cron jobs to discover new bill manifests from govinfo.gov, processes XML files, and enriches the data with AI-generated summaries and categorizations from GPT-4o. The data is then vectorized for advanced semantic search (RAG), allowing users to interact with and understand complex legislation through a simple chat interface.",
             "image": "/civicly.png",
             "secondaryImage": "/civiclySecondary.png",
-            "techStack": ["Next.js", "Convex", "TypeScript", "OpenAI", "React", "Vercel"],
+            "techStack": ["Next.js", "Convex", "TypeScript", "OpenAI", "React"],
             "links": {
               "github": "https://github.com/LaykenV/civicly",
               "live": "https://civicly.chat"
@@ -50,7 +50,7 @@
             "longDescription": "FoodTruckFlow is a complete digital solution for mobile food businesses. Its multi-tenant architecture uses Supabase's Row-Level Security (RLS) for complete data isolation between tenants. The platform handles automatic subdomain generation, custom domain mapping via Vercel, and a JSON-based configuration for a live, real-time website builder. It also features a full subscription system with Stripe, including freemium and pro tiers with recurring billing.",
             "image": "/FoodTruckFlowSS.png",
             "secondaryImage": "/FoodTruckFlowSecondary.png",
-            "techStack": ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Stripe", "Vercel"],
+            "techStack": ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Stripe"],
             "links": {
               "github": "https://github.com/LaykenV/food-truck-flow",
               "live": "https://foodtruckflow.com"
