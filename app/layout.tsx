@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.laykenvarholdt.com'),
+  metadataBase: new URL('https://www.laykenvarholdt.com'),
   title: {
     default: 'Layken Varholdt — Software Engineer',
     template: '%s — Layken Varholdt',
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/portrait.jpeg',
+        url: 'https://www.laykenvarholdt.com/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Layken Varholdt — Software Engineer',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     description:
       'I build websites and products with cutting-edge technology and realtime sync.',
     creator: '@LLVarholdt',
-    images: ['/portrait.jpeg'],
+    images: ['https://www.laykenvarholdt.com/twitter-image'],
   },
   robots: {
     index: true,
