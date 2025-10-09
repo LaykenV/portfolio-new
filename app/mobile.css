@@ -77,7 +77,7 @@ html.dark .mobile-menu-panel {
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
-  z-index: 30;
+  z-index: 20;
   padding-bottom: calc(var(--safe-bottom) + 0.75rem);
   pointer-events: none;
 }
@@ -102,6 +102,23 @@ html.dark .mobile-menu-panel {
 /* Cards now have rounded corners on all sides since they float */
 .card-flat-bottom {
   border-radius: 0.5rem;
+}
+
+/* Fullscreen overlay on mobile - ensure it's truly fullscreen */
+@media (max-width: 767px) {
+  .overlay-panel {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    z-index: 100 !important;
+  }
 }
 
 

@@ -439,6 +439,7 @@ html.dark .card {
     0 14px 36px -16px hsl(var(--peach-strong) / 0.22),
     inset 0 1px 0 hsl(var(--foreground-hsl) / 0.06);
   backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
 }
 
 html.dark .overlay-panel {
@@ -451,6 +452,18 @@ html.dark .overlay-panel {
     0 28px 72px -24px hsl(var(--blue-soft) / 0.22),
     0 14px 36px -16px hsl(var(--peach-soft) / 0.18),
     inset 0 1px 0 hsl(var(--foreground-hsl) / 0.05);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+}
+
+/* Mobile dock positioning */
+.mobile-dock-floating {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  pointer-events: none;
 }
 
 /* Tech badges */
@@ -762,5 +775,17 @@ html.dark .footer-item:hover .footer-icon {
 
 .duration-300 {
   animation-duration: 300ms;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
