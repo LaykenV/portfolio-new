@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useRef, useEffect, UIEvent } from 'react'
+import { useState, useRef, useEffect, useCallback, UIEvent } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
-import { motion, AnimatePresence, LayoutGroup, useReducedMotion } from 'framer-motion'
+ 
 import { cn } from '@/lib/utils'
 import type { Project } from '@/types/project'
 
@@ -15,6 +15,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null)
   const [imageLoaded, setImageLoaded] = useState<Record<string, boolean>>({})
+  const [isClosing, setIsClosing] = useState(false)
 
   // Horizontal scroll on mobile; vertical on desktop
   const containerRef = useRef<HTMLDivElement>(null)
@@ -28,27 +29,14 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
   const [isMobile, setIsMobile] = useState(false)
   const [mounted, setMounted] = useState(false)
   
-  // Motion preferences
-  const prefersReducedMotion = useReducedMotion()
-  
-  const openTransition = prefersReducedMotion
-    ? { duration: 0.2 }
-    : { type: 'spring' as const, stiffness: 300, damping: 35 }
-  
-  const closeTransition = prefersReducedMotion
-    ? { duration: 0.15 }
-    : { type: 'spring' as const, stiffness: 400, damping: 30 }
-  
-  // Content fade transitions - content fades out quickly on close
-  const contentOpenTransition = prefersReducedMotion
-    ? { duration: 0.15, delay: 0.05 }
-    : { duration: 0.25, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }
-  
-  const contentCloseTransition = prefersReducedMotion
-    ? { duration: 0.08 }
-    : { duration: 0.12, ease: [0.22, 1, 0.36, 1] as const }
+  // Close flow helper to trigger CSS exit animation
+  const handleRequestClose = useCallback(() => {
+    if (!expandedSlug) return
+    setIsClosing(true)
+  }, [expandedSlug])
 
   const items = projects
+  const currentProject = items.find(p => p.slug === expandedSlug)
   
   // Detect mobile on mount
   useEffect(() => {
@@ -128,8 +116,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         e.preventDefault()
-        setExpandedSlug(null)
-        requestAnimationFrame(() => lastTriggerRef.current?.focus())
+        handleRequestClose()
       }
       if (e.key === 'Tab' && focusable.length > 0) {
         if (e.shiftKey && document.activeElement === first) {
@@ -143,10 +130,140 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
     }
     overlayEl.addEventListener('keydown', onKey)
     return () => overlayEl.removeEventListener('keydown', onKey)
-  }, [expandedSlug])
+  }, [expandedSlug, handleRequestClose])
+
+  const cp = currentProject
+  const mobileOverlay = mounted && isMobile && expandedSlug && cp ? createPortal(
+    <div
+      ref={overlayRef}
+      key={`overlay-mobile-${cp.slug}`}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${cp.title} details`}
+      tabIndex={-1}
+      className={cn(
+        'overlay-panel fixed inset-0 z-[100] border-0',
+        isClosing ? 'animate-out zoom-out-95 anim-duration-200' : 'animate-in zoom-in-95 anim-duration-200'
+      )}
+      onAnimationEnd={(e) => {
+        if (e.target !== e.currentTarget) return
+        if (!isClosing) return
+        setExpandedSlug(null)
+        setIsClosing(false)
+        requestAnimationFrame(() => lastTriggerRef.current?.focus())
+      }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div
+        className={cn(
+          'absolute inset-0 overflow-auto p-4',
+          isClosing
+            ? 'animate-out slide-out-to-bottom-2 anim-duration-200'
+            : 'animate-in slide-in-from-bottom-2 anim-duration-200'
+        )}
+      >
+        {/* Header Row */}
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h4 className="text-xl font-semibold tracking-tight">
+              {cp.title}
+            </h4>
+            <p className="text-base opacity-80 mt-0.5">
+              {cp.tagline}
+            </p>
+          </div>
+          <button
+            ref={closeBtnRef}
+            className="btn-icon"
+            aria-label="Close details"
+            onClick={handleRequestClose}
+          >
+            ×
+          </button>
+        </div>
+
+        {/* Secondary Image */}
+        <div className="mt-4 relative w-full overflow-hidden rounded-lg">
+          <div className="relative w-full aspect-[16/9]">
+            {/* Loading spinner - shows until image loads */}
+            {!imageLoaded[cp.slug] && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/5 dark:bg-white/5 backdrop-blur-sm">
+                <div className="w-8 h-8 border-2 border-current border-t-transparent rounded-full animate-spin opacity-50" />
+              </div>
+            )}
+            <Image
+              src={cp.secondaryImage}
+              alt={`${cp.title} - additional view`}
+              fill
+              className="object-contain select-none"
+              draggable={false}
+              sizes="92vw"
+              onLoad={() => setImageLoaded(prev => ({ ...prev, [cp.slug]: true }))}
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/8 via-black/0 to-black/0 dark:from-black/15" />
+          </div>
+        </div>
+
+        {/* Body */}
+        <div className="mt-4 flex flex-col gap-6">
+          <div>
+            <p className="text-sm leading-relaxed">
+              {cp.longDescription}
+            </p>
+          </div>
+          <div>
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-wide opacity-70">
+                Tech Stack
+              </div>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {cp.techStack?.map((tech) => (
+                  <span 
+                    key={tech} 
+                    className="tech-badge"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <div className="text-xs font-semibold uppercase tracking-wide opacity-70">
+                Links
+              </div>
+              <div className="mt-2 flex flex-wrap gap-3">
+                {cp.links?.live ? (
+                  <a
+                    href={cp.links.live}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="btn-accent-invert btn-compact flex-1"
+                  >
+                    Live Website
+                  </a>
+                ) : null}
+                {cp.links?.github ? (
+                  <a
+                    href={cp.links.github}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="btn-accent btn-compact flex-1"
+                  >
+                    GitHub Repo
+                  </a>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>,
+    document.body
+  ) : null
 
   return (
-    <LayoutGroup>
+    <>
       <div className="h-full flex flex-col">
         <div
           ref={containerRef}
@@ -217,12 +334,12 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                 </a>
               ) : null}
 
-              <motion.button
-                layoutId={`expand-${project.slug}`}
+              <button
                 className={cn('btn-accent btn-compact flex-1 md:flex-none transition-all duration-200')}
                 onClick={(e) => {
                   e.stopPropagation()
                   lastTriggerRef.current = e.currentTarget
+                  setIsClosing(false)
                   setExpandedSlug(project.slug)
                 }}
                 onMouseEnter={() => preloadImage(project.secondaryImage, project.slug)}
@@ -230,40 +347,39 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                 aria-expanded={expandedSlug === project.slug}
               >
                 Learn More
-              </motion.button>
+              </button>
             </div>
           </div>
 
           {/* Expanding Overlay with Framer Motion morph */}
           {/* Desktop: render in card | Mobile: render via portal at body level */}
-          {!isMobile && (
-            <AnimatePresence initial={false}>
-              {expandedSlug === project.slug && (
-                <motion.div
+          {!isMobile && expandedSlug === project.slug && (
+                <div
                   ref={overlayRef}
-                  key={`overlay-${project.slug}`}
-                  layoutId={`expand-${project.slug}`}
                   role="dialog"
                   aria-modal="true"
                   aria-label={`${project.title} details`}
                   tabIndex={-1}
-                  className="overlay-panel absolute inset-0 z-10 rounded-xl border"
-                  transition={openTransition}
-                  exit={{ transition: closeTransition }}
+          className={cn(
+            'overlay-panel absolute inset-0 z-10 rounded-xl border',
+            isClosing ? 'animate-out zoom-out-95 anim-duration-200' : 'animate-in zoom-in-95 anim-duration-200'
+          )}
+                  onAnimationEnd={(e) => {
+                    if (e.target !== e.currentTarget) return
+                    if (!isClosing) return
+                    setExpandedSlug(null)
+                    setIsClosing(false)
+                    requestAnimationFrame(() => lastTriggerRef.current?.focus())
+                  }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {/* Overlay content - fades in on open, fades out quickly on close */}
-                  <motion.div 
-                    className="absolute inset-0 overflow-auto p-4 md:p-6"
-                    initial={{ opacity: 0 }}
-                    animate={{ 
-                      opacity: 1,
-                      transition: contentOpenTransition
-                    }}
-                    exit={{ 
-                      opacity: 0,
-                      transition: contentCloseTransition
-                    }}
+                  <div 
+          className={cn(
+            'absolute inset-0 overflow-auto p-4 md:p-6',
+            isClosing
+              ? 'animate-out slide-out-to-bottom-2 anim-duration-200'
+              : 'animate-in slide-in-from-bottom-2 anim-duration-200'
+          )}
                   >
                     {/* Header Row */}
                     <div className="flex items-start justify-between gap-4">
@@ -279,10 +395,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                         ref={closeBtnRef}
                         className="btn-icon"
                         aria-label="Close details"
-                        onClick={() => {
-                          setExpandedSlug(null)
-                          requestAnimationFrame(() => lastTriggerRef.current?.focus())
-                        }}
+                        onClick={handleRequestClose}
                       >
                         ×
                       </button>
@@ -363,10 +476,8 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  </div>
+                </div>
           )}
         </article>
       ))}
@@ -375,7 +486,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
       {/* Mobile bottom dock (floating) - hidden while overlay is expanded */}
       {expandedSlug === null && (
         <div className="md:hidden mobile-dock-floating">
-          <div className="index-footer-track">
+          <div className="index-footer-track animate-in slide-in-from-bottom-3 anim-duration-300">
             {items.map((_, i) => (
               <span key={i} className={cn('index-dot', i === activeIndex && 'index-dot-active')} />
             ))}
@@ -397,145 +508,11 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
           />
         ))}
       </div>
-      </div>
-
-      {/* Mobile fullscreen overlay - rendered via portal */}
-      {mounted && isMobile && expandedSlug && createPortal(
-        <AnimatePresence initial={false}>
-          {items.map((project) => (
-            expandedSlug === project.slug && (
-              <motion.div
-                ref={overlayRef}
-                key={`overlay-mobile-${project.slug}`}
-                layoutId={`expand-${project.slug}`}
-                role="dialog"
-                aria-modal="true"
-                aria-label={`${project.title} details`}
-                tabIndex={-1}
-                className="overlay-panel fixed inset-0 z-[100] border-0"
-                transition={openTransition}
-                exit={{ transition: closeTransition }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Overlay content - fades in on open, fades out quickly on close */}
-                <motion.div 
-                  className="absolute inset-0 overflow-auto p-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ 
-                    opacity: 1,
-                    transition: contentOpenTransition
-                  }}
-                  exit={{ 
-                    opacity: 0,
-                    transition: contentCloseTransition
-                  }}
-                >
-                  {/* Header Row */}
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h4 className="text-xl font-semibold tracking-tight">
-                        {project.title}
-                      </h4>
-                      <p className="text-base opacity-80 mt-0.5">
-                        {project.tagline}
-                      </p>
-                    </div>
-                    <button
-                      ref={closeBtnRef}
-                      className="btn-icon"
-                      aria-label="Close details"
-                      onClick={() => {
-                        setExpandedSlug(null)
-                        requestAnimationFrame(() => lastTriggerRef.current?.focus())
-                      }}
-                    >
-                      ×
-                    </button>
-                  </div>
-
-                  {/* Secondary Image */}
-                  <div className="mt-4 relative w-full overflow-hidden rounded-lg">
-                    <div className="relative w-full aspect-[16/9]">
-                      {/* Loading spinner - shows until image loads */}
-                      {!imageLoaded[project.slug] && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/5 dark:bg-white/5 backdrop-blur-sm">
-                          <div className="w-8 h-8 border-2 border-current border-t-transparent rounded-full animate-spin opacity-50" />
-                        </div>
-                      )}
-                      <Image
-                        src={project.secondaryImage}
-                        alt={`${project.title} - additional view`}
-                        fill
-                        className="object-contain select-none"
-                        draggable={false}
-                        sizes="92vw"
-                        onLoad={() => setImageLoaded(prev => ({ ...prev, [project.slug]: true }))}
-                      />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/8 via-black/0 to-black/0 dark:from-black/15" />
-                    </div>
-                  </div>
-
-                  {/* Body */}
-                  <div className="mt-4 flex flex-col gap-6">
-                    <div>
-                      <p className="text-sm leading-relaxed">
-                        {project.longDescription}
-                      </p>
-                    </div>
-                    <div>
-                      <div>
-                        <div className="text-xs font-semibold uppercase tracking-wide opacity-70">
-                          Tech Stack
-                        </div>
-                        <div className="mt-2 flex flex-wrap gap-2">
-                          {project.techStack?.map((tech) => (
-                            <span 
-                              key={tech} 
-                              className="tech-badge"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="mt-4">
-                        <div className="text-xs font-semibold uppercase tracking-wide opacity-70">
-                          Links
-                        </div>
-                        <div className="mt-2 flex flex-wrap gap-3">
-                          {project.links?.live ? (
-                            <a
-                              href={project.links.live}
-                              target="_blank"
-                              rel="noreferrer noopener"
-                              className="btn-accent-invert btn-compact flex-1"
-                            >
-                              Live Website
-                            </a>
-                          ) : null}
-                          {project.links?.github ? (
-                            <a
-                              href={project.links.github}
-                              target="_blank"
-                              rel="noreferrer noopener"
-                              className="btn-accent btn-compact flex-1"
-                            >
-                              GitHub Repo
-                            </a>
-                          ) : null}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            )
-          ))}
-        </AnimatePresence>,
-        document.body
-      )}
-    </LayoutGroup>
+    </div>
+    
+    {/* Mobile fullscreen overlay portal */}
+    {mobileOverlay}
+    </>
   )
 }
 

@@ -52,7 +52,7 @@ export function MobileMenu({ open, onClose, children }: MobileMenuProps) {
       <div className={cn(
         'relative rounded-2xl p-4 outline-none',
         'mobile-menu-panel',
-        'animate-in fade-in slide-in-from-top-2 duration-200'
+        'animate-in slide-in-from-top-2 duration-200'
       )}>
         {children}
       </div>

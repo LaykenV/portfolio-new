@@ -440,6 +440,8 @@ html.dark .card {
     inset 0 1px 0 hsl(var(--foreground-hsl) / 0.06);
   backdrop-filter: saturate(140%) blur(10px);
   -webkit-backdrop-filter: saturate(140%) blur(10px);
+  transform: translateZ(0); /* Force GPU acceleration */
+  backface-visibility: hidden;
 }
 
 html.dark .overlay-panel {
@@ -464,6 +466,8 @@ html.dark .overlay-panel {
   transform: translateX(-50%);
   z-index: 20;
   pointer-events: none;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 /* Tech badges */
@@ -549,7 +553,12 @@ html.dark .tech-badge:focus-visible {
   border-radius: 9999px;
   background: linear-gradient(180deg, hsl(var(--blue-strong) / 0.40), hsl(var(--peach-strong) / 0.32));
   opacity: 0.45;
-  transition: all 220ms ease;
+  transition: width 280ms cubic-bezier(0.34, 1.56, 0.64, 1), 
+              opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              background 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+  will-change: width, opacity;
 }
 
 .index-dot-active {
@@ -702,79 +711,207 @@ html.dark .footer-item:hover .footer-icon {
   }
 }
 
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 @keyframes slide-in-from-top {
   from {
     transform: translateY(-0.5rem);
+    opacity: 0;
   }
   to {
     transform: translateY(0);
+    opacity: 1;
   }
 }
 
 @keyframes slide-in-from-bottom {
   from {
     transform: translateY(0.5rem);
+    opacity: 0;
   }
   to {
     transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-to-bottom {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(0.5rem);
+    opacity: 0;
   }
 }
 
 @keyframes slide-in-from-right {
   from {
     transform: translateX(0.5rem);
+    opacity: 0;
   }
   to {
     transform: translateX(0);
+    opacity: 1;
   }
 }
 
 @keyframes zoom-in {
   from {
-    transform: scale(0.95);
+    transform: scale(0.96);
+    opacity: 0;
   }
   to {
     transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoom-out {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+}
+
+/* Mobile-optimized animations with larger, more visible movements */
+@media (max-width: 767px) {
+  @keyframes slide-in-from-bottom {
+    from {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-out-to-bottom {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes zoom-in {
+    from {
+      transform: scale(0.92);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes zoom-out {
+    from {
+      transform: scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: scale(0.92);
+      opacity: 0;
+    }
   }
 }
 
 /* Animation utility classes */
 .animate-in {
-  animation-duration: 200ms;
-  animation-timing-function: ease-out;
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); /* Smooth ease-out */
   animation-fill-mode: both;
+  will-change: transform, opacity;
 }
 
+.animate-out {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.7, 0, 0.84, 0); /* Smooth ease-in */
+  animation-fill-mode: both;
+  will-change: transform, opacity;
+}
+
+/* Single animation classes */
 .fade-in {
   animation-name: fade-in;
 }
 
+.fade-out {
+  animation-name: fade-out;
+}
+
+/* Combined animation classes - opacity is already in keyframes */
 .slide-in-from-top-2 {
-  animation-name: fade-in, slide-in-from-top;
+  animation-name: slide-in-from-top;
 }
 
 .slide-in-from-bottom-2 {
-  animation-name: fade-in, slide-in-from-bottom;
+  animation-name: slide-in-from-bottom;
 }
 
 .slide-in-from-bottom-3 {
-  animation-name: fade-in, slide-in-from-bottom;
+  animation-name: slide-in-from-bottom;
 }
 
 .slide-in-from-right-2 {
-  animation-name: fade-in, slide-in-from-right;
+  animation-name: slide-in-from-right;
+}
+
+.slide-out-to-bottom-2 {
+  animation-name: slide-out-to-bottom;
+}
+
+.slide-out-to-bottom-3 {
+  animation-name: slide-out-to-bottom;
 }
 
 .zoom-in-95 {
-  animation-name: fade-in, zoom-in;
+  animation-name: zoom-in;
 }
 
-.duration-200 {
-  animation-duration: 200ms;
+.zoom-out-95 {
+  animation-name: zoom-out;
 }
 
-.duration-300 {
-  animation-duration: 300ms;
+/* Animation duration utilities */
+.anim-duration-200 {
+  animation-duration: 320ms;
+}
+
+.anim-duration-300 {
+  animation-duration: 420ms;
+}
+
+.anim-duration-500 {
+  animation-duration: 600ms;
+}
+
+/* Mobile-specific timing for snappier feel */
+@media (max-width: 767px) {
+  .animate-in {
+    animation-duration: 360ms;
+  }
+  
+  .animate-out {
+    animation-duration: 260ms;
+  }
 }
 
 /* Respect user motion preferences */
