@@ -207,7 +207,15 @@ export default function Image() {
             <div style={{ fontSize: '18px', letterSpacing: '0.28em', textTransform: 'uppercase', opacity: 0.58 }}>
               Focus Areas
             </div>
-            <div style={{ display: 'grid', gap: '14px', fontSize: '24px', fontWeight: 600 }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '14px',
+              fontSize: '24px',
+              fontWeight: 600,
+            }}
+          >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span>Next.js & React 19</span>
                 <span style={{ fontSize: '20px', opacity: 0.65 }}>→</span>
