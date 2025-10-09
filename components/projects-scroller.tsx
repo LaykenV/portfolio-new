@@ -31,9 +31,13 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
   // Motion preferences
   const prefersReducedMotion = useReducedMotion()
   
-  const springTransition = prefersReducedMotion
-    ? { duration: 0.15 }
-    : { type: 'spring' as const, stiffness: 400, damping: 35 }
+  const openTransition = prefersReducedMotion
+    ? { duration: 0.2 }
+    : { type: 'spring' as const, stiffness: 300, damping: 35 }
+  
+  const closeTransition = prefersReducedMotion
+    ? { duration: 0.1 }
+    : { type: 'spring' as const, stiffness: 600, damping: 25 }
 
   const items = projects
   
@@ -197,7 +201,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                   href={project.links.live}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className={cn('btn-accent btn-compact flex-1 md:flex-none')}
+                  className={cn('btn-accent-invert btn-compact flex-1 md:flex-none')}
                   onClick={(e) => e.stopPropagation()}
                 >
                   Live Website
@@ -206,8 +210,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
 
               <motion.button
                 layoutId={`expand-${project.slug}`}
-                className={cn('btn-accent-invert btn-compact flex-1 md:flex-none transition-all duration-200')}
-                transition={springTransition}
+                className={cn('btn-accent btn-compact flex-1 md:flex-none transition-all duration-200')}
                 onClick={(e) => {
                   e.stopPropagation()
                   lastTriggerRef.current = e.currentTarget
@@ -236,7 +239,8 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                   aria-label={`${project.title} details`}
                   tabIndex={-1}
                   className="overlay-panel absolute inset-0 z-10 rounded-xl border"
-                  transition={springTransition}
+                  transition={openTransition}
+                  exit={{ transition: closeTransition }}
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Overlay content - no animations, instant display */}
@@ -320,7 +324,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                                 href={project.links.live}
                                 target="_blank"
                                 rel="noreferrer noopener"
-                                className="btn-accent btn-compact flex-1 md:flex-none"
+                                className="btn-accent-invert btn-compact flex-1 md:flex-none"
                               >
                                 Live Website
                               </a>
@@ -330,7 +334,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                                 href={project.links.github}
                                 target="_blank"
                                 rel="noreferrer noopener"
-                                className="btn-accent-invert btn-compact flex-1 md:flex-none"
+                                className="btn-accent btn-compact flex-1 md:flex-none"
                               >
                                 GitHub Repo
                               </a>
@@ -389,7 +393,8 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                 aria-label={`${project.title} details`}
                 tabIndex={-1}
                 className="overlay-panel fixed inset-0 z-[100] border-0"
-                transition={springTransition}
+                transition={openTransition}
+                exit={{ transition: closeTransition }}
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Overlay content - no animations, instant display */}
@@ -473,7 +478,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                               href={project.links.live}
                               target="_blank"
                               rel="noreferrer noopener"
-                              className="btn-accent btn-compact flex-1"
+                              className="btn-accent-invert btn-compact flex-1"
                             >
                               Live Website
                             </a>
@@ -483,7 +488,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                               href={project.links.github}
                               target="_blank"
                               rel="noreferrer noopener"
-                              className="btn-accent-invert btn-compact flex-1"
+                              className="btn-accent btn-compact flex-1"
                             >
                               GitHub Repo
                             </a>
