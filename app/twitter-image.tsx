@@ -18,48 +18,17 @@ export default function Image() {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '72px 88px',
-          background:
+          backgroundColor: '#FAF9F6',
+          backgroundImage: [
             'linear-gradient(140deg, #FAF9F6 0%, #FFF8F3 38%, #FFEDE4 72%, #E9F1FF 100%)',
+            'radial-gradient(420px 420px at -16% 20%, rgba(233,241,255,0.55), rgba(233,241,255,0) 70%)',
+            'radial-gradient(520px 520px at 120% 120%, rgba(255,237,228,0.48), rgba(255,237,228,0) 70%)',
+          ].join(', '),
           color: '#222222',
           fontFamily: "'Geist', 'Inter', 'SF Pro Display', sans-serif",
           position: 'relative',
         }}
       >
-        <div
-          style={{
-            position: 'absolute',
-            inset: '0',
-            pointerEvents: 'none',
-            mixBlendMode: 'normal',
-            display: 'block',
-          }}
-        >
-          <div
-            style={{
-              position: 'absolute',
-              width: '420px',
-              height: '420px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(233,241,255,0.55) 0%, rgba(233,241,255,0) 70%)',
-              top: '-120px',
-              left: '-160px',
-              display: 'flex',
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              width: '520px',
-              height: '520px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(255,237,228,0.48) 0%, rgba(255,237,228,0) 70%)',
-              bottom: '-180px',
-              right: '-220px',
-              display: 'flex',
-            }}
-          />
-        </div>
-
         <div
           style={{
             position: 'relative',
