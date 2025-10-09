@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/opengraph-image',
+        url: '/portrait.jpeg',
         width: 1200,
         height: 630,
         alt: 'Layken Varholdt — Software Engineer',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     description:
       'I build websites and products with cutting-edge technology and realtime sync.',
     creator: '@LLVarholdt',
-    images: ['/twitter-image'],
+    images: ['/portrait.jpeg'],
   },
   robots: {
     index: true,

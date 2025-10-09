@@ -36,8 +36,17 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
     : { type: 'spring' as const, stiffness: 300, damping: 35 }
   
   const closeTransition = prefersReducedMotion
-    ? { duration: 0.1 }
-    : { type: 'spring' as const, stiffness: 600, damping: 25 }
+    ? { duration: 0.15 }
+    : { type: 'spring' as const, stiffness: 400, damping: 30 }
+  
+  // Content fade transitions - content fades out quickly on close
+  const contentOpenTransition = prefersReducedMotion
+    ? { duration: 0.15, delay: 0.05 }
+    : { duration: 0.25, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }
+  
+  const contentCloseTransition = prefersReducedMotion
+    ? { duration: 0.08 }
+    : { duration: 0.12, ease: [0.22, 1, 0.36, 1] as const }
 
   const items = projects
   
@@ -243,8 +252,19 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                   exit={{ transition: closeTransition }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {/* Overlay content - no animations, instant display */}
-                  <div className="absolute inset-0 overflow-auto p-4 md:p-6">
+                  {/* Overlay content - fades in on open, fades out quickly on close */}
+                  <motion.div 
+                    className="absolute inset-0 overflow-auto p-4 md:p-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ 
+                      opacity: 1,
+                      transition: contentOpenTransition
+                    }}
+                    exit={{ 
+                      opacity: 0,
+                      transition: contentCloseTransition
+                    }}
+                  >
                     {/* Header Row */}
                     <div className="flex items-start justify-between gap-4">
                       <div>
@@ -343,7 +363,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -397,15 +417,26 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                 exit={{ transition: closeTransition }}
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Overlay content - no animations, instant display */}
-                <div className="absolute inset-0 overflow-auto p-4">
+                {/* Overlay content - fades in on open, fades out quickly on close */}
+                <motion.div 
+                  className="absolute inset-0 overflow-auto p-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ 
+                    opacity: 1,
+                    transition: contentOpenTransition
+                  }}
+                  exit={{ 
+                    opacity: 0,
+                    transition: contentCloseTransition
+                  }}
+                >
                   {/* Header Row */}
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <h4 className="text-base font-semibold tracking-tight">
+                      <h4 className="text-xl font-semibold tracking-tight">
                         {project.title}
                       </h4>
-                      <p className="text-xs opacity-80 mt-0.5">
+                      <p className="text-base opacity-80 mt-0.5">
                         {project.tagline}
                       </p>
                     </div>
@@ -497,7 +528,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
             )
           ))}
