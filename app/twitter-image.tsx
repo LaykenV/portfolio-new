@@ -42,6 +42,7 @@ export default function Image() {
               background: 'radial-gradient(circle, rgba(233,241,255,0.55) 0%, rgba(233,241,255,0) 70%)',
               top: '-120px',
               left: '-160px',
+              display: 'flex',
             }}
           />
           <div
@@ -53,6 +54,7 @@ export default function Image() {
               background: 'radial-gradient(circle, rgba(255,237,228,0.48) 0%, rgba(255,237,228,0) 70%)',
               bottom: '-180px',
               right: '-220px',
+              display: 'flex',
             }}
           />
         </div>
