@@ -19,11 +19,10 @@ export default function Image() {
           justifyContent: 'space-between',
           padding: '72px 88px',
           backgroundColor: '#FAF9F6',
-          backgroundImage: [
-            'linear-gradient(140deg, #FAF9F6 0%, #FFF8F3 38%, #FFEDE4 72%, #E9F1FF 100%)',
-            'radial-gradient(420px 420px at -16% 20%, rgba(233,241,255,0.55), rgba(233,241,255,0) 70%)',
+          backgroundImage:
+            'linear-gradient(140deg, #FAF9F6 0%, #FFF8F3 38%, #FFEDE4 72%, #E9F1FF 100%), ' +
+            'radial-gradient(420px 420px at -16% 20%, rgba(233,241,255,0.55), rgba(233,241,255,0) 70%), ' +
             'radial-gradient(520px 520px at 120% 120%, rgba(255,237,228,0.48), rgba(255,237,228,0) 70%)',
-          ].join(', '),
           color: '#222222',
           fontFamily: "'Geist', 'Inter', 'SF Pro Display', sans-serif",
           position: 'relative',
@@ -71,27 +70,32 @@ export default function Image() {
             Modern web experiences
           </div>
 
-          <div
+          <h1
             style={{
               fontSize: '72px',
               fontWeight: 600,
               lineHeight: 0.98,
               letterSpacing: '-0.045em',
+              margin: 0,
+              display: 'flex',
             }}
           >
             Layken Varholdt
-          </div>
+          </h1>
 
-          <div
+          <p
             style={{
               fontSize: '30px',
               fontWeight: 500,
               opacity: 0.82,
               letterSpacing: '-0.02em',
+              margin: 0,
+              display: 'flex',
+              flexWrap: 'wrap',
             }}
           >
             Software Engineer crafting realtime, beautiful products for fast-moving teams.
-          </div>
+          </p>
 
           <div
             style={{
@@ -103,8 +107,8 @@ export default function Image() {
               opacity: 0.85,
             }}
           >
-            <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', borderRadius: '10px', padding: '4px 10px', background: 'rgba(255,255,255,0.56)' }}>
+              <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -117,9 +121,9 @@ export default function Image() {
                 }}
               />
               Realtime apps
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', borderRadius: '10px', padding: '4px 10px', background: 'rgba(255,255,255,0.56)' }}>
+              <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -132,9 +136,9 @@ export default function Image() {
                 }}
               />
               Fast iterations
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', borderRadius: '10px', padding: '4px 10px', background: 'rgba(255,255,255,0.56)' }}>
+              <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -147,7 +151,7 @@ export default function Image() {
                 }}
               />
               Premium polish
-            </span>
+            </div>
           </div>
         </div>
 
@@ -176,9 +180,18 @@ export default function Image() {
               backdropFilter: 'blur(20px)',
             }}
           >
-            <div style={{ fontSize: '18px', letterSpacing: '0.28em', textTransform: 'uppercase', opacity: 0.58 }}>
+            <h2
+              style={{
+                fontSize: '18px',
+                letterSpacing: '0.28em',
+                textTransform: 'uppercase',
+                opacity: 0.58,
+                margin: 0,
+                display: 'flex',
+              }}
+            >
               Focus Areas
-            </div>
+            </h2>
           <div
             style={{
               display: 'flex',
@@ -201,7 +214,7 @@ export default function Image() {
                 <span style={{ fontSize: '20px', opacity: 0.65 }}>→</span>
               </div>
             </div>
-            <div
+            <p
               style={{
                 marginTop: '12px',
                 paddingTop: '16px',
@@ -209,10 +222,12 @@ export default function Image() {
                 fontSize: '18px',
                 lineHeight: 1.4,
                 opacity: 0.7,
+                display: 'flex',
+                marginBottom: 0,
               }}
             >
               Delivering realtime, beautiful web applications with premium UX.
-            </div>
+            </p>
           </div>
         </div>
       </div>
