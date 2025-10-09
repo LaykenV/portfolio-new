@@ -31,6 +31,7 @@ export default function Image() {
             inset: '0',
             pointerEvents: 'none',
             mixBlendMode: 'normal',
+            display: 'block',
           }}
         >
           <div
