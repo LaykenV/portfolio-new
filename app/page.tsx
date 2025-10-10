@@ -16,7 +16,7 @@ export default function Home() {
       <StructuredData projects={projects} />
     <div className="font-sans mx-auto max-w-[110rem] h-dvh overflow-hidden">
       <div className="flex flex-col md:flex-row h-full">
-        <aside className="relative flex-shrink-0 md:h-screen md:overflow-y-auto md:overflow-x-hidden p-8 pt-8 md:p-6 md:pt-6 flex flex-col gap-6 md:gap-6 md:border-r border-subtle md:w-[42%] md:shrink-0">
+        <aside className="relative flex-shrink-0 md:h-screen md:overflow-y-auto md:overflow-x-hidden p-8 pt-8 md:p-6 md:pt-6 flex flex-col gap-3 md:gap-4 md:border-r border-subtle md:w-[42%] md:shrink-0">
           {/* Burger menu button (mobile) */}
           <MobileMenuController className="absolute top-6 right-6 md:top-4 md:right-4 md:hidden" />
           {/* Keep theme toggle visible on desktop */}
@@ -54,7 +54,7 @@ export default function Home() {
           </div>
 
           {/* Big marketing copy */}
-          <div className="mt-2 sm:mt-3 space-y-1 sm:space-y-1.5 md:space-y-2 text-center md:text-left px-0">
+          <div className="mt-3 md:mt-4 space-y-1 sm:space-y-1.5 md:space-y-2 text-center md:text-left px-0">
             <p className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-balance">
               Building Web Applications with cutting edge technology
             </p>
@@ -64,7 +64,7 @@ export default function Home() {
           </div>
 
           {/* Primary actions - now visible on all screen sizes */}
-          <div className="flex gap-2 justify-center md:justify-start mt-3 md:mt-4">
+          <div className="flex gap-2 justify-center md:justify-start mt-2 md:mt-3">
             <a className="btn-accent-invert btn-compact flex-1 sm:flex-initial sm:btn-equal text-sm md:text-base" href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer">Schedule call</a>
             <a className="btn-accent btn-compact flex-1 sm:flex-initial sm:btn-equal text-sm md:text-base" href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer"> <Image src="/telegram.png" alt="Telegram" width={20} height={20} /> Chat</a>
           </div>
