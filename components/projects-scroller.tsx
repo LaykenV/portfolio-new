@@ -281,6 +281,12 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
           className="min-w-[280px] w-[85vw] max-w-[360px] md:w-full md:max-w-none flex-shrink-0 snap-center card card-flat-bottom md:cursor-default relative overflow-hidden flex flex-col first:ml-6 last:mr-6 md:ml-0 md:mr-0 md:first:ml-0 md:last:mr-0"
           aria-current={undefined}
         >
+          {project.award && expandedSlug !== project.slug && (
+            <div className="project-award-ribbon" aria-label={`${project.award.label} award`}>
+              <span aria-hidden="true">{project.award.icon ?? '🏅'}</span>
+              <span>{project.award.label}</span>
+            </div>
+          )}
           {/* Media */}
           {/* Mobile: friendlier aspect / flexible height */}
           <div className="relative block md:hidden w-full overflow-hidden rounded-md">

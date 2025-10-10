@@ -14,6 +14,9 @@
   --accent-blue: #E9F1FF;   /* pale sky blue */
   --accent-peach: #FFEDE4;  /* warm peach */
   --accent-peach-2: #FFF8F3;/* warm off-white */
+  --gold-soft: 36 96% 88%;
+  --gold-strong: 36 92% 56%;
+  --gold-shadow: 36 64% 40%;
 
   /* HSL tokens for richer UI composition */
   /* Core accents (light) */
@@ -57,6 +60,9 @@
   --blue-strong: 218 90% 72%;
   --peach-soft: 20 100% 86%;
   --peach-strong: 20 90% 72%;
+  --gold-soft: 36 96% 78%;
+  --gold-strong: 36 92% 52%;
+  --gold-shadow: 36 64% 32%;
   /* Aliases for compatibility */
   --primary: var(--blue-soft);
   --accent: var(--peach-soft);
@@ -402,6 +408,51 @@ html.dark .card {
     0 0 0 3px hsl(var(--blue-strong) / 0.30),
     0 12px 28px -14px hsl(var(--blue-strong) / 0.26),
     0 4px 10px -2px hsl(var(--peach-strong) / 0.16);
+}
+
+/* Award ribbon badge */
+.project-award-ribbon {
+  position: absolute;
+  top: -0.26rem;
+  left: -0.34rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.36rem;
+  padding: 0.32rem 0.72rem;
+  border-radius: 0 0 0.7rem 0;
+  border: 1px solid hsl(var(--gold-strong) / 0.5);
+  background:
+    radial-gradient(90% 160% at 15% 15%, hsl(var(--gold-soft)), transparent 58%),
+    linear-gradient(130deg, hsl(var(--gold-strong)), hsl(var(--gold-soft)) 62%, hsl(var(--gold-strong)) 100%);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow:
+    inset 0 1px 0 hsl(0 0% 100% / 0.82),
+    0 8px 18px -14px hsl(var(--gold-shadow) / 0.38);
+  transform: translateZ(0);
+  z-index: 12;
+}
+
+.project-award-ribbon span[aria-hidden="true"] {
+  font-size: 1.15em;
+  filter: drop-shadow(0 1px 2px hsl(0 0% 0% / 0.35));
+}
+
+.project-award-ribbon span:last-child {
+  letter-spacing: 0.18em;
+}
+
+.dark .project-award-ribbon {
+  border-color: hsl(var(--gold-soft) / 0.55);
+  background:
+    radial-gradient(90% 160% at 18% 18%, hsl(var(--gold-soft) / 0.9), transparent 55%),
+    linear-gradient(135deg, hsl(var(--gold-strong)), hsl(var(--gold-soft)) 58%, hsl(var(--gold-strong)) 100%);
+  box-shadow:
+    inset 0 1px 0 hsl(0 0% 100% / 0.42),
+    0 10px 22px -18px hsl(var(--gold-shadow) / 0.44);
 }
 
 .dark .btn-accent-invert:focus-visible {
@@ -925,4 +976,5 @@ html.dark .footer-item:hover .footer-icon {
     scroll-behavior: auto !important;
   }
 }
+
 

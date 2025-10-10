@@ -11,5 +11,9 @@ export interface Project {
     github?: string | null
     live?: string | null
   }
+  award?: {
+    label: string
+    icon?: string
+  }
 }
 

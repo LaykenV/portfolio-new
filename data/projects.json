@@ -17,15 +17,19 @@
           {
             "slug": "atlas-outbound",
             "title": "Atlas Outbound",
-            "tagline": "AI-Powered Sales Calls for Digital Agencies",
-            "description": "A hackathon AI platform that automates sales prospecting for agencies by finding qualified local clients and initiating a trust-based AI sales call to book discovery meetings.",
-            "longDescription": "Built in just 12 days for the Convex Modern Stack Hackathon, Atlas Outbound solves a critical agency pain point. It uses Google Places API for lead sourcing, Firecrawl to analyze websites for marketing gaps, and OpenAI for intelligence. The core feature is its context-aware AI sales agent, powered by Vapi, which uses the agency's own case studies to build immediate trust and book calls. The real-time dashboard is powered by Convex, showcasing a complete end-to-end user flow.",
+            "tagline": " AI-Powered Sales Calls - Hackathon Winner ($10k Prize)",
+            "description": "Award-winning AI platform that automates sales prospecting for agencies by finding qualified local clients and initiating trust-based AI sales calls to book discovery meetings.",
+            "longDescription": "Atlas Outbound won 1st place at the Convex Modern Stack Hackathon, earning a $10k cash prize plus ~$3k in additional prizes. Built in just 12 days, it solves a critical agency pain point by combining intelligent lead sourcing with AI-powered sales automation. The platform uses Google Places API for lead discovery, Firecrawl to analyze websites for marketing gaps, and OpenAI for intelligence. Its standout feature is a context-aware AI sales agent powered by Vapi, which leverages the agency's own case studies to build immediate trust and book qualified discovery calls. The real-time dashboard, powered by Convex, showcases a complete end-to-end user flow from prospecting to conversion.",
             "image": "/atlasOutbound.png",
             "secondaryImage": "/atlasOutboundSecondary.png",
             "techStack": ["Next.js", "Convex", "Resend", "OpenAI", "Vapi", "Better-Auth", "Firecrawl"],
             "links": {
               "github": "https://github.com/LaykenV/modern-hack",
               "live": "https://atlasoutbound.app"
+            },
+            "award": {
+              "label": "1st Place",
+              "icon": "🥇"
             }
           },
           {
