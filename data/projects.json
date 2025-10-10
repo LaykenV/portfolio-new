@@ -17,7 +17,7 @@
           {
             "slug": "atlas-outbound",
             "title": "Atlas Outbound",
-            "tagline": " AI-Powered Sales Calls - Hackathon Winner ($10k Prize)",
+            "tagline": " AI-Powered Sales Calls - Hackathon Winner ($10k)",
             "description": "Award-winning AI platform that automates sales prospecting for agencies by finding qualified local clients and initiating trust-based AI sales calls to book discovery meetings.",
             "longDescription": "Atlas Outbound won 1st place at the Convex Modern Stack Hackathon, earning a $10k cash prize plus ~$3k in additional prizes. Built in just 12 days, it solves a critical agency pain point by combining intelligent lead sourcing with AI-powered sales automation. The platform uses Google Places API for lead discovery, Firecrawl to analyze websites for marketing gaps, and OpenAI for intelligence. Its standout feature is a context-aware AI sales agent powered by Vapi, which leverages the agency's own case studies to build immediate trust and book qualified discovery calls. The real-time dashboard, powered by Convex, showcases a complete end-to-end user flow from prospecting to conversion.",
             "image": "/atlasOutbound.png",

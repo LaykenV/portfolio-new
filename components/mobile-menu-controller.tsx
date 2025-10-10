@@ -5,7 +5,6 @@ import { MobileMenu } from '@/components/mobile-menu'
 import { AnimatedThemeToggler } from '@/components/animated-theme-toggler'
 import { Github, Linkedin, FileText } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 
 interface MobileMenuControllerProps {
   className?: string
@@ -51,13 +50,6 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
             <a href="/LLVarholdt-Resume.pdf" aria-label="Resume" title="Resume" className="btn text-xs" target="_blank" rel="noreferrer">
               <FileText className="h-4 w-4" />
               <span>Resume</span>
-            </a>
-          </div>
-          <div className="h-px" style={{ background: 'hsl(var(--blue-strong) / 0.2)' }} />
-          <div className="flex flex-wrap gap-2">
-            <a className="btn-accent-invert btn-compact btn-equal text-sm flex-1" href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer">Schedule call</a>
-            <a className="btn-accent btn-compact btn-equal text-sm flex-1" href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer">
-              <Image src="/telegram.png" alt="Telegram" width={20} height={20} /> Chat
             </a>
           </div>
         </div>

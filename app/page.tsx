@@ -16,7 +16,7 @@ export default function Home() {
       <StructuredData projects={projects} />
     <div className="font-sans mx-auto max-w-[110rem] h-dvh overflow-hidden">
       <div className="flex flex-col md:flex-row h-full">
-        <aside className="relative flex-shrink-0 md:h-screen md:overflow-y-auto md:overflow-x-hidden p-8 pt-8 md:p-6 md:pt-6 flex flex-col gap-6 md:gap-6 md:border-r border-subtle md:w-[42%] md:shrink-0">
+        <aside className="relative flex-shrink-0 md:h-screen md:overflow-y-auto md:overflow-x-hidden p-6 pt-6 pb-3 md:p-6 md:pt-6 flex flex-col gap-3 md:gap-6 md:border-r border-subtle md:w-[42%] md:shrink-0">
           {/* Burger menu button (mobile) */}
           <MobileMenuController className="absolute top-6 right-6 md:top-4 md:right-4 md:hidden" />
           {/* Keep theme toggle visible on desktop */}
@@ -25,7 +25,7 @@ export default function Home() {
           </div>
 
           {/* Header: avatar + name/role */}
-          <div className="flex flex-row md:flex-row items-center md:items-start gap-4 sm:gap-5 md:gap-4 justify-center md:justify-start md:pr-0">
+          <div className="flex flex-row md:flex-row items-center md:items-start gap-3 sm:gap-4 md:gap-4 justify-center md:justify-start md:pr-0">
             <div className="h-32 w-32 md:h-28 md:w-28 border border-subtle overflow-hidden flex-shrink-0 mx-0">
               <Image src="/portrait.jpeg" alt="Layken Varholdt's profile portrait" width={128} height={128} className="object-cover" priority />
             </div>
@@ -33,7 +33,7 @@ export default function Home() {
               <h1 className="text-3xl md:text-3xl font-semibold tracking-tight">Layken Varholdt</h1>
               <p className="text-lg md:text-base opacity-80">Software Engineer @ DOL</p>
               {/* Social links */}
-              <div className="mt-2 md:mt-3 hidden md:flex flex-wrap items-center gap-2 justify-start">
+              <div className="mt-1.5 md:mt-3 hidden md:flex flex-wrap items-center gap-2 justify-start">
                 <a href="https://x.com/LLVarholdt" aria-label="Twitter" className="btn-icon" target="_blank" rel="noreferrer">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-twitter-x" viewBox="0 0 16 16">
                     <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
@@ -54,7 +54,7 @@ export default function Home() {
           </div>
 
           {/* Big marketing copy */}
-          <div className="mt-2 sm:mt-3 space-y-1.5 sm:space-y-2 md:space-y-2 text-center md:text-left px-0 pb-2 sm:pb-0">
+          <div className="mt-0 sm:mt-2 space-y-0.5 sm:space-y-1.5 md:space-y-2 text-center md:text-left px-0 pb-0 sm:pb-0">
             <p className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-balance">
               Building Web Applications with cutting edge technology
             </p>
@@ -63,7 +63,15 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Primary actions - hidden on mobile, shown in menu instead */}
+          {/* Primary actions (mobile) */}
+          <div className="flex flex-wrap items-center justify-center gap-1.5 mt-0.5 md:hidden">
+            <a className="btn-accent-invert btn-compact text-sm flex-1 min-w-[9.25rem]" href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer">Schedule call</a>
+            <a className="btn-accent btn-compact text-sm flex-1 min-w-[9.25rem]" href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer">
+              <Image src="/telegram.png" alt="Telegram" width={20} height={20} /> Chat
+            </a>
+          </div>
+
+          {/* Primary actions (desktop) */}
           <div className="hidden md:flex flex-wrap gap-2 justify-center md:justify-start">
             <a className="btn-accent-invert btn-compact btn-equal text-sm md:text-base" href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer">Schedule call</a>
             <a className="btn-accent btn-compact btn-equal text-sm md:text-base" href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer"> <Image src="/telegram.png" alt="Telegram" width={20} height={20} /> Chat</a>
