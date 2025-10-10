@@ -210,7 +210,6 @@ html.dark .card {
 /* Beautiful accent button based on provided example */
 .btn-accent {
   position: relative;
-  width: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -316,7 +315,6 @@ html.dark .card {
 /* Inverted accent button: uses dark palette on light theme, light palette on dark theme */
 .btn-accent-invert {
   position: relative;
-  width: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -472,8 +470,16 @@ html.dark .card {
 }
 
 .btn-equal {
-  width: 11rem;
   white-space: nowrap;
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .btn-equal {
+    flex: 0 0 auto;
+    width: 12rem;
+  }
 }
 
 

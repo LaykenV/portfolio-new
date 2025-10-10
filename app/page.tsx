@@ -65,8 +65,8 @@ export default function Home() {
 
           {/* Primary actions - now visible on all screen sizes */}
           <div className="flex gap-2 justify-center md:justify-start mt-2 md:mt-3">
-            <a className="btn-accent-invert btn-compact flex-1 sm:flex-initial sm:btn-equal text-sm md:text-base" href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer">Schedule call</a>
-            <a className="btn-accent btn-compact flex-1 sm:flex-initial sm:btn-equal text-sm md:text-base" href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer"> <Image src="/telegram.png" alt="Telegram" width={20} height={20} /> Chat</a>
+            <a className="btn-accent-invert btn-compact btn-equal text-sm md:text-base" href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer">Schedule call</a>
+            <a className="btn-accent btn-compact btn-equal text-sm md:text-base" href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer"> <Image src="/telegram.png" alt="Telegram" width={20} height={20} /> Chat</a>
           </div>
 
           {/* Sidebar footer (md+): compact, polished value section */}
