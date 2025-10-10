@@ -264,7 +264,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
 
   return (
     <>
-      <div className="h-full flex flex-col pt-1 md:pt-0">
+      <div className="h-full flex flex-col">
         <div
           ref={containerRef}
           onScroll={handleScroll}
