@@ -54,17 +54,17 @@ export default function Home() {
           </div>
 
           {/* Big marketing copy */}
-          <div className="mt-2 sm:mt-3 space-y-1.5 sm:space-y-2 md:space-y-2 text-center md:text-left px-0 pb-2 sm:pb-0">
+          <div className="mt-2 sm:mt-3 space-y-1 sm:space-y-1.5 md:space-y-2 text-center md:text-left px-0">
             <p className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-balance">
               Building Web Applications with cutting edge technology
             </p>
-            <p className="hidden md:block text-lg md:text-xl opacity-90 text-balance">
+            <p className="text-base md:text-lg lg:text-xl opacity-90 text-balance leading-snug">
               I work with teams that move fast and want stunning websites done right
             </p>
           </div>
 
           {/* Primary actions - now visible on all screen sizes */}
-          <div className="flex gap-2 justify-center md:justify-start mt-3 sm:mt-4 md:mt-0">
+          <div className="flex gap-2 justify-center md:justify-start mt-3 md:mt-4">
             <a className="btn-accent-invert btn-compact flex-1 sm:flex-initial sm:btn-equal text-sm md:text-base" href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer">Schedule call</a>
             <a className="btn-accent btn-compact flex-1 sm:flex-initial sm:btn-equal text-sm md:text-base" href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer"> <Image src="/telegram.png" alt="Telegram" width={20} height={20} /> Chat</a>
           </div>
