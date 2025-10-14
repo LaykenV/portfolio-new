@@ -16,9 +16,9 @@ export default function Home() {
       <StructuredData projects={projects} />
     <div className="font-sans mx-auto max-w-[110rem] h-dvh overflow-hidden">
       <div className="flex flex-col md:flex-row h-full">
-        <aside className="relative flex-shrink-0 md:h-screen md:overflow-y-auto md:overflow-x-hidden px-8 pt-8 pb-3 md:p-6 md:pt-6 flex flex-col gap-3 md:gap-4 md:border-r border-subtle md:w-[42%] md:shrink-0">
+        <aside className="relative flex-shrink-0 md:h-screen md:overflow-y-auto md:overflow-x-hidden px-8 pt-5 pb-3 md:p-6 md:pt-6 flex flex-col gap-3 md:gap-4 md:border-r border-subtle md:w-[42%] md:shrink-0">
           {/* Burger menu button (mobile) */}
-          <MobileMenuController className="absolute top-6 right-6 md:top-4 md:right-4 md:hidden" />
+          <MobileMenuController className="absolute top-4 right-6 md:top-4 md:right-4 md:hidden" />
           {/* Keep theme toggle visible on desktop */}
           <div className="hidden md:block absolute top-4 right-4">
             <AnimatedThemeToggler className="btn-icon" />
