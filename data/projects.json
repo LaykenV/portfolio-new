@@ -33,6 +33,20 @@
             }
           },
           {
+            "slug": "acadiana-web-design",
+            "title": "Acadiana Web Design Agency",
+            "tagline": "Complete Website-as-a-Service (WaaS) Agency Platform",
+            "description": "A production-ready WaaS platform that automates the agency lifecycle—from prospecting and clickwrap legal agreements to recurring Stripe billing and a dedicated client portal.",
+            "longDescription": "The Acadiana Web Design Agency is a full-stack solution designed for agencies operating on a subscription model. It automates the 'Golden Path' client journey: transitioning leads into clients via magic-link authentication, enforcing digital clickwrap agreements, and handling recurring payments through Stripe. The platform features a robust client portal with real-time status tracking, file uploads with instant previews, and a ticketing system for edit requests. The backend, powered by Convex, manages complex state transitions, RBAC for the Admin dashboard, and integrations with Cal.com for scheduling and Resend for transactional emails.",
+            "image": "/awd.png",
+            "secondaryImage": "/awdSecondary.png",
+            "techStack": ["Next.js", "Convex", "TypeScript", "Stripe", "Resend", "Better-Auth", "Cal.com"],
+            "links": {
+              "github": "https://github.com/LaykenV/agency-site",
+              "live": "https://acadianawebdesign.com"
+            }
+          },
+          {
             "slug": "civicly",
             "title": "Civicly",
             "tagline": "AI-Powered Legislative Data Engine & Analysis",
