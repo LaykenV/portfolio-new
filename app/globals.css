@@ -408,6 +408,30 @@ html.dark .card {
     0 4px 10px -2px hsl(var(--peach-strong) / 0.16);
 }
 
+/* Avatar ring with subtle solid border */
+.avatar-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  border-radius: 0.75rem;
+  background: hsl(var(--blue-strong) / 0.35);
+  box-shadow:
+    0 6px 16px -10px hsl(var(--blue-strong) / 0.30);
+}
+
+.avatar-ring > * {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+html.dark .avatar-ring {
+  background: hsl(var(--blue-soft) / 0.30);
+  box-shadow:
+    0 6px 16px -10px hsl(var(--blue-soft) / 0.25);
+}
+
 /* Award ribbon badge */
 .project-award-ribbon {
   position: absolute;

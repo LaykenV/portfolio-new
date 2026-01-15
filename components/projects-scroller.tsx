@@ -48,6 +48,28 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
+
+  // Preload all secondary images on mount with staggered timing
+  useEffect(() => {
+    const timeoutIds: NodeJS.Timeout[] = []
+    
+    // Wait for initial render to complete, then preload secondary images
+    const initialTimeout = setTimeout(() => {
+      items.forEach((project, index) => {
+        // Stagger preloading to avoid network congestion
+        const innerTimeout = setTimeout(() => {
+          preloadImage(project.secondaryImage, project.slug)
+        }, index * 100) // 100ms delay between each image
+        timeoutIds.push(innerTimeout)
+      })
+    }, 1000) // Start preloading 1 second after mount
+    
+    timeoutIds.push(initialTimeout)
+
+    return () => {
+      timeoutIds.forEach(id => clearTimeout(id))
+    }
+  }, [items])
   
   // Preload image on hover/focus for instant display
   const preloadImage = (src: string, slug: string) => {
@@ -500,7 +522,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
         </div>
       )}
 
-      {/* Hidden images for background preloading - lazy loaded after main content */}
+      {/* Hidden images for background preloading - lazy loaded as fallback */}
       <div className="hidden">
         {items.map((project) => (
           <Image

@@ -16,22 +16,24 @@ export default function Home() {
       <StructuredData projects={projects} />
     <div className="font-sans mx-auto max-w-[110rem] h-dvh overflow-hidden">
       <div className="flex flex-col md:flex-row h-full">
-        <aside className="relative flex-shrink-0 md:h-screen md:overflow-y-auto md:overflow-x-hidden px-8 pt-5 pb-3 md:p-6 md:pt-6 flex flex-col gap-3 md:gap-4 md:border-r border-subtle md:w-[42%] md:shrink-0">
+        <aside className="relative flex-shrink-0 md:h-screen md:overflow-y-auto md:overflow-x-hidden px-8 pt-5 pb-3 md:px-10 md:py-8 flex flex-col gap-3 md:gap-5 md:border-r border-subtle md:w-[42%] md:shrink-0">
           {/* Burger menu button (mobile) */}
           <MobileMenuController className="absolute top-4 right-6 md:top-4 md:right-4 md:hidden" />
           {/* Keep theme toggle visible on desktop */}
-          <div className="hidden md:block absolute top-4 right-4">
+          <div className="hidden md:block absolute top-8 right-10">
             <AnimatedThemeToggler className="btn-icon" />
           </div>
 
           {/* Header: avatar + name/role */}
           <div className="flex flex-row md:flex-row items-center md:items-start gap-4 sm:gap-5 md:gap-4 justify-center md:justify-start md:pr-0">
-            <div className="h-32 w-32 md:h-28 md:w-28 border border-subtle overflow-hidden flex-shrink-0 mx-0">
-              <Image src="/portrait.jpeg" alt="Layken Varholdt's profile portrait" width={128} height={128} className="object-cover" priority />
+            <div className="avatar-ring flex-shrink-0">
+              <div className="h-32 w-32 md:h-28 md:w-28 overflow-hidden">
+                <Image src="/portrait.jpeg" alt="Layken Varholdt's profile portrait" width={128} height={128} className="object-cover" priority />
+              </div>
             </div>
             <div className="min-w-0 text-left">
-              <h1 className="text-3xl md:text-3xl font-semibold tracking-tight">Layken Varholdt</h1>
-              <p className="text-lg md:text-base opacity-80">Software Engineer @ DOL</p>
+              <h1 className="text-2xl md:text-2xl font-bold tracking-tight">Layken Varholdt</h1>
+              <p className="text-sm md:text-sm font-medium opacity-70 tracking-wide uppercase mt-0.5">Software Engineer @ DOL</p>
               {/* Social links */}
               <div className="mt-2 md:mt-3 hidden md:flex flex-wrap items-center gap-2 justify-start">
                 <a href="https://x.com/LLVarholdt" aria-label="Twitter" className="btn-icon" target="_blank" rel="noreferrer">
@@ -54,11 +56,11 @@ export default function Home() {
           </div>
 
           {/* Big marketing copy */}
-          <div className="mt-2 md:mt-4 space-y-1 sm:space-y-1.5 md:space-y-2 text-center md:text-left px-0">
-            <p className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-balance">
+          <div className="mt-3 md:mt-6 space-y-2 md:space-y-3 text-center md:text-left px-0">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-[1.1] tracking-tight text-balance">
               Building Web Applications with cutting edge technology
-            </p>
-            <p className="text-base md:text-lg lg:text-xl opacity-90 text-balance leading-snug">
+            </h2>
+            <p className="text-base md:text-lg lg:text-xl opacity-75 text-balance leading-relaxed font-medium">
               I work with teams that move fast and want stunning websites done right
             </p>
           </div>
