@@ -101,6 +101,13 @@ html.dark .mobile-menu-panel {
   }
 }
 
+/* Hide scroller images on short mobile screens */
+@media (max-height: 750px) and (max-width: 767px) {
+  .mobile-card-image {
+    display: none;
+  }
+}
+
 /* Cards now have rounded corners on all sides since they float */
 .card-flat-bottom {
   border-radius: 0.5rem;
