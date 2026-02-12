@@ -311,7 +311,7 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
           )}
           {/* Media */}
           {/* Mobile: friendlier aspect / flexible height */}
-          <div className="relative block md:hidden w-full overflow-hidden rounded-md mobile-card-image">
+          <div className="relative block md:hidden w-full overflow-hidden rounded-md">
             <div className="relative w-full aspect-[16/9]">
               <Image
                 src={project.image}
