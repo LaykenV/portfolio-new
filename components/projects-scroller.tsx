@@ -27,8 +27,9 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
   
   // Track if we're on mobile for portal rendering
   const [isMobile, setIsMobile] = useState(false)
+  const [isShortScreen, setIsShortScreen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  
+
   // Close flow helper to trigger CSS exit animation
   const handleRequestClose = useCallback(() => {
     if (!expandedSlug) return
@@ -37,16 +38,17 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
 
   const items = projects
   const currentProject = items.find(p => p.slug === expandedSlug)
-  
-  // Detect mobile on mount
+
+  // Detect mobile + short screen on mount
   useEffect(() => {
     setMounted(true)
-    const checkMobile = () => {
+    const check = () => {
       setIsMobile(window.innerWidth < 768)
+      setIsShortScreen(window.innerWidth < 768 && window.innerHeight < 750)
     }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
   }, [])
 
   // Preload all secondary images on mount with staggered timing
@@ -287,14 +289,29 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
   return (
     <>
       <div className="h-full flex flex-col">
+        {/* Short-screen inline dots - replaces floating dock to reclaim bottom space */}
+        {isShortScreen && expandedSlug === null && (
+          <div className="md:hidden flex items-center justify-center px-6 flex-shrink-0" style={{ height: '2rem' }}>
+            <div className="flex items-center gap-1.5">
+              {items.map((_, i) => (
+                <span key={i} className={cn('index-dot', i === activeIndex && 'index-dot-active')} />
+              ))}
+            </div>
+          </div>
+        )}
+
         <div
           ref={containerRef}
           onScroll={handleScroll}
-          className="flex flex-row md:flex-col gap-6 md:gap-8 overflow-x-auto md:overflow-x-hidden md:overflow-y-auto h-full md:p-6 md:pt-6 snap-x snap-mandatory md:snap-none [&::-webkit-scrollbar]:hidden mobile-scroller md:h-full"
-          style={{ 
+          className={cn(
+            'flex flex-row md:flex-col gap-6 md:gap-8 overflow-x-auto md:overflow-x-hidden md:overflow-y-auto h-full md:p-6 md:pt-6 snap-x snap-mandatory md:snap-none [&::-webkit-scrollbar]:hidden md:h-full',
+            !isShortScreen && 'mobile-scroller'
+          )}
+          style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
-            WebkitOverflowScrolling: 'touch'
+            WebkitOverflowScrolling: 'touch',
+            ...(isShortScreen ? { paddingBottom: '0.5rem' } : {}),
           }}
         >
       {items.map((project, i) => (
@@ -511,8 +528,8 @@ export function ProjectsScroller({ projects }: ProjectsScrollerProps) {
       ))}
       </div>
 
-      {/* Mobile bottom dock (floating) - hidden while overlay is expanded */}
-      {expandedSlug === null && (
+      {/* Mobile bottom dock (floating) - hidden on short screens and while overlay is expanded */}
+      {expandedSlug === null && !isShortScreen && (
         <div className="md:hidden mobile-dock-floating">
           <div className="index-footer-track animate-in slide-in-from-bottom-3 anim-duration-300">
             {items.map((_, i) => (
