@@ -85,7 +85,7 @@
             "techStack": ["Next.js", "TypeScript", "PostgreSQL", "Drizzle ORM", "OpenAI", "Clerk", "Stripe"],
             "links": {
               "github": "https://github.com/LaykenV/teach-magic",
-              "live": "https://teachmagic.us"
+              "live": "https://teach-magic.vercel.app/"
             }
           }
     ]
