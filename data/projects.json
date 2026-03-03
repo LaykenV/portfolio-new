@@ -47,6 +47,20 @@
             }
           },
           {
+            "slug": "omnibid",
+            "title": "OmniBid",
+            "tagline": "AI-Native Proposal Operations for Government Contractors",
+            "description": "An AI platform that turns 200-page federal RFPs into structured compliance matrices in minutes, empowering small businesses to compete for $700B+ in annual government contracts.",
+            "longDescription": "OmniBid tackles the broken front door of government contracting. The proposal process for a single federal contract costs $20,000-$80,000 and takes weeks of manual labor—locking out 400,000+ registered small businesses. OmniBid's compliance matrix parser extracts every requirement from an RFP, categorizes them by type, traces each to its exact source reference, and delivers an interactive compliance checklist. The platform is architected on Convex's real-time database to support a value ladder from self-serve parsing ($99/RFP) up through bid intelligence, multi-agent proposal draft generation, and a multiplayer war room with continuous compliance validation.",
+            "image": "/omnibid.png",
+            "secondaryImage": "/omnibidSecondary.png",
+            "techStack": ["Next.js", "Convex", "TypeScript", "Gemini", "Stripe", "Better-Auth"],
+            "links": {
+              "github": null,
+              "live": "https://omnibid.vercel.app/"
+            }
+          },
+          {
             "slug": "civicly",
             "title": "Civicly",
             "tagline": "AI-Powered Legislative Data Engine & Analysis",
