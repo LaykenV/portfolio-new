@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { MobileMenu } from '@/components/mobile-menu'
 import { AnimatedThemeToggler } from '@/components/animated-theme-toggler'
-import { Github, Linkedin, FileText } from 'lucide-react'
+import { Github, Linkedin, FileText, BookOpen, Mail } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface MobileMenuControllerProps {
@@ -32,22 +32,39 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between mb-1">
             <span className="text-sm font-semibold opacity-80">Menu</span>
-            <AnimatedThemeToggler className="btn-icon" />
+            <div className="flex items-center gap-2">
+              <a
+                href="/blog"
+                className="cta-primary"
+                style={{ padding: '0.4rem 0.7rem', fontSize: '0.78rem', borderRadius: '0.55rem' }}
+              >
+                <BookOpen className="h-3.5 w-3.5" />
+                Blog
+              </a>
+              <AnimatedThemeToggler className="btn-icon" />
+            </div>
           </div>
           <div className="h-px" style={{ background: 'hsl(var(--blue-strong) / 0.2)' }} />
-          <div className="flex items-center gap-2">
-            <a href="https://x.com/LLVarholdt" aria-label="Twitter" className="btn-icon" target="_blank" rel="noreferrer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-twitter-x" viewBox="0 0 16 16">
-                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
-              </svg>
-            </a>
+          <a
+            href="mailto:laykenv@gmail.com?subject=AI%20Engineering%20role"
+            className="cta-primary w-full"
+          >
+            <Mail className="h-4 w-4" />
+            laykenv@gmail.com
+          </a>
+          <div className="flex flex-wrap items-center gap-2">
             <a href="https://github.com/laykenV" aria-label="GitHub" className="btn-icon" target="_blank" rel="noreferrer">
               <Github className="h-4 w-4" />
             </a>
             <a href="https://www.linkedin.com/in/layken-varholdt-a78687230/" aria-label="LinkedIn" className="btn-icon" target="_blank" rel="noreferrer">
               <Linkedin className="h-4 w-4" />
             </a>
-            <a href="/LLVarholdt-Resume.pdf" aria-label="Resume" title="Resume" className="btn text-xs" target="_blank" rel="noreferrer">
+            <a href="https://x.com/LLVarholdt" aria-label="Twitter" className="btn-icon" target="_blank" rel="noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-twitter-x" viewBox="0 0 16 16">
+                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+              </svg>
+            </a>
+            <a href="/Layken-Varholdt-AI-Engineer-Resume.pdf" aria-label="Resume" title="Resume" className="btn text-xs ml-auto" target="_blank" rel="noreferrer">
               <FileText className="h-4 w-4" />
               <span>Resume</span>
             </a>

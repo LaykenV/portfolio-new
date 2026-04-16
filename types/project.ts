@@ -1,3 +1,5 @@
+export type ProjectTier = 'hero' | 'featured' | 'more'
+
 export interface Project {
   slug: string
   title: string
@@ -7,6 +9,7 @@ export interface Project {
   image: string
   secondaryImage: string
   techStack: string[]
+  tier: ProjectTier
   links: {
     github?: string | null
     live?: string | null
@@ -16,4 +19,3 @@ export interface Project {
     icon?: string
   }
 }
-

@@ -8,7 +8,6 @@ export function AppThemeProvider({ children }: { children: ReactNode }) {
     <ThemeProvider
       attribute="class"
       defaultTheme="dark"
-      enableSystem
       disableTransitionOnChange
     >
       {children}

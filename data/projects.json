@@ -1,14 +1,30 @@
 {
     "projects": [
         {
+            "slug": "omnibid",
+            "title": "OmniBid",
+            "tagline": "AI-native proposal operations for federal contractors",
+            "description": "Compliance matrix parser that turns 200-page federal RFPs into structured requirement graphs in minutes — every requirement categorized and traced back to its exact source reference.",
+            "longDescription": "The proposal process for a single federal contract costs $20k–$80k and weeks of manual labor, locking 400k+ small businesses out of $700B in annual spend. OmniBid's extraction pipeline is architected on Convex's real-time database with Gemini handling document understanding: each requirement is classified by type, traced to its source section, and delivered as an interactive compliance checklist. The platform is designed as a value ladder — self-serve RFP parsing ($99) at the bottom, climbing through bid intelligence, multi-agent proposal draft generation, and a multiplayer war room with continuous compliance validation. The hard engineering work is reliability: making a messy, semi-structured domain feel deterministic.",
+            "image": "/omnibid.png",
+            "secondaryImage": "/omnibidSecondary.png",
+            "techStack": ["Next.js", "Convex", "TypeScript", "Gemini", "Stripe", "Better-Auth"],
+            "tier": "hero",
+            "links": {
+              "github": null,
+              "live": "https://omnibid.vercel.app/"
+            }
+          },
+          {
             "slug": "mesh-mind",
             "title": "Mesh Mind",
-            "tagline": "Multi-Model AI Chat & Research Interface",
-            "description": "A multi-model chat interface that coordinates multiple AI models in a single conversation, running a 'research and debate' process to synthesize a final, concise answer.",
-            "longDescription": "Mesh Mind showcases advanced AI orchestration using Convex workflows. Users select a 'master' model and secondary models which then engage in a two-round process: parallel initial responses followed by a debate round where each model refines its answer based on its peers. The final output is a synthesized summary. The app features real-time streaming, file-based grounding for prompts, and a lightweight subscription and usage-tracking model.",
+            "tagline": "Multi-model debate-and-synthesize orchestration",
+            "description": "A multi-model orchestration layer that coordinates GPT, Claude, and Gemini through a two-round protocol — parallel initial responses, peer-informed refinement, then a synthesized summary.",
+            "longDescription": "Mesh Mind is an exploration of what multi-model orchestration looks like when you treat it as a first-class system problem instead of a prompt trick. Users pick a 'master' model plus secondaries; the app runs a parallel first round, then feeds each model its peers' responses for a debate round, then collapses everything into a single synthesized answer — all on Convex scheduled functions with token-level streaming and file-based grounding. The whole thing sits behind a lightweight subscription and usage-tracking model so the cost surface actually matches the compute surface.",
             "image": "/MeshMind.png",
             "secondaryImage": "/MeshMindSecondary.png",
             "techStack": ["Next.js", "React 19", "Convex", "AI-SDK", "Stripe"],
+            "tier": "hero",
             "links": {
               "github": "https://github.com/LaykenV/master-prompt",
               "live": "https://meshmind.chat"
@@ -17,58 +33,47 @@
           {
             "slug": "atlas-outbound",
             "title": "Atlas Outbound",
-            "tagline": " AI-Powered Sales Calls - Hackathon Winner ($10k)",
-            "description": "Award-winning AI platform that automates sales prospecting for agencies by finding qualified local clients and initiating trust-based AI sales calls to book discovery meetings.",
-            "longDescription": "Atlas Outbound won 1st place at the Convex Modern Stack Hackathon, earning a $10k cash prize plus ~$3k in additional prizes. Built in just 12 days, it solves a critical agency pain point by combining intelligent lead sourcing with AI-powered sales automation. The platform uses Google Places API for lead discovery, Firecrawl to analyze websites for marketing gaps, and OpenAI for intelligence. Its standout feature is a context-aware AI sales agent powered by Vapi, which leverages the agency's own case studies to build immediate trust and book qualified discovery calls. The real-time dashboard, powered by Convex, showcases a complete end-to-end user flow from prospecting to conversion.",
+            "tagline": "AI sales agent that books meetings using scraped agency intel",
+            "description": "Context-aware AI voice agent that scrapes an agency's own case studies to build trust on live calls and book qualified discovery meetings. 1st place at the Convex Modern Stack Hackathon — built in 12 days.",
+            "longDescription": "Atlas Outbound won 1st place at the Convex Modern Stack Hackathon ($10k cash + ~$3k in additional prizes), built end-to-end in 12 days. The system combines a lead-sourcing pipeline (Google Places + Firecrawl marketing-gap analysis + OpenAI intelligence) with a Vapi-powered voice agent whose context is dynamically assembled from the hiring agency's own case studies — so pitches reference real customers, not generic copy. Convex drives a real-time dashboard that surfaces every stage of the funnel, from prospect discovery through meeting booked. The prize wasn't for the demo — it was for shipping a coherent system under a 12-day constraint.",
             "image": "/atlasOutbound.png",
             "secondaryImage": "/atlasOutboundSecondary.png",
             "techStack": ["Next.js", "Convex", "Resend", "OpenAI", "Vapi", "Better-Auth", "Firecrawl"],
+            "tier": "featured",
             "links": {
               "github": "https://github.com/LaykenV/modern-hack",
               "live": "https://atlasoutbound.app"
             },
             "award": {
-              "label": "1st Place",
+              "label": "$10k Hackathon Winner",
               "icon": "🥇"
             }
           },
           {
             "slug": "acadiana-web-design",
-            "title": "Acadiana Web Design Agency",
-            "tagline": "Complete Website-as-a-Service (WaaS) Agency Platform",
-            "description": "A production-ready WaaS platform that automates the agency lifecycle—from prospecting and clickwrap legal agreements to recurring Stripe billing and a dedicated client portal.",
-            "longDescription": "The Acadiana Web Design Agency is a full-stack solution designed for agencies operating on a subscription model. It automates the 'Golden Path' client journey: transitioning leads into clients via magic-link authentication, enforcing digital clickwrap agreements, and handling recurring payments through Stripe. The platform features a robust client portal with real-time status tracking, file uploads with instant previews, and a ticketing system for edit requests. The backend, powered by Convex, manages complex state transitions, RBAC for the Admin dashboard, and integrations with Cal.com for scheduling and Resend for transactional emails.",
+            "title": "Acadiana Web Design",
+            "tagline": "Production WaaS platform with real customers and recurring revenue",
+            "description": "A full Website-as-a-Service platform I run as a real business — clickwrap legal agreements, Stripe recurring billing, admin/client RBAC, and a real-time ticketing portal.",
+            "longDescription": "Acadiana Web Design is a production WaaS platform with paying customers, not a demo. The backend (Convex) coordinates the full client lifecycle: magic-link auth, enforced digital clickwrap agreements, Stripe subscription state, RBAC for the admin dashboard, a client portal with real-time status, file uploads with instant previews, and a ticketing system for edit requests. Cal.com handles scheduling; Resend handles transactional mail. Every complex state transition — trial to active, failed payment to grace period, agreement revision — is modeled explicitly rather than papered over.",
             "image": "/awd.png",
             "secondaryImage": "/awdSecondary.png",
             "techStack": ["Next.js", "Convex", "TypeScript", "Stripe", "Resend", "Better-Auth", "Cal.com"],
+            "tier": "featured",
             "links": {
               "github": "https://github.com/LaykenV/agency-site",
               "live": "https://acadianawebdesign.com"
             }
           },
           {
-            "slug": "omnibid",
-            "title": "OmniBid",
-            "tagline": "AI-Native Proposal Operations for Government Contractors",
-            "description": "An AI platform that turns 200-page federal RFPs into structured compliance matrices in minutes, empowering small businesses to compete for $700B+ in annual government contracts.",
-            "longDescription": "OmniBid tackles the broken front door of government contracting. The proposal process for a single federal contract costs $20,000-$80,000 and takes weeks of manual labor—locking out 400,000+ registered small businesses. OmniBid's compliance matrix parser extracts every requirement from an RFP, categorizes them by type, traces each to its exact source reference, and delivers an interactive compliance checklist. The platform is architected on Convex's real-time database to support a value ladder from self-serve parsing ($99/RFP) up through bid intelligence, multi-agent proposal draft generation, and a multiplayer war room with continuous compliance validation.",
-            "image": "/omnibid.png",
-            "secondaryImage": "/omnibidSecondary.png",
-            "techStack": ["Next.js", "Convex", "TypeScript", "Gemini", "Stripe", "Better-Auth"],
-            "links": {
-              "github": null,
-              "live": "https://omnibid.vercel.app/"
-            }
-          },
-          {
             "slug": "civicly",
             "title": "Civicly",
-            "tagline": "AI-Powered Legislative Data Engine & Analysis",
-            "description": "A real-time data engine that ingests and processes U.S. congressional bills, using AI to provide summaries, semantic search, and chat-based analysis for complex legislative information.",
-            "longDescription": "Civicly's core is a fully implemented data pipeline built on Convex. It uses cron jobs to discover new bill manifests from govinfo.gov, processes XML files, and enriches the data with AI-generated summaries and categorizations from GPT-4o. The data is then vectorized for advanced semantic search (RAG), allowing users to interact with and understand complex legislation through a simple chat interface.",
+            "tagline": "RAG pipeline over U.S. congressional bills",
+            "description": "Real-time legislative data engine: cron-driven ingestion of govinfo.gov manifests, XML parsing, GPT-4o summarization/categorization, and vector search for RAG over every active bill.",
+            "longDescription": "Civicly is a fully implemented data pipeline on Convex. Cron jobs discover new bill manifests from govinfo.gov, a worker parses the XML, GPT-4o produces summaries and categorizations, and the enriched documents are embedded into a vector index for semantic search. The user-facing side is a chat interface that does RAG over the corpus — but the interesting work is the ingestion layer: idempotency, backoff, dedup, and keeping the index in sync with an upstream source that publishes at its own pace.",
             "image": "/civicly.png",
             "secondaryImage": "/civiclySecondary.png",
             "techStack": ["Next.js", "Convex", "TypeScript", "OpenAI", "React"],
+            "tier": "more",
             "links": {
               "github": "https://github.com/LaykenV/civicly",
               "live": "https://civicly.chat"
@@ -77,12 +82,13 @@
           {
             "slug": "food-truck-flow",
             "title": "FoodTruckFlow",
-            "tagline": "A Full-Stack B2B Multi-Tenant SaaS Platform",
-            "description": "A comprehensive SaaS platform that empowers food truck owners to create professional websites with integrated online ordering, featuring a sophisticated multi-tenant architecture.",
-            "longDescription": "FoodTruckFlow is a complete digital solution for mobile food businesses. Its multi-tenant architecture uses Supabase's Row-Level Security (RLS) for complete data isolation between tenants. The platform handles automatic subdomain generation, custom domain mapping via Vercel, and a JSON-based configuration for a live, real-time website builder. It also features a full subscription system with Stripe, including freemium and pro tiers with recurring billing.",
+            "tagline": "Multi-tenant B2B SaaS on Supabase RLS",
+            "description": "Complete digital stack for mobile food businesses — multi-tenant isolation via Supabase RLS, custom-domain mapping via the Vercel API, JSON-configured live site builder, and Stripe billing tiers.",
+            "longDescription": "FoodTruckFlow is a full SaaS platform with hard multi-tenant isolation using Supabase Row-Level Security — every query is scoped by tenant, enforced at the database layer. It handles automatic subdomain generation, custom domain mapping via the Vercel API, and a JSON-driven configuration that powers a live website builder. Freemium and pro tiers are wired through Stripe with recurring billing and webhook-driven state.",
             "image": "/FoodTruckFlowSS.png",
             "secondaryImage": "/FoodTruckFlowSecondary.png",
             "techStack": ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Stripe"],
+            "tier": "more",
             "links": {
               "github": "https://github.com/LaykenV/food-truck-flow",
               "live": "https://foodtruckflow.com"
@@ -91,12 +97,13 @@
           {
             "slug": "teach-magic",
             "title": "TeachMagic",
-            "tagline": "AI-Powered Educational Content Platform",
-            "description": "An AI platform for educators that instantly generates structured slides, quizzes, and custom images on any subject using OpenAI and Stability AI, with seamless export capabilities.",
-            "longDescription": "TeachMagic leverages OpenAI's GPT-4o for structured content generation and Stability AI for creating contextually relevant images. The backend uses Drizzle ORM with a PostgreSQL database, optimized with a memory caching layer. The platform is secured with Clerk Authentication and processes payments via Stripe, providing a robust, enterprise-ready solution for modern educational content creation.",
+            "tagline": "AI content platform for educators",
+            "description": "Generates structured slides, quizzes, and custom images from a subject prompt — GPT-4o for content, Stability AI for imagery, Drizzle/Postgres with a caching layer, Clerk + Stripe.",
+            "longDescription": "TeachMagic pairs GPT-4o for structured content generation with Stability AI for contextually relevant imagery. The backend uses Drizzle ORM over Postgres with a memory caching layer to amortize repeat-prompt cost. Clerk handles auth, Stripe handles subscriptions — a clean vertical stack showing how to make generative content features actually stable for end users.",
             "image": "/TeachMagicSS.png",
             "secondaryImage": "/TeachMagicSecondary.png",
             "techStack": ["Next.js", "TypeScript", "PostgreSQL", "Drizzle ORM", "OpenAI", "Clerk", "Stripe"],
+            "tier": "more",
             "links": {
               "github": "https://github.com/LaykenV/teach-magic",
               "live": "https://teach-magic.vercel.app/"

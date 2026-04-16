@@ -73,42 +73,9 @@ html.dark .mobile-menu-panel {
     inset 0 1px 0 hsl(var(--foreground-hsl) / 0.05);
 }
 
-/* Mobile bottom dock for index tracker - floating style */
-.mobile-dock-floating {
-  position: fixed;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  z-index: 20;
-  padding-bottom: calc(var(--safe-bottom) + 0.75rem);
-  pointer-events: none;
-}
-
-.mobile-dock-floating .index-footer-track {
-  pointer-events: auto;
-}
-
-/* Mobile scroller sizing helper - now with padding for floating tracker */
-.mobile-scroller {
-  height: calc(100dvh - var(--header-h));
-  padding-bottom: 3.5rem; /* Space for floating tracker */
-}
-
-@media (min-width: 768px) {
-  .mobile-scroller {
-    height: auto;
-    padding-bottom: 0;
-  }
-}
-
-/* Cards now have rounded corners on all sides since they float */
-.card-flat-bottom {
-  border-radius: 0.5rem;
-}
-
-/* Fullscreen overlay on mobile - ensure it's truly fullscreen */
+/* Fullscreen project modal on mobile — kills the desktop centered/bordered treatment */
 @media (max-width: 767px) {
-  .overlay-panel {
+  .project-modal {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
@@ -117,9 +84,11 @@ html.dark .mobile-menu-panel {
     width: 100vw !important;
     height: 100vh !important;
     height: 100dvh !important;
+    max-height: none !important;
     border-radius: 0 !important;
     margin: 0 !important;
     z-index: 100 !important;
+    border: 0 !important;
   }
 }
 
