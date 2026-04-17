@@ -12,6 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    {
+      url: `${base}/blog/my-default-app-stack`,
+      lastModified: '2026-04-17T00:00:00.000Z',
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
   ]
 }
 

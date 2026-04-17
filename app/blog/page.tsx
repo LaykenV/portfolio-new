@@ -39,6 +39,16 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: 'my-default-app-stack',
+    title: 'The stack I’m building everything on now.',
+    description:
+      'TanStack Start, Convex, and Clerk — plus the specific architectural patterns from Theo Browne’s open-source Lawn repo that make them work together.',
+    date: '2026-04-17',
+    dateReadable: 'April 17, 2026',
+    readMinutes: 10,
+    tags: ['TanStack Start', 'Convex', 'Architecture'],
+  },
+  {
     slug: 'mesh-mind-debate-workflow',
     title: 'Three models, one answer.',
     description:
