@@ -6,6 +6,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${base}/`, lastModified: now, changeFrequency: 'weekly', priority: 1 },
     { url: `${base}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
+    {
+      url: `${base}/blog/mesh-mind-debate-workflow`,
+      lastModified: '2026-04-16T00:00:00.000Z',
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
   ]
 }
 

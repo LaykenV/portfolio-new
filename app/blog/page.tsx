@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowLeft, BookOpen } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 
 import type { Metadata } from 'next'
 
@@ -37,6 +37,19 @@ export const metadata: Metadata = {
   },
 }
 
+const posts = [
+  {
+    slug: 'mesh-mind-debate-workflow',
+    title: 'Three models, one answer.',
+    description:
+      'Rebuilding MIT and Google Brain’s multi-agent debate paper as a chat product, end to end on Convex — sub-threads per model, two parallel rounds, a hidden synthesis prompt, and a Zod-validated summary.',
+    date: '2026-04-16',
+    dateReadable: 'April 16, 2026',
+    readMinutes: 12,
+    tags: ['Multi-agent', 'Convex', 'Mesh Mind'],
+  },
+] as const
+
 export default function BlogIndex() {
   return (
     <div className="font-sans mx-auto max-w-3xl min-h-dvh px-6 py-14 md:py-20 flex flex-col gap-10">
@@ -51,24 +64,50 @@ export default function BlogIndex() {
           Notes on <em>shipping AI</em>.
         </h1>
         <p className="hero-sub">
-          Long-form pieces on multi-agent orchestration, document intelligence pipelines,
-          and the infrastructure work behind AI systems that actually reach production.
+          Long-form pieces on multi-agent orchestration, document intelligence
+          pipelines, and the infrastructure work behind AI systems that actually
+          reach production.
         </p>
       </div>
 
-      <div className="aside-footer">
-        <div className="flex items-center gap-3">
-          <span className="footer-icon" aria-hidden="true">
-            <BookOpen className="h-3.5 w-3.5" />
-          </span>
-          <div>
-            <p className="text-sm font-semibold">First post landing soon.</p>
-            <p className="text-xs opacity-70 mt-0.5">
-              Kicking off with a teardown of the Mesh Mind multi-model orchestration layer.
-            </p>
-          </div>
-        </div>
-      </div>
+      <ul className="flex flex-col gap-4">
+        {posts.map((post) => (
+          <li key={post.slug}>
+            <Link
+              href={`/blog/${post.slug}`}
+              className="post-row group"
+              aria-label={`Read: ${post.title}`}
+            >
+              <div className="flex flex-col gap-2 min-w-0">
+                <div className="flex items-center gap-2 text-xs opacity-65">
+                  <time
+                    dateTime={post.date}
+                    className="mono-accent"
+                  >
+                    {post.dateReadable}
+                  </time>
+                  <span aria-hidden="true">·</span>
+                  <span className="mono-accent">
+                    ~{post.readMinutes} min read
+                  </span>
+                </div>
+                <h2 className="post-row-title">{post.title}</h2>
+                <p className="post-row-desc">{post.description}</p>
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {post.tags.map((tag) => (
+                    <span key={tag} className="tech-badge-compact">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <span className="post-row-arrow" aria-hidden="true">
+                <ArrowUpRight className="h-4 w-4" />
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
