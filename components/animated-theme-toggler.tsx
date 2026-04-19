@@ -12,30 +12,13 @@ interface AnimatedThemeTogglerProps {
 }
 
 export const AnimatedThemeToggler = ({ className, duration = 400 }: AnimatedThemeTogglerProps) => {
-  const { setTheme } = useTheme()
-  const [isDark, setIsDark] = useState(false)
+  const { theme, setTheme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
-  // Keep local state in sync with actual class on <html>
   useEffect(() => {
-    const updateTheme = () => {
-      setIsDark(document.documentElement.classList.contains('dark'))
-    }
-    updateTheme()
-    const observer = new MutationObserver(updateTheme)
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
-    return () => observer.disconnect()
+    setMounted(true)
   }, [])
-
-  const applyTheme = useCallback((nextIsDark: boolean) => {
-    const newTheme = nextIsDark ? 'dark' : 'light'
-    setIsDark(nextIsDark)
-    // Change DOM now so the transition captures the frame
-    document.documentElement.classList.toggle('dark', nextIsDark)
-    localStorage.setItem('theme', newTheme)
-    // Keep next-themes context in sync for other components
-    queueMicrotask(() => setTheme(newTheme))
-  }, [setTheme])
 
   const toggleTheme = useCallback(async () => {
     const btn = buttonRef.current
@@ -43,15 +26,18 @@ export const AnimatedThemeToggler = ({ className, duration = 400 }: AnimatedThem
 
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const supportsVT = 'startViewTransition' in document
-    const nextIsDark = !isDark
+    const currentTheme = resolvedTheme || theme
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark'
 
     if (!supportsVT || prefersReduce) {
-      applyTheme(nextIsDark)
+      setTheme(nextTheme)
       return
     }
 
     await document.startViewTransition(() => {
-      flushSync(() => applyTheme(nextIsDark))
+      flushSync(() => {
+        setTheme(nextTheme)
+      })
     }).ready
 
     const { top, left, width, height } = btn.getBoundingClientRect()
@@ -75,7 +61,17 @@ export const AnimatedThemeToggler = ({ className, duration = 400 }: AnimatedThem
         pseudoElement: '::view-transition-new(root)',
       }
     )
-  }, [isDark, applyTheme, duration])
+  }, [theme, resolvedTheme, setTheme, duration])
+
+  if (!mounted) {
+    return (
+      <button ref={buttonRef} className={cn('btn-icon', className)} aria-label="Toggle theme">
+        <Sun />
+      </button>
+    )
+  }
+
+  const isDark = resolvedTheme === 'dark'
 
   return (
     <button ref={buttonRef} onClick={toggleTheme} className={cn('btn-icon', className)} aria-label="Toggle theme">

@@ -3,15 +3,15 @@
         {
             "slug": "omnibid",
             "title": "OmniBid",
-            "tagline": "AI-native proposal operations for federal contractors",
-            "description": "Compliance matrix parser that turns 200-page federal RFPs into structured requirement graphs in minutes — every requirement categorized and traced back to its exact source reference.",
-            "longDescription": "The proposal process for a single federal contract costs $20k–$80k and weeks of manual labor, locking 400k+ small businesses out of $700B in annual spend. OmniBid's extraction pipeline is architected on Convex's real-time database with Gemini handling document understanding: each requirement is classified by type, traced to its source section, and delivered as an interactive compliance checklist. The platform is designed as a value ladder — self-serve RFP parsing ($99) at the bottom, climbing through bid intelligence, multi-agent proposal draft generation, and a multiplayer war room with continuous compliance validation. The hard engineering work is reliability: making a messy, semi-structured domain feel deterministic.",
+            "tagline": "Federal RFP parser for traceable compliance matrices",
+            "description": "Focused MVP that takes a SAM.gov link, solicitation number, or PDF and turns it into a structured compliance matrix with each requirement traced back to the source document.",
+            "longDescription": "OmniBid is built around one narrow workflow: ingest a federal RFP and return a usable compliance matrix fast. The current app uses TanStack Start on React 19 with Convex as the real-time backend, and leans on Gemini's native PDF understanding instead of a brittle multi-service parsing chain. The pipeline resolves the solicitation, extracts requirements from the source document, validates and organizes them, then presents the result as an interactive checklist. The real engineering problem is making messy procurement documents feel deterministic enough to trust.",
             "image": "/omnibid.png",
             "secondaryImage": "/omnibidSecondary.png",
-            "techStack": ["Next.js", "Convex", "TypeScript", "Gemini", "Stripe", "Better-Auth"],
+            "techStack": ["TanStack Start", "React 19", "Convex", "TypeScript", "Gemini", "Tailwind CSS", "Clerk"],
             "tier": "hero",
             "links": {
-              "github": null,
+              "github": "https://github.com/LaykenV/omnibid",
               "live": "https://omnibid.vercel.app/"
             }
           },
@@ -107,6 +107,21 @@
             "links": {
               "github": "https://github.com/LaykenV/teach-magic",
               "live": "https://teach-magic.vercel.app/"
+            }
+          },
+          {
+            "slug": "agency-template",
+            "title": "Agency Template",
+            "tagline": "Config-driven client site template for Acadiana Web Design",
+            "description": "Reusable Next.js template for spinning up client sites from one codebase, with design archetypes, config-over-code setup, and an upstream merge flow that protects client-specific assets.",
+            "longDescription": "Agency Template is the internal product behind my client website work. Instead of rebuilding brochure sites from scratch, I maintain a Next.js 16 template where the core client-specific changes live in config and image directories. The system includes industry-specific design archetypes, config validation, and a Git workflow for pushing template improvements downstream without overwriting client content. It is the operational layer that makes a small web design shop faster and more consistent.",
+            "image": "/agencyTemplate.png",
+            "secondaryImage": "/agencyTemplateSecondary.png",
+            "techStack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "Bun", "Vercel"],
+            "tier": "more",
+            "links": {
+              "github": "https://github.com/LaykenV/agency-template",
+              "live": null
             }
           }
     ]
