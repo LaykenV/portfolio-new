@@ -236,8 +236,8 @@ html.dark .m-about-bg {
 }
 
 .m-about-portrait {
-  width: 84px;
-  height: 84px;
+  width: 108px;
+  height: 108px;
   border-radius: 50%;
   overflow: hidden;
   border: 1.5px solid hsl(var(--blue-strong) / 0.35);
@@ -322,7 +322,7 @@ html.dark .m-about-pitch em { color: hsl(var(--blue-soft)); }
 }
 
 .m-about-cta-stack {
-  margin-top: auto;
+  margin-top: 4px;
   display: flex;
   flex-direction: column;
   gap: 8px;
