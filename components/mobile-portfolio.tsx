@@ -206,11 +206,7 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
           <span>Open to Senior / Staff AI</span>
         </div>
 
-        <h1 className="m-about-name">
-          Layken
-          <br />
-          Varholdt
-        </h1>
+        <h1 className="m-about-name">Layken Varholdt</h1>
 
         <div className="m-about-role">
           AI Engineer <span className="sep">·</span>{' '}
@@ -276,18 +272,18 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
             </a>
           </div>
         </div>
-      </div>
 
-      <button
-        className="m-scroll-indicator"
-        onClick={onScrollToProjects}
-        aria-label="Scroll to projects"
-      >
-        <span className="label">Swipe for work</span>
-        <span className="chev" aria-hidden="true">
-          <ChevronDown className="h-[18px] w-[18px]" strokeWidth={2.5} />
-        </span>
-      </button>
+        <button
+          className="m-scroll-indicator"
+          onClick={onScrollToProjects}
+          aria-label="Scroll to projects"
+        >
+          <span className="label">Swipe for work</span>
+          <span className="chev" aria-hidden="true">
+            <ChevronDown className="h-[16px] w-[16px]" strokeWidth={2.5} />
+          </span>
+        </button>
+      </div>
     </section>
   )
 }
