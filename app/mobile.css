@@ -126,15 +126,15 @@ html.dark .mobile-portfolio {
 
 .m-browser-edge-top {
   top: 0;
-  z-index: 2;
-  height: calc(env(safe-area-inset-top, 0px) + 2px);
+  z-index: 0;
+  height: calc(env(safe-area-inset-top, 0px) + 64px);
   background: var(--mobile-edge-top);
 }
 
 .m-browser-edge-bottom {
   bottom: 0;
-  z-index: 2;
-  height: calc(env(safe-area-inset-bottom, 0px) + 2px);
+  z-index: 0;
+  height: calc(env(safe-area-inset-bottom, 0px) + 72px);
   background: var(--mobile-edge-bottom);
 }
 
