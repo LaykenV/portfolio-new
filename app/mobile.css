@@ -312,17 +312,17 @@ html.dark .m-about-role .accent { color: hsl(var(--blue-soft)); }
 html.dark .m-about-pitch em { color: hsl(var(--blue-soft)); }
 
 .m-about-sub {
-  font-size: 12.5px;
-  line-height: 1.45;
+  font-size: 14.5px;
+  line-height: 1.5;
   color: var(--foreground);
-  opacity: 0.74;
+  opacity: 0.8;
   margin: 0 auto;
   text-wrap: pretty;
   max-width: 40ch;
 }
 
 .m-about-cta-stack {
-  margin-top: 4px;
+  margin-top: 28px;
   display: flex;
   flex-direction: column;
   gap: 8px;
