@@ -162,6 +162,9 @@ html.dark .mobile-portfolio {
 .m-topbar-hidden > * { pointer-events: none; }
 
 .m-topbar-brand {
+  appearance: none;
+  border-width: 1px;
+  border-style: solid;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -173,13 +176,30 @@ html.dark .mobile-portfolio {
   opacity: 0.75;
   padding: 6px 12px 6px 6px;
   border-radius: 999px;
-  border: 1px solid hsl(var(--blue-strong) / 0.18);
+  border-color: hsl(var(--blue-strong) / 0.18);
   background: hsl(var(--card) / 0.7);
   backdrop-filter: saturate(140%) blur(12px);
   -webkit-backdrop-filter: saturate(140%) blur(12px);
-  transition: opacity 260ms ease, transform 260ms ease;
+  cursor: pointer;
+  transition: opacity 260ms ease, transform 260ms ease, border-color 200ms ease;
+  text-align: left;
 }
 html.dark .m-topbar-brand { border-color: hsl(var(--blue-soft) / 0.16); }
+.m-topbar-brand:hover,
+.m-topbar-brand:focus-visible {
+  border-color: hsl(var(--blue-strong) / 0.32);
+}
+html.dark .m-topbar-brand:hover,
+html.dark .m-topbar-brand:focus-visible {
+  border-color: hsl(var(--blue-soft) / 0.28);
+}
+.m-topbar-brand:focus-visible {
+  outline: 2px solid hsl(var(--blue-strong) / 0.34);
+  outline-offset: 2px;
+}
+html.dark .m-topbar-brand:focus-visible {
+  outline-color: hsl(var(--blue-soft) / 0.30);
+}
 .m-topbar-brand-hidden {
   opacity: 0;
   transform: translateY(-8px);

@@ -1,5 +1,102 @@
 # Safari Mobile Theme / Toolbar Issue Context
 
+## Final Outcome
+
+This issue is now **working** in the portfolio.
+
+Working result:
+
+1. Theme switching in Safari on iPhone now syncs without requiring a refresh.
+2. The mobile swipe/snap deck behavior was preserved.
+3. Desktop visuals were not changed.
+4. The top of the about section now blends correctly into the Safari top area instead of showing a hard band.
+
+The final implementation is a **mobile-only Safari sampling fix**, not a full architectural rewrite.
+
+## What Actually Fixed It
+
+The winning fix was a combination of:
+
+1. Restore `viewport-fit=cover`
+   - Implemented in [app/layout.tsx](/Users/laykenvarholdt/projects/portfolio-new/app/layout.tsx:96)
+
+2. Add an early standards-level `color-scheme` signal
+   - `<meta name="color-scheme" content="dark light">` in [app/layout.tsx](/Users/laykenvarholdt/projects/portfolio-new/app/layout.tsx:107)
+   - `:root { color-scheme: light dark; }` in [app/globals.css](/Users/laykenvarholdt/projects/portfolio-new/app/globals.css:3)
+   - explicit `html.dark` / `html:not(.dark)` rules in [app/globals.css](/Users/laykenvarholdt/projects/portfolio-new/app/globals.css:101)
+
+3. Keep the existing mobile fixed-shell + inner-scroll architecture
+   - No page-scroll refactor
+   - No change to the snap deck structure
+
+4. Add dedicated top/bottom mobile edge sampling layers
+   - Markup in [components/mobile-portfolio.tsx](/Users/laykenvarholdt/projects/portfolio-new/components/mobile-portfolio.tsx:107)
+   - Styling in [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:120)
+
+5. Make those sampling layers large enough to matter to Safari, but place them **behind** the mobile content
+   - top sampler: [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:127)
+   - bottom sampler: [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:134)
+
+6. Give the about section its own opaque top blend so the Safari sampler color visually merges into the actual about-screen background
+   - [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:231)
+
+## Why The Final Fix Worked
+
+The final solution worked because it split the problem into two separate responsibilities:
+
+1. **Safari sampling / theme sync**
+   - solved by `viewport-fit=cover`, `color-scheme`, and stable top/bottom mobile edge surfaces
+
+2. **Visual blending**
+   - solved by making the about section's top background blend into the same color Safari is likely sampling
+
+The important detail is that the top/bottom sampling layers are:
+
+- mobile-only
+- fixed to the viewport edges
+- solid
+- theme-specific
+- behind the visible content
+
+That made them influence Safari without drawing obvious slabs over the page.
+
+## What Did Not Work
+
+These approaches were either ineffective or too visually destructive:
+
+1. Runtime `meta[name="theme-color"]` sync
+   - did not reliably fix Safari
+   - was removed
+
+2. Forcing `html` / `body` background colors broadly
+   - altered desktop visuals
+   - was reverted
+
+3. Large visible top/bottom Safari shim overlays
+   - did make sync work
+   - but visibly broke the page
+   - especially at the top of the about section
+
+4. Tiny nearly invisible samplers
+   - looked better
+   - but stopped influencing Safari enough, so sync failed again
+
+5. Converting the mobile deck to normal page scrolling
+   - broke the intended mobile interaction model
+   - was reverted
+
+## Practical Lesson
+
+For this repo, Safari theme sync was **not** fixed by `next-themes` alone and **not** fixed by `theme-color`.
+
+It was fixed by:
+
+- keeping the current mobile architecture
+- giving Safari stable viewport-edge surfaces to sample
+- giving the about section an opaque top blend so the sampled color looked intentional
+
+This means the earlier architectural concern was directionally useful, but the repo did not need a full page-scroll rewrite to get a good result.
+
 ## Goal
 
 Find a way to make the mobile portfolio behave correctly in **Safari on iPhone** when switching light/dark themes, while **preserving the existing mobile swipe/snap scrolling UX**.
@@ -40,12 +137,14 @@ Current root layout file:
 Current state:
 
 - There is **no** `themeColor` metadata.
-- There is **no** explicit `viewportFit: 'cover'`.
+- `viewportFit: 'cover'` is enabled.
 - The old runtime sync component was removed.
+- A `<meta name="color-scheme" content="dark light">` signal is present in the document head.
 
 Relevant lines:
 - [app/layout.tsx](/Users/laykenvarholdt/projects/portfolio-new/app/layout.tsx:17)
 - [app/layout.tsx](/Users/laykenvarholdt/projects/portfolio-new/app/layout.tsx:96)
+- [app/layout.tsx](/Users/laykenvarholdt/projects/portfolio-new/app/layout.tsx:107)
 
 ### Theme provider
 
@@ -106,12 +205,14 @@ Current mobile CSS behavior:
 - `.mobile-deck` is `position: absolute; inset: 0; overflow-y: auto;`
 - `.mobile-deck` uses `scroll-snap-type: y mandatory`
 - top bar is absolutely positioned over the fixed shell
+- mobile-only top/bottom edge samplers exist behind the content
+- the about slide has its own opaque top blend into the top sampler color
 
 Relevant lines:
 - [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:100)
-- [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:121)
+- [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:120)
 - [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:183)
-- [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:196)
+- [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:231)
 
 ## Comparison Repo: `agency-site`
 
@@ -158,6 +259,18 @@ Important note:
 
 2. Removing custom `theme-color` metadata/runtime sync logic.
    - This is still in place.
+
+3. Restoring `viewport-fit=cover` after the rest of the workaround code was removed.
+   - This is part of the final working fix.
+
+4. Adding root/document `color-scheme` signals.
+   - This is part of the final working fix.
+
+5. Adding mobile-only fixed top/bottom Safari edge samplers behind the content.
+   - This is part of the final working fix.
+
+6. Blending the top of the about slide into the same top sampler color.
+   - This is part of the final working fix.
 
 ## Constraints
 
@@ -341,6 +454,49 @@ The research agent should ideally return:
    - implementation complexity
    - specific files likely to change
 5. A recommendation for the safest next experiment
+
+## Resolved Implementation Notes
+
+If this issue regresses in the future, start by checking these exact areas before trying a new architecture:
+
+1. [app/layout.tsx](/Users/laykenvarholdt/projects/portfolio-new/app/layout.tsx:96)
+   - `viewportFit: 'cover'`
+
+2. [app/layout.tsx](/Users/laykenvarholdt/projects/portfolio-new/app/layout.tsx:107)
+   - `<meta name="color-scheme" content="dark light">`
+
+3. [app/globals.css](/Users/laykenvarholdt/projects/portfolio-new/app/globals.css:3)
+   - root `color-scheme`
+
+4. [app/globals.css](/Users/laykenvarholdt/projects/portfolio-new/app/globals.css:48)
+   - `--mobile-edge-top`
+   - `--mobile-edge-bottom`
+
+5. [components/mobile-portfolio.tsx](/Users/laykenvarholdt/projects/portfolio-new/components/mobile-portfolio.tsx:107)
+   - top/bottom edge sampler elements must stay present in the mobile portfolio
+
+6. [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:127)
+   - top sampler height / color
+
+7. [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:134)
+   - bottom sampler height / color
+
+8. [app/mobile.css](/Users/laykenvarholdt/projects/portfolio-new/app/mobile.css:231)
+   - about slide top blend
+
+## What Not To Do Again
+
+These caused regressions during the debugging process:
+
+1. Do not change the mobile deck from inner scrolling to page scrolling unless intentionally redesigning the mobile UX.
+
+2. Do not reintroduce a runtime `theme-color` sync component as the primary fix path.
+
+3. Do not force desktop/global background colors just to influence Safari mobile.
+
+4. Do not put large visible Safari sampling overlays above the mobile content.
+
+5. Do not remove the about slide's opaque top blend unless you also change how the top Safari sampling color is produced.
 
 ## Useful External References To Start From
 

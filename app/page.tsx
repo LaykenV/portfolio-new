@@ -120,10 +120,10 @@ export default function Home() {
                 reliable in production.
               </p>
               <div className="flex justify-center md:justify-start pt-0.5">
-                <span className="role-pill">
-                  <span className="role-pill-dot" aria-hidden="true" />
-                  Open to Senior / Staff AI roles
-                </span>
+                <div className="role-banner" aria-label="Open to Senior / Staff AI roles">
+                  <span className="role-banner-prefix">Open to</span>
+                  <span className="role-banner-value">Senior / Staff AI roles</span>
+                </div>
               </div>
             </div>
 

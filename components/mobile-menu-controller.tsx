@@ -30,8 +30,7 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
 
       <MobileMenu open={open} onClose={() => setOpen(false)}>
         <div className="flex flex-col gap-3">
-          <div className="flex items-center justify-between mb-1">
-            <span className="text-sm font-semibold opacity-80">Menu</span>
+          <div className="flex items-center justify-end mb-1">
             <div className="flex items-center gap-2">
               <a
                 href="/blog"
@@ -74,5 +73,4 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
     </div>
   )
 }
-
 

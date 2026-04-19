@@ -1,18 +1,22 @@
 {
     "projects": [
         {
-            "slug": "omnibid",
-            "title": "OmniBid",
-            "tagline": "Federal RFP parser for traceable compliance matrices",
-            "description": "Focused MVP that takes a SAM.gov link, solicitation number, or PDF and turns it into a structured compliance matrix with each requirement traced back to the source document.",
-            "longDescription": "OmniBid is built around one narrow workflow: ingest a federal RFP and return a usable compliance matrix fast. The current app uses TanStack Start on React 19 with Convex as the real-time backend, and leans on Gemini's native PDF understanding instead of a brittle multi-service parsing chain. The pipeline resolves the solicitation, extracts requirements from the source document, validates and organizes them, then presents the result as an interactive checklist. The real engineering problem is making messy procurement documents feel deterministic enough to trust.",
-            "image": "/omnibid.png",
-            "secondaryImage": "/omnibidSecondary.png",
-            "techStack": ["TanStack Start", "React 19", "Convex", "TypeScript", "Gemini", "Tailwind CSS", "Clerk"],
+            "slug": "atlas-outbound",
+            "title": "Atlas Outbound",
+            "tagline": "AI sales agent that books meetings using scraped agency intel",
+            "description": "Context-aware AI voice agent that scrapes an agency's own case studies to build trust on live calls and book qualified discovery meetings. 1st place at the Convex Modern Stack Hackathon — built in 12 days.",
+            "longDescription": "Atlas Outbound won 1st place at the Convex Modern Stack Hackathon ($10k cash + ~$3k in additional prizes), built end-to-end in 12 days. The system combines a lead-sourcing pipeline (Google Places + Firecrawl marketing-gap analysis + OpenAI intelligence) with a Vapi-powered voice agent whose context is dynamically assembled from the hiring agency's own case studies — so pitches reference real customers, not generic copy. Convex drives a real-time dashboard that surfaces every stage of the funnel, from prospect discovery through meeting booked. The prize wasn't for the demo — it was for shipping a coherent system under a 12-day constraint.",
+            "image": "/atlasOutbound.png",
+            "secondaryImage": "/atlasOutboundSecondary.png",
+            "techStack": ["Next.js", "Convex", "Resend", "OpenAI", "Vapi", "Better-Auth", "Firecrawl"],
             "tier": "hero",
             "links": {
-              "github": "https://github.com/LaykenV/omnibid",
-              "live": "https://omnibid.vercel.app/"
+              "github": "https://github.com/LaykenV/modern-hack",
+              "live": "https://atlasoutbound.app"
+            },
+            "award": {
+              "label": "$10k Hackathon Winner",
+              "icon": "🥇"
             }
           },
           {
@@ -31,22 +35,18 @@
             }
           },
           {
-            "slug": "atlas-outbound",
-            "title": "Atlas Outbound",
-            "tagline": "AI sales agent that books meetings using scraped agency intel",
-            "description": "Context-aware AI voice agent that scrapes an agency's own case studies to build trust on live calls and book qualified discovery meetings. 1st place at the Convex Modern Stack Hackathon — built in 12 days.",
-            "longDescription": "Atlas Outbound won 1st place at the Convex Modern Stack Hackathon ($10k cash + ~$3k in additional prizes), built end-to-end in 12 days. The system combines a lead-sourcing pipeline (Google Places + Firecrawl marketing-gap analysis + OpenAI intelligence) with a Vapi-powered voice agent whose context is dynamically assembled from the hiring agency's own case studies — so pitches reference real customers, not generic copy. Convex drives a real-time dashboard that surfaces every stage of the funnel, from prospect discovery through meeting booked. The prize wasn't for the demo — it was for shipping a coherent system under a 12-day constraint.",
-            "image": "/atlasOutbound.png",
-            "secondaryImage": "/atlasOutboundSecondary.png",
-            "techStack": ["Next.js", "Convex", "Resend", "OpenAI", "Vapi", "Better-Auth", "Firecrawl"],
+            "slug": "omnibid",
+            "title": "OmniBid",
+            "tagline": "Federal RFP parser for traceable compliance matrices",
+            "description": "Focused MVP that takes a SAM.gov link, solicitation number, or PDF and turns it into a structured compliance matrix with each requirement traced back to the source document.",
+            "longDescription": "OmniBid is built around one narrow workflow: ingest a federal RFP and return a usable compliance matrix fast. The current app uses TanStack Start on React 19 with Convex as the real-time backend, and leans on Gemini's native PDF understanding instead of a brittle multi-service parsing chain. The pipeline resolves the solicitation, extracts requirements from the source document, validates and organizes them, then presents the result as an interactive checklist. The real engineering problem is making messy procurement documents feel deterministic enough to trust.",
+            "image": "/omnibid.png",
+            "secondaryImage": "/omnibidSecondary.png",
+            "techStack": ["TanStack Start", "React 19", "Convex", "TypeScript", "Gemini", "Tailwind CSS", "Clerk"],
             "tier": "featured",
             "links": {
-              "github": "https://github.com/LaykenV/modern-hack",
-              "live": "https://atlasoutbound.app"
-            },
-            "award": {
-              "label": "$10k Hackathon Winner",
-              "icon": "🥇"
+              "github": "https://github.com/LaykenV/omnibid",
+              "live": "https://omnibid.vercel.app/"
             }
           },
           {
@@ -121,7 +121,7 @@
             "tier": "more",
             "links": {
               "github": "https://github.com/LaykenV/agency-template",
-              "live": null
+              "live": "https://acadianaweb.xyz/"
             }
           }
     ]

@@ -110,9 +110,15 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
 
       {/* Top chrome — always visible (brand hidden on about slide) */}
       <header className="m-topbar">
-        <div
+        <button
+          type="button"
           className={cn('m-topbar-brand', !viewingProject && 'm-topbar-brand-hidden')}
-          aria-hidden={!viewingProject}
+          onClick={() => {
+            haptic(6)
+            jumpTo(0)
+          }}
+          tabIndex={viewingProject ? 0 : -1}
+          aria-label="Scroll back to the about section"
         >
           <span className="m-brand-portrait">
             <Image
@@ -125,7 +131,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
             />
           </span>
           <span className="m-brand-text">Layken Varholdt</span>
-        </div>
+        </button>
         <MobileMenuController className="m-topbar-menu" />
       </header>
 

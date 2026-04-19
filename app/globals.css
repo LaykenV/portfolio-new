@@ -1015,33 +1015,29 @@ html.dark .footer-item:hover .footer-icon {
    AI Engineer redesign — positioning, hierarchy, tier cards
    ============================================================ */
 
-/* Available-for-hire status badge — restrained, no glow/pulse */
-.role-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.25rem 0.6rem 0.25rem 0.5rem;
-  border-radius: 9999px;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  border: 1px solid hsl(var(--blue-strong) / 0.22);
-  background: transparent;
+/* Desktop availability marker — editorial, not pill-shaped */
+.role-banner {
+  display: inline-grid;
+  gap: 0.18rem;
+  padding-left: 0.95rem;
+  border-left: 2px solid hsl(var(--blue-strong) / 0.72);
   color: var(--foreground);
-  opacity: 0.85;
 }
-.role-pill-dot {
-  width: 0.4rem;
-  height: 0.4rem;
-  border-radius: 9999px;
-  background: #16a34a;
-  flex-shrink: 0;
+.role-banner-prefix {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.58;
 }
-html.dark .role-pill {
-  border-color: hsl(var(--blue-soft) / 0.20);
+.role-banner-value {
+  font-size: 0.94rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
-html.dark .role-pill-dot {
-  background: #22c55e;
+html.dark .role-banner {
+  border-left-color: hsl(var(--blue-soft) / 0.62);
 }
 
 /* Mono-type accent helpers for "engineer" feel */
