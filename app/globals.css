@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light dark;
   --background: #ffffff;
   --foreground: #171717;
   /* Palette — Light mode (off-white base, charcoal text) */
@@ -44,6 +45,8 @@
   /* Surfaces and shadows */
   --surface: rgb(255 255 255 / 0.6);
   --shadow-color: rgb(0 0 0 / 0.07);
+  --mobile-edge-top: #e7ecf5;
+  --mobile-edge-bottom: #f1e6df;
 
 }
 
@@ -78,6 +81,8 @@
   /* Surfaces and shadows */
   --surface: rgb(16 16 16 / 0.6);
   --shadow-color: rgb(0 0 0 / 0.35);
+  --mobile-edge-top: #161b26;
+  --mobile-edge-bottom: #120f10;
 
 }
 
@@ -91,6 +96,14 @@
   --color-muted: var(--muted);
   --color-accent-blue: var(--accent-blue);
   --color-accent-peach: var(--accent-peach);
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html:not(.dark) {
+  color-scheme: light;
 }
 
 body {

@@ -117,6 +117,61 @@ html.dark .mobile-portfolio {
     var(--background);
 }
 
+.m-browser-edge {
+  position: fixed;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.m-browser-edge-top {
+  top: 0;
+  z-index: 60;
+  height: calc(env(safe-area-inset-top, 0px) + 18px);
+  background: var(--mobile-edge-top);
+}
+
+.m-browser-edge-bottom {
+  bottom: 0;
+  z-index: 55;
+  height: calc(env(safe-area-inset-bottom, 0px) + 20px);
+  background: var(--mobile-edge-bottom);
+}
+
+.m-browser-edge-glass {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.m-browser-edge-glass-top {
+  top: 100%;
+  height: 72px;
+  background:
+    linear-gradient(180deg, hsl(var(--blue-strong) / 0.16), transparent 72%);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+}
+
+.m-browser-edge-glass-bottom {
+  bottom: 100%;
+  height: 84px;
+  background:
+    linear-gradient(0deg, hsl(var(--peach-strong) / 0.16), transparent 74%);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+}
+
+html.dark .m-browser-edge-glass-top {
+  background:
+    linear-gradient(180deg, hsl(var(--blue-soft) / 0.14), transparent 72%);
+}
+
+html.dark .m-browser-edge-glass-bottom {
+  background:
+    linear-gradient(0deg, hsl(var(--peach-soft) / 0.12), transparent 74%);
+}
+
 /* Top bar */
 .m-topbar {
   position: absolute;

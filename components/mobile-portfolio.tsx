@@ -105,6 +105,13 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
 
   return (
     <div className="mobile-portfolio">
+      <div className="m-browser-edge m-browser-edge-top" aria-hidden="true">
+        <div className="m-browser-edge-glass m-browser-edge-glass-top" />
+      </div>
+      <div className="m-browser-edge m-browser-edge-bottom" aria-hidden="true">
+        <div className="m-browser-edge-glass m-browser-edge-glass-bottom" />
+      </div>
+
       {/* Top chrome — always visible (brand hidden on about slide) */}
       <header className="m-topbar">
         <div
