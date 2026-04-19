@@ -39,6 +39,16 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: 'safari-iphone-theme-sync',
+    title: 'The Safari theme-sync quirk no AI could fix.',
+    description:
+      'Why iPhone Safari wouldn’t sync the toolbar on theme switch in a fixed-shell mobile portfolio, the obvious fixes that didn’t work, and the small workaround that did.',
+    date: '2026-04-19',
+    dateReadable: 'April 19, 2026',
+    readMinutes: 7,
+    tags: ['iOS Safari', 'Mobile UX', 'Debugging'],
+  },
+  {
     slug: 'my-default-app-stack',
     title: 'The stack I’m building everything on now.',
     description:

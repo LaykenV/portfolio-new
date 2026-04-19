@@ -3,6 +3,7 @@
 import {
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -14,6 +15,7 @@ import {
   ArrowUpRight,
   CalendarClock,
   ChevronDown,
+  ChevronLeft,
   ExternalLink,
   Github,
   Mail,
@@ -35,14 +37,89 @@ function haptic(ms = 8) {
   } catch {}
 }
 
+const HINT_STORAGE_KEY = 'mobile-swipe-hint-v1'
+/** Total keyframe duration for the hint overlay cycle (CSS-matched). */
+const HINT_CYCLE_MS = 2600
+/** Button fade-in duration, matched to CSS so the controls finish appearing
+ *  exactly as the hint overlay completes its exit. */
+const HINT_BUTTON_FADE_MS = 320
+/** Debounce between activeIndex settling and the hint firing — lets the
+ *  vertical snap-scroll complete before the teach plays. */
+const HINT_ARM_DELAY_MS = 500
+
 export function MobilePortfolio({ projects }: MobilePortfolioProps) {
   const deckRef = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLElement | null)[]>([])
   const [activeIndex, setActiveIndex] = useState(0)
   const [deepDiveSlug, setDeepDiveSlug] = useState<string | null>(null)
+  const [hintQueueSlot, setHintQueueSlot] = useState<number | null>(null)
+  const [hintSlot, setHintSlot] = useState<number | null>(null)
+  // Keep the initial server and client render identical; we decide whether to
+  // run the hint only after mount once browser APIs are available.
+  const [hintPending, setHintPending] = useState(false)
+  const [hintReady, setHintReady] = useState(false)
 
   // total slots = about (index 0) + each project
   const total = projects.length + 1
+
+  useEffect(() => {
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setHintPending(false)
+        return
+      }
+      setHintPending(window.localStorage.getItem(HINT_STORAGE_KEY) !== 'true')
+    } catch {
+      setHintPending(false)
+    } finally {
+      setHintReady(true)
+    }
+  }, [])
+
+  // Lock the teach-in to the first eligible project slide before paint so its
+  // action buttons never flash in ahead of the indicator.
+  useLayoutEffect(() => {
+    if (!hintReady) return
+    if (!hintPending) return
+    if (hintQueueSlot !== null) return
+    if (hintSlot !== null) return // already in-flight
+    if (activeIndex < 1) return
+
+    setHintQueueSlot(activeIndex)
+  }, [activeIndex, hintPending, hintQueueSlot, hintReady, hintSlot])
+
+  // First time the user lands on any project slide, wait for the snap to
+  // settle and then play the action-bar hint on that slide.
+  useEffect(() => {
+    if (!hintReady) return
+    if (!hintPending) return
+    if (hintQueueSlot === null) return
+
+    const slot = hintQueueSlot
+    let revealTimer: number | null = null
+    let cleanupTimer: number | null = null
+    const armTimer = window.setTimeout(() => {
+      try {
+        window.localStorage.setItem(HINT_STORAGE_KEY, 'true')
+      } catch {}
+      setHintSlot(slot)
+      // Start the button fade so it completes exactly as the overlay exits.
+      revealTimer = window.setTimeout(
+        () => setHintPending(false),
+        HINT_CYCLE_MS - HINT_BUTTON_FADE_MS,
+      )
+      cleanupTimer = window.setTimeout(() => {
+        setHintSlot((prev) => (prev === slot ? null : prev))
+        setHintQueueSlot((prev) => (prev === slot ? null : prev))
+      }, HINT_CYCLE_MS)
+    }, HINT_ARM_DELAY_MS)
+
+    return () => {
+      window.clearTimeout(armTimer)
+      if (revealTimer !== null) window.clearTimeout(revealTimer)
+      if (cleanupTimer !== null) window.clearTimeout(cleanupTimer)
+    }
+  }, [hintPending, hintQueueSlot, hintReady])
 
   const jumpTo = useCallback((slotIndex: number) => {
     const deck = deckRef.current
@@ -163,6 +240,8 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
               project={project}
               index={i}
               total={projects.length}
+              showHint={hintSlot === slotIndex}
+              hintPending={hintReady && hintPending && hintQueueSlot === slotIndex}
               onDeepDive={() => {
                 haptic(8)
                 setDeepDiveSlug(project.slug)
@@ -304,11 +383,23 @@ interface ProjectSlideProps {
   project: Project
   index: number
   total: number
+  showHint: boolean
+  hintPending: boolean
   onDeepDive: () => void
 }
 
-function ProjectSlide({ ref, project, index, total, onDeepDive }: ProjectSlideProps) {
+function ProjectSlide({
+  ref,
+  project,
+  index,
+  total,
+  showHint,
+  hintPending,
+  onDeepDive,
+}: ProjectSlideProps) {
   const cardRef = useRef<HTMLDivElement>(null)
+  const actionsHidden = hintPending
+  const actionsBlocked = hintPending || showHint
   const gesture = useRef<{
     startX: number
     startY: number
@@ -422,13 +513,15 @@ function ProjectSlide({ ref, project, index, total, onDeepDive }: ProjectSlidePr
             ))}
           </div>
 
-          <div className="m-card-actions">
+          <div className={cn('m-card-actions', actionsHidden && 'pending')}>
             {project.links.live ? (
               <a
                 href={project.links.live}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="m-btn m-btn-primary"
+                tabIndex={actionsBlocked ? -1 : undefined}
+                aria-hidden={actionsBlocked || undefined}
                 onClick={(e) => e.stopPropagation()}
               >
                 <ExternalLink className="h-[14px] w-[14px]" />
@@ -439,6 +532,8 @@ function ProjectSlide({ ref, project, index, total, onDeepDive }: ProjectSlidePr
             )}
             <button
               className="m-btn"
+              disabled={actionsBlocked}
+              aria-hidden={actionsBlocked || undefined}
               onClick={(e) => {
                 e.stopPropagation()
                 onDeepDive()
@@ -454,10 +549,27 @@ function ProjectSlide({ ref, project, index, total, onDeepDive }: ProjectSlidePr
                 rel="noreferrer noopener"
                 className="m-btn m-btn-icon"
                 aria-label="Source code"
+                tabIndex={actionsBlocked ? -1 : undefined}
+                aria-hidden={actionsBlocked || undefined}
                 onClick={(e) => e.stopPropagation()}
               >
                 <Github className="h-[16px] w-[16px]" />
               </a>
+            )}
+
+            {/* One-shot action-bar hint — covers the button row on first
+                project-slide arrival, then slides off to the left to
+                demonstrate the swipe-for-deep-dive gesture. pointer-events
+                is none so taps fall through to the buttons below. */}
+            {showHint && (
+              <div className="m-actions-hint" aria-hidden="true">
+                <span className="m-actions-hint-chev">
+                  <ChevronLeft className="h-[14px] w-[14px]" strokeWidth={3} />
+                  <ChevronLeft className="h-[14px] w-[14px]" strokeWidth={3} />
+                  <ChevronLeft className="h-[14px] w-[14px]" strokeWidth={3} />
+                </span>
+                <span className="m-actions-hint-text">Swipe for deep dive</span>
+              </div>
             )}
           </div>
         </div>

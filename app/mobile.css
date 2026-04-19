@@ -682,6 +682,7 @@ html.dark .m-card-tagline { color: hsl(var(--blue-soft)); }
 html.dark .m-chip { border-color: hsl(var(--blue-soft) / 0.20); }
 
 .m-card-actions {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr auto;
   gap: 8px;
@@ -724,6 +725,79 @@ html.dark .m-btn { border-color: hsl(var(--blue-soft) / 0.20); }
   opacity: 0.6;
 }
 html.dark .m-btn-ghost-empty { border-color: hsl(var(--blue-soft) / 0.12); }
+
+/* ── Action-bar swipe hint ──────────────────────────────
+   Minimal one-shot teach that slides in from the right, holds, then
+   slides out to the LEFT — the exit direction silently demonstrates
+   the swipe-for-deep-dive gesture. No background, no border, just
+   monospaced text with blue accent chevrons marching left. */
+.m-actions-hint {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 46px;
+  pointer-events: none; /* taps pass through to the real buttons */
+  color: hsl(var(--foreground-hsl) / 0.82);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  will-change: transform, opacity;
+  animation: m-actions-hint-cycle 2600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.m-actions-hint-chev {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  color: hsl(var(--blue-strong));
+}
+html.dark .m-actions-hint-chev { color: hsl(var(--blue-soft)); }
+
+.m-actions-hint-chev > svg {
+  opacity: 0;
+  transform: translateX(6px);
+  animation: m-hint-chev-march 1.3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.m-actions-hint-chev > svg:nth-child(1) { animation-delay: 0ms; }
+.m-actions-hint-chev > svg:nth-child(2) { animation-delay: 160ms; }
+.m-actions-hint-chev > svg:nth-child(3) { animation-delay: 320ms; }
+
+/* Master lifecycle: slide in from right → hold → slide out to left.
+   The asymmetric out-direction is the whole point — it silently
+   demonstrates the gesture the user should use. */
+@keyframes m-actions-hint-cycle {
+  0%   { transform: translateX(108%);  opacity: 0; }
+  14%  { transform: translateX(0);     opacity: 1; } /* in by ~365ms */
+  80%  { transform: translateX(0);     opacity: 1; } /* hold through ~2080ms */
+  100% { transform: translateX(-112%); opacity: 0; } /* out by 2600ms */
+}
+
+/* Chevron march — staggered fade-in + leftward drift creates a
+   continuous "flowing" feel inside the text strip. */
+@keyframes m-hint-chev-march {
+  0%   { opacity: 0; transform: translateX(8px); }
+  35%  { opacity: 1; transform: translateX(-1px); }
+  65%  { opacity: 1; transform: translateX(-4px); }
+  100% { opacity: 0; transform: translateX(-12px); }
+}
+
+/* While the hint is pending (queued or animating), suppress the real
+   action buttons so they never flash in front of (or before) the hint.
+   Their fade-in is timed in JS to complete exactly as the overlay exits. */
+.m-card-actions > :not(.m-actions-hint) {
+  transition: opacity 320ms ease;
+}
+.m-card-actions.pending > :not(.m-actions-hint) {
+  opacity: 0;
+  pointer-events: none;
+}
 
 /* Swipe hint overlay */
 .m-swipe-hint {
@@ -958,4 +1032,7 @@ html.dark .m-sheet-label::before { background: hsl(var(--blue-soft)); }
   .mobile-deck { scroll-behavior: auto; }
   .m-sheet { transition: none; }
   .m-card-inner { transition: none; }
+  /* For reduced-motion users, skip the teach-in entirely — the button
+     label and tap target are already sufficient. */
+  .m-actions-hint { display: none; }
 }
