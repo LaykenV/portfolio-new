@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./mobile.css";
 import { AppThemeProvider } from '../components/theme-provider';
+import { ThemeColorSync } from '../components/theme-color-sync';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -95,8 +96,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FAF9F6' },
-    { media: '(prefers-color-scheme: dark)', color: '#0A0A0A' },
+    { media: '(prefers-color-scheme: light)', color: '#E7ECF5' },
+    { media: '(prefers-color-scheme: dark)', color: '#161B26' },
   ],
 };
 
@@ -110,7 +111,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased app-background`}
       >
-        <AppThemeProvider>{children}</AppThemeProvider>
+        <AppThemeProvider>
+          <ThemeColorSync />
+          {children}
+        </AppThemeProvider>
       </body>
     </html>
   );
