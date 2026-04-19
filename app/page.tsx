@@ -130,11 +130,11 @@ export default function Home() {
             {/* Primary email CTA + 3 secondary actions */}
             <div className="flex flex-col gap-2 mt-1">
               <a
-                href="mailto:laykenv@gmail.com?subject=AI%20Engineering%20role"
+                href="mailto:Laykenv@gmail.com?subject=AI%20Engineering%20role"
                 className="cta-primary w-full"
               >
                 <Mail className="h-4 w-4" />
-                laykenv@gmail.com
+                Laykenv@gmail.com
                 <ArrowUpRight className="h-4 w-4" />
               </a>
               <div className="grid grid-cols-3 gap-2">

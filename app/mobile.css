@@ -572,8 +572,8 @@ html:not(.dark) .m-card-bg::after {
 .m-card-image {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 22px;
+  aspect-ratio: 16 / 9;
+  border-radius: 0.5rem;
   overflow: hidden;
   background: hsl(var(--card));
   border: 1px solid hsl(var(--blue-strong) / 0.26);
@@ -866,10 +866,10 @@ html.dark .m-sheet-crumb .accent { color: hsl(var(--blue-soft)); }
 
 .m-sheet-hero {
   position: relative;
-  border-radius: 22px;
+  border-radius: 0.5rem;
   overflow: hidden;
   border: 1px solid hsl(var(--blue-strong) / 0.24);
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   background: hsl(var(--card));
   box-shadow: 0 30px 60px -24px hsl(var(--blue-strong) / 0.34);
 }

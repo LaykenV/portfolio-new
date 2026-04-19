@@ -725,7 +725,7 @@ position, justify it against the alternatives.`}</code>
             More writing
           </Link>
           <a
-            href="mailto:laykenv@gmail.com?subject=Re%3A%20Mesh%20Mind%20debate%20workflow%20post"
+            href="mailto:Laykenv@gmail.com?subject=Re%3A%20Mesh%20Mind%20debate%20workflow%20post"
             className="nav-link"
           >
             Reply by email

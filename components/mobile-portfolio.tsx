@@ -233,13 +233,13 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
 
         <div className="m-about-cta-stack">
           <a
-            href="mailto:laykenv@gmail.com?subject=AI%20Engineering%20role"
+            href="mailto:Laykenv@gmail.com?subject=AI%20Engineering%20role"
             className="m-cta-email"
           >
             <span className="m-cta-icon" aria-hidden="true">
               <Mail className="h-[18px] w-[18px]" />
             </span>
-            <b className="m-cta-email-addr">laykenv@gmail.com</b>
+            <b className="m-cta-email-addr">Laykenv@gmail.com</b>
             <span className="arrow">
               <ArrowUpRight className="h-4 w-4" />
             </span>
@@ -401,7 +401,7 @@ function ProjectSlide({ ref, project, index, total, onDeepDive }: ProjectSlidePr
             src={project.image}
             alt={project.title}
             fill
-            className="object-cover"
+            className="object-contain scale-[1.01]"
             sizes="100vw"
             priority={index < 2}
             draggable={false}
@@ -581,7 +581,7 @@ function DeepDiveSheet({ project, onClose }: DeepDiveSheetProps) {
             src={project.secondaryImage}
             alt={`${project.title} — detail`}
             fill
-            className="object-cover"
+            className="object-contain scale-[1.01]"
             sizes="100vw"
             draggable={false}
           />

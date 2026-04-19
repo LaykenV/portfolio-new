@@ -590,7 +590,7 @@ export default function DefaultStackPost() {
             More writing
           </Link>
           <a
-            href="mailto:laykenv@gmail.com?subject=Re%3A%20Default%20app%20stack%20post"
+            href="mailto:Laykenv@gmail.com?subject=Re%3A%20Default%20app%20stack%20post"
             className="nav-link"
           >
             <Wand2 className="h-3.5 w-3.5" />

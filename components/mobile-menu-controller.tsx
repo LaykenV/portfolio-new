@@ -45,11 +45,11 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
           </div>
           <div className="h-px" style={{ background: 'hsl(var(--blue-strong) / 0.2)' }} />
           <a
-            href="mailto:laykenv@gmail.com?subject=AI%20Engineering%20role"
+            href="mailto:Laykenv@gmail.com?subject=AI%20Engineering%20role"
             className="cta-primary w-full"
           >
             <Mail className="h-4 w-4" />
-            laykenv@gmail.com
+            Laykenv@gmail.com
           </a>
           <div className="flex flex-wrap items-center gap-2">
             <a href="https://github.com/laykenV" aria-label="GitHub" className="btn-icon" target="_blank" rel="noreferrer">
@@ -73,4 +73,3 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
     </div>
   )
 }
-
