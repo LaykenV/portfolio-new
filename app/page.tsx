@@ -16,7 +16,7 @@ import {
   BookOpen,
   ArrowUpRight,
 } from 'lucide-react'
-import { MobileMenuController } from '@/components/mobile-menu-controller'
+import { MobilePortfolio } from '@/components/mobile-portfolio'
 
 export const dynamic = 'force-static'
 
@@ -25,10 +25,14 @@ export default function Home() {
   return (
     <>
       <StructuredData projects={projects} />
-      <div className="font-sans mx-auto max-w-[110rem] min-h-dvh md:h-dvh md:overflow-hidden">
+      {/* Mobile: bespoke swipe deck */}
+      <div className="md:hidden">
+        <MobilePortfolio projects={projects} />
+      </div>
+      {/* Desktop (md+): untouched two-column layout */}
+      <div className="hidden md:block font-sans mx-auto max-w-[110rem] min-h-dvh md:h-dvh md:overflow-hidden">
         <div className="flex flex-col md:flex-row md:h-full">
           <aside className="identity-panel relative flex-shrink-0 md:h-screen md:overflow-hidden px-8 pt-5 pb-6 md:px-10 md:py-8 flex flex-col gap-3 md:gap-4 md:border-r border-subtle md:w-[42%] md:shrink-0">
-            <MobileMenuController className="absolute top-4 right-6 md:top-4 md:right-4 md:hidden" />
             <div className="hidden md:block absolute top-8 right-10 z-10">
               <AnimatedThemeToggler className="btn-icon" />
             </div>
