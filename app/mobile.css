@@ -683,10 +683,19 @@ html.dark .m-chip { border-color: hsl(var(--blue-soft) / 0.20); }
 
 .m-card-actions {
   position: relative;
+  margin-top: 14px;
+}
+.m-card-actions-ui {
   display: grid;
   grid-template-columns: 1fr 1fr auto;
   gap: 8px;
-  margin-top: 14px;
+  transition: opacity 320ms ease;
+}
+.m-card-actions-ui.pending {
+  opacity: 0;
+}
+.m-card-actions-ui.blocked {
+  pointer-events: none;
 }
 .m-btn {
   height: 46px;
@@ -786,17 +795,6 @@ html.dark .m-actions-hint-chev { color: hsl(var(--blue-soft)); }
   35%  { opacity: 1; transform: translateX(-1px); }
   65%  { opacity: 1; transform: translateX(-4px); }
   100% { opacity: 0; transform: translateX(-12px); }
-}
-
-/* While the hint is pending (queued or animating), suppress the real
-   action buttons so they never flash in front of (or before) the hint.
-   Their fade-in is timed in JS to complete exactly as the overlay exits. */
-.m-card-actions > :not(.m-actions-hint) {
-  transition: opacity 320ms ease;
-}
-.m-card-actions.pending > :not(.m-actions-hint) {
-  opacity: 0;
-  pointer-events: none;
 }
 
 /* Swipe hint overlay */

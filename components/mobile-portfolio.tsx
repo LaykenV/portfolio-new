@@ -76,8 +76,8 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
     }
   }, [])
 
-  // Lock the teach-in to the first eligible project slide before paint so its
-  // action buttons never flash in ahead of the indicator.
+  // Lock the teach-in to the first project slide before paint so its action
+  // buttons never flash in ahead of the indicator.
   useLayoutEffect(() => {
     if (!hintReady) return
     if (!hintPending) return
@@ -85,7 +85,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
     if (hintSlot !== null) return // already in-flight
     if (activeIndex < 1) return
 
-    setHintQueueSlot(activeIndex)
+    setHintQueueSlot(1)
   }, [activeIndex, hintPending, hintQueueSlot, hintReady, hintSlot])
 
   // First time the user lands on any project slide, wait for the snap to
@@ -231,6 +231,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
 
         {projects.map((project, i) => {
           const slotIndex = i + 1
+          const teachSlide = slotIndex === 1
           return (
             <ProjectSlide
               key={project.slug}
@@ -241,7 +242,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
               index={i}
               total={projects.length}
               showHint={hintSlot === slotIndex}
-              hintPending={hintReady && hintPending && hintQueueSlot === slotIndex}
+              hintPending={teachSlide && (!hintReady || hintPending)}
               onDeepDive={() => {
                 haptic(8)
                 setDeepDiveSlug(project.slug)
@@ -513,49 +514,57 @@ function ProjectSlide({
             ))}
           </div>
 
-          <div className={cn('m-card-actions', actionsHidden && 'pending')}>
-            {project.links.live ? (
-              <a
-                href={project.links.live}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="m-btn m-btn-primary"
-                tabIndex={actionsBlocked ? -1 : undefined}
-                aria-hidden={actionsBlocked || undefined}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ExternalLink className="h-[14px] w-[14px]" />
-                Live
-              </a>
-            ) : (
-              <span className="m-btn m-btn-ghost-empty" aria-hidden="true" />
-            )}
-            <button
-              className="m-btn"
-              disabled={actionsBlocked}
-              aria-hidden={actionsBlocked || undefined}
-              onClick={(e) => {
-                e.stopPropagation()
-                onDeepDive()
-              }}
+          <div className="m-card-actions">
+            <div
+              className={cn(
+                'm-card-actions-ui',
+                actionsHidden && 'pending',
+                actionsBlocked && 'blocked',
+              )}
             >
-              Deep dive
-              <ArrowUpRight className="h-[14px] w-[14px]" />
-            </button>
-            {project.links.github && (
-              <a
-                href={project.links.github}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="m-btn m-btn-icon"
-                aria-label="Source code"
-                tabIndex={actionsBlocked ? -1 : undefined}
+              {project.links.live ? (
+                <a
+                  href={project.links.live}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="m-btn m-btn-primary"
+                  tabIndex={actionsBlocked ? -1 : undefined}
+                  aria-hidden={actionsBlocked || undefined}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ExternalLink className="h-[14px] w-[14px]" />
+                  Live
+                </a>
+              ) : (
+                <span className="m-btn m-btn-ghost-empty" aria-hidden="true" />
+              )}
+              <button
+                className="m-btn"
+                disabled={actionsBlocked}
                 aria-hidden={actionsBlocked || undefined}
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onDeepDive()
+                }}
               >
-                <Github className="h-[16px] w-[16px]" />
-              </a>
-            )}
+                Deep dive
+                <ArrowUpRight className="h-[14px] w-[14px]" />
+              </button>
+              {project.links.github && (
+                <a
+                  href={project.links.github}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="m-btn m-btn-icon"
+                  aria-label="Source code"
+                  tabIndex={actionsBlocked ? -1 : undefined}
+                  aria-hidden={actionsBlocked || undefined}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Github className="h-[16px] w-[16px]" />
+                </a>
+              )}
+            </div>
 
             {/* One-shot action-bar hint — covers the button row on first
                 project-slide arrival, then slides off to the left to
