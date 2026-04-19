@@ -1,6 +1,5 @@
 'use client';
 
-import { useTheme } from 'next-themes';
 import { useEffect } from 'react';
 
 const THEME_COLORS = {
@@ -8,23 +7,29 @@ const THEME_COLORS = {
   dark: '#161B26',
 } as const;
 
-export function ThemeColorSync() {
-  const { resolvedTheme } = useTheme();
+function apply(isDark: boolean) {
+  const color = isDark ? THEME_COLORS.dark : THEME_COLORS.light;
+  document.head
+    .querySelectorAll('meta[name="theme-color"]')
+    .forEach((el) => el.remove());
+  const meta = document.createElement('meta');
+  meta.setAttribute('name', 'theme-color');
+  meta.setAttribute('content', color);
+  document.head.appendChild(meta);
+}
 
+export function ThemeColorSync() {
   useEffect(() => {
     if (typeof document === 'undefined') return;
-    const color =
-      resolvedTheme === 'dark' ? THEME_COLORS.dark : THEME_COLORS.light;
+    const root = document.documentElement;
+    apply(root.classList.contains('dark'));
 
-    document
-      .querySelectorAll('meta[name="theme-color"]')
-      .forEach((el) => el.remove());
-
-    const meta = document.createElement('meta');
-    meta.setAttribute('name', 'theme-color');
-    meta.setAttribute('content', color);
-    document.head.appendChild(meta);
-  }, [resolvedTheme]);
+    const observer = new MutationObserver(() => {
+      apply(root.classList.contains('dark'));
+    });
+    observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
 
   return null;
 }

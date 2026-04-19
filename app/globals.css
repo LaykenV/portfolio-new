@@ -44,6 +44,11 @@
   /* Surfaces and shadows */
   --surface: rgb(255 255 255 / 0.6);
   --shadow-color: rgb(0 0 0 / 0.07);
+
+  /* Color that matches the iOS Safari theme-color meta (chrome bar) so page
+     edges can blend into it without visible seams. Keep in sync with
+     components/theme-color-sync.tsx. */
+  --chrome-bg: #E7ECF5;
 }
 
 .dark {
@@ -77,6 +82,8 @@
   /* Surfaces and shadows */
   --surface: rgb(16 16 16 / 0.6);
   --shadow-color: rgb(0 0 0 / 0.35);
+
+  --chrome-bg: #161B26;
 }
 
 @theme inline {

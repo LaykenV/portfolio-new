@@ -210,12 +210,18 @@ html.dark .m-topbar-brand { border-color: hsl(var(--blue-soft) / 0.16); }
   inset: 0;
   z-index: 0;
   background:
+    /* Top/bottom blend bands — fade from chrome color into the radials so the
+       edges meet the iOS Safari theme-color chrome without a visible seam. */
+    linear-gradient(to bottom, var(--chrome-bg) 0, transparent 72px),
+    linear-gradient(to top,    var(--chrome-bg) 0, transparent 72px),
     radial-gradient(120% 90% at 50% 0%, hsl(var(--blue-strong) / 0.26), transparent 60%),
     radial-gradient(90% 60% at 0% 100%, hsl(var(--peach-strong) / 0.24), transparent 60%),
     radial-gradient(90% 60% at 100% 100%, hsl(var(--gold-strong) / 0.10), transparent 60%);
 }
 html.dark .m-about-bg {
   background:
+    linear-gradient(to bottom, var(--chrome-bg) 0, transparent 72px),
+    linear-gradient(to top,    var(--chrome-bg) 0, transparent 72px),
     radial-gradient(120% 90% at 50% 0%, hsl(var(--blue-soft) / 0.20), transparent 60%),
     radial-gradient(90% 60% at 0% 100%, hsl(var(--peach-soft) / 0.18), transparent 60%);
 }
