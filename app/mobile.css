@@ -102,7 +102,9 @@ html.dark .mobile-menu-panel {
   inset: 0;
   z-index: 40;
   overflow: hidden;
+  isolation: isolate;
   color: var(--foreground);
+  background-color: var(--chrome-bg);
   background:
     radial-gradient(120% 80% at 50% 0%, hsl(var(--blue-strong) / 0.18), transparent 60%),
     radial-gradient(100% 80% at 100% 100%, hsl(var(--peach-strong) / 0.14), transparent 62%),
@@ -114,6 +116,40 @@ html.dark .mobile-portfolio {
     radial-gradient(120% 80% at 50% 0%, hsl(var(--blue-soft) / 0.14), transparent 60%),
     radial-gradient(100% 80% at 100% 100%, hsl(var(--peach-soft) / 0.10), transparent 62%),
     var(--background);
+}
+
+.mobile-portfolio::before,
+.mobile-portfolio::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.mobile-portfolio::before {
+  top: 0;
+  height: calc(env(safe-area-inset-top, 0px) + 88px);
+  background:
+    linear-gradient(
+      180deg,
+      var(--chrome-bg) 0%,
+      color-mix(in srgb, var(--chrome-bg) 82%, transparent) 48%,
+      transparent 100%
+    );
+}
+
+.mobile-portfolio::after {
+  bottom: 0;
+  height: calc(env(safe-area-inset-bottom, 0px) + 120px);
+  background:
+    linear-gradient(
+      0deg,
+      var(--chrome-bg) 0%,
+      color-mix(in srgb, var(--chrome-bg) 80%, transparent) 44%,
+      transparent 100%
+    );
 }
 
 /* Top bar */
@@ -182,6 +218,7 @@ html.dark .m-topbar-brand { border-color: hsl(var(--blue-soft) / 0.16); }
 .mobile-deck {
   position: absolute;
   inset: 0;
+  z-index: 1;
   overflow-y: auto;
   overflow-x: hidden;
   scroll-snap-type: y mandatory;
@@ -212,16 +249,36 @@ html.dark .m-topbar-brand { border-color: hsl(var(--blue-soft) / 0.16); }
   background:
     /* Top/bottom blend bands — fade from chrome color into the radials so the
        edges meet the iOS Safari theme-color chrome without a visible seam. */
-    linear-gradient(to bottom, var(--chrome-bg) 0, transparent 72px),
-    linear-gradient(to top,    var(--chrome-bg) 0, transparent 72px),
+    linear-gradient(
+      to bottom,
+      var(--chrome-bg) 0,
+      color-mix(in srgb, var(--chrome-bg) 82%, transparent) 42px,
+      transparent 132px
+    ),
+    linear-gradient(
+      to top,
+      var(--chrome-bg) 0,
+      color-mix(in srgb, var(--chrome-bg) 80%, transparent) 48px,
+      transparent 148px
+    ),
     radial-gradient(120% 90% at 50% 0%, hsl(var(--blue-strong) / 0.26), transparent 60%),
     radial-gradient(90% 60% at 0% 100%, hsl(var(--peach-strong) / 0.24), transparent 60%),
     radial-gradient(90% 60% at 100% 100%, hsl(var(--gold-strong) / 0.10), transparent 60%);
 }
 html.dark .m-about-bg {
   background:
-    linear-gradient(to bottom, var(--chrome-bg) 0, transparent 72px),
-    linear-gradient(to top,    var(--chrome-bg) 0, transparent 72px),
+    linear-gradient(
+      to bottom,
+      var(--chrome-bg) 0,
+      color-mix(in srgb, var(--chrome-bg) 82%, transparent) 42px,
+      transparent 132px
+    ),
+    linear-gradient(
+      to top,
+      var(--chrome-bg) 0,
+      color-mix(in srgb, var(--chrome-bg) 80%, transparent) 48px,
+      transparent 148px
+    ),
     radial-gradient(120% 90% at 50% 0%, hsl(var(--blue-soft) / 0.20), transparent 60%),
     radial-gradient(90% 60% at 0% 100%, hsl(var(--peach-soft) / 0.18), transparent 60%);
 }
