@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./mobile.css";
@@ -91,10 +91,6 @@ export const metadata: Metadata = {
   icons: {
     icon: '/icon',
   },
-};
-
-export const viewport: Viewport = {
-  viewportFit: 'cover',
 };
 
 export default function RootLayout({
