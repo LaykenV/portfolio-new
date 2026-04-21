@@ -37,7 +37,6 @@ function haptic(ms = 8) {
   } catch {}
 }
 
-const HINT_STORAGE_KEY = 'mobile-swipe-hint-v1'
 /** Total keyframe duration for the hint overlay cycle (CSS-matched). */
 const HINT_CYCLE_MS = 2600
 /** Button fade-in duration, matched to CSS so the controls finish appearing
@@ -68,7 +67,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
         setHintPending(false)
         return
       }
-      setHintPending(window.localStorage.getItem(HINT_STORAGE_KEY) !== 'true')
+      setHintPending(true)
     } catch {
       setHintPending(false)
     } finally {
@@ -99,9 +98,6 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
     let revealTimer: number | null = null
     let cleanupTimer: number | null = null
     const armTimer = window.setTimeout(() => {
-      try {
-        window.localStorage.setItem(HINT_STORAGE_KEY, 'true')
-      } catch {}
       setHintSlot(slot)
       // Start the button fade so it completes exactly as the overlay exits.
       revealTimer = window.setTimeout(
@@ -332,8 +328,10 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
               target="_blank"
               rel="noreferrer"
             >
-              <CalendarClock className="h-[18px] w-[18px]" />
-              Book call
+              <span className="m-quick-chip" aria-hidden="true">
+                <CalendarClock className="h-[18px] w-[18px]" />
+              </span>
+              <span className="m-quick-label">Book call</span>
             </a>
             <a
               className="m-quick"
@@ -341,14 +339,16 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
               target="_blank"
               rel="noreferrer"
             >
-              <Image
-                src="/telegram.png"
-                alt=""
-                width={18}
-                height={18}
-                draggable={false}
-              />
-              Telegram
+              <span className="m-quick-chip" aria-hidden="true">
+                <Image
+                  src="/telegram.png"
+                  alt=""
+                  width={18}
+                  height={18}
+                  draggable={false}
+                />
+              </span>
+              <span className="m-quick-label">Telegram</span>
             </a>
             <a
               className="m-quick"
@@ -356,8 +356,10 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
               target="_blank"
               rel="noreferrer"
             >
-              <Github className="h-[18px] w-[18px]" />
-              GitHub
+              <span className="m-quick-chip" aria-hidden="true">
+                <Github className="h-[18px] w-[18px]" />
+              </span>
+              <span className="m-quick-label">GitHub</span>
             </a>
           </div>
         </div>
