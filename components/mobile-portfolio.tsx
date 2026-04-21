@@ -49,8 +49,15 @@ const HINT_ARM_DELAY_MS = 500
 export function MobilePortfolio({ projects }: MobilePortfolioProps) {
   const deckRef = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLElement | null)[]>([])
+  const previewResetRef = useRef<number | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [deepDiveSlug, setDeepDiveSlug] = useState<string | null>(null)
+  const [entryPreview, setEntryPreview] = useState<{ slug: string; offset: number } | null>(null)
+  const [swipePreview, setSwipePreview] = useState<{
+    slug: string | null
+    offset: number
+    active: boolean
+  }>({ slug: null, offset: 0, active: false })
   const [hintQueueSlot, setHintQueueSlot] = useState<number | null>(null)
   const [hintSlot, setHintSlot] = useState<number | null>(null)
   // Keep the initial server and client render identical; we decide whether to
@@ -150,6 +157,52 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
     () => projects.find((p) => p.slug === deepDiveSlug) ?? null,
     [projects, deepDiveSlug],
   )
+  const previewProject = useMemo(
+    () => projects.find((p) => p.slug === swipePreview.slug) ?? null,
+    [projects, swipePreview.slug],
+  )
+
+  const clearPreviewReset = useCallback(() => {
+    if (previewResetRef.current !== null) {
+      window.clearTimeout(previewResetRef.current)
+      previewResetRef.current = null
+    }
+  }, [])
+
+  const clearSwipePreviewNow = useCallback(() => {
+    clearPreviewReset()
+    setSwipePreview({ slug: null, offset: 0, active: false })
+  }, [clearPreviewReset])
+
+  const clearEntryPreview = useCallback(() => {
+    setEntryPreview(null)
+  }, [])
+
+  const previewSwipe = useCallback(
+    (slug: string, offset: number) => {
+      clearPreviewReset()
+      setSwipePreview({ slug, offset, active: true })
+    },
+    [clearPreviewReset],
+  )
+
+  const settleSwipePreview = useCallback(
+    (slug?: string, delay = 340) => {
+      clearPreviewReset()
+      setSwipePreview((prev) => ({
+        slug: slug ?? prev.slug,
+        offset: 0,
+        active: false,
+      }))
+      previewResetRef.current = window.setTimeout(() => {
+        setSwipePreview({ slug: null, offset: 0, active: false })
+        previewResetRef.current = null
+      }, delay)
+    },
+    [clearPreviewReset],
+  )
+
+  useEffect(() => () => clearPreviewReset(), [clearPreviewReset])
 
   // Lock body when deep dive is open
   useEffect(() => {
@@ -241,7 +294,20 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
               hintPending={teachSlide && (!hintReady || hintPending)}
               onDeepDive={() => {
                 haptic(8)
+                clearSwipePreviewNow()
+                clearEntryPreview()
                 setDeepDiveSlug(project.slug)
+              }}
+              onSwipePreview={(offset) => previewSwipe(project.slug, offset)}
+              onSwipePreviewEnd={(commit, offset) => {
+                if (commit) {
+                  haptic(8)
+                  clearSwipePreviewNow()
+                  setEntryPreview({ slug: project.slug, offset })
+                  setDeepDiveSlug(project.slug)
+                  return
+                }
+                settleSwipePreview()
               }}
             />
           )
@@ -259,7 +325,19 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
       )}
 
       {/* Deep-dive slide-in sheet */}
-      <DeepDiveSheet project={currentProject} onClose={() => setDeepDiveSlug(null)} />
+      <DeepDiveSheet
+        project={currentProject}
+        previewProject={previewProject}
+        previewOffset={swipePreview.offset}
+        previewActive={swipePreview.active}
+        entryPreview={entryPreview}
+        onEntryPreviewConsumed={clearEntryPreview}
+        onClose={() => {
+          clearSwipePreviewNow()
+          clearEntryPreview()
+          setDeepDiveSlug(null)
+        }}
+      />
     </div>
   )
 }
@@ -389,6 +467,8 @@ interface ProjectSlideProps {
   showHint: boolean
   hintPending: boolean
   onDeepDive: () => void
+  onSwipePreview: (offset: number) => void
+  onSwipePreviewEnd: (commit: boolean, offset: number) => void
 }
 
 function ProjectSlide({
@@ -399,18 +479,19 @@ function ProjectSlide({
   showHint,
   hintPending,
   onDeepDive,
+  onSwipePreview,
+  onSwipePreviewEnd,
 }: ProjectSlideProps) {
-  const cardRef = useRef<HTMLDivElement>(null)
   const actionsHidden = hintPending
   const actionsBlocked = hintPending || showHint
   const gesture = useRef<{
     startX: number
     startY: number
     startT: number
+    deltaX: number
     axis: 'x' | 'y' | null
     active: boolean
-  }>({ startX: 0, startY: 0, startT: 0, axis: null, active: false })
-  const [dragX, setDragX] = useState(0)
+  }>({ startX: 0, startY: 0, startT: 0, deltaX: 0, axis: null, active: false })
   const [hintOn, setHintOn] = useState(false)
 
   const onTouchStart = (e: ReactTouchEvent) => {
@@ -419,6 +500,7 @@ function ProjectSlide({
       startX: t.clientX,
       startY: t.clientY,
       startT: performance.now(),
+      deltaX: 0,
       axis: null,
       active: true,
     }
@@ -435,10 +517,16 @@ function ProjectSlide({
     }
 
     if (gesture.current.axis === 'x') {
-      // rubber-band rightward (can't swipe right on a card)
+      const hadLeftSwipe = gesture.current.deltaX < 0
       const clamped = dx < 0 ? dx : dx / 4
-      setDragX(clamped)
-      if (dx < -40) setHintOn(true)
+      gesture.current.deltaX = clamped
+      if (dx < 0) {
+        onSwipePreview(Math.min(-dx, window.innerWidth))
+      } else if (hadLeftSwipe) {
+        onSwipePreview(0)
+      }
+      setHintOn(dx < -40)
+      if (e.cancelable) e.preventDefault()
     }
   }
 
@@ -448,18 +536,19 @@ function ProjectSlide({
     gesture.current.active = false
 
     if (axis === 'x') {
-      const dx = dragX
+      const dx = gesture.current.deltaX
       const elapsed = performance.now() - startT
       const vx = dx / Math.max(elapsed, 1)
-      setDragX(0)
+      gesture.current.deltaX = 0
       setHintOn(false)
       if (dx < -80 || vx < -0.5) {
-        onDeepDive()
+        onSwipePreviewEnd(true, Math.min(-dx, window.innerWidth))
+        return
       }
-    } else {
-      setDragX(0)
-      setHintOn(false)
+      onSwipePreviewEnd(false, 0)
     }
+    gesture.current.deltaX = 0
+    setHintOn(false)
   }
 
   const bgStyle = { ['--card-bg-url' as string]: `url("${project.image}")` }
@@ -468,9 +557,7 @@ function ProjectSlide({
     <section ref={ref} className="m-slide m-project">
       <div className="m-card-bg" style={bgStyle} aria-hidden="true" />
       <div
-        ref={cardRef}
-        className={cn('m-card-inner', dragX !== 0 && 'dragging')}
-        style={{ transform: dragX !== 0 ? `translateX(${dragX}px)` : undefined }}
+        className="m-card-inner"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
@@ -598,13 +685,27 @@ function ProjectSlide({
 
 interface DeepDiveSheetProps {
   project: Project | null
+  previewProject: Project | null
+  previewOffset: number
+  previewActive: boolean
+  entryPreview: { slug: string; offset: number } | null
+  onEntryPreviewConsumed: () => void
   onClose: () => void
 }
 
-function DeepDiveSheet({ project, onClose }: DeepDiveSheetProps) {
+function DeepDiveSheet({
+  project,
+  previewProject,
+  previewOffset,
+  previewActive,
+  entryPreview,
+  onEntryPreviewConsumed,
+  onClose,
+}: DeepDiveSheetProps) {
   const [visible, setVisible] = useState(false)
   const [dragX, setDragX] = useState(0)
   const [dragging, setDragging] = useState(false)
+  const entryPreviewRef = useRef(entryPreview)
   const startRef = useRef({
     x: 0,
     y: 0,
@@ -612,15 +713,31 @@ function DeepDiveSheet({ project, onClose }: DeepDiveSheetProps) {
     axis: null as 'x' | 'y' | null,
     fromEdge: false,
   })
+  const displayProject = project ?? previewProject
+  const isPreviewing = !project && !!previewProject
+  const isInteractive = !!project
+  const openingOffset =
+    project && !visible && entryPreview?.slug === project.slug ? entryPreview.offset : null
+
+  useEffect(() => {
+    entryPreviewRef.current = entryPreview
+  }, [entryPreview])
 
   useEffect(() => {
     if (!project) {
       setVisible(false)
       return
     }
-    const id = requestAnimationFrame(() => setVisible(true))
+    setVisible(false)
+    const openedFromSwipe = entryPreviewRef.current?.slug === project.slug
+    const id = requestAnimationFrame(() => {
+      setVisible(true)
+      if (openedFromSwipe) {
+        onEntryPreviewConsumed()
+      }
+    })
     return () => cancelAnimationFrame(id)
-  }, [project])
+  }, [onEntryPreviewConsumed, project])
 
   const requestClose = useCallback(() => {
     setVisible(false)
@@ -663,17 +780,30 @@ function DeepDiveSheet({ project, onClose }: DeepDiveSheetProps) {
     }
   }
 
-  if (!project) return null
+  if (!displayProject) return null
 
-  const style = dragging && dragX > 0 ? { transform: `translateX(${dragX}px)` } : undefined
+  const style =
+    dragging && dragX > 0
+      ? { transform: `translateX(${dragX}px)` }
+      : isPreviewing
+        ? { transform: `translateX(calc(100% - ${previewOffset}px))` }
+        : openingOffset !== null
+          ? { transform: `translateX(calc(100% - ${openingOffset}px))` }
+          : { transform: visible ? 'translateX(0)' : 'translateX(100%)' }
 
   return (
     <div
-      className={cn('m-sheet', visible && 'open', dragging && 'dragging')}
+      className={cn(
+        'm-sheet',
+        visible && 'open',
+        (dragging || previewActive) && 'dragging',
+        isPreviewing && 'preview',
+      )}
       style={style}
-      role="dialog"
-      aria-modal="true"
-      aria-label={`${project.title} deep dive`}
+      role={isInteractive ? 'dialog' : undefined}
+      aria-modal={isInteractive ? 'true' : undefined}
+      aria-label={isInteractive ? `${displayProject.title} deep dive` : undefined}
+      aria-hidden={isPreviewing || undefined}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
@@ -694,40 +824,41 @@ function DeepDiveSheet({ project, onClose }: DeepDiveSheetProps) {
         <div className="m-sheet-crumb">
           <span>Deep dive</span>
           <span className="sep">/</span>
-          <span className="accent">{project.title}</span>
+          <span className="accent">{displayProject.title}</span>
         </div>
       </div>
 
       <div className="m-sheet-inner">
         <div className="m-sheet-hero">
           <Image
-            src={project.secondaryImage}
-            alt={`${project.title} — detail`}
+            src={displayProject.secondaryImage}
+            alt={isInteractive ? `${displayProject.title} — detail` : ''}
             fill
             className="object-contain scale-[1.01]"
             sizes="100vw"
             draggable={false}
+            aria-hidden={isPreviewing || undefined}
           />
         </div>
 
-        <h2 className="m-sheet-title">{project.title}</h2>
-        <div className="m-sheet-tagline">{project.tagline}</div>
+        <h2 className="m-sheet-title">{displayProject.title}</h2>
+        <div className="m-sheet-tagline">{displayProject.tagline}</div>
 
-        {project.award && (
+        {displayProject.award && (
           <div className="m-sheet-award">
-            <span aria-hidden="true">{project.award.icon ?? '🥇'}</span>
-            {project.award.label}
+            <span aria-hidden="true">{displayProject.award.icon ?? '🥇'}</span>
+            {displayProject.award.label}
           </div>
         )}
 
         <div className="m-sheet-label">The work</div>
         <div className="m-sheet-body">
-          <p>{project.longDescription}</p>
+          <p>{displayProject.longDescription}</p>
         </div>
 
         <div className="m-sheet-label">Stack</div>
         <div className="m-sheet-stack">
-          {project.techStack.map((t) => (
+          {displayProject.techStack.map((t) => (
             <span key={t} className="m-chip">
               {t}
             </span>
@@ -736,10 +867,10 @@ function DeepDiveSheet({ project, onClose }: DeepDiveSheetProps) {
 
         <div className="m-sheet-label">Links</div>
         <div className="m-sheet-links">
-          {project.links.live && (
+          {displayProject.links.live && (
             <a
               className="m-btn m-btn-primary"
-              href={project.links.live}
+              href={displayProject.links.live}
               target="_blank"
               rel="noreferrer noopener"
             >
@@ -747,10 +878,10 @@ function DeepDiveSheet({ project, onClose }: DeepDiveSheetProps) {
               Live site
             </a>
           )}
-          {project.links.github && (
+          {displayProject.links.github && (
             <a
               className="m-btn"
-              href={project.links.github}
+              href={displayProject.links.github}
               target="_blank"
               rel="noreferrer noopener"
             >

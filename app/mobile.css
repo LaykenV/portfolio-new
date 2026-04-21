@@ -1034,6 +1034,7 @@ html.dark .m-rail-dot.active {
 }
 .m-sheet.dragging { transition: none; }
 .m-sheet.open { transform: translateX(0); }
+.m-sheet.preview { pointer-events: none; }
 .m-sheet::before {
   content: '';
   position: absolute;
