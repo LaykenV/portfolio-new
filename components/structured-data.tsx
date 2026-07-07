@@ -12,7 +12,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Layken Varholdt',
-    jobTitle: 'AI Engineer',
+    jobTitle: 'Senior Engineer',
     worksFor: {
       '@type': 'Organization',
       name: 'DOL',
@@ -39,7 +39,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
       'Gemini',
     ],
     description:
-      'AI engineer shipping production systems — document intelligence pipelines, multi-agent orchestration, and the infrastructure that keeps AI features reliable at scale. 1st place at the Convex Modern Stack Hackathon ($10k).',
+      'Senior engineer shipping production systems — document intelligence pipelines, multi-agent orchestration, and the infrastructure that keeps them reliable at scale. 1st place at the Convex Modern Stack Hackathon ($10k).',
   }
 
   // WebSite schema for search box potential
@@ -53,7 +53,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
       name: 'Layken Varholdt',
     },
     description:
-      'Portfolio of Layken Varholdt, an AI engineer shipping production systems — document intelligence, multi-agent orchestration, and AI infrastructure.',
+      'Portfolio of Layken Varholdt, a senior engineer shipping production systems — document intelligence, multi-agent orchestration, and reliable infrastructure.',
   }
 
   // ProfilePage schema
@@ -63,7 +63,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
     mainEntity: {
       '@type': 'Person',
       name: 'Layken Varholdt',
-      jobTitle: 'AI Engineer',
+      jobTitle: 'Senior Engineer',
       url: baseUrl,
       image: `${baseUrl}/portrait.jpeg`,
     },

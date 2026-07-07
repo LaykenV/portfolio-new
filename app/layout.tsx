@@ -17,15 +17,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.laykenvarholdt.com'),
   title: {
-    default: 'Layken Varholdt — AI Engineer',
+    default: 'Layken Varholdt — Senior Engineer',
     template: '%s — Layken Varholdt',
   },
   description:
-    'AI engineer shipping production systems: document intelligence pipelines, multi-agent orchestration, and the infrastructure that keeps AI features reliable. 1st place at the Convex Modern Stack Hackathon ($10k).',
+    'Senior engineer shipping production systems: document intelligence pipelines, multi-agent orchestration, and the infrastructure that keeps them reliable. 1st place at the Convex Modern Stack Hackathon ($10k).',
   keywords: [
     'Layken Varholdt',
-    'AI engineer',
-    'AI engineering',
+    'Senior engineer',
+    'Software engineer',
     'multi-agent orchestration',
     'document intelligence',
     'RAG',
@@ -53,9 +53,9 @@ export const metadata: Metadata = {
     // bing: 'your-bing-verification-code',
   },
   openGraph: {
-    title: 'Layken Varholdt — AI Engineer',
+    title: 'Layken Varholdt — Senior Engineer',
     description:
-      'AI engineer shipping production systems — document intelligence, multi-agent orchestration, and reliable AI infrastructure. 1st place at the Convex Modern Stack Hackathon ($10k).',
+      'Senior engineer shipping production systems — document intelligence, multi-agent orchestration, and reliable infrastructure. 1st place at the Convex Modern Stack Hackathon ($10k).',
     url: '/',
     siteName: 'Layken Varholdt',
     locale: 'en_US',
@@ -65,15 +65,15 @@ export const metadata: Metadata = {
         url: 'https://www.laykenvarholdt.com/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Layken Varholdt — AI Engineer',
+        alt: 'Layken Varholdt — Senior Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Layken Varholdt — AI Engineer',
+    title: 'Layken Varholdt — Senior Engineer',
     description:
-      'AI engineer shipping production systems — document intelligence, multi-agent orchestration, and reliable AI infrastructure.',
+      'Senior engineer shipping production systems — document intelligence, multi-agent orchestration, and reliable infrastructure.',
     creator: '@LLVarholdt',
     images: ['https://www.laykenvarholdt.com/twitter-image'],
   },

@@ -372,7 +372,7 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
         <h1 className="m-about-name">Layken Varholdt</h1>
 
         <div className="m-about-role">
-          AI Engineer <span className="sep">·</span>{' '}
+          Senior Engineer <span className="sep">·</span>{' '}
           <span className="accent">@ DOL</span>
         </div>
 

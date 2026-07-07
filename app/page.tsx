@@ -56,7 +56,7 @@ export default function Home() {
                   Layken Varholdt
                 </h1>
                 <p className="text-sm md:text-sm font-medium opacity-70 tracking-wide uppercase mt-0.5">
-                  AI Engineer · @ DOL
+                  Senior Engineer · @ DOL
                 </p>
                 {/* Social links (desktop only) */}
                 <div className="mt-2 md:mt-3 hidden md:flex flex-wrap items-center gap-2 justify-start">
