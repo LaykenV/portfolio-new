@@ -35,18 +35,18 @@
             }
           },
           {
-            "slug": "omnibid",
-            "title": "OmniBid",
-            "tagline": "Federal RFP parser for traceable compliance matrices",
-            "description": "Focused MVP that takes a SAM.gov link, solicitation number, or PDF and turns it into a structured compliance matrix with each requirement traced back to the source document.",
-            "longDescription": "OmniBid is built around one narrow workflow: ingest a federal RFP and return a usable compliance matrix fast. The current app uses TanStack Start on React 19 with Convex as the real-time backend, and leans on Gemini's native PDF understanding instead of a brittle multi-service parsing chain. The pipeline resolves the solicitation, extracts requirements from the source document, validates and organizes them, then presents the result as an interactive checklist. The real engineering problem is making messy procurement documents feel deterministic enough to trust.",
-            "image": "/omnibid.png",
-            "secondaryImage": "/omnibidSecondary.png",
-            "techStack": ["TanStack Start", "React 19", "Convex", "TypeScript", "Gemini", "Tailwind CSS", "Clerk"],
+            "slug": "varholdt-ai",
+            "title": "Varholdt AI",
+            "tagline": "AI paperwork automation service for local operators",
+            "description": "Astro marketing site and service funnel for an AI workflow automation practice — local positioning, structured SEO, demo proof, and a free-audit-to-sprint offer ladder.",
+            "longDescription": "Varholdt AI is the business packaging layer around my document automation work. The site positions a concrete service for document-heavy local businesses: insurance agencies, staffing firms, CPA firms, and contractors that need PDFs read, spreadsheets filled, and routine documents drafted with human approval still in the loop. I built the Astro marketing site, conversion copy, structured business schema, demo assets, and offer ladder from a free workflow audit into a fixed-price sprint. It is less about showing another app and more about proving I can turn AI engineering into a credible service motion.",
+            "image": "/varholdt-ai-main.png",
+            "secondaryImage": "/varholdt-ai.png",
+            "techStack": ["Astro", "TypeScript", "SEO", "Schema.org", "Conversion Copy", "Vercel"],
             "tier": "featured",
             "links": {
-              "github": "https://github.com/LaykenV/omnibid",
-              "live": "https://omnibid.vercel.app/"
+              "github": null,
+              "live": "https://www.varholdt.com/"
             }
           },
           {
@@ -107,6 +107,21 @@
             "links": {
               "github": "https://github.com/LaykenV/teach-magic",
               "live": "https://teach-magic.vercel.app/"
+            }
+          },
+          {
+            "slug": "omnibid",
+            "title": "OmniBid",
+            "tagline": "Federal RFP parser for traceable compliance matrices",
+            "description": "Focused MVP that takes a SAM.gov link, solicitation number, or PDF and turns it into a structured compliance matrix with each requirement traced back to the source document.",
+            "longDescription": "OmniBid is built around one narrow workflow: ingest a federal RFP and return a usable compliance matrix fast. The current app uses TanStack Start on React 19 with Convex as the real-time backend, and leans on Gemini's native PDF understanding instead of a brittle multi-service parsing chain. The pipeline resolves the solicitation, extracts requirements from the source document, validates and organizes them, then presents the result as an interactive checklist. The real engineering problem is making messy procurement documents feel deterministic enough to trust.",
+            "image": "/omnibid.png",
+            "secondaryImage": "/omnibidSecondary.png",
+            "techStack": ["TanStack Start", "React 19", "Convex", "TypeScript", "Gemini", "Tailwind CSS", "Clerk"],
+            "tier": "more",
+            "links": {
+              "github": "https://github.com/LaykenV/omnibid",
+              "live": "https://omnibid.vercel.app/"
             }
           },
           {
