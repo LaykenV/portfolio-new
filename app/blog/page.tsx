@@ -6,14 +6,14 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Blog',
   description:
-    'Writing on AI engineering, multi-agent orchestration, document intelligence, and production LLM infrastructure.',
+    'Writing on software engineering, applied AI, document workflows, and the systems behind production products.',
   alternates: {
     canonical: '/blog',
   },
   openGraph: {
     title: 'Blog — Layken Varholdt',
     description:
-      'Writing on AI engineering, multi-agent orchestration, document intelligence, and production LLM infrastructure.',
+      'Writing on software engineering, applied AI, document workflows, and the systems behind production products.',
     url: '/blog',
     siteName: 'Layken Varholdt',
     locale: 'en_US',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Blog — Layken Varholdt',
     description:
-      'Writing on AI engineering, multi-agent orchestration, document intelligence, and production LLM infrastructure.',
+      'Writing on software engineering, applied AI, document workflows, and the systems behind production products.',
     creator: '@LLVarholdt',
     images: ['https://www.laykenvarholdt.com/twitter-image'],
   },

@@ -56,7 +56,7 @@ export default function Home() {
                   Layken Varholdt
                 </h1>
                 <p className="text-sm md:text-sm font-medium opacity-70 tracking-wide uppercase mt-0.5">
-                  Senior Engineer · @ DOL
+                  Software Engineer · @ DOL
                 </p>
                 {/* Social links (desktop only) */}
                 <div className="mt-2 md:mt-3 hidden md:flex flex-wrap items-center gap-2 justify-start">
@@ -96,7 +96,7 @@ export default function Home() {
                     <Linkedin className="h-4 w-4" />
                   </a>
                   <a
-                    href="/Layken-Varholdt-AI-Engineer-Resume.pdf"
+                    href="/Layken-Varholdt-Software-Engineer-Resume.pdf"
                     aria-label="Resume"
                     title="Resume"
                     className="btn text-xs md:text-sm"
@@ -112,17 +112,17 @@ export default function Home() {
 
             {/* Marketing copy */}
             <div className="mt-2 md:mt-4 space-y-2 md:space-y-3 text-center md:text-left">
-              <h2 className="hero-title">Engineer who ships production AI.</h2>
+              <h2 className="hero-title">Full-stack engineer who ships reliable software.</h2>
               <p className="hero-sub">
-                1st place at the Convex Modern Stack Hackathon ($10k). I
-                specialize in document intelligence pipelines, multi-agent
-                orchestration, and the infrastructure that makes AI features
-                reliable in production.
+                I build production software across React, TypeScript, Java,
+                and modern AI tooling. My work spans federal web applications,
+                multi-tenant SaaS, document workflows, and a 1st-place Convex
+                hackathon product.
               </p>
               <div className="flex justify-center md:justify-start pt-0.5">
-                <div className="role-banner" aria-label="Open to Senior / Staff AI roles">
+                <div className="role-banner" aria-label="Open to software engineering roles">
                   <span className="role-banner-prefix">Open to</span>
-                  <span className="role-banner-value">Senior / Staff AI roles</span>
+                  <span className="role-banner-value">Software engineering roles</span>
                 </div>
               </div>
             </div>
@@ -130,7 +130,7 @@ export default function Home() {
             {/* Primary email CTA + 3 secondary actions */}
             <div className="flex flex-col gap-2 mt-1">
               <a
-                href="mailto:Laykenv@gmail.com?subject=AI%20Engineering%20role"
+                href="mailto:Laykenv@gmail.com?subject=Software%20Engineering%20role"
                 className="cta-primary w-full"
               >
                 <Mail className="h-4 w-4" />
@@ -184,7 +184,7 @@ export default function Home() {
                     id="aside-footer-title"
                     className="text-xs font-semibold tracking-wider uppercase opacity-70"
                   >
-                    What I engineer
+                    What I build
                   </p>
                 </div>
                 <ul className="mt-2 space-y-2">
@@ -193,8 +193,8 @@ export default function Home() {
                       <FileSearch className="h-3.5 w-3.5" />
                     </span>
                     <span className="text-sm md:text-base font-medium tracking-tight text-balance">
-                      Document intelligence pipelines — parsing, extraction,
-                      compliance matrices
+                      Full-stack applications - React, TypeScript, Java, and
+                      production APIs
                     </span>
                   </li>
                   <li className="footer-item">
@@ -202,8 +202,8 @@ export default function Home() {
                       <Workflow className="h-3.5 w-3.5" />
                     </span>
                     <span className="text-sm md:text-base font-medium tracking-tight text-balance">
-                      Multi-agent orchestration — debate/synthesize workflows,
-                      cost-aware routing
+                      Workflow systems - document processing, automation, and
+                      human review
                     </span>
                   </li>
                   <li className="footer-item">
@@ -211,8 +211,8 @@ export default function Home() {
                       <Cpu className="h-3.5 w-3.5" />
                     </span>
                     <span className="text-sm md:text-base font-medium tracking-tight text-balance">
-                      Production AI infrastructure — streaming, observability,
-                      state
+                      Applied AI features - model orchestration, streaming,
+                      and observability
                     </span>
                   </li>
                 </ul>

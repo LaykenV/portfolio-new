@@ -17,15 +17,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.laykenvarholdt.com'),
   title: {
-    default: 'Layken Varholdt — Senior Engineer',
+    default: 'Layken Varholdt - Software Engineer',
     template: '%s — Layken Varholdt',
   },
   description:
-    'Senior engineer shipping production systems: document intelligence pipelines, multi-agent orchestration, and the infrastructure that keeps them reliable. 1st place at the Convex Modern Stack Hackathon ($10k).',
+    'Software engineer building production web applications with React, TypeScript, Java, and applied AI. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
   keywords: [
     'Layken Varholdt',
-    'Senior engineer',
     'Software engineer',
+    'Full-stack engineer',
     'multi-agent orchestration',
     'document intelligence',
     'RAG',
@@ -53,9 +53,9 @@ export const metadata: Metadata = {
     // bing: 'your-bing-verification-code',
   },
   openGraph: {
-    title: 'Layken Varholdt — Senior Engineer',
+    title: 'Layken Varholdt - Software Engineer',
     description:
-      'Senior engineer shipping production systems — document intelligence, multi-agent orchestration, and reliable infrastructure. 1st place at the Convex Modern Stack Hackathon ($10k).',
+      'Software engineer building production web applications with React, TypeScript, Java, and applied AI. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
     url: '/',
     siteName: 'Layken Varholdt',
     locale: 'en_US',
@@ -65,15 +65,15 @@ export const metadata: Metadata = {
         url: 'https://www.laykenvarholdt.com/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Layken Varholdt — Senior Engineer',
+        alt: 'Layken Varholdt - Software Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Layken Varholdt — Senior Engineer',
+    title: 'Layken Varholdt - Software Engineer',
     description:
-      'Senior engineer shipping production systems — document intelligence, multi-agent orchestration, and reliable infrastructure.',
+      'Software engineer building production web applications with React, TypeScript, Java, and applied AI.',
     creator: '@LLVarholdt',
     images: ['https://www.laykenvarholdt.com/twitter-image'],
   },

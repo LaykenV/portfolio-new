@@ -366,28 +366,28 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
         </div>
 
         <div className="m-status">
-          <span>Open to Senior / Staff AI</span>
+          <span>Open to software engineering roles</span>
         </div>
 
         <h1 className="m-about-name">Layken Varholdt</h1>
 
         <div className="m-about-role">
-          Senior Engineer <span className="sep">·</span>{' '}
+          Software Engineer <span className="sep">·</span>{' '}
           <span className="accent">@ DOL</span>
         </div>
 
         <p className="m-about-pitch">
-          Engineer who ships <em>production AI.</em>
+          Full-stack engineer who ships <em>reliable software.</em>
         </p>
         <p className="m-about-sub">
-          1st place at the Convex Modern Stack Hackathon ($10k). I specialize
-          in document intelligence pipelines, multi-agent orchestration, and
-          the infrastructure that makes AI reliable in production.
+          I build production software across React, TypeScript, Java, and
+          modern AI tooling, from federal web applications to multi-tenant SaaS
+          and a 1st-place Convex hackathon product.
         </p>
 
         <div className="m-about-cta-stack">
           <a
-            href="mailto:Laykenv@gmail.com?subject=AI%20Engineering%20role"
+            href="mailto:Laykenv@gmail.com?subject=Software%20Engineering%20role"
             className="m-cta-email"
           >
             <span className="m-cta-icon" aria-hidden="true">

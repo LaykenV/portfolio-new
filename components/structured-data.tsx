@@ -12,7 +12,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Layken Varholdt',
-    jobTitle: 'Senior Engineer',
+    jobTitle: 'Software Engineer',
     worksFor: {
       '@type': 'Organization',
       name: 'DOL',
@@ -25,7 +25,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
       'https://www.linkedin.com/in/layken-varholdt-a78687230/',
     ],
     knowsAbout: [
-      'AI Engineering',
+      'Full-stack software engineering',
       'Multi-agent orchestration',
       'Document intelligence',
       'RAG',
@@ -39,7 +39,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
       'Gemini',
     ],
     description:
-      'Senior engineer shipping production systems — document intelligence pipelines, multi-agent orchestration, and the infrastructure that keeps them reliable at scale. 1st place at the Convex Modern Stack Hackathon ($10k).',
+      'Software engineer building production web applications with React, TypeScript, Java, and applied AI. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
   }
 
   // WebSite schema for search box potential
@@ -53,7 +53,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
       name: 'Layken Varholdt',
     },
     description:
-      'Portfolio of Layken Varholdt, a senior engineer shipping production systems — document intelligence, multi-agent orchestration, and reliable infrastructure.',
+      'Portfolio of Layken Varholdt, a software engineer building production web applications, workflow systems, and applied AI features.',
   }
 
   // ProfilePage schema
@@ -63,7 +63,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
     mainEntity: {
       '@type': 'Person',
       name: 'Layken Varholdt',
-      jobTitle: 'Senior Engineer',
+      jobTitle: 'Software Engineer',
       url: baseUrl,
       image: `${baseUrl}/portrait.jpeg`,
     },
@@ -74,7 +74,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Portfolio Projects',
-    description: 'Production AI systems and full-stack applications built by Layken Varholdt',
+    description: 'Production web applications, workflow systems, and applied AI projects built by Layken Varholdt',
     numberOfItems: projects.length,
     itemListElement: projects.map((project, index) => ({
       '@type': 'ListItem',
@@ -141,4 +141,3 @@ export function StructuredData({ projects }: StructuredDataProps) {
     </>
   )
 }
-
