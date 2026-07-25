@@ -719,9 +719,13 @@ html:not(.dark) .m-card-bg::after {
   box-sizing: border-box;
   overflow: hidden;
   transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* will-change only while a drag is actually in flight — leaving it on would
+   hold a full-viewport compositor layer per card for the whole session. */
+.m-card-inner.dragging {
+  transition: none;
   will-change: transform;
 }
-.m-card-inner.dragging { transition: none; }
 
 .m-eyebrow {
   display: flex;
@@ -887,6 +891,7 @@ html.dark .m-chip { border-color: hsl(var(--blue-soft) / 0.20); }
   text-decoration: none;
   transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
   user-select: none;
+  white-space: nowrap;
 }
 html.dark .m-btn { border-color: hsl(var(--blue-soft) / 0.20); }
 .m-btn:active { transform: scale(0.96); }

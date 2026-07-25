@@ -1,143 +1,207 @@
 {
-    "projects": [
-        {
-            "slug": "atlas-outbound",
-            "title": "Atlas Outbound",
-            "tagline": "AI sales agent that books meetings using scraped agency intel",
-            "description": "Context-aware AI voice agent that scrapes an agency's own case studies to build trust on live calls and book qualified discovery meetings. 1st place at the Convex Modern Stack Hackathon — built in 12 days.",
-            "longDescription": "Atlas Outbound won 1st place at the Convex Modern Stack Hackathon ($10k cash + ~$3k in additional prizes), built end-to-end in 12 days. The system combines a lead-sourcing pipeline (Google Places + Firecrawl marketing-gap analysis + OpenAI intelligence) with a Vapi-powered voice agent whose context is dynamically assembled from the hiring agency's own case studies — so pitches reference real customers, not generic copy. Convex drives a real-time dashboard that surfaces every stage of the funnel, from prospect discovery through meeting booked. The prize wasn't for the demo — it was for shipping a coherent system under a 12-day constraint.",
-            "image": "/atlasOutbound.png",
-            "secondaryImage": "/atlasOutboundSecondary.png",
-            "techStack": ["Next.js", "Convex", "Resend", "OpenAI", "Vapi", "Better-Auth", "Firecrawl"],
-            "tier": "hero",
-            "links": {
-              "github": "https://github.com/LaykenV/modern-hack",
-              "live": "https://atlasoutbound.app"
-            },
-            "award": {
-              "label": "$10k Hackathon Winner",
-              "icon": "🥇"
-            }
-          },
-          {
-            "slug": "mesh-mind",
-            "title": "Mesh Mind",
-            "tagline": "Multi-model debate-and-synthesize orchestration",
-            "description": "A multi-model orchestration layer that coordinates GPT, Claude, and Gemini through a two-round protocol — parallel initial responses, peer-informed refinement, then a synthesized summary.",
-            "longDescription": "Mesh Mind is an exploration of what multi-model orchestration looks like when you treat it as a first-class system problem instead of a prompt trick. Users pick a 'master' model plus secondaries; the app runs a parallel first round, then feeds each model its peers' responses for a debate round, then collapses everything into a single synthesized answer — all on Convex scheduled functions with token-level streaming and file-based grounding. The whole thing sits behind a lightweight subscription and usage-tracking model so the cost surface actually matches the compute surface.",
-            "image": "/MeshMind.png",
-            "secondaryImage": "/MeshMindSecondary.png",
-            "techStack": ["Next.js", "React 19", "Convex", "AI-SDK", "Stripe"],
-            "tier": "hero",
-            "links": {
-              "github": "https://github.com/LaykenV/master-prompt",
-              "live": "https://meshmind.chat"
-            }
-          },
-          {
-            "slug": "varholdt-ai",
-            "title": "Varholdt AI",
-            "tagline": "AI paperwork automation service for local operators",
-            "description": "Astro marketing site and service funnel for an AI workflow automation practice — local positioning, structured SEO, demo proof, and a free-audit-to-sprint offer ladder.",
-            "longDescription": "Varholdt AI is the business packaging layer around my document automation work. The site positions a concrete service for document-heavy local businesses: insurance agencies, staffing firms, CPA firms, and contractors that need PDFs read, spreadsheets filled, and routine documents drafted with human approval still in the loop. I built the Astro marketing site, conversion copy, structured business schema, demo assets, and offer ladder from a free workflow audit into a fixed-price sprint. It is less about showing another app and more about proving I can turn AI engineering into a credible service motion.",
-            "image": "/varholdt-ai-main.png",
-            "secondaryImage": "/varholdt-ai.png",
-            "techStack": ["Astro", "TypeScript", "SEO", "Schema.org", "Conversion Copy", "Vercel"],
-            "tier": "featured",
-            "links": {
-              "github": null,
-              "live": "https://www.varholdt.com/"
-            }
-          },
-          {
-            "slug": "acadiana-web-design",
-            "title": "Acadiana Web Design",
-            "tagline": "Production WaaS platform with real customers and recurring revenue",
-            "description": "A full Website-as-a-Service platform I run as a real business — clickwrap legal agreements, Stripe recurring billing, admin/client RBAC, and a real-time ticketing portal.",
-            "longDescription": "Acadiana Web Design is a production WaaS platform with paying customers, not a demo. The backend (Convex) coordinates the full client lifecycle: magic-link auth, enforced digital clickwrap agreements, Stripe subscription state, RBAC for the admin dashboard, a client portal with real-time status, file uploads with instant previews, and a ticketing system for edit requests. Cal.com handles scheduling; Resend handles transactional mail. Every complex state transition — trial to active, failed payment to grace period, agreement revision — is modeled explicitly rather than papered over.",
-            "image": "/awd.png",
-            "secondaryImage": "/awdSecondary.png",
-            "techStack": ["Next.js", "Convex", "TypeScript", "Stripe", "Resend", "Better-Auth", "Cal.com"],
-            "tier": "featured",
-            "links": {
-              "github": "https://github.com/LaykenV/agency-site",
-              "live": "https://acadianawebdesign.com"
-            }
-          },
-          {
-            "slug": "civicly",
-            "title": "Civicly",
-            "tagline": "RAG pipeline over U.S. congressional bills",
-            "description": "Real-time legislative data engine: cron-driven ingestion of govinfo.gov manifests, XML parsing, GPT-4o summarization/categorization, and vector search for RAG over every active bill.",
-            "longDescription": "Civicly is a fully implemented data pipeline on Convex. Cron jobs discover new bill manifests from govinfo.gov, a worker parses the XML, GPT-4o produces summaries and categorizations, and the enriched documents are embedded into a vector index for semantic search. The user-facing side is a chat interface that does RAG over the corpus — but the interesting work is the ingestion layer: idempotency, backoff, dedup, and keeping the index in sync with an upstream source that publishes at its own pace.",
-            "image": "/civicly.png",
-            "secondaryImage": "/civiclySecondary.png",
-            "techStack": ["Next.js", "Convex", "TypeScript", "OpenAI", "React"],
-            "tier": "more",
-            "links": {
-              "github": "https://github.com/LaykenV/civicly",
-              "live": "https://civicly.chat"
-            }
-          },
-          {
-            "slug": "food-truck-flow",
-            "title": "FoodTruckFlow",
-            "tagline": "Multi-tenant B2B SaaS on Supabase RLS",
-            "description": "Complete digital stack for mobile food businesses — multi-tenant isolation via Supabase RLS, custom-domain mapping via the Vercel API, JSON-configured live site builder, and Stripe billing tiers.",
-            "longDescription": "FoodTruckFlow is a full SaaS platform with hard multi-tenant isolation using Supabase Row-Level Security — every query is scoped by tenant, enforced at the database layer. It handles automatic subdomain generation, custom domain mapping via the Vercel API, and a JSON-driven configuration that powers a live website builder. Freemium and pro tiers are wired through Stripe with recurring billing and webhook-driven state.",
-            "image": "/FoodTruckFlowSS.png",
-            "secondaryImage": "/FoodTruckFlowSecondary.png",
-            "techStack": ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Stripe"],
-            "tier": "more",
-            "links": {
-              "github": "https://github.com/LaykenV/food-truck-flow",
-              "live": "https://foodtruckflow.com"
-            }
-          },
-          {
-            "slug": "teach-magic",
-            "title": "TeachMagic",
-            "tagline": "AI content platform for educators",
-            "description": "Generates structured slides, quizzes, and custom images from a subject prompt — GPT-4o for content, Stability AI for imagery, Drizzle/Postgres with a caching layer, Clerk + Stripe.",
-            "longDescription": "TeachMagic pairs GPT-4o for structured content generation with Stability AI for contextually relevant imagery. The backend uses Drizzle ORM over Postgres with a memory caching layer to amortize repeat-prompt cost. Clerk handles auth, Stripe handles subscriptions — a clean vertical stack showing how to make generative content features actually stable for end users.",
-            "image": "/TeachMagicSS.png",
-            "secondaryImage": "/TeachMagicSecondary.png",
-            "techStack": ["Next.js", "TypeScript", "PostgreSQL", "Drizzle ORM", "OpenAI", "Clerk", "Stripe"],
-            "tier": "more",
-            "links": {
-              "github": "https://github.com/LaykenV/teach-magic",
-              "live": "https://teach-magic.vercel.app/"
-            }
-          },
-          {
-            "slug": "omnibid",
-            "title": "OmniBid",
-            "tagline": "Federal RFP parser for traceable compliance matrices",
-            "description": "Focused MVP that takes a SAM.gov link, solicitation number, or PDF and turns it into a structured compliance matrix with each requirement traced back to the source document.",
-            "longDescription": "OmniBid is built around one narrow workflow: ingest a federal RFP and return a usable compliance matrix fast. The current app uses TanStack Start on React 19 with Convex as the real-time backend, and leans on Gemini's native PDF understanding instead of a brittle multi-service parsing chain. The pipeline resolves the solicitation, extracts requirements from the source document, validates and organizes them, then presents the result as an interactive checklist. The real engineering problem is making messy procurement documents feel deterministic enough to trust.",
-            "image": "/omnibid.png",
-            "secondaryImage": "/omnibidSecondary.png",
-            "techStack": ["TanStack Start", "React 19", "Convex", "TypeScript", "Gemini", "Tailwind CSS", "Clerk"],
-            "tier": "more",
-            "links": {
-              "github": "https://github.com/LaykenV/omnibid",
-              "live": "https://omnibid.vercel.app/"
-            }
-          },
-          {
-            "slug": "agency-template",
-            "title": "Agency Template",
-            "tagline": "Config-driven client site template for Acadiana Web Design",
-            "description": "Reusable Next.js template for spinning up client sites from one codebase, with design archetypes, config-over-code setup, and an upstream merge flow that protects client-specific assets.",
-            "longDescription": "Agency Template is the internal product behind my client website work. Instead of rebuilding brochure sites from scratch, I maintain a Next.js 16 template where the core client-specific changes live in config and image directories. The system includes industry-specific design archetypes, config validation, and a Git workflow for pushing template improvements downstream without overwriting client content. It is the operational layer that makes a small web design shop faster and more consistent.",
-            "image": "/agencyTemplate.png",
-            "secondaryImage": "/agencyTemplateSecondary.png",
-            "techStack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "Bun", "Vercel"],
-            "tier": "more",
-            "links": {
-              "github": "https://github.com/LaykenV/agency-template",
-              "live": "https://acadianaweb.xyz/"
-            }
-          }
-    ]
-  }
+  "projects": [
+    {
+      "slug": "atlas-outbound",
+      "title": "Atlas Outbound",
+      "tagline": "AI sales agent that books meetings using scraped agency intel",
+      "description": "Context-aware AI voice agent that scrapes an agency's own case studies to build trust on live calls and book qualified discovery meetings. 1st place at the Convex Modern Stack Hackathon — built in 12 days.",
+      "longDescription": "Atlas Outbound won 1st place at the Convex Modern Stack Hackathon ($10k cash + ~$3k in additional prizes), built end-to-end in 12 days. The system combines a lead-sourcing pipeline (Google Places + Firecrawl marketing-gap analysis + OpenAI intelligence) with a Vapi-powered voice agent whose context is dynamically assembled from the hiring agency's own case studies — so pitches reference real customers, not generic copy. Convex drives a real-time dashboard that surfaces every stage of the funnel, from prospect discovery through meeting booked. The prize wasn't for the demo — it was for shipping a coherent system under a 12-day constraint.",
+      "image": "/atlasOutbound.webp",
+      "secondaryImage": "/atlasOutboundSecondary.webp",
+      "techStack": [
+        "Next.js",
+        "Convex",
+        "Resend",
+        "OpenAI",
+        "Vapi",
+        "Better-Auth",
+        "Firecrawl"
+      ],
+      "tier": "hero",
+      "links": {
+        "github": "https://github.com/LaykenV/modern-hack",
+        "live": "https://atlasoutbound.app"
+      },
+      "award": {
+        "label": "$10k Hackathon Winner",
+        "icon": "🥇"
+      }
+    },
+    {
+      "slug": "acadiana-web-design",
+      "title": "Acadiana Web Design",
+      "tagline": "Production WaaS platform with real customers and recurring revenue",
+      "description": "A full Website-as-a-Service platform I run as a real business — clickwrap legal agreements, Stripe recurring billing, admin/client RBAC, and a real-time ticketing portal.",
+      "longDescription": "Acadiana Web Design is a production WaaS platform with paying customers, not a demo. The backend (Convex) coordinates the full client lifecycle: magic-link auth, enforced digital clickwrap agreements, Stripe subscription state, RBAC for the admin dashboard, a client portal with real-time status, file uploads with instant previews, and a ticketing system for edit requests. Cal.com handles scheduling; Resend handles transactional mail. Every complex state transition — trial to active, failed payment to grace period, agreement revision — is modeled explicitly rather than papered over.",
+      "image": "/awd.webp",
+      "secondaryImage": "/awdSecondary.webp",
+      "techStack": [
+        "Next.js",
+        "Convex",
+        "TypeScript",
+        "Stripe",
+        "Resend",
+        "Better-Auth",
+        "Cal.com"
+      ],
+      "tier": "hero",
+      "links": {
+        "github": "https://github.com/LaykenV/agency-site",
+        "live": "https://acadianawebdesign.com"
+      }
+    },
+    {
+      "slug": "mesh-mind",
+      "title": "Mesh Mind",
+      "tagline": "Multi-model debate-and-synthesize orchestration",
+      "description": "A multi-model orchestration layer that coordinates GPT, Claude, and Gemini through a two-round protocol — parallel initial responses, peer-informed refinement, then a synthesized summary.",
+      "longDescription": "Mesh Mind is an exploration of what multi-model orchestration looks like when you treat it as a first-class system problem instead of a prompt trick. Users pick a 'master' model plus secondaries; the app runs a parallel first round, then feeds each model its peers' responses for a debate round, then collapses everything into a single synthesized answer — all on Convex scheduled functions with token-level streaming and file-based grounding. The whole thing sits behind a lightweight subscription and usage-tracking model so the cost surface actually matches the compute surface.",
+      "image": "/MeshMind.webp",
+      "secondaryImage": "/MeshMindSecondary.webp",
+      "techStack": [
+        "Next.js",
+        "React 19",
+        "Convex",
+        "AI-SDK",
+        "Stripe"
+      ],
+      "tier": "hero",
+      "links": {
+        "github": "https://github.com/LaykenV/master-prompt",
+        "live": "https://meshmind.chat"
+      }
+    },
+    {
+      "slug": "civicly",
+      "title": "Civicly",
+      "tagline": "RAG pipeline over U.S. congressional bills",
+      "description": "Real-time legislative data engine: cron-driven ingestion of govinfo.gov manifests, XML parsing, GPT-4o summarization/categorization, and vector search for RAG over every active bill.",
+      "longDescription": "Civicly is a fully implemented data pipeline on Convex. Cron jobs discover new bill manifests from govinfo.gov, a worker parses the XML, GPT-4o produces summaries and categorizations, and the enriched documents are embedded into a vector index for semantic search. The user-facing side is a chat interface that does RAG over the corpus — but the interesting work is the ingestion layer: idempotency, backoff, dedup, and keeping the index in sync with an upstream source that publishes at its own pace.",
+      "image": "/civicly.webp",
+      "secondaryImage": "/civiclySecondary.webp",
+      "techStack": [
+        "Next.js",
+        "Convex",
+        "TypeScript",
+        "OpenAI",
+        "React"
+      ],
+      "tier": "featured",
+      "links": {
+        "github": "https://github.com/LaykenV/civicly",
+        "live": "https://civicly.chat"
+      }
+    },
+    {
+      "slug": "food-truck-flow",
+      "title": "FoodTruckFlow",
+      "tagline": "Multi-tenant B2B SaaS on Supabase RLS",
+      "description": "Complete digital stack for mobile food businesses — multi-tenant isolation via Supabase RLS, custom-domain mapping via the Vercel API, JSON-configured live site builder, and Stripe billing tiers.",
+      "longDescription": "FoodTruckFlow is a full SaaS platform with hard multi-tenant isolation using Supabase Row-Level Security — every query is scoped by tenant, enforced at the database layer. It handles automatic subdomain generation, custom domain mapping via the Vercel API, and a JSON-driven configuration that powers a live website builder. Freemium and pro tiers are wired through Stripe with recurring billing and webhook-driven state.",
+      "image": "/FoodTruckFlowSS.webp",
+      "secondaryImage": "/FoodTruckFlowSecondary.webp",
+      "techStack": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "PostgreSQL",
+        "Stripe"
+      ],
+      "tier": "featured",
+      "links": {
+        "github": "https://github.com/LaykenV/food-truck-flow",
+        "live": "https://foodtruckflow.com"
+      }
+    },
+    {
+      "slug": "omnibid",
+      "title": "OmniBid",
+      "tagline": "Federal RFP parser for traceable compliance matrices",
+      "description": "Focused MVP that takes a SAM.gov link, solicitation number, or PDF and turns it into a structured compliance matrix with each requirement traced back to the source document.",
+      "longDescription": "OmniBid is built around one narrow workflow: ingest a federal RFP and return a usable compliance matrix fast. The current app uses TanStack Start on React 19 with Convex as the real-time backend, and leans on Gemini's native PDF understanding instead of a brittle multi-service parsing chain. The pipeline resolves the solicitation, extracts requirements from the source document, validates and organizes them, then presents the result as an interactive checklist. The real engineering problem is making messy procurement documents feel deterministic enough to trust.",
+      "image": "/omnibid.webp",
+      "secondaryImage": "/omnibidSecondary.webp",
+      "techStack": [
+        "TanStack Start",
+        "React 19",
+        "Convex",
+        "TypeScript",
+        "Gemini",
+        "Tailwind CSS",
+        "Clerk"
+      ],
+      "tier": "featured",
+      "links": {
+        "github": "https://github.com/LaykenV/omnibid",
+        "live": "https://omnibid.vercel.app/"
+      }
+    },
+    {
+      "slug": "teach-magic",
+      "title": "TeachMagic",
+      "tagline": "AI content platform for educators",
+      "description": "Generates structured slides, quizzes, and custom images from a subject prompt — GPT-4o for content, Stability AI for imagery, Drizzle/Postgres with a caching layer, Clerk + Stripe.",
+      "longDescription": "TeachMagic pairs GPT-4o for structured content generation with Stability AI for contextually relevant imagery. The backend uses Drizzle ORM over Postgres with a memory caching layer to amortize repeat-prompt cost. Clerk handles auth, Stripe handles subscriptions — a clean vertical stack showing how to make generative content features actually stable for end users.",
+      "image": "/TeachMagicSS.webp",
+      "secondaryImage": "/TeachMagicSecondary.webp",
+      "techStack": [
+        "Next.js",
+        "TypeScript",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "OpenAI",
+        "Clerk",
+        "Stripe"
+      ],
+      "tier": "more",
+      "links": {
+        "github": "https://github.com/LaykenV/teach-magic",
+        "live": "https://teach-magic.vercel.app/"
+      }
+    },
+    {
+      "slug": "agency-template",
+      "title": "Agency Template",
+      "tagline": "Config-driven client site template for Acadiana Web Design",
+      "description": "Reusable Next.js template for spinning up client sites from one codebase, with design archetypes, config-over-code setup, and an upstream merge flow that protects client-specific assets.",
+      "longDescription": "Agency Template is the internal product behind my client website work. Instead of rebuilding brochure sites from scratch, I maintain a Next.js 16 template where the core client-specific changes live in config and image directories. The system includes industry-specific design archetypes, config validation, and a Git workflow for pushing template improvements downstream without overwriting client content. It is the operational layer that makes a small web design shop faster and more consistent.",
+      "image": "/agencyTemplate.webp",
+      "secondaryImage": "/agencyTemplateSecondary.webp",
+      "techStack": [
+        "Next.js 16",
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS 4",
+        "Bun",
+        "Vercel"
+      ],
+      "tier": "more",
+      "links": {
+        "github": "https://github.com/LaykenV/agency-template",
+        "live": "https://acadianaweb.xyz/"
+      }
+    },
+    {
+      "slug": "varholdt-ai",
+      "title": "Varholdt AI",
+      "tagline": "AI paperwork automation service for local operators",
+      "description": "Astro marketing site and service funnel for an AI workflow automation practice — local positioning, structured SEO, demo proof, and a free-audit-to-sprint offer ladder.",
+      "longDescription": "Varholdt AI is the business packaging layer around my document automation work. The site positions a concrete service for document-heavy local businesses: insurance agencies, staffing firms, CPA firms, and contractors that need PDFs read, spreadsheets filled, and routine documents drafted with human approval still in the loop. I built the Astro marketing site, conversion copy, structured business schema, demo assets, and offer ladder from a free workflow audit into a fixed-price sprint. It is less about showing another app and more about proving I can turn AI engineering into a credible service motion.",
+      "image": "/varholdt-ai-main.webp",
+      "secondaryImage": "/varholdt-ai.webp",
+      "techStack": [
+        "Astro",
+        "TypeScript",
+        "SEO",
+        "Schema.org",
+        "Conversion Copy",
+        "Vercel"
+      ],
+      "tier": "more",
+      "links": {
+        "github": null,
+        "live": "https://www.varholdt.com/"
+      }
+    }
+  ]
+}

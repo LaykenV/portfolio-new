@@ -15,7 +15,11 @@ export function StructuredData({ projects }: StructuredDataProps) {
     jobTitle: 'Software Engineer',
     worksFor: {
       '@type': 'Organization',
-      name: 'DOL',
+      name: 'Zyxware Technologies',
+    },
+    affiliation: {
+      '@type': 'Organization',
+      name: 'U.S. Department of Labor',
     },
     url: baseUrl,
     image: `${baseUrl}/portrait.jpeg`,
@@ -69,51 +73,66 @@ export function StructuredData({ projects }: StructuredDataProps) {
     },
   }
 
-  // ItemList schema for projects showcase
+  const applicationCategories: Record<string, string> = {
+    'atlas-outbound': 'BusinessApplication',
+    'acadiana-web-design': 'BusinessApplication',
+    'mesh-mind': 'DeveloperApplication',
+    civicly: 'ReferenceApplication',
+    'food-truck-flow': 'BusinessApplication',
+    omnibid: 'BusinessApplication',
+    'teach-magic': 'EducationalApplication',
+  }
+
+  // ItemList schema for projects showcase. Use narrower types where the
+  // portfolio item is source code or a website rather than a purchasable app.
   const projectsListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Portfolio Projects',
     description: 'Production web applications, workflow systems, and applied AI projects built by Layken Varholdt',
     numberOfItems: projects.length,
-    itemListElement: projects.map((project, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      item: {
-        '@type': 'SoftwareApplication',
+    itemListElement: projects.map((project, index) => {
+      const common = {
         name: project.title,
         description: project.description,
         image: `${baseUrl}${project.image}`,
-        applicationCategory: 'WebApplication',
-        operatingSystem: 'Web Browser',
-        offers: {
-          '@type': 'Offer',
-          price: '0',
-          priceCurrency: 'USD',
-        },
         ...(project.links?.live && { url: project.links.live }),
-        ...(project.links?.github && { codeRepository: project.links.github }),
+        ...(project.links?.github && { sameAs: project.links.github }),
         keywords: project.techStack.join(', '),
         author: {
           '@type': 'Person',
           name: 'Layken Varholdt',
         },
-      },
-    })),
-  }
+      }
 
-  // BreadcrumbList schema for navigation
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
+      let item
+      if (project.slug === 'agency-template') {
+        item = {
+          '@type': 'SoftwareSourceCode',
+          ...common,
+          ...(project.links?.github && { codeRepository: project.links.github }),
+        }
+      } else if (project.slug === 'varholdt-ai') {
+        item = {
+          '@type': 'WebSite',
+          ...common,
+        }
+      } else {
+        item = {
+          '@type': ['SoftwareApplication', 'WebApplication'],
+          ...common,
+          applicationCategory:
+            applicationCategories[project.slug] ?? 'BusinessApplication',
+          operatingSystem: 'Web Browser',
+        }
+      }
+
+      return {
         '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: baseUrl,
-      },
-    ],
+        position: index + 1,
+        item,
+      }
+    }),
   }
 
   return (
@@ -133,10 +152,6 @@ export function StructuredData({ projects }: StructuredDataProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsListSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
     </>
   )

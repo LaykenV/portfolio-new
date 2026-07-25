@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     authors: ['Layken Varholdt'],
     images: [
       {
-        url: 'https://www.laykenvarholdt.com/MeshMind.png',
+        url: 'https://www.laykenvarholdt.com/MeshMind-og.png',
         width: 1200,
         height: 630,
         alt: 'Mesh Mind multi-model debate UI',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     title: postTitle + ' — Layken Varholdt',
     description: postDescription,
     creator: '@LLVarholdt',
-    images: ['https://www.laykenvarholdt.com/MeshMind.png'],
+    images: ['https://www.laykenvarholdt.com/MeshMind-og.png'],
   },
 }
 
@@ -59,7 +59,7 @@ export default function MeshMindDebatePost() {
     '@type': 'TechArticle',
     headline: postTitle,
     description: postDescription,
-    image: ['https://www.laykenvarholdt.com/MeshMind.png'],
+    image: ['https://www.laykenvarholdt.com/MeshMind-og.png'],
     datePublished: publishedISO,
     dateModified: publishedISO,
     author: {
@@ -218,7 +218,7 @@ export default function MeshMindDebatePost() {
         <h2 className="post-h2">What Mesh Mind is</h2>
         <figure className="post-figure">
           <Image
-            src="/MeshMind.png"
+            src="/MeshMind.webp"
             alt="Mesh Mind chat UI showing three model cards mid-debate"
             width={2400}
             height={1500}

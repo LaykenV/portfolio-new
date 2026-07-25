@@ -46,12 +46,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
-  verification: {
-    // Add verification codes when you have them
-    // google: 'your-google-verification-code',
-    // yandex: 'your-yandex-verification-code',
-    // bing: 'your-bing-verification-code',
-  },
   openGraph: {
     title: 'Layken Varholdt - Software Engineer',
     description:
@@ -105,7 +99,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="color-scheme" content="dark light" />
+        {/* Matches defaultTheme. ThemeColorSync corrects it after mount if the
+            visitor has a stored preference, and on every toggle. */}
+        <meta name="theme-color" content="#0A0A0A" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased app-background`}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef } from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { flushSync } from 'react-dom'
 import { useTheme } from 'next-themes'
@@ -12,70 +12,74 @@ interface AnimatedThemeTogglerProps {
 }
 
 export const AnimatedThemeToggler = ({ className, duration = 400 }: AnimatedThemeTogglerProps) => {
-  const { theme, setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const { setTheme } = useTheme()
   const buttonRef = useRef<HTMLButtonElement>(null)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const inFlight = useRef(false)
 
   const toggleTheme = useCallback(async () => {
     const btn = buttonRef.current
-    if (!btn) return
+    if (!btn || inFlight.current) return
 
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const supportsVT = 'startViewTransition' in document
-    const currentTheme = resolvedTheme || theme
-    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark'
+    // Read the class rather than React state so a click that lands before
+    // hydration settles still flips the right way.
+    const nextTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark'
 
     if (!supportsVT || prefersReduce) {
       setTheme(nextTheme)
       return
     }
 
-    await document.startViewTransition(() => {
-      flushSync(() => {
-        setTheme(nextTheme)
+    inFlight.current = true
+    try {
+      const transition = document.startViewTransition(() => {
+        flushSync(() => {
+          setTheme(nextTheme)
+        })
       })
-    }).ready
 
-    const { top, left, width, height } = btn.getBoundingClientRect()
-    const x = left + width / 2
-    const y = top + height / 2
-    const maxRadius = Math.hypot(
-      Math.max(left, window.innerWidth - left),
-      Math.max(top, window.innerHeight - top)
-    )
+      await transition.ready
 
-    document.documentElement.animate(
-      {
-        clipPath: [
-          `circle(0px at ${x}px ${y}px)`,
-          `circle(${maxRadius}px at ${x}px ${y}px)`,
-        ],
-      },
-      {
-        duration,
-        easing: 'ease-in-out',
-        pseudoElement: '::view-transition-new(root)',
-      }
-    )
-  }, [theme, resolvedTheme, setTheme, duration])
+      const { top, left, width, height } = btn.getBoundingClientRect()
+      const x = left + width / 2
+      const y = top + height / 2
+      const maxRadius = Math.hypot(
+        Math.max(left, window.innerWidth - left),
+        Math.max(top, window.innerHeight - top)
+      )
 
-  if (!mounted) {
-    return (
-      <button ref={buttonRef} className={cn('btn-icon', className)} aria-label="Toggle theme">
-        <Sun />
-      </button>
-    )
-  }
+      document.documentElement.animate(
+        {
+          clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${maxRadius}px at ${x}px ${y}px)`],
+        },
+        {
+          duration,
+          easing: 'ease-in-out',
+          pseudoElement: '::view-transition-new(root)',
+        }
+      )
 
-  const isDark = resolvedTheme === 'dark'
+      await transition.finished
+    } catch {
+      // A transition interrupted by a second click rejects; the theme class is
+      // already correct either way, so there is nothing to recover.
+    } finally {
+      inFlight.current = false
+    }
+  }, [setTheme, duration])
 
   return (
-    <button ref={buttonRef} onClick={toggleTheme} className={cn('btn-icon', className)} aria-label="Toggle theme">
-      {isDark ? <Sun /> : <Moon />}
+    <button
+      ref={buttonRef}
+      onClick={toggleTheme}
+      className={cn('btn-icon', className)}
+      aria-label="Toggle theme"
+    >
+      {/* Both icons render on the server; CSS picks one off the html class, so
+          there is no post-hydration swap. */}
+      <Sun className="theme-icon-sun" aria-hidden="true" />
+      <Moon className="theme-icon-moon" aria-hidden="true" />
     </button>
   )
 }

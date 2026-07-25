@@ -29,6 +29,11 @@ interface MobilePortfolioProps {
   projects: Project[]
 }
 
+/** Routes a card backdrop through the image optimizer at thumbnail size. */
+function blurBackdropSrc(src: string) {
+  return `/_next/image?url=${encodeURIComponent(src)}&w=64&q=75`
+}
+
 function haptic(ms = 8) {
   try {
     if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
@@ -98,7 +103,6 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
   // settle and then play the action-bar hint on that slide.
   useEffect(() => {
     if (!hintReady) return
-    if (!hintPending) return
     if (hintQueueSlot === null) return
 
     const slot = hintQueueSlot
@@ -122,7 +126,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
       if (revealTimer !== null) window.clearTimeout(revealTimer)
       if (cleanupTimer !== null) window.clearTimeout(cleanupTimer)
     }
-  }, [hintPending, hintQueueSlot, hintReady])
+  }, [hintQueueSlot, hintReady])
 
   const jumpTo = useCallback((slotIndex: number) => {
     const deck = deckRef.current
@@ -249,10 +253,9 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
           <span className="m-brand-portrait">
             <Image
               src="/portrait.jpeg"
-              alt="Layken Varholdt"
+              alt=""
               width={32}
               height={32}
-              priority
               draggable={false}
             />
           </span>
@@ -360,7 +363,6 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
             alt="Layken Varholdt"
             width={240}
             height={240}
-            priority
             draggable={false}
           />
         </div>
@@ -369,7 +371,9 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
           <span>Open to software engineering roles</span>
         </div>
 
-        <h1 className="m-about-name">Layken Varholdt</h1>
+        {/* Not an h1 — the page's single h1 lives in app/page.tsx so the two
+            shells don't each contribute one. */}
+        <p className="m-about-name">Layken Varholdt</p>
 
         <div className="m-about-role">
           Software Engineer <span className="sep">·</span>{' '}
@@ -445,7 +449,6 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
         <button
           className="m-scroll-indicator"
           onClick={onScrollToProjects}
-          aria-label="Scroll to projects"
         >
           <span className="label">Swipe for work</span>
           <span className="chev" aria-hidden="true">
@@ -551,7 +554,10 @@ function ProjectSlide({
     setHintOn(false)
   }
 
-  const bgStyle = { ['--card-bg-url' as string]: `url("${project.image}")` }
+  // The backdrop is a 44px blur behind a heavy gradient scrim, so a thumbnail
+  // is indistinguishable from the original — and the original is up to 5 MB of
+  // raw PNG that CSS would otherwise fetch unoptimized on every card.
+  const bgStyle = { ['--card-bg-url' as string]: `url("${blurBackdropSrc(project.image)}")` }
 
   return (
     <section ref={ref} className="m-slide m-project">
@@ -584,7 +590,6 @@ function ProjectSlide({
             fill
             className="object-contain scale-[1.01]"
             sizes="100vw"
-            priority={index < 2}
             draggable={false}
           />
           <span className="m-card-shine" aria-hidden="true" />
