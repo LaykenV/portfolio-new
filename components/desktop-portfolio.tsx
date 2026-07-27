@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import {
   ArrowRight,
   ArrowUpRight,
@@ -85,23 +85,87 @@ function shotDomain(project: Project): string {
   }
 }
 
+type ShotView = 'landing' | 'app'
+
+const SHOT_VIEWS: Array<[ShotView, string]> = [
+  ['landing', 'Landing'],
+  ['app', 'The app'],
+]
+
 /**
- * The screenshot pair, presented as two addresses in the faux browser chrome:
- * the public page the project sells itself with, and the signed-in interior
- * where the actual work is. The interior image is only mounted once asked
- * for, so it costs nothing for visitors who never switch.
+ * The screenshot pair inside faux browser chrome. The dots and address bar are
+ * scenery — the address just tracks whichever view is showing. The real control
+ * is the segmented switch on the right, which reads as a control rather than as
+ * more URL. Hovering the inactive half slides the seam between the two shots
+ * toward it, uncovering a strip of the other view, so the switch demonstrates
+ * itself before you commit to a click.
+ *
+ * `view` is owned by the page: flipping one project flips them all, so a
+ * visitor who wants interiors asks once instead of nine times.
  */
-function ProjectShot({ project }: { project: Project }) {
-  const [isApp, setIsApp] = useState(false)
-  // Sticky: once the interior has been requested it stays mounted, so flipping
-  // back and forth after the first switch costs nothing.
-  const [appRequested, setAppRequested] = useState(false)
+function ProjectShot({
+  project,
+  view,
+  onViewChange,
+}: {
+  project: Project
+  view: ShotView
+  onViewChange: (view: ShotView) => void
+}) {
+  const [peek, setPeek] = useState<ShotView | null>(null)
+  // Sticky: once the interior has been mounted it stays, so flipping back and
+  // forth after the first reveal costs nothing. Next/Image is lazy by default,
+  // so mounting the offscreen bands' interiors does not fetch them until they
+  // scroll near the viewport.
+  const [appMounted, setAppMounted] = useState(view === 'app')
+  const segRefs = useRef<Array<HTMLButtonElement | null>>([])
   const domain = shotDomain(project)
 
-  const showApp = () => {
-    setAppRequested(true)
-    setIsApp(true)
+  useEffect(() => {
+    if (view === 'app') setAppMounted(true)
+  }, [view])
+
+  const select = (next: ShotView) => {
+    if (next === 'app') setAppMounted(true)
+    setPeek(null)
+    onViewChange(next)
   }
+
+  // Hover or focus on a segment. Doubles as the prefetch trigger: there is
+  // nothing to uncover until the interior is mounted, so a peek that had to
+  // wait for the image would show the visitor nothing.
+  const hint = (v: ShotView) => {
+    if (v === 'app') setAppMounted(true)
+    setPeek(v)
+  }
+
+  // Left/right walk the switch the way a native radio group does.
+  const onKeyDown = (e: KeyboardEvent) => {
+    const i = SHOT_VIEWS.findIndex(([v]) => v === view)
+    let next = i
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % SHOT_VIEWS.length
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp')
+      next = (i - 1 + SHOT_VIEWS.length) % SHOT_VIEWS.length
+    else if (e.key === 'Home') next = 0
+    else if (e.key === 'End') next = SHOT_VIEWS.length - 1
+    else return
+    e.preventDefault()
+    select(SHOT_VIEWS[next][0])
+    segRefs.current[next]?.focus()
+  }
+
+  // A peek at the view already showing is a no-op. Reconciling here rather than
+  // in the handlers keeps this correct no matter what order the events land in:
+  // arrow keys select and *then* move focus, so the focus handler would
+  // otherwise re-peek the view it just switched to and strand it half-faded.
+  const activePeek = peek && peek !== view ? peek : null
+  // The interior layer sits on top of the landing shot, clipped to everything
+  // right of this boundary. Landing therefore always occupies the left of the
+  // frame and the interior the right, matching the order of the two segments —
+  // hovering one slides the seam toward it. Wiping rather than crossfading
+  // keeps both screenshots fully opaque instead of blending them into mush.
+  const boundary =
+    activePeek === 'app' ? 70 : activePeek === 'landing' ? 30 : view === 'app' ? 0 : 100
 
   return (
     <figure className="dp-shot mt-7 max-w-[50rem]">
@@ -109,41 +173,70 @@ function ProjectShot({ project }: { project: Project }) {
         <span className="dp-dot" aria-hidden="true" />
         <span className="dp-dot" aria-hidden="true" />
         <span className="dp-dot" aria-hidden="true" />
-        <div className="dp-chrome-tabs" role="group" aria-label={`${project.title} screenshots`}>
-          <button
-            type="button"
-            className={`dp-chrome-tab ${!isApp ? 'is-active' : ''}`}
-            onClick={() => setIsApp(false)}
-            aria-pressed={!isApp}
-          >
-            {domain}
-          </button>
-          <button
-            type="button"
-            className={`dp-chrome-tab ${isApp ? 'is-active' : ''}`}
-            onClick={showApp}
-            aria-pressed={isApp}
-          >
-            /inside
-          </button>
+
+        {/* Scenery: reads as an address bar, tracks the active view. */}
+        <span className="dp-chrome-url" aria-hidden="true">
+          {domain}
+          {view === 'app' && <span className="dp-chrome-path">/app</span>}
+        </span>
+
+        <div
+          className="dp-shot-switch"
+          data-view={view}
+          role="group"
+          aria-label={`${project.title} screenshot view`}
+          onKeyDown={onKeyDown}
+          onPointerLeave={() => setPeek(null)}
+        >
+          {SHOT_VIEWS.map(([v, label], i) => {
+            const isActive = v === view
+            return (
+              <button
+                key={v}
+                type="button"
+                ref={(el) => {
+                  segRefs.current[i] = el
+                }}
+                className="dp-shot-seg"
+                aria-pressed={isActive}
+                tabIndex={isActive ? 0 : -1}
+                onClick={() => select(v)}
+                onPointerEnter={() => hint(v)}
+                onFocus={() => hint(v)}
+                onBlur={() => setPeek(null)}
+              >
+                {label}
+              </button>
+            )
+          })}
         </div>
       </div>
+
       <div className="dp-shot-media aspect-[16/9]">
         <Image
           src={project.image}
           alt={`${project.title} landing page`}
           fill
-          className={`dp-shot-img ${isApp ? 'is-hidden' : ''}`}
+          className="dp-shot-img"
           sizes="(min-width: 1280px) 800px, 60vw"
         />
-        {appRequested && (
-          <Image
-            src={project.secondaryImage}
-            alt={`${project.title} application interface`}
-            fill
-            className={`dp-shot-img ${isApp ? '' : 'is-hidden'}`}
-            sizes="(min-width: 1280px) 800px, 60vw"
-          />
+        {appMounted && (
+          <>
+            <Image
+              src={project.secondaryImage}
+              alt={`${project.title} application interface`}
+              fill
+              className="dp-shot-img dp-shot-img-top"
+              style={{ clipPath: `inset(0 0 0 ${boundary}%)` }}
+              sizes="(min-width: 1280px) 800px, 60vw"
+            />
+            {/* Lit only while peeking, to name the edge the two shots meet at. */}
+            <span
+              className="dp-shot-seam"
+              style={{ left: `${boundary}%`, opacity: activePeek ? 1 : 0 }}
+              aria-hidden="true"
+            />
+          </>
         )}
       </div>
     </figure>
@@ -152,6 +245,9 @@ function ProjectShot({ project }: { project: Project }) {
 
 export function DesktopPortfolio({ projects }: { projects: Project[] }) {
   const [activeSlug, setActiveSlug] = useState(projects[0]?.slug ?? '')
+  // Shared by every band: switching one project switches all of them, so a
+  // visitor who wants to see interiors asks once.
+  const [shotView, setShotView] = useState<ShotView>('landing')
   const scrollRef = useRef<HTMLDivElement>(null)
   const bandRefs = useRef<Map<string, HTMLElement>>(new Map())
 
@@ -279,7 +375,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
                 </span>
               </div>
 
-              <ProjectShot project={project} />
+              <ProjectShot project={project} view={shotView} onViewChange={setShotView} />
 
               <p className="dp-body mt-7 max-w-[44rem]">{project.longDescription}</p>
 
