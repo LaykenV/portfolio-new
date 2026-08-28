@@ -7,6 +7,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/`, lastModified: now, changeFrequency: 'weekly', priority: 1 },
     { url: `${base}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
     {
+      url: `${base}/blog/glm-5-3-flash-pr-agent-code-review`,
+      lastModified: '2026-08-28T00:00:00.000Z',
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${base}/blog/safari-iphone-theme-sync`,
       lastModified: '2026-04-19T00:00:00.000Z',
       changeFrequency: 'monthly',
@@ -26,5 +32,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 }
-
 

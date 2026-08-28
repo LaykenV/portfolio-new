@@ -39,6 +39,16 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: 'glm-5-3-flash-pr-agent-code-review',
+    title: 'Code review for less than a cent.',
+    description:
+      'How I wired GLM 5.3 Flash, open-source PR-Agent, GitHub Actions, and two repository-local Codex skills into a review loop that still asks me before merge.',
+    date: '2026-08-28',
+    dateReadable: 'August 28, 2026',
+    readMinutes: 9,
+    tags: ['GLM 5.3 Flash', 'PR-Agent', 'CI'],
+  },
+  {
     slug: 'safari-iphone-theme-sync',
     title: 'The Safari theme-sync quirk no AI could fix.',
     description:

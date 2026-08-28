@@ -8,6 +8,12 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.laykenvarholdt.com
 /** Kept in step with the list rendered by app/blog/page.tsx. */
 const POSTS = [
   {
+    slug: 'glm-5-3-flash-pr-agent-code-review',
+    title: 'Code review for less than a cent',
+    description:
+      'How GLM 5.3 Flash, open-source PR-Agent, GitHub Actions, and two repository-local Codex skills form a review loop with an explicit human merge gate.',
+  },
+  {
     slug: 'safari-iphone-theme-sync',
     title: 'The Safari theme-sync quirk no AI could fix',
     description:
