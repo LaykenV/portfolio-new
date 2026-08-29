@@ -1,0 +1,726 @@
+/* Hallmark · macrostructure: Feature Stack · theme: Bloom
+ * genre: atmospheric · tone: luxury · anchor hue: violet → amber (300° → 60°)
+ * nav: sticky identity rail (no floating chrome) · footer: Ft5 statement
+ * enrichment: none — real screenshots on a lit plate
+ * axes: light + dark paper / italic-serif / chromatic accent
+ * pre-emit critique: P5 H5 E5 S5 R4 V5
+ */
+
+.v3-root {
+  --reel-step: 3.25rem;
+  --rail-w: clamp(19rem, 22vw, 23rem);
+  --gutter: clamp(var(--space-md), 4vw, var(--space-xl));
+  font-family: var(--font-body);
+}
+
+/* ---------- Ambient bloom ---------- */
+.v3-aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.v3-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  /* The hue is the only thing that changes per project; the recipe lives in
+     the token block, so no raw colour is ever written inline. */
+  transition: background-color var(--dur-5) var(--ease-in-out),
+    opacity var(--dur-5) var(--ease-in-out);
+  will-change: transform;
+}
+
+.v3-blob-a {
+  top: -14%;
+  left: -8%;
+  width: 58vw;
+  height: 58vw;
+  background-color: var(--color-bloom);
+  opacity: var(--bloom-a);
+  animation: v3-float-a 26s var(--ease-in-out) infinite;
+}
+
+.v3-blob-b {
+  right: -16%;
+  top: 22%;
+  width: 52vw;
+  height: 52vw;
+  background-color: var(--color-bloom-far);
+  opacity: var(--bloom-b);
+  animation: v3-float-b 32s var(--ease-in-out) infinite;
+}
+
+.v3-blob-c {
+  left: 28%;
+  bottom: -22%;
+  width: 46vw;
+  height: 46vw;
+  background-color: var(--color-accent-2);
+  opacity: var(--bloom-c);
+  animation: v3-float-a 38s var(--ease-in-out) infinite reverse;
+}
+
+@keyframes v3-float-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6vw, 5vh, 0) scale(1.12);
+  }
+}
+
+@keyframes v3-float-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.08);
+  }
+  50% {
+    transform: translate3d(-7vw, -4vh, 0) scale(1);
+  }
+}
+
+/* Fine grain keeps the large blurred fields from banding on wide gamuts. */
+.v3-grain {
+  position: absolute;
+  inset: -50%;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: var(--grain-blend);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* ---------- Buttons ---------- */
+.v3-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xs) var(--space-md);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--color-ink);
+  transition: border-color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out);
+}
+
+.v3-btn:hover {
+  border-color: var(--color-bloom);
+  color: var(--color-bloom);
+}
+
+.v3-btn:active {
+  transform: translateY(1px);
+}
+
+.v3-btn-primary {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-invert-ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+}
+
+.v3-btn-primary:hover {
+  background: var(--color-bloom);
+  border-color: var(--color-bloom);
+  color: var(--color-invert-ink);
+}
+
+.v3-btn-block {
+  display: flex;
+  width: 100%;
+}
+
+.v3-btn-lg {
+  padding: var(--space-xs) var(--space-lg);
+  font-size: var(--text-sm);
+}
+
+/* ---------- Theme toggle ---------- */
+/* Overrides the site-wide .btn-icon the toggler always carries. */
+.v3-root .v3-toggle {
+  position: fixed;
+  top: var(--space-md);
+  right: var(--space-md);
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border-radius: var(--radius-pill);
+  border: var(--rule-hair) solid var(--glass-line);
+  background: var(--glass);
+  color: var(--color-ink);
+  box-shadow: none;
+  backdrop-filter: blur(18px) saturate(160%);
+  cursor: pointer;
+  transition: color var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out);
+}
+
+.v3-root .v3-toggle:hover {
+  color: var(--color-bloom);
+  border-color: var(--color-bloom);
+}
+
+.v3-root .v3-toggle svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+/* ---------- Opening ---------- */
+.v3-open {
+  position: relative;
+  z-index: 1;
+  /* Owns the first screen outright, so the rail below never crowds the fold. */
+  min-height: 100vh;
+  align-content: center;
+  display: grid;
+  grid-template-columns: clamp(13rem, 17vw, 17rem) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(var(--space-lg), 4vw, var(--space-2xl));
+  max-width: 74rem;
+  margin: 0 auto;
+  padding: clamp(var(--space-2xl), 12vh, var(--space-3xl)) var(--gutter) var(--space-2xl);
+}
+
+.v3-open-portrait {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: var(--rule-hair) solid var(--color-rule);
+  box-shadow: var(--shadow-plate-inset);
+  line-height: 0;
+}
+
+.v3-open-portrait img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.v3-open-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin-top: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  color: var(--color-ink-2);
+}
+
+.v3-open-status::before {
+  content: '';
+  flex-shrink: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-bloom);
+  box-shadow: 0 0 0 3px oklch(70% 0.17 var(--bloom-hue) / 0.2);
+}
+
+/* Lights the portrait from the same field as everything else, so it belongs to
+   the page rather than sitting on top of it. */
+.v3-open-halo {
+  position: absolute;
+  inset: -30%;
+  z-index: -1;
+  border-radius: 50%;
+  background: var(--color-bloom);
+  filter: blur(60px);
+  opacity: 0.4;
+  transition: background-color var(--dur-5) var(--ease-in-out);
+}
+
+.v3-open-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+.v3-open-title {
+  margin-top: var(--space-sm);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(var(--text-3xl), 4vw, var(--text-display-s));
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.v3-open-title em {
+  font-style: italic;
+  font-variation-settings: 'SOFT' 60, 'WONK' 1;
+  color: var(--color-bloom);
+  transition: color var(--dur-5) var(--ease-in-out);
+}
+
+.v3-open-stand {
+  margin-top: var(--space-md);
+  max-width: 46ch;
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+  text-wrap: pretty;
+}
+
+.v3-open-prose {
+  display: grid;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: var(--rule-hair) solid var(--color-rule);
+  max-width: 60ch;
+  font-size: var(--text-body);
+  line-height: 1.66;
+  color: var(--color-ink-2);
+  text-wrap: pretty;
+}
+
+/* ---------- Facts ---------- */
+.v3-open-facts {
+  display: grid;
+  gap: var(--space-2xs);
+  margin-top: var(--space-lg);
+  max-width: 56ch;
+}
+
+.v3-open-facts > div {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: var(--space-sm);
+  align-items: baseline;
+  padding-bottom: var(--space-2xs);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+
+.v3-open-facts dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+.v3-open-facts dd {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.v3-open-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  margin-top: var(--space-lg);
+}
+
+/* ---------- Stage ---------- */
+.v3-stage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  gap: clamp(var(--space-lg), 4vw, var(--space-2xl));
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ---------- Rail ---------- */
+.v3-rail {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg) 0;
+}
+
+.v3-rail-head {
+  flex-shrink: 0;
+}
+
+.v3-rail-name {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  letter-spacing: -0.015em;
+}
+
+.v3-rail-role {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+.v3-meter {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin-top: var(--space-sm);
+  border-radius: var(--radius-pill);
+  background: var(--color-rule);
+  overflow: hidden;
+}
+
+.v3-meter-fill {
+  display: block;
+  height: 100%;
+  background: var(--color-bloom);
+  transform-origin: 0 50%;
+  transition: background-color var(--dur-5) var(--ease-in-out);
+}
+
+/* ---------- The reel ---------- */
+.v3-reel {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  /* Neighbouring titles bleed off rather than being clipped, which is what
+     makes it read as a wheel instead of a scrolling list. */
+  mask-image: linear-gradient(180deg, transparent, black 22%, black 78%, transparent);
+}
+
+.v3-reel-list {
+  width: 100%;
+  padding: calc(var(--reel-step) * 2) 0;
+  transition: transform var(--dur-4) var(--ease-out);
+}
+
+.v3-reel-item {
+  height: var(--reel-step);
+  display: flex;
+  align-items: center;
+}
+
+.v3-reel-btn {
+  display: block;
+  /* Sized to the label, not the rail: scaling a full-width button would push
+     its hit area 45% past the rail and make the dead space beside short titles
+     like "Civicly" hoverable. */
+  width: fit-content;
+  max-width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--color-ink-3);
+  cursor: pointer;
+  /* Scaled rather than resized: the row height stays fixed, so nothing in the
+     rail reflows as the active project changes and the transition is a cheap
+     composited one instead of a per-frame text relayout. */
+  transform-origin: left center;
+  transition: transform var(--dur-4) var(--ease-out), color var(--dur-3) var(--ease-out);
+}
+
+.v3-reel-btn:hover {
+  color: var(--color-ink);
+}
+
+.v3-reel-btn[data-active] {
+  font-style: italic;
+  font-variation-settings: 'SOFT' 70, 'WONK' 1;
+  color: var(--color-ink);
+  transform: scale(1.45);
+}
+
+/* ---------- Rail meta ---------- */
+.v3-rail-meta {
+  flex-shrink: 0;
+  padding-top: var(--space-sm);
+  border-top: var(--rule-hair) solid var(--color-rule);
+  animation: v3-fade var(--dur-4) var(--ease-out) both;
+}
+
+@keyframes v3-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.v3-rail-tag {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+  text-wrap: pretty;
+}
+
+.v3-rail-award {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-2xs);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.06em;
+  color: var(--color-accent-2);
+}
+
+.v3-rail-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3xs);
+  margin-top: var(--space-sm);
+}
+
+.v3-rail-stack li {
+  padding: 3px 9px;
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-2xs);
+  color: var(--color-ink-2);
+}
+
+.v3-rail-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.v3-rail-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-bloom);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: var(--rule-hair);
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+.v3-rail-link:hover {
+  opacity: 0.72;
+}
+
+.v3-rail-foot {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.v3-rail-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.1em;
+  color: var(--color-ink-3);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------- Panels ---------- */
+.v3-panel {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-xl) 0;
+  opacity: 0;
+  transform: translateY(var(--space-lg));
+  transition: opacity var(--dur-5) var(--ease-out), transform var(--dur-5) var(--ease-out);
+}
+
+.v3-panel[data-seen] {
+  opacity: 1;
+  transform: none;
+}
+
+.v3-plate {
+  position: relative;
+  width: 100%;
+  max-width: 60rem;
+  perspective: 1400px;
+  /* Clears the interior plate, which hangs below the frame it is pinned to. */
+  padding-bottom: var(--space-2xl);
+}
+
+.v3-plate-glow {
+  position: absolute;
+  inset: 8% 12% 24%;
+  border-radius: var(--radius-lg);
+  background: oklch(70% 0.17 var(--panel-hue));
+  filter: blur(70px);
+  opacity: 0.28;
+}
+
+.v3-figure {
+  position: relative;
+  border-radius: var(--radius-md);
+  border: var(--rule-hair) solid var(--glass-line);
+  overflow: hidden;
+  line-height: 0;
+  background: var(--color-paper-2);
+  /* Tilt follows the cursor across the plate; both custom properties default
+     to 0 so the untouched state is flat. */
+  transform: rotateY(calc(var(--tx, 0) * 3.4deg)) rotateX(calc(var(--ty, 0) * -2.4deg));
+  transition: transform var(--dur-4) var(--ease-out);
+}
+
+.v3-figure img {
+  width: 100%;
+  height: auto;
+}
+
+.v3-figure-front {
+  box-shadow: var(--shadow-plate);
+}
+
+.v3-figure-back {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 42%;
+  z-index: 2;
+  box-shadow: var(--shadow-plate-inset);
+  transform: translate(6%, 18%) rotateY(calc(var(--tx, 0) * 5deg))
+    rotateX(calc(var(--ty, 0) * -3.4deg));
+}
+
+/* ---------- Panel copy ---------- */
+.v3-copy {
+  max-width: 62ch;
+  margin-top: var(--space-lg);
+}
+
+.v3-copy-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-bottom: var(--space-2xs);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+
+/* Deliberately set as a caption, not a headline: the reel already carries the
+   project name at display size, so repeating it large reads as a stutter. */
+.v3-copy-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-xl);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.v3-copy-num {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.12em;
+  color: var(--color-ink-3);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.v3-copy-body {
+  margin-top: var(--space-md);
+  font-size: var(--text-body);
+  line-height: 1.68;
+  color: var(--color-ink-2);
+  text-wrap: pretty;
+  hanging-punctuation: first;
+}
+
+/* ---------- Sign-off ---------- */
+.v3-outro {
+  position: relative;
+  z-index: 1;
+  max-width: 66rem;
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--gutter) var(--space-2xl);
+  text-align: center;
+}
+
+.v3-outro-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(var(--text-4xl), 8vw, var(--text-display));
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.v3-outro-title em {
+  font-style: italic;
+  font-variation-settings: 'SOFT' 70, 'WONK' 1;
+  color: var(--color-bloom);
+  transition: color var(--dur-5) var(--ease-in-out);
+}
+
+.v3-outro-sub {
+  margin-top: var(--space-sm);
+  color: var(--color-ink-2);
+}
+
+.v3-outro .v3-btn-lg {
+  margin-top: var(--space-lg);
+}
+
+.v3-outro-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+  border-top: var(--rule-hair) solid var(--color-rule);
+}
+
+.v3-outro-link {
+  font-size: var(--text-2xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  white-space: nowrap;
+  transition: color var(--dur-2) var(--ease-out);
+}
+
+.v3-outro-link:hover {
+  color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-blob {
+    animation: none;
+  }
+
+  .v3-panel {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .v3-figure,
+  .v3-figure-back {
+    transform: none;
+  }
+
+  .v3-reel-list,
+  .v3-reel-btn,
+  .v3-rail-meta {
+    transition-duration: var(--dur-1);
+    animation: none;
+  }
+}

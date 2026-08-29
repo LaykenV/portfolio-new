@@ -40,7 +40,7 @@ const IDENTITY = {
 } as const
 
 function pad(n: number) {
-  return String(n).padStart(2, '0')
+  return String(n)
 }
 
 function XIcon({ className }: { className?: string }) {
