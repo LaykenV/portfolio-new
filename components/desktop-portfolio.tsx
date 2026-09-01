@@ -458,7 +458,7 @@ function ControlPanel() {
     <div className="dp-panel">
       <section className="dp-panel-section flex items-start justify-between gap-3">
         <p className="dp-panel-headline">{IDENTITY.headline}</p>
-        <AnimatedThemeToggler className="btn-icon flex-shrink-0" />
+        <AnimatedThemeToggler className="dp-theme-toggle flex-shrink-0" />
       </section>
 
       <section className="dp-panel-section">

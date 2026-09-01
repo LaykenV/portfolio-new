@@ -1810,6 +1810,23 @@ html.dark .dp-nav-active .dp-nav-thumb {
   text-wrap: balance;
 }
 
+.dp-theme-toggle {
+  border-color: hsl(var(--gold-strong) / 0.36);
+  background:
+    linear-gradient(180deg, hsl(var(--gold-soft) / 0.72), hsl(var(--gold-strong) / 0.16));
+  box-shadow:
+    0 12px 28px -16px hsl(var(--gold-shadow) / 0.34),
+    inset 0 1px 0 hsl(var(--gold-soft) / 0.72);
+}
+html.dark .dp-theme-toggle {
+  border-color: hsl(var(--gold-strong) / 0.3);
+  background:
+    linear-gradient(180deg, hsl(var(--gold-strong) / 0.22), hsl(var(--gold-shadow) / 0.12));
+  box-shadow:
+    0 12px 28px -16px hsl(var(--gold-shadow) / 0.48),
+    inset 0 1px 0 hsl(var(--gold-soft) / 0.14);
+}
+
 .dp-panel-row {
   display: grid;
   grid-template-columns: 1.05rem minmax(0, 1fr) auto;

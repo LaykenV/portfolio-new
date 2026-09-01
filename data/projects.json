@@ -56,8 +56,8 @@
       "tagline": "Louisiana local decisions, with receipts",
       "description": "Free, open-source civic app that connects local-government decisions to the official record, public deadlines, and what happens next.",
       "longDescription": "Public Parish turns official Louisiana government records into resident-readable decision updates without asking people to trust a black box. Firecrawl retrieves the source material, Convex stores immutable snapshots and runs a durable extraction workflow, and separate OpenAI passes extract and review every cited fact. Deterministic checks then publish the record in full, limit it to what the evidence supports, or withhold it. The responsive resident interface makes those records free to browse and keeps the official source one click away.",
-      "image": "/publicParish.webp",
-      "secondaryImage": "/publicParishSecondary.webp",
+      "image": "/publicParish16x9.webp",
+      "secondaryImage": "/publicParishSecondary16x9.webp",
       "techStack": [
         "TanStack Start",
         "React 19",
@@ -175,7 +175,7 @@
         "Conversion Copy",
         "Vercel"
       ],
-      "tier": "more",
+      "tier": "featured",
       "links": {
         "github": null,
         "live": "https://www.varholdt.com/"
