@@ -51,6 +51,29 @@
       }
     },
     {
+      "slug": "public-parish",
+      "title": "Public Parish",
+      "tagline": "Louisiana local decisions, with receipts",
+      "description": "Free, open-source civic app that connects local-government decisions to the official record, public deadlines, and what happens next.",
+      "longDescription": "Public Parish turns official Louisiana government records into resident-readable decision updates without asking people to trust a black box. Firecrawl retrieves the source material, Convex stores immutable snapshots and runs a durable extraction workflow, and separate OpenAI passes extract and review every cited fact. Deterministic checks then publish the record in full, limit it to what the evidence supports, or withhold it. The responsive resident interface makes those records free to browse and keeps the official source one click away.",
+      "image": "/publicParish.webp",
+      "secondaryImage": "/publicParishSecondary.webp",
+      "techStack": [
+        "TanStack Start",
+        "React 19",
+        "Convex",
+        "Firecrawl",
+        "OpenAI",
+        "TypeScript",
+        "WebGPU"
+      ],
+      "tier": "hero",
+      "links": {
+        "github": "https://github.com/LaykenV/public-parish",
+        "live": "https://www.publicparish.com"
+      }
+    },
+    {
       "slug": "mesh-mind",
       "title": "Mesh Mind",
       "tagline": "Multi-model debate-and-synthesize orchestration",
@@ -134,51 +157,6 @@
       "links": {
         "github": "https://github.com/LaykenV/omnibid",
         "live": "https://omnibid.vercel.app/"
-      }
-    },
-    {
-      "slug": "teach-magic",
-      "title": "TeachMagic",
-      "tagline": "AI content platform for educators",
-      "description": "Generates structured slides, quizzes, and custom images from a subject prompt — GPT-4o for content, Stability AI for imagery, Drizzle/Postgres with a caching layer, Clerk + Stripe.",
-      "longDescription": "TeachMagic pairs GPT-4o for structured content generation with Stability AI for contextually relevant imagery. The backend uses Drizzle ORM over Postgres with a memory caching layer to amortize repeat-prompt cost. Clerk handles auth, Stripe handles subscriptions — a clean vertical stack showing how to make generative content features actually stable for end users.",
-      "image": "/TeachMagicSS.webp",
-      "secondaryImage": "/TeachMagicSecondary.webp",
-      "techStack": [
-        "Next.js",
-        "TypeScript",
-        "PostgreSQL",
-        "Drizzle ORM",
-        "OpenAI",
-        "Clerk",
-        "Stripe"
-      ],
-      "tier": "more",
-      "links": {
-        "github": "https://github.com/LaykenV/teach-magic",
-        "live": "https://teach-magic.vercel.app/"
-      }
-    },
-    {
-      "slug": "agency-template",
-      "title": "Agency Template",
-      "tagline": "Config-driven client site template for Acadiana Web Design",
-      "description": "Reusable Next.js template for spinning up client sites from one codebase, with design archetypes, config-over-code setup, and an upstream merge flow that protects client-specific assets.",
-      "longDescription": "Agency Template is the internal product behind my client website work. Instead of rebuilding brochure sites from scratch, I maintain a Next.js 16 template where the core client-specific changes live in config and image directories. The system includes industry-specific design archetypes, config validation, and a Git workflow for pushing template improvements downstream without overwriting client content. It is the operational layer that makes a small web design shop faster and more consistent.",
-      "image": "/agencyTemplate.webp",
-      "secondaryImage": "/agencyTemplateSecondary.webp",
-      "techStack": [
-        "Next.js 16",
-        "React 19",
-        "TypeScript",
-        "Tailwind CSS 4",
-        "Bun",
-        "Vercel"
-      ],
-      "tier": "more",
-      "links": {
-        "github": "https://github.com/LaykenV/agency-template",
-        "live": "https://acadianaweb.xyz/"
       }
     },
     {

@@ -19,6 +19,8 @@ const postUrl = '/blog/glm-5-3-flash-pr-agent-code-review'
 const postPath = 'https://www.laykenvarholdt.com' + postUrl
 const publishedISO = '2026-08-28T00:00:00.000Z'
 const publishedReadable = 'August 28, 2026'
+const modifiedISO = '2026-08-29T00:00:00.000Z'
+const modifiedReadable = 'August 29, 2026'
 
 export const metadata: Metadata = {
   title: postTitle,
@@ -32,6 +34,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'article',
     publishedTime: publishedISO,
+    modifiedTime: modifiedISO,
     authors: ['Layken Varholdt'],
     images: [
       {
@@ -82,7 +85,7 @@ export default function GlmFlashPrAgentCodeReviewPost() {
     description: postDescription,
     image: ['https://www.laykenvarholdt.com/opengraph-image'],
     datePublished: publishedISO,
-    dateModified: publishedISO,
+    dateModified: modifiedISO,
     author: {
       '@type': 'Person',
       name: 'Layken Varholdt',
@@ -285,6 +288,7 @@ export default function GlmFlashPrAgentCodeReviewPost() {
 model = "openrouter/z-ai/glm-5.3-flash"
 fallback_models = ["openrouter/z-ai/glm-5.3-flash"]
 custom_model_max_tokens = 1000000
+max_model_tokens = 1000000
 persistent_inline_comments = true
 restricted_mode = true
 
@@ -300,9 +304,24 @@ require_score_review = true
 persistent_comment = true`}</code>
         </pre>
         <p>
-          The custom token value matters because PR-Agent did not have a built-in
-          entry for this new model. Without it, the reviewer assumes a smaller
-          context budget and can clip or reject an ordinary pull request.
+          These two token settings do different jobs.{' '}
+          <code className="post-code-inline">custom_model_max_tokens</code>{' '}
+          tells PR-Agent how much context an unknown model supports.{' '}
+          <code className="post-code-inline">max_model_tokens</code> replaces
+          PR-Agent&apos;s separate 32,000-token quality cap. Without the second
+          setting, PR-Agent can prune a diff even when the model has room for
+          it.
+        </p>
+        <p>
+          I missed that distinction in the first version of this article. The
+          production logs made it plain. Reviews with 41,590, 43,233, and 63,145
+          input tokens all reported{' '}
+          <code className="post-code-inline">pruning diff</code> at the
+          32,000-token limit. The setup now gives both settings a
+          one-million-token ceiling, below GLM&apos;s 1,310,720-token context
+          window. Those three diff sizes now fit without token-budget pruning.
+          Huge one-shot reviews can still lose focus, so deterministic CI and
+          the human pass remain mandatory.
         </p>
         <p>
           Persistent inline comments prevent the same finding from appearing
@@ -561,7 +580,9 @@ persistent_comment = true`}</code>
       </section>
 
       <footer className="border-t border-black/10 dark:border-white/10 pt-8 flex flex-col gap-4">
-        <p className="text-sm opacity-70">Published {publishedReadable}.</p>
+        <p className="text-sm opacity-70">
+          Published {publishedReadable}. Updated {modifiedReadable}.
+        </p>
         <div className="flex items-center justify-between gap-4">
           <Link href="/blog" className="nav-link self-start">
             <ArrowLeft className="h-3.5 w-3.5" />

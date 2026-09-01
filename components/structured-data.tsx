@@ -76,11 +76,11 @@ export function StructuredData({ projects }: StructuredDataProps) {
   const applicationCategories: Record<string, string> = {
     'atlas-outbound': 'BusinessApplication',
     'acadiana-web-design': 'BusinessApplication',
+    'public-parish': 'ReferenceApplication',
     'mesh-mind': 'DeveloperApplication',
     civicly: 'ReferenceApplication',
     'food-truck-flow': 'BusinessApplication',
     omnibid: 'BusinessApplication',
-    'teach-magic': 'EducationalApplication',
   }
 
   // ItemList schema for projects showcase. Use narrower types where the
@@ -106,13 +106,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
       }
 
       let item
-      if (project.slug === 'agency-template') {
-        item = {
-          '@type': 'SoftwareSourceCode',
-          ...common,
-          ...(project.links?.github && { codeRepository: project.links.github }),
-        }
-      } else if (project.slug === 'varholdt-ai') {
+      if (project.slug === 'varholdt-ai') {
         item = {
           '@type': 'WebSite',
           ...common,
