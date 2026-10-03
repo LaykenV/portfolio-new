@@ -35,6 +35,18 @@ My personal portfolio showcasing software engineering projects built with cuttin
 - **Focus Trap**: Accessible modal dialogs with proper focus management
 - **Scroll Lock**: Background scroll prevention during overlay interactions
 
+## 🧪 Design Explorations
+
+Three alternative designs live at unlisted routes (`noindex`) and share `data/projects.json` and `data/posts.ts` with the shipped site. Each is fully responsive, with its own navigation model.
+
+| Route | Name | Idea |
+|-------|------|------|
+| `/4` | Console | The portfolio as an editor: file explorer, tabs, `Ctrl/Cmd+K` palette, and a small terminal (`open`, `ls`, `stack`) |
+| `/5` | Index | Editorial table of contents: cursor-led previews, tech filters, full-screen case studies with prev/next |
+| `/6` | Bento | Tile board sized by importance, with project sheets that morph from the tile via View Transitions |
+
+Code lives in `components/designs/{console,index,bento}`.
+
 ## 🛠️ Tech Stack
 
 | Category | Technologies |

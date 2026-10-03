@@ -57,7 +57,15 @@ export function Terminal({
     const exact = docs.find((d) => d.kind !== 'contact' && d.kind !== 'about' ? d.slug === n : d.id === n)
     if (exact) return exact
     const partial = docs.filter((d) => d.slug.includes(n) || d.title.toLowerCase().includes(n))
-    return partial.length === 1 ? partial[0] : undefined
+    // "mesh" matches a project and a post; the project is almost always the intent.
+    const narrowed = (list: Doc[]) => {
+      const starts = list.filter((d) => d.slug.startsWith(n))
+      const pool = starts.length ? starts : list
+      const projectsOnly = pool.filter((d) => d.kind === 'project')
+      return projectsOnly.length ? projectsOnly : pool
+    }
+    const result = narrowed(partial)
+    return result.length === 1 ? result[0] : undefined
   }
 
   const execute = (raw: string): Line[] => {
