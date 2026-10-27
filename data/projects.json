@@ -158,28 +158,6 @@
         "github": "https://github.com/LaykenV/omnibid",
         "live": "https://omnibid.vercel.app/"
       }
-    },
-    {
-      "slug": "varholdt-ai",
-      "title": "Varholdt AI",
-      "tagline": "AI paperwork automation service for local operators",
-      "description": "Astro marketing site and service funnel for an AI workflow automation practice — local positioning, structured SEO, demo proof, and a free-audit-to-sprint offer ladder.",
-      "longDescription": "Varholdt AI is the business packaging layer around my document automation work. The site positions a concrete service for document-heavy local businesses: insurance agencies, staffing firms, CPA firms, and contractors that need PDFs read, spreadsheets filled, and routine documents drafted with human approval still in the loop. I built the Astro marketing site, conversion copy, structured business schema, demo assets, and offer ladder from a free workflow audit into a fixed-price sprint. It is less about showing another app and more about proving I can turn AI engineering into a credible service motion.",
-      "image": "/varholdt-ai-main.webp",
-      "secondaryImage": "/varholdt-ai.webp",
-      "techStack": [
-        "Astro",
-        "TypeScript",
-        "SEO",
-        "Schema.org",
-        "Conversion Copy",
-        "Vercel"
-      ],
-      "tier": "featured",
-      "links": {
-        "github": null,
-        "live": "https://www.varholdt.com/"
-      }
     }
   ]
 }

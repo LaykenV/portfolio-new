@@ -1768,6 +1768,62 @@ html.dark .dp-nav-active .dp-nav-thumb {
 }
 
 /* --- Floating control panel ---------------------------------------------- */
+.founder-intro {
+  color: var(--foreground);
+}
+.founder-label {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.founder-name {
+  margin-top: 0.3rem;
+  font-size: 1.65rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+.founder-name a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--blue-strong) / 0.6);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+.founder-name a:hover {
+  text-decoration-color: currentColor;
+}
+.founder-name a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+.founder-name svg {
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.founder-description {
+  margin-top: 0.65rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.dp-panel .founder-intro {
+  padding: 0.35rem 0.3rem;
+}
+.dp-panel-availability {
+  margin: 0.5rem 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 .dp-panel {
   border-radius: 1.05rem;
   border: 1px solid var(--border);

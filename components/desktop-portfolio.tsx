@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 
 import { AnimatedThemeToggler } from '@/components/animated-theme-toggler'
+import { FounderIntro } from '@/components/founder-intro'
 import type { Project, ProjectTier } from '@/types/project'
 
 /** Rail groupings, in render order. */
@@ -27,9 +28,9 @@ const TIER_LABELS: Array<[ProjectTier, string]> = [
 const IDENTITY = {
   name: 'Layken Varholdt',
   role: 'Software Engineer · @ DOL',
-  headline: 'Full-stack Engineer open to new roles',
-  email: 'mailto:Laykenv@gmail.com?subject=Software%20Engineering%20role',
-  emailLabel: 'Laykenv@gmail.com',
+  headline: 'Software engineer & founder',
+  email: 'mailto:layken@varholdt.com?subject=Software%20Engineering%20role',
+  emailLabel: 'layken@varholdt.com',
   resume: '/Layken-Varholdt-Software-Engineer-Resume.pdf',
   x: 'https://x.com/LLVarholdt',
   github: 'https://github.com/laykenV',
@@ -435,7 +436,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
       </main>
 
       {/* ---------- Floating control panel ---------- */}
-      <div className="dp-col relative px-4 xl:px-5 py-7 overflow-hidden">
+      <div className="dp-col dp-scroll relative px-4 xl:px-5 py-7">
         {/* Below lg the index rail is hidden, so identity lives here instead. */}
         <div className="lg:hidden flex items-center gap-3 mb-4 px-1">
           <Portrait size={48} />
@@ -462,7 +463,12 @@ function ControlPanel() {
       </section>
 
       <section className="dp-panel-section">
+        <FounderIntro />
+      </section>
+
+      <section className="dp-panel-section">
         <p className="dp-panel-label">Contact</p>
+        <p className="dp-panel-availability">Open to software engineering roles</p>
 
         <a href={IDENTITY.email} className="dp-panel-row dp-panel-row-primary">
           <span className="dp-panel-icon">

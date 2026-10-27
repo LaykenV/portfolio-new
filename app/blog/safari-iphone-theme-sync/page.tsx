@@ -571,7 +571,7 @@ html:not(.dark)   { color-scheme: light; }`}</code>
             More writing
           </Link>
           <a
-            href="mailto:Laykenv@gmail.com?subject=Re%3A%20The%20Safari%20theme-sync%20quirk%20post"
+            href="mailto:layken@varholdt.com?subject=Re%3A%20The%20Safari%20theme-sync%20quirk%20post"
             className="nav-link"
           >
             <Wand2 className="h-3.5 w-3.5" />

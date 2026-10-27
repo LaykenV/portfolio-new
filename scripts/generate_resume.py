@@ -191,7 +191,7 @@ def build_resume() -> None:
         p("SOFTWARE ENGINEER", title_style),
         p(
             'Lafayette, LA &nbsp;|&nbsp; (337) 858-2973 &nbsp;|&nbsp; '
-            '<link href="mailto:laykenv@gmail.com" color="#1565C0">laykenv@gmail.com</link> &nbsp;|&nbsp; '
+            '<link href="mailto:layken@varholdt.com" color="#1565C0">layken@varholdt.com</link> &nbsp;|&nbsp; '
             '<link href="https://www.linkedin.com/in/layken-varholdt-a78687230/" color="#1565C0">LinkedIn</link> &nbsp;|&nbsp; '
             '<link href="https://github.com/laykenV" color="#1565C0">GitHub</link> &nbsp;|&nbsp; '
             '<link href="https://www.laykenvarholdt.com" color="#1565C0">Portfolio</link>',
