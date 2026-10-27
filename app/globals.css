@@ -1675,6 +1675,9 @@ html.dark .site-menu {
   border-radius: 2px;
 }
 .founder-name svg {
+  /* Scales with the name it follows, from the rail to the phone hero. */
+  width: max(12px, 0.55em);
+  height: max(12px, 0.55em);
   color: var(--muted);
   flex-shrink: 0;
 }
@@ -1904,9 +1907,9 @@ html.dark .writing-theme .tech-badge-compact {
   color: var(--muted);
 }
 .dp-identity-name {
-  font-size: 28px;
-  font-weight: 650;
-  letter-spacing: -0.02em;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   line-height: 1.15;
   white-space: nowrap;
 }
@@ -2112,7 +2115,8 @@ html.dark .writing-theme .nav-link:focus-visible {
   .dp-compact-identity-row {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: 56px minmax(0, 1fr) auto;
+    /* 56px portrait plus the ring's 3px on each side. */
+    grid-template-columns: 62px minmax(0, 1fr) auto;
     align-items: center;
     gap: 12px;
     padding: 16px var(--rail-inset) 16px 24px;

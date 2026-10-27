@@ -151,14 +151,11 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
         `translate3d(${portrait.dx * portraitEase}px, ${portrait.dy * portraitEase}px, 0) scale(${Math.pow(portrait.k, portraitEase)})`
       flyName.style.transform =
         `translate3d(${name.dx * nameSlide}px, ${name.dy * nameEase}px, 0) scale(${Math.pow(name.k, nameEase)})`
-      // Both names share weight and tracking, so the large one lands on the
-      // small one almost exactly.
-      // The header name fades in underneath; the flying one stays opaque on
-      // top until it is fully in, so the name never dims.
-      const handoff = Math.min(1, Math.max(0, (p - 0.94) / 0.05))
-      flyName.style.opacity = handoff < 1 ? '1' : '0'
-      brandName.style.opacity = String(handoff)
+      // Both pieces land exactly on the header brand, so they swap with it
+      // in one frame. A fade would either dim the name or double its edges.
       const dock = p >= 0.995 ? 1 : 0
+      flyName.style.opacity = String(1 - dock)
+      brandName.style.opacity = String(dock)
       flyPortrait.style.opacity = String(1 - dock)
       brandImg.style.opacity = String(dock)
       const fade = String(Math.max(0, 1 - p / 0.2))
