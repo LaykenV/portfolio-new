@@ -2,6 +2,7 @@
   "projects": [
     {
       "slug": "atlas-outbound",
+      "mobileSummary": "AI voice agent that uses an agency’s case studies to build trust on calls and book discovery meetings.",
       "title": "Atlas Outbound",
       "tagline": "AI sales agent that books meetings using scraped agency intel",
       "description": "Context-aware AI voice agent that scrapes an agency's own case studies to build trust on live calls and book qualified discovery meetings. 1st place at the Convex Modern Stack Hackathon — built in 12 days.",
@@ -29,6 +30,7 @@
     },
     {
       "slug": "acadiana-web-design",
+      "mobileSummary": "The website business I run, with recurring billing, signed agreements and a client portal for edit requests.",
       "title": "Acadiana Web Design",
       "tagline": "Production WaaS platform with real customers and recurring revenue",
       "description": "A full Website-as-a-Service platform I run as a real business — clickwrap legal agreements, Stripe recurring billing, admin/client RBAC, and a real-time ticketing portal.",
@@ -52,6 +54,7 @@
     },
     {
       "slug": "public-parish",
+      "mobileSummary": "Free civic app connecting Louisiana government decisions to official records, deadlines and next steps.",
       "title": "Public Parish",
       "tagline": "Louisiana local decisions, with receipts",
       "description": "Free, open-source civic app that connects local-government decisions to the official record, public deadlines, and what happens next.",
@@ -75,6 +78,7 @@
     },
     {
       "slug": "mesh-mind",
+      "mobileSummary": "GPT, Claude and Gemini compare answers over two rounds, then combine their findings into one response.",
       "title": "Mesh Mind",
       "tagline": "Multi-model debate-and-synthesize orchestration",
       "description": "A multi-model orchestration layer that coordinates GPT, Claude, and Gemini through a two-round protocol — parallel initial responses, peer-informed refinement, then a synthesized summary.",
@@ -96,6 +100,7 @@
     },
     {
       "slug": "civicly",
+      "mobileSummary": "A searchable index of congressional bills, with automated ingestion, AI summaries and a chat interface.",
       "title": "Civicly",
       "tagline": "RAG pipeline over U.S. congressional bills",
       "description": "Real-time legislative data engine: cron-driven ingestion of govinfo.gov manifests, XML parsing, GPT-4o summarization/categorization, and vector search for RAG over every active bill.",
@@ -117,6 +122,7 @@
     },
     {
       "slug": "food-truck-flow",
+      "mobileSummary": "A website builder for food truck owners, with custom domains, subscriptions and isolated tenant data.",
       "title": "FoodTruckFlow",
       "tagline": "Multi-tenant B2B SaaS on Supabase RLS",
       "description": "Complete digital stack for mobile food businesses — multi-tenant isolation via Supabase RLS, custom-domain mapping via the Vercel API, JSON-configured live site builder, and Stripe billing tiers.",
@@ -138,6 +144,7 @@
     },
     {
       "slug": "omnibid",
+      "mobileSummary": "Turns federal solicitations into compliance checklists, with every requirement linked to its source.",
       "title": "OmniBid",
       "tagline": "Federal RFP parser for traceable compliance matrices",
       "description": "Focused MVP that takes a SAM.gov link, solicitation number, or PDF and turns it into a structured compliance matrix with each requirement traced back to the source document.",

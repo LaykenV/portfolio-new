@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { WritingIdentity } from '@/components/writing-identity'
 import Image from 'next/image'
 import Script from 'next/script'
 import {
@@ -101,7 +102,7 @@ export default function MeshMindDebatePost() {
           All posts
         </Link>
         <Link href="/" className="nav-link writing-wordmark">
-          Layken Varholdt
+          <WritingIdentity />
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </div>

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { WritingIdentity } from '@/components/writing-identity'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 import type { Metadata } from 'next'
@@ -88,7 +89,7 @@ export default function BlogIndex() {
           <ArrowLeft className="h-3.5 w-3.5" />
           Home
         </Link>
-        <span className="writing-wordmark">Layken Varholdt</span>
+        <span className="writing-wordmark"><WritingIdentity /></span>
       </div>
 
       <div className="flex flex-col gap-3">

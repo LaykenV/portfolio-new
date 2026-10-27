@@ -532,7 +532,8 @@ function ProjectSlide({
         onTouchEnd={onTouchEnd}
         onTouchCancel={onTouchEnd}
       >
-        <div className="m-eyebrow">
+        <div className="m-project-heading">
+          <h2 className="m-card-title">{project.title}</h2>
           <span className="m-counter">
             <b>{String(index + 1).padStart(2, '0')}</b>
             <span className="sep"> / </span>
@@ -558,9 +559,7 @@ function ProjectSlide({
               <span>{project.award.label}</span>
             </div>
           )}
-          <h2 className="m-card-title">{project.title}</h2>
-          <p className="m-card-tagline">{project.tagline}</p>
-          <p className="m-card-desc">{project.description}</p>
+          <p className="m-card-desc">{project.mobileSummary}</p>
 
           <div className="m-card-stack">
             {project.techStack.slice(0, 4).map((tech) => (

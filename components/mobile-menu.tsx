@@ -44,7 +44,7 @@ export function MobileMenu({ open, onClose, children }: MobileMenuProps) {
   return (
     <div
       id="mobile-menu"
-      className="md:hidden absolute right-0 top-[calc(100%+12px)] w-[min(92vw,20rem)]"
+      className="md:hidden absolute right-0 top-[calc(100%+12px)] w-[min(calc(100vw-2rem),22rem)]"
       ref={panelRef}
       role="dialog"
       aria-label="Navigation"

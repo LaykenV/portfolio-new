@@ -12,6 +12,7 @@ import {
   Github,
   Linkedin,
   Mail,
+  Send,
   Trophy,
 } from 'lucide-react'
 
@@ -43,7 +44,7 @@ const IDENTITY = {
 } as const
 
 function pad(n: number) {
-  return String(n)
+  return String(n).padStart(2, '0')
 }
 
 function XIcon({ className }: { className?: string }) {
@@ -481,7 +482,7 @@ function ControlPanel() {
 
         <a href={IDENTITY.telegram} target="_blank" rel="noreferrer" className="dp-panel-row">
           <span className="dp-panel-icon">
-            <Image src="/telegram.png" alt="" width={15} height={15} />
+            <Send className="h-[0.95rem] w-[0.95rem]" />
           </span>
           <span>Telegram</span>
           <ArrowUpRight className="dp-panel-arrow h-3.5 w-3.5" />

@@ -5,6 +5,7 @@ export interface Project {
   title: string
   tagline: string
   description: string
+  mobileSummary: string
   longDescription: string
   image: string
   secondaryImage: string

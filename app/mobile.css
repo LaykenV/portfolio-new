@@ -48,11 +48,11 @@
   stroke-dashoffset: -32.42;
 }
 
-/* Glassmorphic mobile menu panel */
+/* Mobile navigation */
 .mobile-menu-panel {
   background: var(--surface);
   border: 1px solid var(--border);
-  box-shadow: 0 16px 40px rgb(0 0 0 / 0.12);
+  box-shadow: 0 12px 28px rgb(0 0 0 / 0.12);
 }
 
 /* Fullscreen project modal on mobile — kills the desktop centered/bordered treatment */
@@ -216,7 +216,8 @@ html.dark .m-topbar-brand:focus-visible {
 /* ── About slide ─────────────────────────────────────── */
 .m-about {
   padding: 0;
-  height: min(100dvh, 660px);
+  height: auto;
+  min-height: 0;
 }
 .m-about-bg {
   position: absolute;
@@ -228,9 +229,8 @@ html.dark .m-topbar-brand:focus-visible {
 .m-about-inner {
   position: relative;
   z-index: 1;
-  padding: calc(env(safe-area-inset-top, 0px) + 36px) 22px
-           calc(env(safe-area-inset-bottom, 0px) + 20px);
-  height: 100%;
+  padding: calc(env(safe-area-inset-top, 0px) + 32px) 22px
+           calc(env(safe-area-inset-bottom, 0px) + 24px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -246,8 +246,8 @@ html.dark .m-topbar-brand:focus-visible {
 
 .m-about-portrait {
   margin-bottom: 10px;
-  width: 112px;
-  height: 112px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid var(--border);
@@ -277,7 +277,7 @@ html.dark .m-topbar-brand:focus-visible {
 .m-about-role .accent { color: var(--muted); opacity: 1; }
 
 .m-about .founder-intro {
-  margin: 20px 0 4px;
+  margin: 12px 0 4px;
   max-width: 30ch;
 }
 .m-about .founder-description {
@@ -287,7 +287,7 @@ html.dark .m-topbar-brand:focus-visible {
 }
 
 .m-about-cta-stack {
-  margin-top: 26px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -366,9 +366,9 @@ html.dark .m-topbar-brand:focus-visible {
   border-radius: 2px;
 }
 
-/* Scroll indicator — minimal, in-flow, centered in remaining space */
+/* The work control follows contact without a reserved blank area. */
 .m-scroll-indicator {
-  margin-top: 32px;
+  margin-top: 20px;
   margin-bottom: 0;
   align-self: stretch;
   min-height: 48px;
@@ -412,7 +412,7 @@ html.dark .m-topbar-brand:focus-visible {
 .m-card-inner {
   position: relative;
   z-index: 1;
-  padding: calc(env(safe-area-inset-top, 0px) + 80px) 20px
+  padding: calc(env(safe-area-inset-top, 0px) + 64px) 20px
            calc(env(safe-area-inset-bottom, 0px) + 24px);
   height: 100%;
   display: flex;
@@ -429,18 +429,20 @@ html.dark .m-topbar-brand:focus-visible {
   will-change: transform;
 }
 
-.m-eyebrow {
+.m-project-heading {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.m-project-heading .m-card-title { font-size: clamp(28px, 8vw, 36px); }
+.m-counter {
+  flex-shrink: 0;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 11px;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 16px;
-}
-.m-counter {
   font-variant-numeric: tabular-nums;
 }
 .m-counter b { font-weight: 600; opacity: 1; }
@@ -483,23 +485,7 @@ html.dark .m-topbar-brand:focus-visible {
   margin: 0;
   text-wrap: balance;
 }
-.m-card-tagline {
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 13.5px;
-  line-height: 1.45;
-  letter-spacing: 0.01em;
-  font-weight: 600;
-  color: hsl(218 72% 42%);
-  text-wrap: balance;
-  margin: 0;
-}
-html.dark .m-card-tagline { color: hsl(var(--blue-soft)); }
-
 .m-card-desc {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
   font-size: 15px;
   line-height: 1.6;
   color: var(--muted);
@@ -545,7 +531,7 @@ html.dark .m-card-tagline { color: hsl(var(--blue-soft)); }
 .m-btn {
   min-height: 48px;
   padding: 0 14px;
-  border-radius: 14px;
+  border-radius: 10px;
   font-weight: 600;
   font-size: 13px;
   letter-spacing: 0.01em;
@@ -554,7 +540,7 @@ html.dark .m-card-tagline { color: hsl(var(--blue-soft)); }
   justify-content: center;
   gap: 8px;
   cursor: pointer;
-  border: 1px solid hsl(var(--blue-strong) / 0.24);
+  border: 1px solid var(--border);
   background: hsl(var(--card) / 0.8);
   color: var(--foreground);
   text-decoration: none;
@@ -562,7 +548,6 @@ html.dark .m-card-tagline { color: hsl(var(--blue-soft)); }
   user-select: none;
   white-space: nowrap;
 }
-html.dark .m-btn { border-color: hsl(var(--blue-soft) / 0.20); }
 .m-btn:active { transform: scale(0.96); }
 .m-btn-primary {
   background: var(--foreground);
@@ -575,11 +560,10 @@ html.dark .m-btn { border-color: hsl(var(--blue-soft) / 0.20); }
   padding: 0;
 }
 .m-btn-ghost-empty {
-  border: 1px dashed hsl(var(--blue-strong) / 0.12);
+  border: 1px dashed var(--border);
   background: transparent;
   opacity: 0.6;
 }
-html.dark .m-btn-ghost-empty { border-color: hsl(var(--blue-soft) / 0.12); }
 
 /* ── Action-bar swipe hint ──────────────────────────────
    Minimal one-shot teach that slides in from the right, holds, then
@@ -717,10 +701,10 @@ html.dark .m-actions-hint-chev { color: hsl(var(--blue-soft)); }
   gap: 12px;
 }
 .m-sheet-back {
-  height: 36px;
+  height: 44px;
   padding: 0 12px;
   border-radius: 999px;
-  border: 1px solid hsl(var(--blue-strong) / 0.22);
+  border: 1px solid var(--border);
   background: hsl(var(--card) / 0.75);
   backdrop-filter: saturate(140%) blur(12px);
   -webkit-backdrop-filter: saturate(140%) blur(12px);
@@ -733,7 +717,6 @@ html.dark .m-actions-hint-chev { color: hsl(var(--blue-soft)); }
   gap: 6px;
   cursor: pointer;
 }
-html.dark .m-sheet-back { border-color: hsl(var(--blue-soft) / 0.18); }
 .m-sheet-back:active { transform: scale(0.96); }
 
 .m-sheet-crumb {
@@ -781,14 +764,12 @@ html.dark .m-sheet-crumb .accent { color: hsl(var(--blue-soft)); }
 }
 
 .m-sheet-tagline {
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 13.5px;
-  line-height: 1.45;
-  font-weight: 600;
-  color: hsl(218 72% 42%);
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--muted);
   margin-bottom: 16px;
 }
-html.dark .m-sheet-tagline { color: hsl(var(--blue-soft)); }
 
 .m-sheet-award {
   display: inline-flex;
@@ -822,10 +803,9 @@ html.dark .m-sheet-tagline { color: hsl(var(--blue-soft)); }
 html.dark .m-sheet-label::before { background: hsl(var(--blue-soft)); }
 
 .m-sheet-body {
-  font-size: 14.5px;
-  line-height: 1.62;
+  font-size: 16px;
+  line-height: 1.65;
   color: var(--foreground);
-  opacity: 0.88;
   text-wrap: pretty;
 }
 .m-sheet-body p + p { margin-top: 10px; }
@@ -855,20 +835,6 @@ html.dark .m-sheet-label::before { background: hsl(var(--blue-soft)); }
   outline: 2px solid var(--foreground);
   outline-offset: -2px;
 }
-.m-card-tagline,
-html.dark .m-card-tagline,
-.m-sheet-tagline,
-html.dark .m-sheet-tagline {
-  color: var(--foreground);
-  font-size: 13px;
-  font-weight: 500;
-}
-.m-btn,
-html.dark .m-btn {
-  border-color: var(--border);
-  border-radius: 10px;
-}
-
 .mobile-portfolio .mobile-menu-panel .btn,
 .mobile-portfolio .mobile-menu-panel .btn-icon {
   min-width: 44px;

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { WritingIdentity } from '@/components/writing-identity'
 import {
   ArrowLeft,
   ArrowRight,
@@ -134,7 +135,7 @@ export default function DefaultStackPost() {
           All posts
         </Link>
         <Link href="/" className="nav-link writing-wordmark">
-          Layken Varholdt
+          <WritingIdentity />
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </div>
