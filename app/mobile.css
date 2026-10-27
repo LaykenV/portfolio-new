@@ -1,7 +1,5 @@
 :root {
   --site-header-h: calc(env(safe-area-inset-top, 0px) + 60px);
-  /* How much of the first project shows under the phone hero. */
-  --m-peek: calc(env(safe-area-inset-bottom, 0px) + 120px);
   --header-h: clamp(64px, 10svh, 88px);
   --dock-h: clamp(48px, 8svh, 64px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -95,7 +93,7 @@
 .m-about {
   padding: 0;
   height: auto;
-  min-height: calc(100dvh - var(--m-peek));
+  min-height: 100dvh;
 }
 .m-about-bg {
   position: absolute;
@@ -109,7 +107,8 @@
   z-index: 1;
   flex: 1;
   justify-content: center;
-  padding: calc(var(--site-header-h) + 16px) 20px 24px;
+  padding: calc(var(--site-header-h) + 16px) 20px
+           calc(env(safe-area-inset-bottom, 0px) + 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,9 +136,10 @@
   margin: 0;
   color: var(--foreground);
   font-size: clamp(38px, 10.5vw, 48px);
-  font-weight: 750;
+  /* Same weight and tracking as the header brand it flies into. */
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 .m-about-role {
@@ -248,14 +248,12 @@ html.dark .m-about-email {
 
 
 /* ── Project slide ───────────────────────────────────── */
-/* Projects are as tall as their content. Each swipe still stops at the next
-   one, and its heading shows below the current project's actions. */
+/* One project fills the screen under the header, centered in it, so each
+   swipe moves exactly one project. */
 .m-project {
   padding: 0;
-  height: auto;
+  height: calc(100dvh - var(--site-header-h));
 }
-/* The last project needs a full screen to reach its snap position. */
-.m-project:last-child { min-height: calc(100dvh - var(--site-header-h)); }
 .m-card-bg {
   position: absolute;
   inset: 0;
@@ -266,9 +264,11 @@ html.dark .m-about-email {
 .m-card-inner {
   position: relative;
   z-index: 1;
-  padding: 16px 20px 40px;
+  height: 100%;
+  padding: 16px 20px calc(env(safe-area-inset-bottom, 0px) + 24px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
@@ -306,10 +306,13 @@ html.dark .m-about-email {
 .m-card-image {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  /* 16:9 when there is room. On short screens the shot gives up height
+     first, cropping from the bottom, so the actions stay on screen. */
+  height: calc((100vw - 40px) * 9 / 16);
+  min-height: 120px;
   border-radius: 10px;
   overflow: hidden;
-  flex-shrink: 0;
+  flex-shrink: 1;
   background: hsl(var(--card));
   border: 1px solid var(--border);
 }
@@ -375,7 +378,7 @@ html.dark .m-about-email {
 }
 .m-card-actions-ui {
   display: grid;
-  grid-template-columns: 1fr 1.25fr 1fr;
+  grid-template-columns: 1fr 1fr 1.25fr;
   gap: 8px;
   transition: opacity 320ms ease;
 }
@@ -615,8 +618,8 @@ html.dark .m-btn-primary {
   min-height: 44px;
   color: var(--foreground);
   font-size: 17px;
-  font-weight: 650;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -887,4 +890,58 @@ html.dark .site-theme-switch [data-theme-option="dark"] {
   height: 32px;
   background: var(--accent);
   opacity: 1;
+}
+
+/* Scroll cue at the foot of the phone hero. It fades in once, never loops. */
+.m-scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  transform: translateX(-50%);
+  animation: m-cue-in 500ms ease 500ms backwards;
+}
+@keyframes m-cue-in {
+  from { opacity: 0; transform: translate(-50%, -6px); }
+}
+
+/* Hero portrait and name in flight to the header brand. Script sets the
+   transforms; this layer sits over the header and under the project sheet. */
+.m-flight {
+  position: absolute;
+  inset: 0;
+  z-index: 110;
+  pointer-events: none;
+  visibility: hidden;
+}
+.m-flying .m-flight { visibility: visible; }
+.m-flight > * {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+}
+.m-flight-name { white-space: nowrap; }
+.m-flying .m-about-inner > .m-about-portrait,
+.m-flying .m-about-inner > .m-about-name { opacity: 0; }
+/* While flying, script owns the brand's opacity, piece by piece. */
+.m-flying .m-site-header .site-brand[data-hidden] { opacity: 1; }
+.m-flying .m-site-header .site-brand img,
+.m-flying .m-site-header .site-brand-name { transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .m-scroll-cue { animation: none; }
 }

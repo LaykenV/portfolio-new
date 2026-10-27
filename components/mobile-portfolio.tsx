@@ -10,6 +10,7 @@ import {
 } from 'react'
 import Image from 'next/image'
 import {
+  ArrowDown,
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
@@ -40,9 +41,10 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
   const slideRefs = useRef<(HTMLElement | null)[]>([])
   const previewResetRef = useRef<number | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const flightRef = useRef<HTMLDivElement>(null)
   const [deckScrolled, setDeckScrolled] = useState(false)
-  // The hero already shows the portrait and name; the header brand joins
-  // once they scroll away, so the two never sit on screen together.
+  // The hero already shows the portrait and name; the header brand takes
+  // over when the first project arrives, so the two never show together.
   const [heroPassed, setHeroPassed] = useState(false)
   const [deepDiveSlug, setDeepDiveSlug] = useState<string | null>(null)
   const [entryPreview, setEntryPreview] = useState<{ slug: string; offset: number } | null>(null)
@@ -87,8 +89,9 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
           if (slides[i].offsetTop <= deck.scrollTop + inset) index = i
         }
         setActiveIndex(index)
+        const firstStop = slides[1].offsetTop - (parseFloat(getComputedStyle(deck).scrollPaddingTop) || 0)
         setDeckScrolled(deck.scrollTop > 8)
-        setHeroPassed(deck.scrollTop > 200)
+        setHeroPassed(deck.scrollTop >= firstStop - 2)
       })
     }
     update()
@@ -98,6 +101,131 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
       cancelAnimationFrame(frame)
       deck.removeEventListener('scroll', update)
       window.removeEventListener('resize', update)
+    }
+  }, [total])
+
+  // The hero portrait and name fly into the header brand as the first project
+  // scrolls in. Copies in a fixed layer above the header do the moving, so
+  // nothing fights the native scroll, and progress comes from scrollTop alone.
+  // The large name fades into the header's own small name near the end, so
+  // both ends rest on real, unscaled text.
+  useEffect(() => {
+    const deck = deckRef.current
+    const flight = flightRef.current
+    const root = deck?.closest<HTMLElement>('.mobile-portfolio')
+    if (!deck || !flight || !root) return
+    const heroPortrait = root.querySelector<HTMLElement>('.m-about-inner > .m-about-portrait')
+    const heroName = root.querySelector<HTMLElement>('.m-about-inner > .m-about-name')
+    const brandImg = root.querySelector<HTMLElement>('.m-site-header .site-brand img')
+    const brandName = root.querySelector<HTMLElement>('.m-site-header .site-brand-name')
+    const flyPortrait = flight.querySelector<HTMLElement>('.m-flight-portrait')
+    const flyName = flight.querySelector<HTMLElement>('.m-flight-name')
+    const rest = Array.from(root.querySelectorAll<HTMLElement>(
+      '.m-about-inner > :not(.m-about-portrait):not(.m-about-name), .m-scroll-cue',
+    ))
+    const firstProject = slideRefs.current[1]
+    if (!heroPortrait || !heroName || !brandImg || !brandName || !flyPortrait || !flyName || !firstProject) return
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
+    let geo: {
+      stop: number
+      portrait: { dx: number; dy: number; k: number }
+      name: { dx: number; dy: number; k: number }
+    } | null = null
+    let frame = 0
+
+    const clear = () => {
+      root.classList.remove('m-flying')
+      for (const el of [brandImg, brandName, ...rest]) el.style.opacity = ''
+    }
+
+    const apply = () => {
+      if (!geo) return
+      const p = Math.min(1, Math.max(0, deck.scrollTop / geo.stop))
+      // Both pieces rise faster than the page at first, so the text below
+      // never catches them. The portrait docks first and clears the way for
+      // the name. The rest of the hero is gone before either could overlap it.
+      const portraitEase = 1 - Math.pow(1 - p, 4)
+      const nameEase = 1 - Math.pow(1 - p, 3)
+      const nameSlide = p * p * (3 - 2 * p)
+      const { portrait, name } = geo
+      flyPortrait.style.transform =
+        `translate3d(${portrait.dx * portraitEase}px, ${portrait.dy * portraitEase}px, 0) scale(${Math.pow(portrait.k, portraitEase)})`
+      flyName.style.transform =
+        `translate3d(${name.dx * nameSlide}px, ${name.dy * nameEase}px, 0) scale(${Math.pow(name.k, nameEase)})`
+      // Both names share weight and tracking, so the large one lands on the
+      // small one almost exactly. A short fade covers font hinting.
+      const handoff = Math.min(1, Math.max(0, (p - 0.94) / 0.06))
+      flyName.style.opacity = String(1 - handoff)
+      brandName.style.opacity = String(handoff)
+      const dock = p >= 0.995 ? 1 : 0
+      flyPortrait.style.opacity = String(1 - dock)
+      brandImg.style.opacity = String(dock)
+      const fade = String(Math.max(0, 1 - p / 0.2))
+      for (const el of rest) el.style.opacity = fade
+    }
+
+    const measure = () => {
+      if (reduce.matches) {
+        geo = null
+        clear()
+        return
+      }
+      const scroll = deck.scrollTop
+      const rootTop = root.getBoundingClientRect().top
+      const hp = heroPortrait.getBoundingClientRect()
+      const hn = heroName.getBoundingClientRect()
+      const bi = brandImg.getBoundingClientRect()
+      const bn = brandName.getBoundingClientRect()
+      const nameW = flyName.offsetWidth
+      const nameH = flyName.offsetHeight
+      // A name that wraps on a narrow phone can't fly as one line.
+      if (hn.height > nameH * 1.5 || nameW === 0) {
+        geo = null
+        clear()
+        return
+      }
+      const portraitTop = hp.top - rootTop + scroll
+      const nameLeft = hn.left + (hn.width - nameW) / 2
+      const nameTop = hn.top - rootTop + scroll
+      flyPortrait.style.left = `${hp.left}px`
+      flyPortrait.style.top = `${portraitTop}px`
+      flyName.style.left = `${nameLeft}px`
+      flyName.style.top = `${nameTop}px`
+      const nameK = bn.width / nameW
+      geo = {
+        stop: Math.max(1, firstProject.offsetTop - (parseFloat(getComputedStyle(deck).scrollPaddingTop) || 0)),
+        portrait: { dx: bi.left - hp.left, dy: bi.top - rootTop - portraitTop, k: bi.width / hp.width },
+        name: {
+          dx: bn.left - nameLeft,
+          dy: bn.top - rootTop + bn.height / 2 - (nameH * nameK) / 2 - nameTop,
+          k: nameK,
+        },
+      }
+      root.classList.add('m-flying')
+      apply()
+    }
+
+    const onScroll = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(apply)
+    }
+    const remeasure = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(measure)
+    }
+
+    measure()
+    document.fonts?.ready.then(remeasure)
+    deck.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', remeasure)
+    reduce.addEventListener('change', remeasure)
+    return () => {
+      cancelAnimationFrame(frame)
+      deck.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', remeasure)
+      reduce.removeEventListener('change', remeasure)
+      clear()
     }
   }, [total])
 
@@ -192,6 +320,13 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
         onWorkClick={() => jumpTo(1)}
       />
 
+      <div ref={flightRef} className="m-flight" aria-hidden="true">
+        <div className="m-about-portrait m-flight-portrait">
+          <Image src="/portrait.jpeg" alt="" width={240} height={240} draggable={false} />
+        </div>
+        <span className="m-about-name m-flight-name">Layken Varholdt</span>
+      </div>
+
       {/* Deck: vertical snap scroller (about slide + project slides) */}
       <div
         ref={deckRef}
@@ -203,6 +338,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
           ref={(el: HTMLElement | null) => {
             slideRefs.current[0] = el
           }}
+          onNext={() => jumpTo(1)}
         />
 
         {projects.map((project, i) => {
@@ -269,9 +405,10 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
 
 interface AboutSlideProps {
   ref: (el: HTMLElement | null) => void
+  onNext: () => void
 }
 
-function AboutSlide({ ref }: AboutSlideProps) {
+function AboutSlide({ ref, onNext }: AboutSlideProps) {
   return (
     <section ref={ref} className="m-slide m-about">
       <div className="m-about-bg" aria-hidden="true" />
@@ -304,6 +441,10 @@ function AboutSlide({ ref }: AboutSlideProps) {
           </nav>
         </div>
       </div>
+      <button type="button" className="m-scroll-cue" onClick={onNext}>
+        Selected work
+        <ArrowDown className="h-[16px] w-[16px]" aria-hidden="true" />
+      </button>
     </section>
   )
 }
@@ -419,7 +560,7 @@ function ProjectSlide({
             src={project.image}
             alt={project.title}
             fill
-            className="object-contain scale-[1.01]"
+            className="object-cover object-top scale-[1.01]"
             sizes="100vw"
             draggable={false}
           />
@@ -467,17 +608,7 @@ function ProjectSlide({
               ) : (
                 <span className="m-btn m-btn-ghost-empty" aria-hidden="true" />
               )}
-              <button
-                className="m-btn m-btn-primary"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  onDeepDive()
-                }}
-              >
-                Deep dive
-                <ArrowRight className="h-[14px] w-[14px]" />
-              </button>
-              {project.links.github && (
+              {project.links.github ? (
                 <a
                   href={project.links.github}
                   target="_blank"
@@ -489,7 +620,19 @@ function ProjectSlide({
                   <Github className="h-[16px] w-[16px]" />
                   Source
                 </a>
+              ) : (
+                <span className="m-btn m-btn-ghost-empty" aria-hidden="true" />
               )}
+              <button
+                className="m-btn m-btn-primary"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onDeepDive()
+                }}
+              >
+                Deep dive
+                <ArrowRight className="h-[14px] w-[14px]" />
+              </button>
             </div>
 
           </div>

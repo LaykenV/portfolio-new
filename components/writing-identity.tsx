@@ -11,7 +11,7 @@ export function WritingIdentity() {
         draggable={false}
         className="rounded-full border border-[var(--border)] object-cover"
       />
-      Layken Varholdt
+      <span className="site-brand-name">Layken Varholdt</span>
     </>
   )
 }
