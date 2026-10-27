@@ -60,7 +60,7 @@ export const metadata: Metadata = {
         url: 'https://www.laykenvarholdt.com/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Layken Varholdt - Software Engineer & Founder of Varholdt AI',
+        alt: 'Layken Varholdt, software engineer and founder of Varholdt AI. Portrait on a sage green background.',
       },
     ],
   },
@@ -82,9 +82,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
       'max-video-preview': -1,
     },
-  },
-  icons: {
-    icon: '/icon',
   },
 };
 
