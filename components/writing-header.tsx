@@ -14,7 +14,10 @@ export function WritingHeader({ backHref = '/blog', backLabel = 'All posts' }: {
         <span className="writing-back-label">{backLabel}</span>
       </Link>
       <Link href="/" className="nav-link writing-wordmark"><WritingIdentity /></Link>
-      <AnimatedThemeToggler className="writing-theme-toggle" />
+      <div className="writing-header-end">
+        <a href="mailto:layken@varholdt.com" className="nav-link writing-email min-h-11">Email</a>
+        <AnimatedThemeToggler className="writing-theme-toggle" />
+      </div>
     </div>
   )
 }

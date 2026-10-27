@@ -410,7 +410,10 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
         <ControlPanel
           projectPicker={
           <label className="dp-project-picker relative block xl:hidden">
-            <span className="dp-panel-label">Selected work</span>
+            <span className="dp-panel-label dp-picker-label">
+              Selected work
+              <span>{pad(activePosition)} / {pad(projects.length)}</span>
+            </span>
             <select
               value={activeSlug}
               onChange={(event) => scrollTo(event.target.value)}

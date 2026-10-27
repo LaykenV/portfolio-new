@@ -11,7 +11,6 @@ import {
 import Image from 'next/image'
 import {
   ArrowLeft,
-  ArrowDown,
   ArrowRight,
   ArrowUpRight,
   ExternalLink,
@@ -198,10 +197,6 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
           ref={(el: HTMLElement | null) => {
             slideRefs.current[0] = el
           }}
-          onScrollToProjects={() => {
-            haptic(6)
-            jumpTo(1)
-          }}
         />
 
         {projects.map((project, i) => {
@@ -261,10 +256,9 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
 
 interface AboutSlideProps {
   ref: (el: HTMLElement | null) => void
-  onScrollToProjects: () => void
 }
 
-function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
+function AboutSlide({ ref }: AboutSlideProps) {
   return (
     <section ref={ref} className="m-slide m-about">
       <div className="m-about-bg" aria-hidden="true" />
@@ -298,13 +292,6 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
             </a>
           </nav>
         </div>
-
-        <button className="m-scroll-indicator" onClick={onScrollToProjects}>
-          <span className="label">Scroll to projects</span>
-          <span className="chev" aria-hidden="true">
-            <ArrowDown className="h-[14px] w-[14px]" />
-          </span>
-        </button>
       </div>
     </section>
   )

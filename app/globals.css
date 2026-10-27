@@ -1358,7 +1358,7 @@ html.dark .site-menu {
   --surface: #1C2823;
   --card: 155 17.65% 13.33%;
   --accent: #9BC5AE;
-  --accent-soft: #243D31;
+  --accent-soft: #2A4638;
   --on-accent: #14251D;
   --mobile-edge-top: #141C1A;
   --mobile-edge-bottom: #141C1A;
@@ -1776,7 +1776,7 @@ html.dark .dp-nav-item.dp-nav-active {
   min-height: 2.5rem;
   padding: 0.44rem 0.3rem;
   border-radius: 0.55rem;
-  font-size: 0.825rem;
+  font-size: 0.875rem;
   opacity: 0.82;
   transition:
     background 150ms ease,
@@ -1824,9 +1824,9 @@ html.dark .dp-nav-item.dp-nav-active {
 .dp-panel-row:hover .dp-panel-arrow {
   transform: translate(1px, -1px);
 }
-.dp-panel-row[target="_blank"] .dp-panel-arrow { opacity: 0; }
-.dp-panel-row[target="_blank"]:hover .dp-panel-arrow,
-.dp-panel-row[target="_blank"]:focus-visible .dp-panel-arrow { opacity: 1; }
+.dp-panel-row:not(.dp-panel-row-primary) .dp-panel-arrow { opacity: 0; }
+.dp-panel-row:hover .dp-panel-arrow,
+.dp-panel-row:focus-visible .dp-panel-arrow { opacity: 1; }
 
 /* --- Metadata table + band rhythm ---------------------------------------- */
 .dp-meta {
@@ -2111,7 +2111,8 @@ html.dark .writing-theme .nav-link:focus-visible {
 }
 .writing-back { justify-self: start; white-space: nowrap; min-width: 44px; }
 .writing-header .writing-wordmark { min-height: 44px; }
-.writing-theme-toggle { justify-self: end; }
+.writing-header-end { justify-self: end; display: flex; align-items: center; gap: 12px; }
+.writing-email { font-size: 14px; font-weight: 500; }
 @media (max-width: 639px) {
   .writing-header { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
   .writing-theme .post-h2 { text-wrap: normal; }
@@ -2121,7 +2122,7 @@ html.dark .writing-theme .nav-link:focus-visible {
   .writing-header[data-home-back] { display: none; }
   .writing-header { display: flex; margin: -8px 0 -4px; }
   .writing-header .writing-wordmark,
-  .writing-header .writing-theme-toggle { display: none; }
+  .writing-header .writing-header-end { display: none; }
 }
 
 .dp-root .dp-eyebrow,
@@ -2154,3 +2155,6 @@ html.dark .writing-theme .nav-link:focus-visible {
 
 /* Tags read as separate items, not one phrase. */
 .writing-theme .tag-sep { margin: 0 8px 0 0; color: var(--muted); }
+
+.dp-panel-row-primary { font-size: 0.9375rem; }
+.dp-picker-label { justify-content: space-between; }

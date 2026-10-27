@@ -500,7 +500,7 @@ html.dark .m-btn-primary {
   line-height: 1.5;
   font-weight: 500;
   color: var(--muted);
-  margin-bottom: 12px;
+  margin-bottom: 0;
   margin-top: 16px;
 }
 
@@ -521,7 +521,7 @@ html.dark .m-btn-primary {
   height: 1px;
   background: var(--border);
 }
-.m-sheet-work-label { margin-top: 24px; }
+.m-sheet-work-label { margin-top: 16px; }
 
 .m-sheet-body {
   font-size: 16px;
