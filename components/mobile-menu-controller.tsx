@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { MobileMenu } from '@/components/mobile-menu'
-import { Github, Linkedin, FileText, BookOpen, Mail, Menu, ArrowUpRight, CalendarClock, Send, Building2 } from 'lucide-react'
+import { Github, Linkedin, FileText, BookOpen, Mail, Menu, ArrowUpRight, ArrowRight, CalendarClock, Send, Building2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface MobileMenuControllerProps {
@@ -43,36 +43,44 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
             <a href="https://cal.com/layken-varholdt" className="m-menu-link" target="_blank" rel="noreferrer">
               <CalendarClock size={16} />
               Book a call
+              <ArrowUpRight size={14} className="m-menu-link-arrow" aria-hidden="true" />
             </a>
             <a href="https://t.me/LLVarholdt" className="m-menu-link" target="_blank" rel="noreferrer">
               <Send size={16} />
               Telegram
+              <ArrowUpRight size={14} className="m-menu-link-arrow" aria-hidden="true" />
             </a>
             <a href="https://www.varholdt.com/" className="m-menu-link" target="_blank" rel="noreferrer">
               <Building2 size={16} />
               Varholdt AI
+              <ArrowUpRight size={14} className="m-menu-link-arrow" aria-hidden="true" />
             </a>
             <a href="/blog" className="m-menu-link">
               <BookOpen className="h-4 w-4" />
               Blog
+              <ArrowRight size={14} className="m-menu-link-arrow" aria-hidden="true" />
             </a>
             <a href="/Layken-Varholdt-Software-Engineer-Resume.pdf" className="m-menu-link" target="_blank" rel="noreferrer">
               <FileText className="h-4 w-4" />
               Résumé
+              <ArrowUpRight size={14} className="m-menu-link-arrow" aria-hidden="true" />
             </a>
             <a href="https://github.com/laykenV" className="m-menu-link" target="_blank" rel="noreferrer">
               <Github className="h-4 w-4" />
               GitHub
+              <ArrowUpRight size={14} className="m-menu-link-arrow" aria-hidden="true" />
             </a>
             <a href="https://www.linkedin.com/in/layken-varholdt-a78687230/" className="m-menu-link" target="_blank" rel="noreferrer">
               <Linkedin className="h-4 w-4" />
               LinkedIn
+              <ArrowUpRight size={14} className="m-menu-link-arrow" aria-hidden="true" />
             </a>
             <a href="https://x.com/LLVarholdt" className="m-menu-link" target="_blank" rel="noreferrer">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-twitter-x" viewBox="0 0 16 16">
                 <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
               </svg>
               Twitter / X
+              <ArrowUpRight size={14} className="m-menu-link-arrow" aria-hidden="true" />
             </a>
           </nav>
         </div>

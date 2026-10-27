@@ -8,6 +8,7 @@ export function WritingIdentity() {
         alt=""
         width={28}
         height={28}
+        draggable={false}
         className="rounded-full border border-[var(--border)] object-cover"
       />
       Layken Varholdt

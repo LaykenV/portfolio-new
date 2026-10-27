@@ -398,14 +398,15 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
       {/* ---------- Floating control panel ---------- */}
       <div className="dp-col dp-scroll relative px-4 xl:px-5 py-7">
         {/* Below xl the identity and compact project index share this column. */}
-        <div className="xl:hidden flex items-center gap-3 mb-4 px-1">
+        <div className="dp-compact-identity xl:hidden flex items-start gap-3 mb-4 px-3">
           <Portrait size={56} />
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <p className="text-[22px] font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
             <p className="dp-identity-role mt-1">
               {IDENTITY.role}
             </p>
           </div>
+          <AnimatedThemeToggler className="dp-theme-toggle mt-2 shrink-0" />
         </div>
 
         <ControlPanel
@@ -435,8 +436,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
 function ControlPanel({ projectPicker }: { projectPicker: ReactNode }) {
   return (
     <div className="dp-panel">
-      <section className="dp-panel-section relative xl:hidden">
-        <AnimatedThemeToggler className="dp-theme-toggle absolute right-3 top-3" />
+      <section className="dp-panel-section xl:hidden">
         <FounderIntro />
       </section>
 

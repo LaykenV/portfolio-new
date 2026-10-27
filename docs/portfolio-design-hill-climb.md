@@ -78,6 +78,11 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 8 | Muse Contributor | 8.0 | 8.0 | 8.5 | 7.5 | 8.5 | 8.0 | 8.0 | 9.0 | 7.5 | 8.1 |
 | 8 | Opus 5.5 | 8.4 | 8.2 | 8.1 | 8.0 | 8.6 | 8.6 | 8.1 | 8.8 | 7.6 | 8.3 |
 
+| 9 | Terra | 8.3 | 8.5 | 8.2 | 8.1 | 8.8 | 8.5 | 8.3 | 8.7 | 7.9 | 8.4 |
+| 9 | DeepSeek, OpenCode | 8.5 | 8.4 | 8.3 | 8.4 | 8.7 | 8.3 | 8.4 | 8.8 | 8.2 | 8.4 |
+| 9 | Muse Contributor | 8.5 | 8.0 | 8.5 | 8.0 | 8.5 | 8.5 | 8.0 | 8.5 | 7.5 | 8.2 |
+| 9 | Opus 5.5 | 8.4 | 8.3 | 8.2 | 8.1 | 8.6 | 8.4 | 8.2 | 8.8 | 7.6 | 8.3 |
+
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
 ## Round 1
@@ -179,6 +184,18 @@ Use 20px mobile edges across writing, the hero and the menu. Bring the writing h
 Declined findings: the supplied dark rail shows readable near-white More work titles. The saved pixel probe and browser style audit do not reproduce DeepSeek's reported near-black text. Do not claim a fix for that finding. Keep the neutral selection without a colored left bar, the work-first desktop order, the founder message and complete project images. Selected navigation and the email still use different effective fills. Do not add another index eyebrow or change the title palette for its own sake.
 
 Round-9 proof: lint and production build pass. The existing browser suites cover both themes at five widths, all seven project positions and actions, real touch swipes, menu focus and Escape, direct screenshot tabs, theme-color sync and flat article steps. Focused checks cover the detail reading order, short header, mobile writing edges and tablet control placement. Fresh captures include all 30 candidate states.
+
+## Round 10
+
+Give tablet identity, founder, picker, contact and email one inset. Move its theme control to the identity row, preserving the personal name's size. Inset the section rule to match the content. Raise the project title's minimum from 29.6px to 32px; its measured 36.7px at 1440px stays the same.
+
+Reuse the portrait/name component in the phone project bar, menu and writing header. Keep the 28px portrait and 14px/650 name. Center the writing mark on phones. Below 390px, the back control uses its arrow with the same accessible label and a 44px target, keeping the full name and theme control in one row. Use text hover and a visible focus outline instead of a filled header hover.
+
+Let project headings use the full width when needed, with an 8px gap before a wrapped counter. Use natural wrapping for mobile article headings. Give detail titles 24px below the header control, use a bare Back control with its 44px target, and put the full-size arrow beside the label. Keep that image action's 48px full-width target. Match dek leading to excerpts. Menu arrows retain the internal/external distinction.
+
+Declined findings: measured project actions are 48px, not 40px. Their unequal widths allow room for the longer Deep dive label. The disclosure has no open-state underline when the pointer is moved away. Inline code has a 24.6px line box inside the body's 28.9px leading. Labels already use 12px/0.08em. Preserve the email priority, neutral selection and tablet picker. Do not turn Blog into an external arrow, shrink targets, remove founder copy or add a new visual layer.
+
+Round-10 proof: lint and production build pass. Browser checks retain all seven projects, short-phone action fit, real swipes, direct tabs, theme/meta sync, focus, menu Escape and flat article steps. Focused measurements check equal tablet insets, one theme control, identical phone brand coordinates, centered writing headers without overlap, text hover/focus and detail spacing. The capture packet adds light/dark long-title project states.
 
 ## Round protocol
 

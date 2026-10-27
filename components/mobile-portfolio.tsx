@@ -23,6 +23,7 @@ import {
 import type { Project } from '@/types/project'
 import { MobileMenuController } from '@/components/mobile-menu-controller'
 import { FounderIntro } from '@/components/founder-intro'
+import { WritingIdentity } from '@/components/writing-identity'
 import { cn } from '@/lib/utils'
 
 interface MobilePortfolioProps {
@@ -182,16 +183,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
           tabIndex={viewingProject ? 0 : -1}
           aria-label="Scroll back to the about section"
         >
-          <span className="m-brand-portrait">
-            <Image
-              src="/portrait.jpeg"
-              alt=""
-              width={32}
-              height={32}
-              draggable={false}
-            />
-          </span>
-          <span className="m-brand-text">Layken Varholdt</span>
+          <WritingIdentity />
         </button>
         <MobileMenuController className="m-topbar-menu" />
       </header>

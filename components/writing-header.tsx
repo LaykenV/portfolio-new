@@ -8,15 +8,13 @@ export function WritingHeader({ backHref = '/blog', backLabel = 'All posts' }: {
   backLabel?: string
 }) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3">
-      <Link href={backHref} className="nav-link writing-back min-h-11">
+    <div className="writing-header">
+      <Link href={backHref} className="nav-link writing-back min-h-11" aria-label={backLabel}>
         <ArrowLeft size={14} aria-hidden="true" />
-        {backLabel}
+        <span className="writing-back-label">{backLabel}</span>
       </Link>
-      <div className="ml-auto flex items-center gap-2">
-        <Link href="/" className="nav-link writing-wordmark"><WritingIdentity /></Link>
-        <AnimatedThemeToggler className="writing-theme-toggle" />
-      </div>
+      <Link href="/" className="nav-link writing-wordmark"><WritingIdentity /></Link>
+      <AnimatedThemeToggler className="writing-theme-toggle" />
     </div>
   )
 }
