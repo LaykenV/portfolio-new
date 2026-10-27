@@ -8,7 +8,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { WritingIdentity } from '@/components/writing-identity'
 
 const EMAIL = 'layken@varholdt.com'
-const CLOSE_MS = 430
+const CLOSE_MS = 220
 
 const SOCIAL_LINKS = [
   ['Book a call', 'https://cal.com/layken-varholdt'],

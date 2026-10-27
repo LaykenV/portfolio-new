@@ -19,6 +19,7 @@ import {
 } from 'lucide-react'
 
 import type { Project } from '@/types/project'
+import { FounderIntro } from '@/components/founder-intro'
 import { SiteHeader } from '@/components/site-header'
 import { cn } from '@/lib/utils'
 
@@ -40,6 +41,9 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
   const previewResetRef = useRef<number | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [deckScrolled, setDeckScrolled] = useState(false)
+  // The hero already shows the portrait and name; the header brand joins
+  // once they scroll away, so the two never sit on screen together.
+  const [heroPassed, setHeroPassed] = useState(false)
   const [deepDiveSlug, setDeepDiveSlug] = useState<string | null>(null)
   const [entryPreview, setEntryPreview] = useState<{ slug: string; offset: number } | null>(null)
   const [swipePreview, setSwipePreview] = useState<{
@@ -84,6 +88,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
         }
         setActiveIndex(index)
         setDeckScrolled(deck.scrollTop > 8)
+        setHeroPassed(deck.scrollTop > 200)
       })
     }
     update()
@@ -179,6 +184,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
       <SiteHeader
         className="m-site-header"
         scrolled={deckScrolled}
+        brandHidden={!heroPassed}
         onHomeClick={() => {
           haptic(6)
           jumpTo(0)
@@ -233,6 +239,13 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
         })}
       </div>
 
+      {/* Right-edge index of the seven projects, shown on project slides. */}
+      <div className={cn('m-rail', activeIndex > 0 && 'visible')} aria-hidden="true">
+        {projects.map((p, i) => (
+          <span key={p.slug} className={cn('m-rail-dot', i + 1 === activeIndex && 'active')} />
+        ))}
+      </div>
+
       {/* Deep-dive slide-in sheet */}
       <DeepDiveSheet
         project={currentProject}
@@ -263,18 +276,16 @@ function AboutSlide({ ref }: AboutSlideProps) {
     <section ref={ref} className="m-slide m-about">
       <div className="m-about-bg" aria-hidden="true" />
       <div className="m-about-inner">
-        {/* The header carries the name and portrait. The page's single h1
-            lives in app/page.tsx so the two shells don't each add one. */}
-        <p className="m-about-headline">
-          Software engineer and founder of{' '}
-          <a href="https://www.varholdt.com/" target="_blank" rel="noreferrer noopener">
-            Varholdt&nbsp;AI
-          </a>
-          .
-        </p>
-        <p className="m-about-sub">
-          Varholdt AI is the AI engineer for businesses that don’t have one.
-        </p>
+        <div className="m-about-portrait">
+          <Image src="/portrait.jpeg" alt="Layken Varholdt" width={192} height={192} draggable={false} />
+        </div>
+
+        {/* Not an h1. The page's single h1 lives in app/page.tsx so the two
+            shells don't each add one. */}
+        <p className="m-about-name">Layken Varholdt</p>
+        <p className="m-about-role">Software engineer</p>
+
+        <FounderIntro />
 
         <div className="m-about-cta-stack">
           <a

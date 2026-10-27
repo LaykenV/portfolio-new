@@ -12,6 +12,8 @@ interface SiteHeaderProps {
   scrolled?: boolean
   /** Replaces the brand, for example with a Back button in a detail view. */
   leading?: ReactNode
+  /** Hides the brand while the page shows the same identity larger. */
+  brandHidden?: boolean
   onHomeClick?: () => void
   onWorkClick?: () => void
 }
@@ -21,7 +23,7 @@ interface SiteHeaderProps {
  * the left, the two-line menu button on the right. It sits flush with the page
  * at the top and gets a hairline and frosted background once content scrolls.
  */
-export function SiteHeader({ className, scrolled, leading, onHomeClick, onWorkClick }: SiteHeaderProps) {
+export function SiteHeader({ className, scrolled, leading, brandHidden, onHomeClick, onWorkClick }: SiteHeaderProps) {
   const [windowScrolled, setWindowScrolled] = useState(false)
   const tracksWindow = scrolled === undefined
 
@@ -40,6 +42,9 @@ export function SiteHeader({ className, scrolled, leading, onHomeClick, onWorkCl
           <Link
             href="/"
             className="site-brand"
+            data-hidden={brandHidden || undefined}
+            aria-hidden={brandHidden || undefined}
+            tabIndex={brandHidden ? -1 : undefined}
             onClick={(event) => {
               if (!onHomeClick) return
               event.preventDefault()

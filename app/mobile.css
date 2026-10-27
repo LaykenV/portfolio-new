@@ -108,9 +108,9 @@
            calc(env(safe-area-inset-bottom, 0px) + 8px);
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  text-align: left;
-  gap: 12px;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
@@ -119,33 +119,44 @@
   flex-shrink: 0;
 }
 
-.m-about-headline {
-  margin: 8px 0 0;
+.m-about-portrait {
+  width: 88px;
+  height: 88px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: hsl(var(--card));
+}
+.m-about-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.m-about-name {
+  margin: 0;
   color: var(--foreground);
-  font-size: clamp(34px, 9.6vw, 44px);
-  font-weight: 700;
-  line-height: 1.06;
+  font-size: clamp(38px, 10.5vw, 48px);
+  font-weight: 750;
+  line-height: 1;
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
-.m-about-headline a {
-  color: var(--accent);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 5px;
-  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
-}
-.m-about-sub {
-  margin: 4px 0 0;
-  max-width: 32ch;
+.m-about-role {
+  margin: 0;
   color: var(--muted);
-  font-size: 18px;
-  line-height: 1.5;
-  text-wrap: pretty;
+  font-size: 16px;
+  font-weight: 500;
+}
+.m-about .founder-intro {
+  margin: 10px 0 0;
+  max-width: 30ch;
+}
+.m-about .founder-description {
+  margin-top: 0.5rem;
+  font-size: 16px;
+  text-wrap: balance;
 }
 
 .m-about-cta-stack {
-  margin-top: 12px;
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -179,7 +190,7 @@ html.dark .m-about-email {
 /* Secondary contact links */
 .m-contact-links {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 0 24px;
 }
@@ -560,23 +571,20 @@ html.dark .m-btn-primary {
    menu that grows down out of the header.
    ============================================================ */
 
+/* A solid bar with a hairline once content scrolls under it. A frosted
+   backdrop flickered in iOS Safari over the inner scrollers, so the bar
+   stays opaque and only the hairline's color changes. */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
   padding-top: env(safe-area-inset-top, 0px);
   background: var(--background);
-  transition: background-color 180ms ease, box-shadow 180ms ease;
+  border-bottom: 1px solid transparent;
+  transition: border-color 160ms ease;
 }
 .site-header[data-scrolled] {
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 70%, transparent);
-}
-@supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
-  .site-header[data-scrolled] {
-    background: color-mix(in srgb, var(--background) 74%, transparent);
-    -webkit-backdrop-filter: saturate(1.8) blur(20px);
-    backdrop-filter: saturate(1.8) blur(20px);
-  }
+  border-bottom-color: color-mix(in srgb, var(--border) 70%, transparent);
 }
 /* Home and the project sheet scroll an inner element, so their header
    overlays it instead of sticking to the window. */
@@ -591,7 +599,7 @@ html.dark .m-btn-primary {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  min-height: 60px;
+  min-height: 59px;
   padding: 0 20px;
 }
 
@@ -608,6 +616,8 @@ html.dark .m-btn-primary {
   white-space: nowrap;
 }
 .site-brand img { flex-shrink: 0; }
+.site-brand { transition: opacity 160ms ease; }
+.site-brand[data-hidden] { opacity: 0; pointer-events: none; }
 
 .site-menu-btn {
   display: grid;
@@ -649,13 +659,14 @@ html.dark .m-btn-primary {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
-  transition: height 420ms cubic-bezier(0.4, 0, 0.6, 1);
+  opacity: 1;
+  transition: opacity 200ms ease-out;
 }
 .site-menu[open] { display: flex; }
 .site-menu::backdrop { background: transparent; }
 .site-menu:focus { outline: none; }
 .site-menu[data-state="starting"],
-.site-menu[data-state="ending"] { height: var(--menu-head); }
+.site-menu[data-state="ending"] { opacity: 0; }
 html.menu-open { overflow: hidden; }
 
 .site-menu-head {
@@ -839,5 +850,35 @@ html.dark .site-theme-switch [data-theme-option="dark"] {
   .site-menu,
   .site-menu-links a,
   .site-menu-bottom { transition: none; }
+  .m-rail-dot { transition: none; }
   .site-menu .site-burger path { animation-duration: 1ms; }
+}
+
+/* Project index on the right edge of the phone deck. */
+.m-rail {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+.m-rail.visible { opacity: 1; }
+.m-rail-dot {
+  width: 3px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--foreground);
+  opacity: 0.22;
+  transition: height 260ms cubic-bezier(0.34, 1.4, 0.64, 1), opacity 200ms ease, background-color 200ms ease;
+}
+.m-rail-dot.active {
+  height: 32px;
+  background: var(--accent);
+  opacity: 1;
 }
