@@ -6,6 +6,7 @@
 
 /* Mobile navigation */
 .hamburger {
+  margin-right: -12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -59,6 +60,7 @@
   text-decoration: none;
 }
 .m-menu-link svg { color: var(--muted); }
+.m-menu-link:last-child { border-bottom: 0; }
 
 /* Fullscreen project modal on mobile — kills the desktop centered/bordered treatment */
 @media (max-width: 767px) {
@@ -123,7 +125,7 @@
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 6px 16px;
+  padding: 6px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -154,14 +156,14 @@
   align-items: center;
   gap: 10px;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0;
-  font-weight: 600;
+  font-weight: 650;
   color: var(--foreground);
-  opacity: 0.75;
-  padding: 6px 12px 6px 6px;
+  opacity: 1;
+  padding: 6px 10px 6px 0;
   border-radius: 999px;
-  border-color: var(--border);
+  border-color: transparent;
   background: var(--background);
   cursor: pointer;
   transition: opacity 260ms ease, transform 260ms ease, border-color 200ms ease;
@@ -185,8 +187,8 @@
 }
 .m-topbar-brand .sep { opacity: 0.5; margin: 0 4px; }
 .m-brand-portrait {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   overflow: hidden;
   display: inline-block;
@@ -599,7 +601,7 @@
   left: 0;
   right: 0;
   z-index: 5;
-  padding: 6px 16px;
+  padding: 6px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -68,6 +68,10 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 6 | DeepSeek, OpenCode | 8.5 | 8.4 | 8.6 | 8.6 | 8.6 | 8.4 | 8.5 | 8.7 | 8.0 | 8.5 |
 | 6 | Muse Contributor | 8.0 | 7.8 | 7.8 | 7.5 | 8.3 | 8.2 | 7.6 | 8.5 | 7.8 | 7.9 |
 | 6 | Opus 5.5 | 8.3 | 8.2 | 8.3 | 8.2 | 8.5 | 8.3 | 8.1 | 8.9 | 7.4 | 8.2 |
+| 7 | Terra | 8.2 | 8.3 | 8.0 | 7.9 | 8.5 | 8.0 | 8.1 | 8.5 | 7.6 | 8.1 |
+| 7 | DeepSeek, OpenCode | 8.5 | 8.3 | 8.4 | 8.4 | 8.6 | 8.4 | 8.2 | 8.5 | 8.4 | 8.4 |
+| 7 | Muse Contributor, retry | 7.5 | 7.5 | 8.0 | 7.5 | 8.0 | 8.0 | 7.5 | 8.5 | 7.0 | 7.7 |
+| 7 | Opus 5.5 | 8.4 | 8.2 | 8.4 | 8.2 | 8.4 | 8.4 | 8.0 | 8.7 | 7.6 | 8.3 |
 
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
@@ -148,6 +152,18 @@ Replace the screenshot capsule with plain direct tabs. Keep click, keyboard and 
 Declined findings: quick links already have 44px targets, Atlas's seven chips fit in one row, numeric counters are tabular, and the full-size underline offset was already 3px. A 1fr grid with a narrower arrow column would not solve the claimed distance; an inline headline group does. Keep the 1024px reading order instead of reversing it solely for a preference.
 
 Round-7 proof: lint, production build and the browser suites pass. Names measure 26px wide /22px tablet, above the 19px founder link. Phone quick links stay on one line with 44px targets at 320 and 390px. Blog arrows are 8px from their title boxes. All seven project positions, real touch swipes, direct screenshot tabs, themes, menu focus and short-phone fit remain checked. The packet includes actual writing-header hover states in both themes.
+
+## Round 8
+
+Keep the title's final words and arrow together inside the heading, fixing the Safari article's wrapped-title defect. Remove the extra article heading margin that compounded the flex gap. Use one 700-weight writing title with accent color on its emphasized phrase.
+
+Give inactive screenshot tabs the muted color on the chrome surface. Align both mobile bars to the 20px content edge and use one plain 14px/650 name mark with a 28px portrait. Preserve the 44px controls and header clearance. Make metadata rules continuous, raise STACK/LINKS to 12px, strengthen secondary icons and remove the last menu rule.
+
+Disclose the omitted mobile stack with a compact +N count; the complete list remains in Deep dive. Keep desktop chip dimensions, the soft palette, real swipes and direct screenshot switching.
+
+Declined findings: selected navigation and email have different effective backgrounds in both themes. Do not hide the tablet founder story or add chip padding that would undo the measured one-row stack. Keep the inline editorial arrows instead of returning them to a distant desktop column. The desktop remains work-first by design, with grouped identity and contact always visible. Muse's first round-7 run returned progress text only; the fresh retry's actual grades are recorded above.
+
+Round-8 proof: lint, production build and browser suites pass. Wrapped title arrows stay with the final words at 320, 390, 768, 1024 and 1440px. All seven +N counts match project data. The plain mobile mark measures x=20px, 14px type and full opacity after the project snap. All actions remain reachable on short phones, and real swipes still open details. Metadata, position and tab text have at least 4.79:1 light /6.79:1 dark contrast in the measured states.
 
 ## Round protocol
 

@@ -481,6 +481,11 @@ function ProjectSlide({
                 {tech}
               </span>
             ))}
+            {project.techStack.length > 4 && (
+              <span className="m-chip" aria-label={`${project.techStack.length - 4} more technologies in Deep dive`}>
+                +{project.techStack.length - 4}
+              </span>
+            )}
           </div>
 
           <div className="m-card-actions">

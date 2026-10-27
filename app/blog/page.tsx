@@ -81,6 +81,21 @@ const posts = [
   },
 ] as const
 
+function PostTitle({ title }: { title: string }) {
+  const words = title.split(' ')
+  const beginning = words.slice(0, -2).join(' ')
+  const ending = words.slice(-2).join(' ')
+  return (
+    <h2 className="post-row-title">
+      {beginning && `${beginning} `}
+      <span className="post-row-ending">
+        {ending}
+        <span className="post-row-arrow" aria-hidden="true"><ArrowRight size={14} /></span>
+      </span>
+    </h2>
+  )
+}
+
 export default function BlogIndex() {
   return (
     <div className="font-sans mx-auto max-w-3xl min-h-dvh px-6 py-14 md:py-20 flex flex-col gap-8 md:gap-10">
@@ -119,12 +134,7 @@ export default function BlogIndex() {
                     ~{post.readMinutes} min read
                   </span>
                 </div>
-                <div className="post-row-heading">
-                  <h2 className="post-row-title">{post.title}</h2>
-                  <span className="post-row-arrow" aria-hidden="true">
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
-                </div>
+                <PostTitle title={post.title} />
                 <p className="post-row-desc">{post.description}</p>
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   {post.tags.map((tag) => (

@@ -1511,7 +1511,7 @@ html.dark .writing-theme {
   font-weight: 500;
   letter-spacing: 0.02em;
   border-bottom: 2px solid transparent;
-  color: var(--foreground);
+  color: var(--muted);
   cursor: pointer;
   white-space: nowrap;
 }
@@ -1801,7 +1801,7 @@ html.dark .dp-nav-item.dp-nav-active {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.62;
+  opacity: 0.85;
 }
 .dp-panel-row:hover .dp-panel-icon {
   opacity: 0.95;
@@ -1820,7 +1820,7 @@ html.dark .dp-nav-item.dp-nav-active {
 .dp-meta {
   display: grid;
   grid-template-columns: 4rem minmax(0, 1fr);
-  column-gap: 0.75rem;
+  column-gap: 0;
   max-width: 38rem;
 }
 .dp-meta-k,
@@ -1830,12 +1830,13 @@ html.dark .dp-nav-item.dp-nav-active {
 }
 .dp-meta-k {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
 }
 .dp-meta-v {
+  padding-left: 0.75rem;
   font-size: 0.86rem;
 }
 
@@ -1927,11 +1928,11 @@ html.dark .writing-theme .tech-badge-compact {
   color: var(--foreground);
   cursor: pointer;
   list-style: none;
-  text-decoration: underline;
+  text-decoration: none;
   text-underline-offset: 3px;
   text-decoration-color: hsl(var(--foreground-hsl) / 0.3);
 }
-.dp-details summary:hover { text-decoration-color: currentColor; }
+.dp-details summary:hover { text-decoration: underline; text-decoration-color: currentColor; }
 .dp-details summary::-webkit-details-marker { display: none; }
 .dp-details[open] summary svg { transform: rotate(180deg); }
 .dp-details summary:focus-visible {
@@ -2040,11 +2041,13 @@ html.dark .writing-theme .post-code-inline { background: var(--surface); border-
 .writing-theme-toggle { margin-right: -12px; }
 .writing-theme .hero-title em { color: var(--accent); font-weight: 600; }
 .writing-theme .post-row { display: block; }
-.post-row-heading { display: flex; align-items: baseline; gap: 8px; }
-.post-row-heading .post-row-title { min-width: 0; }
-.writing-theme .post-row-arrow { position: static; margin: 0; width: 16px; height: 20px; }
+.post-row-ending { white-space: nowrap; }
+.writing-theme .post-row-arrow { position: static; margin: 0 0 0 6px; width: 14px; height: 14px; vertical-align: -2px; }
 .writing-theme .post-row > div > div:first-child { padding-right: 0; }
 .writing-theme .post-steps { margin-top: 0; }
+.writing-theme .hero-title,
+.writing-theme .hero-title em { font-weight: 700; }
+.writing-theme .prose-block > .post-h2 { margin-bottom: 0; }
 .writing-theme .post-steps > li:first-child { padding-top: 8px; }
 .writing-theme .nav-link:hover,
 .writing-theme .nav-link:focus-visible,
