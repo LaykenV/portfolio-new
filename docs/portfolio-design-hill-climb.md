@@ -93,6 +93,11 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 11 | Muse Contributor | 8.5 | 8.0 | 8.5 | 8.0 | 8.5 | 8.5 | 8.0 | 8.5 | 8.0 | 8.3 |
 | 11 | Opus 5.5 | 8.4 | 8.1 | 8.1 | 8.3 | 8.5 | 8.4 | 8.3 | 8.5 | 7.6 | 8.2 |
 
+| 12 | Terra | 8.4 | 8.7 | 8.4 | 8.3 | 9.0 | 8.5 | 8.6 | 9.0 | 8.3 | 8.6 |
+| 12 | DeepSeek, OpenCode | 8.6 | 8.8 | 8.4 | 8.6 | 8.7 | 8.4 | 8.4 | 8.9 | 8.0 | 8.5 |
+| 12 | Muse Contributor | 8.5 | 8.5 | 8.5 | 8.5 | 9.0 | 9.0 | 8.5 | 9.0 | 8.0 | 8.6 |
+| 12 | Opus 5.5 | 8.4 | 8.3 | 8.2 | 8.4 | 8.2 | 8.8 | 8.3 | 8.8 | 7.8 | 8.4 |
+
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
 ## Round 1
@@ -230,6 +235,18 @@ Keep labels at 12px and increase weight to 600 with 0.08em tracking. Dark labels
 Declined findings: the article already uses a verified 36rem/17px reading measure, and metadata is already 12px. The screenshot tab's underline is a 2px border, so text-underline-offset would not change it. The +N count already stays with its preceding chip. Keep the one-row centered writing header, centered phone introduction and work-first tablet order. A navigation header can be wider than its prose column. Do not turn structural or static-tag hairlines into mandatory control borders.
 
 Round-12 proof: lint and production build pass. Browser checks retain themes, meta colors, seven project routes, real touch swipes, menu focus/inert state and short-phone action fit. Focused measurements cover control-edge contrast, all rail-title fits, the shared 20px edge, earlier phone work, single-line names and the counter/title/image rhythm. All 32 candidate states are captured again.
+
+## Round 13
+
+Align open-menu controls with the closed toolbar's optical overhang. The portrait/name mark and 44px targets stay in place. Add a neutral theme control to the deep-dive header. Keep its background inert, contain Tab focus in the dialog and restore focus when it closes.
+
+Use 17px/1.65 opaque muted writing deks, a 14px/600 disclosure control and 16px inline blog arrows. Shorten the phone article's header-to-first-section gap by 16px. Darken light muted text to #47554F while keeping label and dark tokens unchanged. Mark the expanded account with spacing and a quiet top rule, preserving its 17px ink text and reading cap.
+
+Enlarge rail previews to 56px. Recover horizontal space through the grid's index width, gaps and inner padding, retaining all seven title fits and the 20px outer inset. Project screenshots and facts stay unchanged.
+
+Declined findings: the summary is already 36rem/17px; a 40rem replacement would widen it. Source uses the same 16px Lucide GitHub icon as the menu. The writing header's visible content is centered, as measured at 320px and 390px. Card titles use 700 weight, menu rows use 52px and have no final rule, and the baseline git object exists. The native picker chevron is already centered in its 48px field. Keep the centered phone identity and responsive tablet order. Do not add another availability line to the compact hero.
+
+Round-13 proof: lint and production build pass. Browser checks cover navigation, themes, meta colors, short phones, all seven card actions, swipes and menu focus. Focused checks compare open/closed menu coordinates, modal Tab/Escape/focus restoration and theme access, centered writing marks, intro type and all rail-title fits at 56px. All 33 candidate states are captured again, including the detail header in both themes.
 
 ## Round protocol
 

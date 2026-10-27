@@ -552,6 +552,7 @@ function DeepDiveSheet({
   onEntryPreviewConsumed,
   onClose,
 }: DeepDiveSheetProps) {
+  const sheetRef = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
   const [dragX, setDragX] = useState(0)
   const [dragging, setDragging] = useState(false)
@@ -593,6 +594,39 @@ function DeepDiveSheet({
     setVisible(false)
     window.setTimeout(onClose, 340)
   }, [onClose])
+
+  useEffect(() => {
+    if (!isInteractive) return
+    const sheet = sheetRef.current
+    if (!sheet) return
+    const previous = document.activeElement as HTMLElement | null
+    const background = Array.from(
+      sheet.closest('.mobile-portfolio')?.querySelectorAll<HTMLElement>('.mobile-deck, .m-topbar') ?? [],
+    )
+    const previousInert = background.map((element) => element.inert)
+    background.forEach((element) => { element.inert = true })
+    const frame = requestAnimationFrame(() => sheet.querySelector<HTMLButtonElement>('.m-sheet-back')?.focus({ preventScroll: true }))
+    const containFocus = (event: KeyboardEvent) => {
+      if (event.key !== 'Tab') return
+      const controls = Array.from(sheet.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'))
+      const first = controls[0]
+      const last = controls[controls.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last?.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first?.focus()
+      }
+    }
+    window.addEventListener('keydown', containFocus)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('keydown', containFocus)
+      background.forEach((element, index) => { element.inert = previousInert[index] })
+      previous?.focus({ preventScroll: true })
+    }
+  }, [isInteractive])
 
   const onTouchStart = (e: ReactTouchEvent) => {
     const t = e.touches[0]
@@ -643,6 +677,7 @@ function DeepDiveSheet({
 
   return (
     <div
+      ref={sheetRef}
       className={cn(
         'm-sheet',
         visible && 'open',
@@ -671,8 +706,11 @@ function DeepDiveSheet({
           <ArrowLeft className="h-[14px] w-[14px]" />
           <span>Back</span>
         </button>
-        <div className="m-sheet-crumb">
-          <span>Deep dive</span>
+        <div className="flex items-center gap-3">
+          <div className="m-sheet-crumb">
+            <span>Deep dive</span>
+          </div>
+          <AnimatedThemeToggler className="m-sheet-theme" />
         </div>
       </div>
 

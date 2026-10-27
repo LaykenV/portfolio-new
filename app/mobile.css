@@ -35,6 +35,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 32px;
+  margin-right: -12px;
 }
 .m-menu-close {
   display: inline-flex;
@@ -739,7 +740,8 @@ html.dark .m-btn-primary {
   outline-offset: -2px;
 }
 .mobile-portfolio .m-menu-dialog .btn-icon,
-.mobile-portfolio .m-topbar .m-topbar-theme {
+.mobile-portfolio .m-topbar .m-topbar-theme,
+.mobile-portfolio .m-sheet-topbar .m-sheet-theme {
   min-width: 44px;
   min-height: 44px;
   border-color: transparent;
@@ -747,3 +749,4 @@ html.dark .m-btn-primary {
   color: var(--foreground);
   box-shadow: none;
 }
+.m-sheet-theme { margin-right: -12px; }

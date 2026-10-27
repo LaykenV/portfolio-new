@@ -1327,7 +1327,7 @@ html.dark .stack-icon {
   --background: #D7DFD6;
   --foreground: #202C2A;
   --foreground-hsl: 170 15.79% 14.9%;
-  --muted: #52615B;
+  --muted: #47554F;
   --border: #93A89A;
   --control-border: #55796C;
   --label: #52615B;
@@ -1588,13 +1588,13 @@ html.dark .writing-theme {
 .dp-nav-item {
   position: relative;
   display: grid;
-  grid-template-columns: 1.1rem 3rem minmax(0, 1fr);
+  grid-template-columns: 1rem 3.5rem minmax(0, 1fr);
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
   min-height: 44px;
   text-align: left;
-  padding: 0.4rem 0.5rem;
+  padding: 6px 7px;
   border-radius: 0.6rem;
   cursor: pointer;
   transition:
@@ -1634,7 +1634,7 @@ html.dark .dp-nav-item.dp-nav-active {
 
 .dp-nav-thumb {
   position: relative;
-  width: 3rem;
+  width: 3.5rem;
   aspect-ratio: 16 / 9;
   border-radius: 0.32rem;
   overflow: hidden;
@@ -1958,8 +1958,8 @@ html.dark .writing-theme .tech-badge-compact {
   align-items: center;
   gap: 6px;
   min-height: 36px;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--foreground);
   cursor: pointer;
   list-style: none;
@@ -1968,6 +1968,12 @@ html.dark .writing-theme .tech-badge-compact {
   text-decoration-color: hsl(var(--foreground-hsl) / 0.3);
 }
 .dp-details summary:hover { text-decoration: underline; text-decoration-color: currentColor; }
+.dp-details .dp-account {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  max-width: 36rem;
+}
 .dp-details summary::-webkit-details-marker { display: none; }
 .dp-details[open] summary svg { transform: rotate(180deg); }
 .dp-details summary:focus-visible {
@@ -1986,7 +1992,7 @@ html.dark .writing-theme .tech-badge-compact {
   font-size: clamp(2rem, 3vw, 2.75rem);
   line-height: 1.12;
 }
-.writing-theme .hero-sub { max-width: 40rem; line-height: 1.65; }
+.writing-theme .hero-sub { max-width: 40rem; font-size: 17px; line-height: 1.65; color: var(--muted); opacity: 1; }
 .writing-theme article .hero-sub { max-width: 36rem; }
 .writing-theme .prose-block {
   max-width: 36rem;
@@ -2078,7 +2084,7 @@ html.dark .writing-theme .post-code-inline { background: var(--surface); border-
 .writing-theme .hero-title em { color: var(--accent); font-weight: 600; }
 .writing-theme .post-row { display: block; }
 .post-row-ending { white-space: nowrap; }
-.writing-theme .post-row-arrow { position: static; margin: 0 0 0 6px; width: 14px; height: 14px; vertical-align: -2px; }
+.writing-theme .post-row-arrow { position: static; margin: 0 0 0 8px; width: 16px; height: 16px; vertical-align: -2px; opacity: 1; }
 .writing-theme .post-row > div > div:first-child { padding-right: 0; }
 .writing-theme .post-steps { margin-top: 0; }
 .writing-theme .hero-title,
@@ -2111,6 +2117,7 @@ html.dark .writing-theme .nav-link:focus-visible {
 @media (max-width: 639px) {
   .writing-header { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
   .writing-theme .post-h2 { text-wrap: normal; }
+  .writing-theme article > header + .prose-block { margin-top: -16px; }
 }
 @media (max-width: 389px) {
   .writing-back-label { display: none; }
