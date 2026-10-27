@@ -329,7 +329,7 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
           className="m-scroll-indicator"
           onClick={onScrollToProjects}
         >
-          <span className="label">View projects</span>
+          <span className="label">Scroll to projects</span>
           <span className="chev" aria-hidden="true">
             <ArrowDown className="h-[16px] w-[16px]" />
           </span>
@@ -706,12 +706,7 @@ function DeepDiveSheet({
           <ArrowLeft className="h-[14px] w-[14px]" />
           <span>Back</span>
         </button>
-        <div className="flex items-center gap-3">
-          <div className="m-sheet-crumb">
-            <span>Deep dive</span>
-          </div>
-          <AnimatedThemeToggler className="m-sheet-theme" />
-        </div>
+        <AnimatedThemeToggler className="m-sheet-theme" />
       </div>
 
       <div className="m-sheet-inner">

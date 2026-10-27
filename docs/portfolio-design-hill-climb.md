@@ -97,6 +97,10 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 12 | DeepSeek, OpenCode | 8.6 | 8.8 | 8.4 | 8.6 | 8.7 | 8.4 | 8.4 | 8.9 | 8.0 | 8.5 |
 | 12 | Muse Contributor | 8.5 | 8.5 | 8.5 | 8.5 | 9.0 | 9.0 | 8.5 | 9.0 | 8.0 | 8.6 |
 | 12 | Opus 5.5 | 8.4 | 8.3 | 8.2 | 8.4 | 8.2 | 8.8 | 8.3 | 8.8 | 7.8 | 8.4 |
+| 13 | Terra | 8.5 | 8.6 | 8.4 | 8.3 | 9.0 | 8.6 | 8.5 | 9.0 | 8.2 | 8.6 |
+| 13 | DeepSeek, OpenCode retry | 9.4 | 9.4 | 9.2 | 9.3 | 9.0 | 9.4 | 9.0 | 9.4 | 8.8 | 9.2 |
+| 13 | Muse Contributor | 8.5 | 8.5 | 8.0 | 8.0 | 8.5 | 8.5 | 8.0 | 9.0 | 8.0 | 8.3 |
+| 13 | Opus 5.5, session limit | no score | no score | no score | no score | no score | no score | no score | no score | no score | no score |
 
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
@@ -247,6 +251,18 @@ Enlarge rail previews to 56px. Recover horizontal space through the grid's index
 Declined findings: the summary is already 36rem/17px; a 40rem replacement would widen it. Source uses the same 16px Lucide GitHub icon as the menu. The writing header's visible content is centered, as measured at 320px and 390px. Card titles use 700 weight, menu rows use 52px and have no final rule, and the baseline git object exists. The native picker chevron is already centered in its 48px field. Keep the centered phone identity and responsive tablet order. Do not add another availability line to the compact hero.
 
 Round-13 proof: lint and production build pass. Browser checks cover navigation, themes, meta colors, short phones, all seven card actions, swipes and menu focus. Focused checks compare open/closed menu coordinates, modal Tab/Escape/focus restoration and theme access, centered writing marks, intro type and all rail-title fits at 56px. All 33 candidate states are captured again, including the detail header in both themes.
+
+## Round 14
+
+Remove borders and padding from static technology metadata on project cards, desktop accounts and writing rows. Keep the existing gaps and every technology name. The fourth phone technology and +N count remain together. Buttons keep their 48px targets and stronger control borders.
+
+Give phone article lists a 12px hanging gutter, recovering text width without clipping numbers. Reduce the detail work-label margin to 24px. Keep Back and theme as the detail toolbar controls; the title and dialog name identify the project. Rename the working phone shortcut to Scroll to projects so its action is explicit.
+
+Declined findings: rail labels already use 12px, and project prose already has a 36rem cap. The native picker and full rail are mutually hidden at their breakpoints. Phone actions remain horizontal and 48px tall. The writing mark is centered by measurement. Keep the current 56px previews and their subtle edges, since those edges help dark images separate from the rail. Preserve the work-first desktop and centered phone introduction.
+
+Round-13 review handling: Opus reached its session limit and was skipped under Layken's instruction. The original three seats remain active. DeepSeek's first run returned progress only, with no grades; a fresh same-model retry supplied the recorded review. No score was inferred from either unavailable result.
+
+Round-14 proof: lint, production build and browser suites pass. Checks cover all seven cards and actions, real swipes, direct screenshot tabs, themes and browser colors, menu and detail focus containment/restoration, centered writing marks, rail-title fit and control contrast. Focused checks confirm borderless static metadata, the working scroll shortcut, 24px detail spacing and 12px article gutters at 320px and 390px in both themes. All 33 candidate states are captured again.
 
 ## Round protocol
 

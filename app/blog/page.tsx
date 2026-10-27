@@ -136,7 +136,7 @@ export default function BlogIndex() {
                 </div>
                 <PostTitle title={post.title} />
                 <p className="post-row-desc">{post.description}</p>
-                <div className="flex flex-wrap gap-1.5 pt-1">
+                <div className="flex flex-wrap gap-2 pt-1">
                   {post.tags.map((tag) => (
                     <span key={tag} className="tech-badge-compact">
                       {tag}

@@ -1921,10 +1921,10 @@ html.dark .dp-root .avatar-ring {
 .writing-theme .tech-badge-compact,
 html.dark .dp-root .tech-badge-compact,
 html.dark .writing-theme .tech-badge-compact {
-  border-color: var(--tag-border);
+  border: 0;
   background: transparent;
   color: var(--muted);
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 .dp-identity {
@@ -2005,7 +2005,7 @@ html.dark .writing-theme .tech-badge-compact {
 .writing-theme .tech-badge-compact,
 .dp-root .tech-badge-compact {
   font-size: 12px;
-  padding: 4px 8px;
+  padding: 0;
   opacity: 1;
 }
 .writing-theme .post-steps {
@@ -2047,7 +2047,7 @@ html.dark .writing-theme .post-steps > li {
 }
 
 @media (max-width: 639px) {
-  .writing-theme .post-steps { padding-left: 20px; }
+  .writing-theme .post-steps { padding-left: 12px; }
   .writing-theme .post-steps > li { padding-left: 0; }
 }
 .writing-theme .post-code-inline,
@@ -2133,7 +2133,6 @@ html.dark .writing-theme .nav-link:focus-visible {
 .writing-theme .mono-accent,
 .writing-theme .section-eyebrow,
 .mobile-portfolio .m-counter,
-.mobile-portfolio .m-sheet-crumb,
 .mobile-portfolio .m-sheet-label {
   font-weight: 600;
   letter-spacing: 0.08em;
