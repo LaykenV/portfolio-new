@@ -1,8 +1,8 @@
-import { renderBrandIcon } from '@/lib/brand-icon'
+import { renderVarholdtIcon } from '@/lib/brand-icon'
 
 export const size = { width: 32, height: 32 }
 export const contentType = 'image/png'
 
 export default function Icon() {
-  return renderBrandIcon(size.width)
+  return renderVarholdtIcon(size.width)
 }
