@@ -2120,7 +2120,7 @@ html.dark .writing-theme .nav-link:focus-visible {
 @media (max-width: 767px) {
   /* The shared site header carries the brand, menu and theme on phones. */
   .writing-header[data-home-back] { display: none; }
-  .writing-header { display: flex; margin: -8px 0 -4px; }
+  .writing-header { display: flex; margin: -8px 0 -12px; }
   .writing-header .writing-wordmark,
   .writing-header .writing-header-end { display: none; }
 }

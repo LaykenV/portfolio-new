@@ -411,6 +411,7 @@ function ProjectSlide({
             {String(total).padStart(2, '0')}
           </span>
           <h2 className="m-card-title">{project.title}</h2>
+          <p className="m-card-desc">{project.mobileSummary}</p>
         </div>
 
         <div className="m-card-image">
@@ -431,7 +432,6 @@ function ProjectSlide({
               <span>{project.award.label}</span>
             </div>
           )}
-          <p className="m-card-desc">{project.mobileSummary}</p>
 
           <div className="m-card-stack">
             {project.techStack.slice(0, 3).map((tech) => (
@@ -462,7 +462,7 @@ function ProjectSlide({
                   onClick={(e) => e.stopPropagation()}
                 >
                   <ExternalLink className="h-[14px] w-[14px]" />
-                  Live
+                  Live site
                 </a>
               ) : (
                 <span className="m-btn m-btn-ghost-empty" aria-hidden="true" />

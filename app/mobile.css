@@ -286,7 +286,8 @@ html.dark .m-about-email {
   gap: 8px;
   margin-bottom: 16px;
 }
-.m-project-heading .m-card-title { font-size: clamp(28px, 8vw, 36px); }
+.m-project-heading .m-card-title { font-size: 32px; }
+.m-project-heading .m-card-desc { margin-top: 4px; }
 .m-counter {
   flex-shrink: 0;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
@@ -473,7 +474,7 @@ html.dark .m-btn-primary {
 }
 
 .m-sheet-title {
-  font-size: clamp(34px, 9vw, 44px);
+  font-size: 32px;
   line-height: 0.98;
   margin: 0 0 8px;
   font-weight: 700;
@@ -783,7 +784,7 @@ html.dark .site-menu-cta {
 }
 html:not(.dark) .site-theme-switch [data-theme-option="light"],
 html.dark .site-theme-switch [data-theme-option="dark"] {
-  background: var(--accent-soft);
+  background: var(--surface);
   color: var(--foreground);
   font-weight: 600;
 }
@@ -874,7 +875,7 @@ html.dark .site-theme-switch [data-theme-option="dark"] {
   height: 16px;
   border-radius: 2px;
   background: var(--foreground);
-  opacity: 0.22;
+  opacity: 0.38;
   transition: height 260ms cubic-bezier(0.34, 1.4, 0.64, 1), opacity 200ms ease, background-color 200ms ease;
 }
 .m-rail-dot.active {
