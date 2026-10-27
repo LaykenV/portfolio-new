@@ -2,8 +2,8 @@ import { ImageResponse } from 'next/og'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
-// The Varholdt V mark, recolored in the portfolio's forest and sage palette.
-export async function renderVarholdtIcon(size: number) {
+// LV initials with the Varholdt tile, rim and forest-and-sage shading.
+export async function renderPortfolioIcon(size: number) {
   const svg = await readFile(join(process.cwd(), 'public/favicon.svg'))
   return new ImageResponse(
     <div style={{ width: '100%', height: '100%', display: 'flex' }}>
