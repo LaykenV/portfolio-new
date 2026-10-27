@@ -398,17 +398,13 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
       {/* ---------- Floating control panel ---------- */}
       <div className="dp-col dp-control-col dp-scroll relative py-7">
         {/* Below xl the identity and compact project index share this column. */}
-        <div className="dp-compact-identity xl:hidden flex flex-col gap-3 mb-3">
-          <div className="flex w-full items-center justify-between">
-            <Portrait size={64} />
-            <AnimatedThemeToggler className="dp-theme-toggle" />
-          </div>
+        <div className="dp-compact-identity dp-compact-identity-row xl:hidden mb-3">
+          <Portrait size={48} />
           <div className="min-w-0">
-            <p className="text-[22px] font-bold tracking-tight leading-tight whitespace-nowrap">{IDENTITY.name}</p>
-            <p className="dp-identity-role mt-1">
-              {IDENTITY.role}
-            </p>
+            <p className="text-[20px] font-bold tracking-tight leading-tight whitespace-nowrap">{IDENTITY.name}</p>
+            <p className="dp-identity-role">{IDENTITY.role}</p>
           </div>
+          <AnimatedThemeToggler className="dp-theme-toggle" />
         </div>
 
         <ControlPanel

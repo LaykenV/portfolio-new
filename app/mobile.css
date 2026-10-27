@@ -145,7 +145,7 @@
 }
 
 .m-about-cta-stack {
-  margin-top: 20px;
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -210,7 +210,7 @@ html.dark .m-about-email {
   margin-bottom: 0;
   align-self: stretch;
   min-height: 48px;
-  padding: 12px 0;
+  padding: 4px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -427,16 +427,17 @@ html.dark .m-btn-primary {
 
 .m-sheet-back {
   min-height: 44px;
-  margin-left: -2px;
+  margin: -8px 0 4px -2px;
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--foreground);
-  font-size: 16px;
-  font-weight: 600;
+  color: var(--muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   cursor: pointer;
 }
 
@@ -698,8 +699,8 @@ html.menu-open { overflow: hidden; }
   .site-menu-links a:hover { color: var(--accent); }
 }
 .site-menu-ext {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   color: var(--muted);
   stroke-width: 2;
 }
@@ -771,6 +772,7 @@ html.dark .site-menu-cta {
 }
 html:not(.dark) .site-theme-switch [data-theme-option="light"],
 html.dark .site-theme-switch [data-theme-option="dark"] {
+  box-shadow: inset 0 0 0 1px var(--accent);
   background: var(--accent-soft);
   color: var(--foreground);
   font-weight: 600;

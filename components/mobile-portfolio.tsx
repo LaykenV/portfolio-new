@@ -673,18 +673,6 @@ function DeepDiveSheet({
       <SiteHeader
         className="m-sheet-header"
         scrolled={bodyScrolled}
-        leading={
-          <button
-            className="m-sheet-back"
-            onClick={() => {
-              haptic(6)
-              requestClose()
-            }}
-          >
-            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            <span>Back</span>
-          </button>
-        }
         onHomeClick={() => {
           onHome()
           requestClose()
@@ -693,6 +681,16 @@ function DeepDiveSheet({
       />
 
       <div className="m-sheet-inner" onScroll={(event) => setBodyScrolled(event.currentTarget.scrollTop > 8)}>
+        <button
+          className="m-sheet-back"
+          onClick={() => {
+            haptic(6)
+            requestClose()
+          }}
+        >
+          <ArrowLeft className="h-[14px] w-[14px]" aria-hidden="true" />
+          All projects
+        </button>
         <h2 className="m-sheet-title">{displayProject.title}</h2>
         <div className="m-sheet-tagline">{displayProject.tagline}</div>
         <div className="m-sheet-hero">

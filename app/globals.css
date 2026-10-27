@@ -2026,6 +2026,17 @@ html.dark .writing-theme .post-steps > li {
 .dp-root .post-link,
 .writing-theme .post-link { text-decoration-color: var(--accent); }
 .dp-root .dp-panel-row-primary .dp-panel-icon { color: var(--accent); opacity: 1; }
+/* Light mode: the email action is the same filled forest button as on phones.
+   Dark keeps the soft fill every dark primary uses. */
+html:not(.dark) .dp-root .dp-panel-row-primary,
+html:not(.dark) .dp-root .dp-panel-row-primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+html:not(.dark) .dp-root .dp-panel-row-primary .dp-panel-icon,
+html:not(.dark) .dp-root .dp-panel-row-primary .dp-panel-arrow { color: var(--on-accent); }
+.dp-panel-row-primary { padding-left: calc(0.3rem - 1px); }
 .dp-panel-availability { color: var(--foreground); font-weight: 500; }
 .writing-theme .section-eyebrow::before { background: var(--accent); }
 
@@ -2104,12 +2115,11 @@ html.dark .writing-theme .nav-link:focus-visible {
 @media (max-width: 639px) {
   .writing-header { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
   .writing-theme .post-h2 { text-wrap: normal; }
-  .writing-theme article > header + .prose-block { margin-top: -16px; }
 }
 @media (max-width: 767px) {
   /* The shared site header carries the brand, menu and theme on phones. */
   .writing-header[data-home-back] { display: none; }
-  .writing-header { display: flex; margin-bottom: -16px; }
+  .writing-header { display: flex; margin: -8px 0 -4px; }
   .writing-header .writing-wordmark,
   .writing-header .writing-theme-toggle { display: none; }
 }
@@ -2126,6 +2136,18 @@ html.dark .writing-theme .nav-link:focus-visible {
 .mobile-portfolio .m-counter,
 .mobile-portfolio .m-sheet-label {
   font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: 13px;
+  letter-spacing: 0.06em;
   color: var(--label);
+}
+
+/* Below xl the identity shares the right column with contact. Put the
+   portrait beside the name so the column reaches its links sooner. */
+@media (max-width: 1279px) {
+  .dp-compact-identity-row {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+  }
 }
