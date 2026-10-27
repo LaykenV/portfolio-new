@@ -17,13 +17,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.laykenvarholdt.com'),
   title: {
-    default: 'Layken Varholdt - Software Engineer',
+    default: 'Layken Varholdt - Software Engineer & Founder of Varholdt AI',
     template: '%s — Layken Varholdt',
   },
   description:
-    'Software engineer building production web applications with React, TypeScript, Java, and applied AI. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
+    'Software engineer and founder of Varholdt AI. Building web applications and AI systems. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
   keywords: [
     'Layken Varholdt',
+    'Varholdt AI',
     'Software engineer',
     'Full-stack engineer',
     'multi-agent orchestration',
@@ -47,9 +48,9 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Layken Varholdt - Software Engineer',
+    title: 'Layken Varholdt - Software Engineer & Founder of Varholdt AI',
     description:
-      'Software engineer building production web applications with React, TypeScript, Java, and applied AI. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
+      'Software engineer and founder of Varholdt AI. Building web applications and AI systems. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
     url: '/',
     siteName: 'Layken Varholdt',
     locale: 'en_US',
@@ -59,15 +60,15 @@ export const metadata: Metadata = {
         url: 'https://www.laykenvarholdt.com/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Layken Varholdt - Software Engineer',
+        alt: 'Layken Varholdt - Software Engineer & Founder of Varholdt AI',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Layken Varholdt - Software Engineer',
+    title: 'Layken Varholdt - Software Engineer & Founder of Varholdt AI',
     description:
-      'Software engineer building production web applications with React, TypeScript, Java, and applied AI.',
+      'Software engineer and founder of Varholdt AI. Building web applications and AI systems.',
     creator: '@LLVarholdt',
     images: ['https://www.laykenvarholdt.com/twitter-image'],
   },

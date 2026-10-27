@@ -13,7 +13,6 @@ import Image from 'next/image'
 import {
   ArrowLeft,
   ArrowUpRight,
-  CalendarClock,
   ChevronDown,
   ChevronLeft,
   ExternalLink,
@@ -23,6 +22,7 @@ import {
 
 import type { Project } from '@/types/project'
 import { MobileMenuController } from '@/components/mobile-menu-controller'
+import { FounderIntro } from '@/components/founder-intro'
 import { cn } from '@/lib/utils'
 
 interface MobilePortfolioProps {
@@ -367,10 +367,6 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
           />
         </div>
 
-        <div className="m-status">
-          <span>Open to software engineering roles</span>
-        </div>
-
         {/* Not an h1 — the page's single h1 lives in app/page.tsx so the two
             shells don't each contribute one. */}
         <p className="m-about-name">Layken Varholdt</p>
@@ -380,70 +376,45 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
           <span className="accent">@ DOL</span>
         </div>
 
-        <p className="m-about-pitch">
-          Full-stack engineer who ships <em>reliable software.</em>
-        </p>
-        <p className="m-about-sub">
-          I build production software across React, TypeScript, Java, and
-          modern AI tooling, from federal web applications to multi-tenant SaaS
-          and a 1st-place Convex hackathon product.
-        </p>
+        <FounderIntro />
 
         <div className="m-about-cta-stack">
           <a
-            href="mailto:Laykenv@gmail.com?subject=Software%20Engineering%20role"
+            href="mailto:layken@varholdt.com?subject=Software%20Engineering%20role"
             className="m-cta-email"
           >
             <span className="m-cta-icon" aria-hidden="true">
               <Mail className="h-[18px] w-[18px]" />
             </span>
-            <b className="m-cta-email-addr">Laykenv@gmail.com</b>
+            <b className="m-cta-email-addr">layken@varholdt.com</b>
             <span className="arrow">
               <ArrowUpRight className="h-4 w-4" />
             </span>
           </a>
 
-          <div className="m-quick-grid">
+          <nav className="m-contact-links" aria-label="Contact and GitHub">
             <a
-              className="m-quick"
               href="https://cal.com/layken-varholdt"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
             >
-              <span className="m-quick-chip" aria-hidden="true">
-                <CalendarClock className="h-[18px] w-[18px]" />
-              </span>
-              <span className="m-quick-label">Book call</span>
+              Book a call
             </a>
             <a
-              className="m-quick"
               href="https://t.me/LLVarholdt"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
             >
-              <span className="m-quick-chip" aria-hidden="true">
-                <Image
-                  src="/telegram.png"
-                  alt=""
-                  width={18}
-                  height={18}
-                  draggable={false}
-                />
-              </span>
-              <span className="m-quick-label">Telegram</span>
+              Telegram
             </a>
             <a
-              className="m-quick"
               href="https://github.com/laykenV"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
             >
-              <span className="m-quick-chip" aria-hidden="true">
-                <Github className="h-[18px] w-[18px]" />
-              </span>
-              <span className="m-quick-label">GitHub</span>
+              GitHub
             </a>
-          </div>
+          </nav>
         </div>
 
         <button

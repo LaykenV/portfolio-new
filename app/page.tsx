@@ -12,7 +12,7 @@ export default function Home() {
       <StructuredData projects={projects} />
       {/* The only h1 on the page. Both shells are layout-specific, so the
           document outline lives here rather than being duplicated in each. */}
-      <h1 className="sr-only">Layken Varholdt — Software Engineer</h1>
+      <h1 className="sr-only">Layken Varholdt, software engineer and founder of Varholdt AI</h1>
       <PortfolioShell projects={projects} />
     </>
   )

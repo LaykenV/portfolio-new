@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
-export const ogCardAlt = 'Layken Varholdt - Software Engineer'
+export const ogCardAlt = 'Layken Varholdt - Software Engineer and Founder of Varholdt AI'
 export const ogCardSize = {
   width: 1200,
   height: 630,
@@ -16,7 +16,7 @@ const MUTED = 'rgba(237, 237, 237, 0.6)'
 const NAME = 'Layken Varholdt'
 const ROLE = 'SOFTWARE ENGINEER'
 const SUB =
-  'Production web applications, workflow systems, and applied AI built with React, TypeScript, and Java.'
+  'Founder of Varholdt AI. Building web applications, workflow systems, and applied AI.'
 const URL_TEXT = 'laykenvarholdt.com'
 const CREDENTIAL = '1st place · Convex Modern Stack Hackathon · $10k'
 

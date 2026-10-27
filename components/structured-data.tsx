@@ -11,12 +11,13 @@ export function StructuredData({ projects }: StructuredDataProps) {
   const personSchema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
+    '@id': `${baseUrl}/#person`,
     name: 'Layken Varholdt',
-    jobTitle: 'Software Engineer',
-    worksFor: {
-      '@type': 'Organization',
-      name: 'Zyxware Technologies',
-    },
+    jobTitle: 'Software Engineer and Founder of Varholdt AI',
+    worksFor: [
+      { '@type': 'Organization', name: 'Zyxware Technologies' },
+      { '@id': 'https://www.varholdt.com/#business' },
+    ],
     affiliation: {
       '@type': 'Organization',
       name: 'U.S. Department of Labor',
@@ -43,7 +44,18 @@ export function StructuredData({ projects }: StructuredDataProps) {
       'Gemini',
     ],
     description:
-      'Software engineer building production web applications with React, TypeScript, Java, and applied AI. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
+      'Software engineer and founder of Varholdt AI. Building web applications and AI systems. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
+  }
+
+  const businessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': 'https://www.varholdt.com/#business',
+    name: 'Varholdt AI',
+    url: 'https://www.varholdt.com/',
+    slogan: 'The AI engineer for businesses that don’t have one.',
+    description: 'AI workflows, custom software, and team AI training.',
+    founder: { '@id': `${baseUrl}/#person` },
   }
 
   // WebSite schema for search box potential
@@ -57,7 +69,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
       name: 'Layken Varholdt',
     },
     description:
-      'Portfolio of Layken Varholdt, a software engineer building production web applications, workflow systems, and applied AI features.',
+      'Portfolio of Layken Varholdt, software engineer and founder of Varholdt AI. Web applications, workflow systems, and applied AI.',
   }
 
   // ProfilePage schema
@@ -66,8 +78,9 @@ export function StructuredData({ projects }: StructuredDataProps) {
     '@type': 'ProfilePage',
     mainEntity: {
       '@type': 'Person',
+      '@id': `${baseUrl}/#person`,
       name: 'Layken Varholdt',
-      jobTitle: 'Software Engineer',
+      jobTitle: 'Software Engineer and Founder of Varholdt AI',
       url: baseUrl,
       image: `${baseUrl}/portrait.jpeg`,
     },
@@ -105,20 +118,12 @@ export function StructuredData({ projects }: StructuredDataProps) {
         },
       }
 
-      let item
-      if (project.slug === 'varholdt-ai') {
-        item = {
-          '@type': 'WebSite',
-          ...common,
-        }
-      } else {
-        item = {
-          '@type': ['SoftwareApplication', 'WebApplication'],
-          ...common,
-          applicationCategory:
-            applicationCategories[project.slug] ?? 'BusinessApplication',
-          operatingSystem: 'Web Browser',
-        }
+      const item = {
+        '@type': ['SoftwareApplication', 'WebApplication'],
+        ...common,
+        applicationCategory:
+          applicationCategories[project.slug] ?? 'BusinessApplication',
+        operatingSystem: 'Web Browser',
       }
 
       return {
@@ -134,6 +139,10 @@ export function StructuredData({ projects }: StructuredDataProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
       />
       <script
         type="application/ld+json"
