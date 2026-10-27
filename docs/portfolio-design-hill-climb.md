@@ -104,6 +104,9 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 14 | Terra | 8.5 | 8.7 | 8.4 | 8.2 | 9.0 | 9.0 | 8.5 | 9.0 | 8.1 | 8.6 |
 | 14 | DeepSeek, OpenCode | 9.1 | 9.0 | 8.7 | 8.7 | 9.1 | 8.8 | 8.8 | 9.3 | 8.4 | 8.9 |
 | 14 | Muse Contributor | 8.0 | 7.5 | 7.5 | 7.0 | 8.0 | 7.5 | 7.0 | 8.5 | 7.5 | 7.6 |
+| 15 | Terra | 8.5 | 8.5 | 8.4 | 8.1 | 9.0 | 8.7 | 8.5 | 9.0 | 8.3 | 8.6 |
+| 15 | DeepSeek, OpenCode retry | 9.0 | 9.1 | 8.8 | 8.6 | 9.0 | 9.0 | 8.8 | 9.3 | 8.9 | 8.9 |
+| 15 | Muse Contributor | 8.5 | 8.5 | 8.5 | 8.0 | 8.5 | 8.0 | 8.0 | 9.0 | 7.5 | 8.3 |
 
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
@@ -276,6 +279,20 @@ Remove the rules around Scroll to projects. Keep its 48px target, location and w
 Declined findings: the metadata already uses a 4rem grid with aligned keys and continuous image-width rules. The first Atlas stack row fits on one line. Phone actions already have an 8px gap and fit at 320px. The writing header already uses three tracks on phones and its visible mark is centered by measurement. Prose and screenshot metadata have different intended widths. Keep the responsive tablet order, 24px work-label margin, screenshot tabs, founder story and current palette. Do not add founder text to every byline or shrink labels for variation.
 
 Round-15 proof: lint and production build pass. Browser checks cover themes and browser colors, all seven actions and real swipes, direct tabs, menu/detail focus and restoration, short viewports and reading overflow. Focused checks confirm 13px static labels with 10px gaps, all seven Atlas labels on one row, hover/focus arrow visibility, a borderless 48px scroll control, 16px phone article gutters, centered writing marks and the unchanged 8px/16px card rhythm. All 33 states are captured again.
+
+## Round 16
+
+Replace the wide rail's miniature screenshots with a numbered text index. Keep every project name, both groups, 44px targets and the shared 20px edge. Use 15px titles and a 12px gap from the number. Give the dark selected row the existing control-border outline. The large project images and direct screenshot tabs stay.
+
+Recover 20px from the phone intro's handoff to work without changing its copy, portrait or contact targets. The scroll shortcut loses its extra top margin, and the intro has 8px bottom padding. Keep the 8px counter/title and 16px title/image gaps.
+
+Raise writing dates, read time and the article byline to 13px with 0.04em tracking. Group the blog intro and post list with a 24px gap while keeping the header's spacing separate. Retain the 36rem excerpt and article measures.
+
+Declined findings: index descriptions already cap at 36rem, not 720px. The visible writing mark is centered and the phone header already has three tracks. The 1024px layout already has two columns. Phone actions fit horizontally at 320px with 48px targets, and Atlas's technology row fits on one line. Do not widen prose, stack buttons, flip the tablet order or add another header link for variation. Keep the current palette, founder message and screenshot frame.
+
+DeepSeek's first round-15 result ended at the table heading and had no grades. A fresh same-model OpenCode retry produced the recorded full review. Opus remains skipped after its usage limit, as authorized.
+
+Round-16 proof: lint and production build pass. Browser suites retain all seven project routes and actions, real touch swipes, direct screenshot tabs, themes and browser colors, menu/detail focus and restoration, short-phone fit and reading overflow. Focused checks confirm seven text-only rail rows with 44px targets, 15px titles and 12px gaps, the earlier phone handoff, 13px writing metadata, the 24px index gap, centered writing marks and unchanged card geometry. All 33 states are captured again.
 
 ## Round protocol
 

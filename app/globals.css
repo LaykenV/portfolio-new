@@ -1588,9 +1588,9 @@ html.dark .writing-theme {
 .dp-nav-item {
   position: relative;
   display: grid;
-  grid-template-columns: 1rem 3.5rem minmax(0, 1fr);
+  grid-template-columns: 1rem minmax(0, 1fr);
   align-items: center;
-  gap: 6px;
+  gap: 12px;
   width: 100%;
   min-height: 44px;
   text-align: left;
@@ -1617,6 +1617,7 @@ html.dark .writing-theme {
 }
 html.dark .dp-nav-item.dp-nav-active {
   background: hsl(var(--foreground-hsl) / 0.1);
+  box-shadow: inset 0 0 0 1px var(--control-border);
 }
 
 
@@ -1632,32 +1633,12 @@ html.dark .dp-nav-item.dp-nav-active {
   opacity: 1;
 }
 
-.dp-nav-thumb {
-  position: relative;
-  width: 3.5rem;
-  aspect-ratio: 16 / 9;
-  border-radius: 0.32rem;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: hsl(var(--card));
-  transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease;
-}
-.dp-nav-thumb img {
-  object-fit: cover;
-  object-position: 50% 0%;
-}
-.dp-nav-active .dp-nav-thumb {
-  border-color: hsl(var(--foreground-hsl) / 0.3);
-}
-
 .dp-nav-title {
   display: flex;
   align-items: center;
   gap: 0.35rem;
   min-width: 0;
-  font-size: 0.85rem;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1.25;
@@ -2005,6 +1986,7 @@ html.dark .writing-theme .tech-badge-compact {
 .writing-theme .post-h2 { font-size: clamp(1.25rem, 2.2vw, 1.5rem); }
 .writing-theme .post-row-title { font-size: 20px; font-weight: 650; }
 .writing-theme .post-row-desc { max-width: 36rem; font-size: 16px; line-height: 1.65; }
+.writing-theme .writing-meta .mono-accent { font-size: 13px; letter-spacing: 0.04em; }
 .writing-theme .tech-badge-compact,
 .dp-root .tech-badge-compact {
   font-size: 13px;

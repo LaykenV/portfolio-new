@@ -132,7 +132,7 @@ export default function GlmFlashPrAgentCodeReviewPost() {
           and two repository-local Codex skills into a review loop that still
           asks me before merge.
         </p>
-        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
+        <div className="writing-meta flex flex-wrap items-center gap-2 pt-1 text-xs">
           <span className="mono-accent">By Layken Varholdt</span>
           <span aria-hidden="true">&middot;</span>
           <span className="mono-accent">~9 min read</span>

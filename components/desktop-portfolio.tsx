@@ -288,9 +288,6 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
                       aria-current={isActive}
                     >
                       <span className="dp-nav-num">{pad(position.get(p.slug) ?? 0)}</span>
-                      <span className="dp-nav-thumb">
-                        <Image src={p.image} alt="" fill sizes="112px" />
-                      </span>
                       <span className="dp-nav-title">
                         <span>{p.title}</span>
                       </span>

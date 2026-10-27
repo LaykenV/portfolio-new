@@ -101,53 +101,55 @@ export default function BlogIndex() {
     <div className="font-sans mx-auto max-w-3xl min-h-dvh px-5 pb-14 pt-5 md:px-6 md:py-20 flex flex-col gap-8 md:gap-10">
       <WritingHeader backHref="/" backLabel="Home" />
 
-      <div className="flex flex-col gap-3">
-        <div className="section-eyebrow">Writing</div>
-        <h1 className="hero-title">
-          Notes on <em>shipping AI</em>.
-        </h1>
-        <p className="hero-sub">
-          Long-form pieces on multi-agent orchestration, document intelligence
-          pipelines, and the infrastructure work behind AI systems that actually
-          reach production.
-        </p>
-      </div>
+      <section className="flex flex-col gap-6">
+        <div className="flex flex-col gap-3">
+          <div className="section-eyebrow">Writing</div>
+          <h1 className="hero-title">
+            Notes on <em>shipping AI</em>.
+          </h1>
+          <p className="hero-sub">
+            Long-form pieces on multi-agent orchestration, document intelligence
+            pipelines, and the infrastructure work behind AI systems that actually
+            reach production.
+          </p>
+        </div>
 
-      <ul className="flex flex-col gap-4">
-        {posts.map((post) => (
-          <li key={post.slug}>
-            <Link
-              href={`/blog/${post.slug}`}
-              className="post-row group"
-              aria-label={`Read: ${post.title}`}
-            >
-              <div className="flex flex-col gap-2 min-w-0">
-                <div className="flex items-center gap-2 text-xs">
-                  <time
-                    dateTime={post.date}
-                    className="mono-accent"
-                  >
-                    {post.dateReadable}
-                  </time>
-                  <span aria-hidden="true">·</span>
-                  <span className="mono-accent">
-                    ~{post.readMinutes} min read
-                  </span>
-                </div>
-                <PostTitle title={post.title} />
-                <p className="post-row-desc">{post.description}</p>
-                <div className="flex flex-wrap gap-2.5 pt-1">
-                  {post.tags.map((tag) => (
-                    <span key={tag} className="tech-badge-compact">
-                      {tag}
+        <ul className="flex flex-col gap-4">
+          {posts.map((post) => (
+            <li key={post.slug}>
+              <Link
+                href={`/blog/${post.slug}`}
+                className="post-row group"
+                aria-label={`Read: ${post.title}`}
+              >
+                <div className="flex flex-col gap-2 min-w-0">
+                  <div className="writing-meta flex items-center gap-2 text-xs">
+                    <time
+                      dateTime={post.date}
+                      className="mono-accent"
+                    >
+                      {post.dateReadable}
+                    </time>
+                    <span aria-hidden="true">·</span>
+                    <span className="mono-accent">
+                      ~{post.readMinutes} min read
                     </span>
-                  ))}
+                  </div>
+                  <PostTitle title={post.title} />
+                  <p className="post-row-desc">{post.description}</p>
+                  <div className="flex flex-wrap gap-2.5 pt-1">
+                    {post.tags.map((tag) => (
+                      <span key={tag} className="tech-badge-compact">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   )
 }
