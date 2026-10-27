@@ -277,7 +277,7 @@ function AboutSlide({ ref }: AboutSlideProps) {
       <div className="m-about-bg" aria-hidden="true" />
       <div className="m-about-inner">
         <div className="m-about-portrait">
-          <Image src="/portrait.jpeg" alt="Layken Varholdt" width={192} height={192} draggable={false} />
+          <Image src="/portrait.jpeg" alt="Layken Varholdt" width={240} height={240} draggable={false} />
         </div>
 
         {/* Not an h1. The page's single h1 lives in app/page.tsx so the two

@@ -373,10 +373,9 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
         <div className="dp-compact-identity dp-compact-identity-row xl:hidden mb-3">
           <Portrait size={56} />
           <div className="min-w-0">
-            <p className="text-[20px] font-bold tracking-tight leading-tight whitespace-nowrap">{IDENTITY.name}</p>
+            <p className="text-[22px] font-bold tracking-tight leading-tight whitespace-nowrap">{IDENTITY.name}</p>
             <p className="dp-identity-role">{IDENTITY.role}</p>
           </div>
-          <AnimatedThemeToggler className="dp-theme-toggle" />
         </div>
 
         <ControlPanel
@@ -415,6 +414,8 @@ function ControlPanel({ projectPicker }: { projectPicker: ReactNode }) {
       <section className="dp-panel-section">
         <div className="dp-contact-heading">
           <p className="dp-panel-label">Contact</p>
+          {/* At xl the toggle sits in the rail beside the portrait. */}
+          <AnimatedThemeToggler className="dp-theme-toggle xl:hidden" />
         </div>
         <p className="dp-panel-availability">Open to software engineering roles</p>
 

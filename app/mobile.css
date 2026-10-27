@@ -123,8 +123,8 @@
 }
 
 .m-about-portrait {
-  width: 88px;
-  height: 88px;
+  width: 112px;
+  height: 112px;
   margin-bottom: 6px;
   border-radius: 50%;
   overflow: hidden;
@@ -747,8 +747,9 @@ html.dark .site-menu-cta {
   color: var(--foreground);
 }
 .site-menu-meta {
-  display: flex;
-  flex-wrap: wrap;
+  /* Three per row, so five links split 3 and 2 instead of leaving one alone. */
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
   gap: 0 22px;
   margin: 0;
 }

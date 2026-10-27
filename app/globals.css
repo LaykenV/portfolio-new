@@ -1934,8 +1934,8 @@ html.dark .writing-theme .tech-badge-compact {
   margin-top: 20px;
   padding-top: 16px;
   border-top: 1px solid var(--border);
-  max-width: 36rem;
 }
+.dp-details .dp-account > * { max-width: 36rem; }
 .dp-details summary::-webkit-details-marker { display: none; }
 .dp-details[open] summary svg { transform: rotate(180deg); }
 .dp-details summary:focus-visible {
@@ -2112,10 +2112,11 @@ html.dark .writing-theme .nav-link:focus-visible {
 @media (max-width: 1279px) {
   .dp-compact-identity-row {
     display: grid;
-    grid-template-columns: 48px minmax(0, 1fr) auto;
+    grid-template-columns: 56px minmax(0, 1fr);
     align-items: center;
     gap: 12px;
   }
+  .dp-contact-heading .dp-theme-toggle { margin: -12px -10px -12px 0; }
 }
 
 /* Tags read as separate items, not one phrase. */
