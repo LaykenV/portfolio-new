@@ -291,7 +291,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
           <Portrait size={64} />
           <div className="min-w-0">
             <p className="text-[1.15rem] font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
-            <p className="dp-eyebrow mt-1" style={{ fontSize: '0.63rem' }}>
+            <p className="dp-eyebrow mt-1">
               {IDENTITY.role}
             </p>
           </div>
@@ -378,7 +378,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
 
               <ProjectShot project={project} view={shotView} onViewChange={setShotView} />
 
-              <p className="dp-body mt-7 max-w-[44rem]">{project.longDescription}</p>
+              <p className="dp-body mt-7 max-w-[65ch]">{project.longDescription}</p>
 
               <dl className="dp-meta mt-8">
                 <dt className="dp-meta-k">Stack</dt>
@@ -391,15 +391,6 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
                     ))}
                   </div>
                 </dd>
-
-                {project.award && (
-                  <>
-                    <dt className="dp-meta-k">Recognition</dt>
-                    <dd className="dp-meta-v">
-                      {project.award.icon} {project.award.label}
-                    </dd>
-                  </>
-                )}
 
                 <dt className="dp-meta-k">Links</dt>
                 <dd className="dp-meta-v">
@@ -442,7 +433,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
           <Portrait size={48} />
           <div className="min-w-0">
             <p className="text-base font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
-            <p className="dp-eyebrow mt-1" style={{ fontSize: '0.6rem' }}>
+            <p className="dp-eyebrow mt-1">
               {IDENTITY.role}
             </p>
           </div>

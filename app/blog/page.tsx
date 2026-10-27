@@ -109,7 +109,7 @@ export default function BlogIndex() {
               aria-label={`Read: ${post.title}`}
             >
               <div className="flex flex-col gap-2 min-w-0">
-                <div className="flex items-center gap-2 text-xs opacity-65">
+                <div className="flex items-center gap-2 text-xs">
                   <time
                     dateTime={post.date}
                     className="mono-accent"

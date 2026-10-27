@@ -3,9 +3,10 @@
 import { ThemeProvider } from 'next-themes';
 import { useEffect } from 'react';
 import { useTheme } from 'next-themes';
+import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 
-/** Must track --background in globals.css for each theme. */
+/** Fallback for routes without a portfolio or writing surface. */
 const THEME_COLORS: Record<string, string> = {
   light: '#FAF9F6',
   dark: '#0A0A0A',
@@ -18,12 +19,25 @@ const THEME_COLORS: Record<string, string> = {
  */
 function ThemeColorSync() {
   const { resolvedTheme } = useTheme();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!resolvedTheme) return;
-    const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-    if (meta) meta.content = THEME_COLORS[resolvedTheme] ?? THEME_COLORS.dark;
-  }, [resolvedTheme]);
+    // next-themes applies the html class in its own effect. Read the surface
+    // on the next frame so its computed color belongs to the selected theme.
+    const frame = requestAnimationFrame(() => {
+      const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+      const surface = Array.from(
+        document.querySelectorAll<HTMLElement>('.dp-root, .mobile-portfolio, .writing-theme')
+      ).find((element) => element.getClientRects().length > 0);
+      if (meta) {
+        meta.content = surface
+          ? getComputedStyle(surface).backgroundColor
+          : THEME_COLORS[resolvedTheme] ?? THEME_COLORS.dark;
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [resolvedTheme, pathname]);
 
   return null;
 }

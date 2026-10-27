@@ -29,11 +29,6 @@ interface MobilePortfolioProps {
   projects: Project[]
 }
 
-/** Routes a card backdrop through the image optimizer at thumbnail size. */
-function blurBackdropSrc(src: string) {
-  return `/_next/image?url=${encodeURIComponent(src)}&w=64&q=75`
-}
-
 function haptic(ms = 8) {
   try {
     if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
@@ -525,14 +520,9 @@ function ProjectSlide({
     setHintOn(false)
   }
 
-  // The backdrop is a 44px blur behind a heavy gradient scrim, so a thumbnail
-  // is indistinguishable from the original — and the original is up to 5 MB of
-  // raw PNG that CSS would otherwise fetch unoptimized on every card.
-  const bgStyle = { ['--card-bg-url' as string]: `url("${blurBackdropSrc(project.image)}")` }
-
   return (
     <section ref={ref} className="m-slide m-project">
-      <div className="m-card-bg" style={bgStyle} aria-hidden="true" />
+      <div className="m-card-bg" aria-hidden="true" />
       <div
         className="m-card-inner"
         onTouchStart={onTouchStart}
@@ -549,12 +539,6 @@ function ProjectSlide({
         </div>
 
         <div className="m-card-image">
-          {project.award && (
-            <div className="m-ribbon" aria-label={project.award.label}>
-              <span aria-hidden="true">{project.award.icon ?? '🥇'}</span>
-              <span>{project.award.label}</span>
-            </div>
-          )}
           <Image
             src={project.image}
             alt={project.title}
@@ -563,10 +547,15 @@ function ProjectSlide({
             sizes="100vw"
             draggable={false}
           />
-          <span className="m-card-shine" aria-hidden="true" />
         </div>
 
         <div className="m-card-body">
+          {project.award && (
+            <div className="m-ribbon">
+              <span aria-hidden="true">{project.award.icon ?? '🥇'}</span>
+              <span>{project.award.label}</span>
+            </div>
+          )}
           <h2 className="m-card-title">{project.title}</h2>
           <p className="m-card-tagline">{project.tagline}</p>
           <p className="m-card-desc">{project.description}</p>
