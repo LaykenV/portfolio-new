@@ -35,7 +35,7 @@ function ThemeColorSync() {
         // previous color while a CSS transition is starting.
         meta.content = surface
           ? getComputedStyle(surface).getPropertyValue('--background').trim()
-          : THEME_COLORS[resolvedTheme] ?? THEME_COLORS.dark;
+          : THEME_COLORS[resolvedTheme] ?? THEME_COLORS.light;
       }
     });
     return () => cancelAnimationFrame(frame);
@@ -47,7 +47,7 @@ function ThemeColorSync() {
 export function AppThemeProvider({ children }: { children: ReactNode }) {
   return (
     // Switch both surfaces and browser chrome without a page-wide animation.
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
       <ThemeColorSync />
       {children}
     </ThemeProvider>

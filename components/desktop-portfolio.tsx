@@ -240,7 +240,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
       <aside className="dp-col hidden xl:flex flex-col border-r dp-hairline py-7 overflow-hidden">
         <div className="dp-identity dp-identity-section px-5 pb-6 flex-shrink-0">
           <div className="flex w-full items-center justify-between">
-            <Portrait size={64} />
+            <Portrait size={88} />
             <AnimatedThemeToggler className="dp-theme-toggle" />
           </div>
           <div className="min-w-0">
@@ -371,7 +371,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
       <div className="dp-col dp-control-col dp-scroll relative py-7">
         {/* Below xl the identity and compact project index share this column. */}
         <div className="dp-compact-identity dp-compact-identity-row xl:hidden mb-3">
-          <Portrait size={48} />
+          <Portrait size={56} />
           <div className="min-w-0">
             <p className="text-[20px] font-bold tracking-tight leading-tight whitespace-nowrap">{IDENTITY.name}</p>
             <p className="dp-identity-role">{IDENTITY.role}</p>

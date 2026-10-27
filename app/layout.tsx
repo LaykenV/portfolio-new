@@ -102,7 +102,7 @@ export default function RootLayout({
       <head>
         {/* Matches defaultTheme. ThemeColorSync corrects it after mount if the
             visitor has a stored preference, and on every toggle. */}
-        <meta name="theme-color" content="#0A0A0A" />
+        <meta name="theme-color" content="#D7DFD6" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased app-background`}

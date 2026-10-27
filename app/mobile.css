@@ -1,5 +1,7 @@
 :root {
   --site-header-h: calc(env(safe-area-inset-top, 0px) + 60px);
+  /* How much of the first project shows under the phone hero. */
+  --m-peek: calc(env(safe-area-inset-bottom, 0px) + 120px);
   --header-h: clamp(64px, 10svh, 88px);
   --dock-h: clamp(48px, 8svh, 64px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -74,6 +76,7 @@
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
+  scroll-padding-top: var(--site-header-h);
 }
 
 .m-slide {
@@ -89,7 +92,11 @@
 }
 
 /* ── About slide ─────────────────────────────────────── */
-.m-about { padding: 0; }
+.m-about {
+  padding: 0;
+  height: auto;
+  min-height: calc(100dvh - var(--m-peek));
+}
 .m-about-bg {
   position: absolute;
   inset: 0;
@@ -100,18 +107,16 @@
 .m-about-inner {
   position: relative;
   z-index: 1;
-  height: 100%;
-  justify-content: safe center;
-  padding: calc(var(--site-header-h) + 16px) 20px
-           calc(env(safe-area-inset-bottom, 0px) + 8px);
+  flex: 1;
+  justify-content: center;
+  padding: calc(var(--site-header-h) + 16px) 20px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 8px;
   box-sizing: border-box;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow-x: clip;
 }
 .m-about-inner > * {
   flex-shrink: 0;
@@ -243,8 +248,12 @@ html.dark .m-about-email {
 
 
 /* ── Project slide ───────────────────────────────────── */
-/* One project per screen, so a swipe moves exactly one project. */
-.m-project { padding: 0; }
+/* One project fills the screen under the header, so a swipe moves exactly
+   one project. */
+.m-project {
+  padding: 0;
+  height: calc(100dvh - var(--site-header-h));
+}
 .m-card-bg {
   position: absolute;
   inset: 0;
@@ -256,11 +265,10 @@ html.dark .m-about-email {
   position: relative;
   z-index: 1;
   height: 100%;
-  padding: calc(var(--site-header-h) + 16px) 20px
+  padding: 16px 20px
            calc(env(safe-area-inset-bottom, 0px) + 24px);
   display: flex;
   flex-direction: column;
-  justify-content: safe center;
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
@@ -298,10 +306,13 @@ html.dark .m-about-email {
 .m-card-image {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  /* 16:9 when there is room. On short screens the shot gives up height
+     first, cropping from the bottom, so the actions stay on screen. */
+  height: calc((100vw - 40px) * 9 / 16);
+  min-height: 120px;
   border-radius: 10px;
   overflow: hidden;
-  flex-shrink: 0;
+  flex-shrink: 1;
   background: hsl(var(--card));
   border: 1px solid var(--border);
 }
@@ -323,6 +334,9 @@ html.dark .m-about-email {
   gap: 8px;
   padding-top: 16px;
 }
+/* Tall screens keep the actions at the bottom, near the thumb. */
+.m-project .m-card-body { flex: 1 0 auto; }
+.m-project .m-card-actions { margin-top: auto; }
 
 .m-card-title {
   font-size: clamp(32px, 9vw, 44px);
