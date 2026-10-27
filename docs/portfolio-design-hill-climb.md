@@ -101,6 +101,9 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 13 | DeepSeek, OpenCode retry | 9.4 | 9.4 | 9.2 | 9.3 | 9.0 | 9.4 | 9.0 | 9.4 | 8.8 | 9.2 |
 | 13 | Muse Contributor | 8.5 | 8.5 | 8.0 | 8.0 | 8.5 | 8.5 | 8.0 | 9.0 | 8.0 | 8.3 |
 | 13 | Opus 5.5, session limit | no score | no score | no score | no score | no score | no score | no score | no score | no score | no score |
+| 14 | Terra | 8.5 | 8.7 | 8.4 | 8.2 | 9.0 | 9.0 | 8.5 | 9.0 | 8.1 | 8.6 |
+| 14 | DeepSeek, OpenCode | 9.1 | 9.0 | 8.7 | 8.7 | 9.1 | 8.8 | 8.8 | 9.3 | 8.4 | 8.9 |
+| 14 | Muse Contributor | 8.0 | 7.5 | 7.5 | 7.0 | 8.0 | 7.5 | 7.0 | 8.5 | 7.5 | 7.6 |
 
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
@@ -263,6 +266,16 @@ Declined findings: rail labels already use 12px, and project prose already has a
 Round-13 review handling: Opus reached its session limit and was skipped under Layken's instruction. The original three seats remain active. DeepSeek's first run returned progress only, with no grades; a fresh same-model retry supplied the recorded review. No score was inferred from either unavailable result.
 
 Round-14 proof: lint, production build and browser suites pass. Checks cover all seven cards and actions, real swipes, direct screenshot tabs, themes and browser colors, menu and detail focus containment/restoration, centered writing marks, rail-title fit and control contrast. Focused checks confirm borderless static metadata, the working scroll shortcut, 24px detail spacing and 12px article gutters at 320px and 390px in both themes. All 33 candidate states are captured again.
+
+## Round 15
+
+Raise static desktop and writing technology labels to 13px and use 10px gaps across technology rows. Preserve plain labels, facts and the fourth-label/+N grouping. Keep all action buttons at 48px. Set the phone article gutter to 16px, giving markers more room than round 14 while retaining some of its wider text measure.
+
+Remove the rules around Scroll to projects. Keep its 48px target, location and working scroll action, with a 14px/600 label and 14px arrow. Show repeated desktop external-link arrows on hover and keyboard focus; keep the email and internal Blog arrows visible.
+
+Declined findings: the metadata already uses a 4rem grid with aligned keys and continuous image-width rules. The first Atlas stack row fits on one line. Phone actions already have an 8px gap and fit at 320px. The writing header already uses three tracks on phones and its visible mark is centered by measurement. Prose and screenshot metadata have different intended widths. Keep the responsive tablet order, 24px work-label margin, screenshot tabs, founder story and current palette. Do not add founder text to every byline or shrink labels for variation.
+
+Round-15 proof: lint and production build pass. Browser checks cover themes and browser colors, all seven actions and real swipes, direct tabs, menu/detail focus and restoration, short viewports and reading overflow. Focused checks confirm 13px static labels with 10px gaps, all seven Atlas labels on one row, hover/focus arrow visibility, a borderless 48px scroll control, 16px phone article gutters, centered writing marks and the unchanged 8px/16px card rhythm. All 33 states are captured again.
 
 ## Round protocol
 

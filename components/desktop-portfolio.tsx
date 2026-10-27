@@ -355,7 +355,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
               <dl className="dp-meta mt-6">
                 <dt className="dp-meta-k">Stack</dt>
                 <dd className="dp-meta-v">
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2.5">
                     {project.techStack.map((t) => (
                       <span key={t} className="tech-badge-compact">
                         {t}

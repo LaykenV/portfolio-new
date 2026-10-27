@@ -331,7 +331,7 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
         >
           <span className="label">Scroll to projects</span>
           <span className="chev" aria-hidden="true">
-            <ArrowDown className="h-[16px] w-[16px]" />
+            <ArrowDown className="h-[14px] w-[14px]" />
           </span>
         </button>
       </div>

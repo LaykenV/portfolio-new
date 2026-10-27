@@ -1841,6 +1841,9 @@ html.dark .dp-nav-item.dp-nav-active {
 .dp-panel-row:hover .dp-panel-arrow {
   transform: translate(1px, -1px);
 }
+.dp-panel-row[target="_blank"] .dp-panel-arrow { opacity: 0; }
+.dp-panel-row[target="_blank"]:hover .dp-panel-arrow,
+.dp-panel-row[target="_blank"]:focus-visible .dp-panel-arrow { opacity: 1; }
 
 /* --- Metadata table + band rhythm ---------------------------------------- */
 .dp-meta {
@@ -2004,7 +2007,7 @@ html.dark .writing-theme .tech-badge-compact {
 .writing-theme .post-row-desc { max-width: 36rem; font-size: 16px; line-height: 1.65; }
 .writing-theme .tech-badge-compact,
 .dp-root .tech-badge-compact {
-  font-size: 12px;
+  font-size: 13px;
   padding: 0;
   opacity: 1;
 }
@@ -2047,7 +2050,7 @@ html.dark .writing-theme .post-steps > li {
 }
 
 @media (max-width: 639px) {
-  .writing-theme .post-steps { padding-left: 12px; }
+  .writing-theme .post-steps { padding-left: 16px; }
   .writing-theme .post-steps > li { padding-left: 0; }
 }
 .writing-theme .post-code-inline,
