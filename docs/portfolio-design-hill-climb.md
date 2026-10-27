@@ -122,6 +122,10 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 22 | Sol | 10 | 9.0 | 9.2 | 10 | 10 | 10 | 9.5 | 9.3 | 10 | 9.7 |
 | 22 | DeepSeek, OpenCode | 9.0 | 8.7 | 8.8 | 8.8 | 8.7 | 9.0 | 8.7 | 9.0 | 8.7 | 8.8 |
 | 22 | Muse Contributor | 8.5 | 8.5 | 8.5 | 8.5 | 9.0 | 9.0 | 8.0 | 9.0 | 8.5 | 8.6 |
+| 24 | Sol | 10 | 10 | 9.0 | 9.3 | 10 | 10 | 9.0 | 10 | 10 | 9.7 |
+| 24 | Opus 5.5 | 9.0 | 8.8 | 8.7 | 8.6 | 9.1 | 9.1 | 8.7 | 9.2 | 7.8 | 8.8 |
+| 25 | Sol | 10 | 9.6 | 10 | 10 | 10 | 9.3 | 9.0 | 9.5 | 10 | 9.7 |
+| 25 | Opus 5.5 | 8.8 | 8.6 | 8.6 | 8.5 | 8.9 | 8.6 | 8.3 | 8.9 | 8.0 | 8.6 |
 
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 

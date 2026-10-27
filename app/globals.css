@@ -1828,6 +1828,9 @@ html.dark .site-menu {
   padding-left: 0.75rem;
   font-size: 0.86rem;
 }
+/* One line box for the label and the tokens keeps them on a baseline. */
+.dp-meta-k,
+.dp-meta-v .tech-badge-compact { line-height: 1.25rem; }
 
 .dp-band + .dp-band {
   margin-top: 2.5rem;
@@ -1930,12 +1933,7 @@ html.dark .writing-theme .tech-badge-compact {
   text-decoration-color: hsl(var(--foreground-hsl) / 0.3);
 }
 .dp-details summary:hover { text-decoration: underline; text-decoration-color: currentColor; }
-.dp-details .dp-account {
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-}
-.dp-details .dp-account > * { max-width: 36rem; }
+.dp-details .dp-account { margin-top: 20px; }
 .dp-details summary::-webkit-details-marker { display: none; }
 .dp-details[open] summary svg { transform: rotate(180deg); }
 .dp-details summary:focus-visible {
@@ -2117,6 +2115,11 @@ html.dark .writing-theme .nav-link:focus-visible {
     gap: 12px;
   }
   .dp-contact-heading .dp-theme-toggle { margin: -12px -10px -12px 0; }
+}
+/* .btn-icon sets display, so xl:hidden alone loses. The rail has the
+   toggle at this width. */
+@media (min-width: 1280px) {
+  .dp-contact-heading .dp-theme-toggle { display: none; }
 }
 
 /* Tags read as separate items, not one phrase. */
