@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import {
   ArrowRight,
   ArrowUpRight,
@@ -30,7 +30,7 @@ const TIER_LABELS: Array<[ProjectTier, string]> = [
 /* Identity content shared by the rail and the control panel. */
 const IDENTITY = {
   name: 'Layken Varholdt',
-  role: 'Software engineer · DOL',
+  role: 'Software engineer',
   email: 'mailto:layken@varholdt.com?subject=Software%20Engineering%20role',
   emailLabel: 'layken@varholdt.com',
   resume: '/Layken-Varholdt-Software-Engineer-Resume.pdf',
@@ -95,15 +95,7 @@ const SHOT_VIEWS: Array<[ShotView, string]> = [
   ['app', 'The app'],
 ]
 
-/**
- * The screenshot pair shares a plain hostname and a view switch. Hovering the
- * inactive half slides the seam between the two shots
- * toward it, uncovering a strip of the other view, so the switch demonstrates
- * itself before you commit to a click.
- *
- * `view` is owned by the page: flipping one project flips them all, so a
- * visitor who wants interiors asks once instead of nine times.
- */
+/** The selected screenshot view is shared across all seven projects. */
 function ProjectShot({
   project,
   view,
@@ -113,9 +105,8 @@ function ProjectShot({
   view: ShotView
   onViewChange: (view: ShotView) => void
 }) {
-  const [peek, setPeek] = useState<ShotView | null>(null)
   // Sticky: once the interior has been mounted it stays, so flipping back and
-  // forth after the first reveal costs nothing. Next/Image is lazy by default,
+  // forth after the first selection costs nothing. Next/Image is lazy by default,
   // so mounting the offscreen bands' interiors does not fetch them until they
   // scroll near the viewport.
   const [appMounted, setAppMounted] = useState(view === 'app')
@@ -128,16 +119,7 @@ function ProjectShot({
 
   const select = (next: ShotView) => {
     if (next === 'app') setAppMounted(true)
-    setPeek(null)
     onViewChange(next)
-  }
-
-  // Hover or focus on a segment. Doubles as the prefetch trigger: there is
-  // nothing to uncover until the interior is mounted, so a peek that had to
-  // wait for the image would show the visitor nothing.
-  const hint = (v: ShotView) => {
-    if (v === 'app') setAppMounted(true)
-    setPeek(v)
   }
 
   // Left/right walk the switch the way a native radio group does.
@@ -155,19 +137,6 @@ function ProjectShot({
     segRefs.current[next]?.focus()
   }
 
-  // A peek at the view already showing is a no-op. Reconciling here rather than
-  // in the handlers keeps this correct no matter what order the events land in:
-  // arrow keys select and *then* move focus, so the focus handler would
-  // otherwise re-peek the view it just switched to and strand it half-faded.
-  const activePeek = peek && peek !== view ? peek : null
-  // The interior layer sits on top of the landing shot, clipped to everything
-  // right of this boundary. Landing therefore always occupies the left of the
-  // frame and the interior the right, matching the order of the two segments —
-  // hovering one slides the seam toward it. Wiping rather than crossfading
-  // keeps both screenshots fully opaque instead of blending them into mush.
-  const boundary =
-    activePeek === 'app' ? 70 : activePeek === 'landing' ? 30 : view === 'app' ? 0 : 100
-
   return (
     <figure className="dp-shot mt-6 max-w-[50rem]">
       <div className="dp-chrome">
@@ -183,7 +152,8 @@ function ProjectShot({
           role="group"
           aria-label={`${project.title} screenshot view`}
           onKeyDown={onKeyDown}
-          onPointerLeave={() => setPeek(null)}
+          onPointerEnter={() => setAppMounted(true)}
+          onFocus={() => setAppMounted(true)}
         >
           {SHOT_VIEWS.map(([v, label], i) => {
             const isActive = v === view
@@ -198,9 +168,6 @@ function ProjectShot({
                 aria-pressed={isActive}
                 tabIndex={isActive ? 0 : -1}
                 onClick={() => select(v)}
-                onPointerEnter={() => hint(v)}
-                onFocus={() => hint(v)}
-                onBlur={() => setPeek(null)}
               >
                 {label}
               </button>
@@ -215,6 +182,8 @@ function ProjectShot({
           alt={`${project.title} landing page`}
           fill
           className="dp-shot-img"
+          style={{ opacity: view === 'landing' ? 1 : 0 }}
+          aria-hidden={view !== 'landing'}
           sizes="(min-width: 1280px) 800px, 60vw"
         />
         {appMounted && (
@@ -224,15 +193,11 @@ function ProjectShot({
               alt={`${project.title} application interface`}
               fill
               className="dp-shot-img dp-shot-img-top"
-              style={{ clipPath: `inset(0 0 0 ${boundary}%)` }}
+              style={{ opacity: view === 'app' ? 1 : 0 }}
+              aria-hidden={view !== 'app'}
               sizes="(min-width: 1280px) 800px, 60vw"
             />
-            {/* Lit only while peeking, to name the edge the two shots meet at. */}
-            <span
-              className="dp-shot-seam"
-              style={{ left: `${boundary}%`, opacity: activePeek ? 1 : 0 }}
-              aria-hidden="true"
-            />
+
           </>
         )}
       </div>
@@ -286,7 +251,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
         <div className="dp-identity px-5 pb-6 border-b dp-hairline flex-shrink-0">
           <Portrait size={64} />
           <div className="min-w-0">
-            <p className="text-[1.15rem] font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
+            <p className="text-[1.4rem] font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
             <p className="dp-identity-role mt-1">
               {IDENTITY.role}
             </p>
@@ -433,40 +398,46 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
         <div className="xl:hidden flex items-center gap-3 mb-4 px-1">
           <Portrait size={48} />
           <div className="min-w-0">
-            <p className="text-base font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
+            <p className="text-lg font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
             <p className="dp-identity-role mt-1">
               {IDENTITY.role}
             </p>
           </div>
         </div>
 
-        <label className="dp-project-picker block xl:hidden">
-          <span className="dp-panel-label">Selected work</span>
-          <select
-            value={activeSlug}
-            onChange={(event) => scrollTo(event.target.value)}
-            aria-label="Choose a project"
-          >
-            {projects.map((project, index) => (
-              <option key={project.slug} value={project.slug}>
-                {pad(index + 1)} {project.title}
-              </option>
-            ))}
-          </select>
-        </label>
-        <ControlPanel />
+        <ControlPanel
+          projectPicker={
+          <label className="dp-project-picker relative block xl:hidden">
+            <span className="dp-panel-label">Selected work</span>
+            <select
+              value={activeSlug}
+              onChange={(event) => scrollTo(event.target.value)}
+              aria-label="Choose a project"
+            >
+              {projects.map((project, index) => (
+                <option key={project.slug} value={project.slug}>
+                  {pad(index + 1)} {project.title}
+                </option>
+              ))}
+            </select>
+            <ChevronDown size={16} className="pointer-events-none absolute right-3 bottom-4 text-[var(--muted)]" aria-hidden="true" />
+          </label>
+          }
+        />
       </div>
     </div>
   )
 }
 
-function ControlPanel() {
+function ControlPanel({ projectPicker }: { projectPicker: ReactNode }) {
   return (
     <div className="dp-panel">
       <section className="dp-panel-section relative">
         <AnimatedThemeToggler className="dp-theme-toggle absolute right-3 top-3" />
         <FounderIntro />
       </section>
+
+      {projectPicker}
 
       <section className="dp-panel-section">
         <p className="dp-panel-label">Contact</p>
@@ -526,7 +497,7 @@ function ControlPanel() {
 
         <a href={IDENTITY.x} target="_blank" rel="noreferrer" className="dp-panel-row">
           <span className="dp-panel-icon">
-            <XIcon className="h-[0.85rem] w-[0.85rem]" />
+            <XIcon className="h-[0.95rem] w-[0.95rem]" />
           </span>
           <span>X</span>
           <ArrowUpRight className="dp-panel-arrow h-3.5 w-3.5" />

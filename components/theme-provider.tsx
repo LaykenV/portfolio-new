@@ -46,12 +46,8 @@ function ThemeColorSync() {
 
 export function AppThemeProvider({ children }: { children: ReactNode }) {
   return (
-    // The toggle is strictly two-state, so "system" is unreachable in the UI —
-    // enabling it would only add a media listener that can never win. The
-    // view transition in AnimatedThemeToggler covers the swap, so
-    // disableTransitionOnChange (which injects a global transition kill and
-    // forces a reflow mid-transition) would only fight it.
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+    // Switch both surfaces and browser chrome without a page-wide animation.
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
       <ThemeColorSync />
       {children}
     </ThemeProvider>

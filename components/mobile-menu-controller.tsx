@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { MobileMenu } from '@/components/mobile-menu'
-import { Github, Linkedin, FileText, BookOpen, Mail } from 'lucide-react'
+import { Github, Linkedin, FileText, BookOpen, Mail, Menu } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface MobileMenuControllerProps {
@@ -26,17 +26,14 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
         aria-controls="mobile-menu"
         onClick={() => setOpen(!open)}
       >
-        <svg viewBox="0 0 32 32" aria-hidden="true" width="32" height="32">
-          <path className="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
-          <path className="line" d="M7 16 27 16"></path>
-        </svg>
+        <Menu size={24} aria-hidden="true" />
       </button>
 
       <MobileMenu open={open} onClose={() => setOpen(false)}>
         <div className="flex flex-col gap-3">
           <a
             href="mailto:layken@varholdt.com?subject=Software%20Engineering%20role"
-            className="m-cta-email w-full justify-center"
+            className="m-cta-email w-full"
           >
             <Mail className="h-4 w-4" />
             layken@varholdt.com

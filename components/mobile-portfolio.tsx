@@ -3,7 +3,6 @@
 import {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -15,7 +14,6 @@ import {
   ArrowDown,
   ArrowRight,
   ArrowUpRight,
-  ChevronLeft,
   ExternalLink,
   Github,
   Mail,
@@ -39,15 +37,6 @@ function haptic(ms = 8) {
   } catch {}
 }
 
-/** Total keyframe duration for the hint overlay cycle (CSS-matched). */
-const HINT_CYCLE_MS = 2600
-/** Button fade-in duration, matched to CSS so the controls finish appearing
- *  exactly as the hint overlay completes its exit. */
-const HINT_BUTTON_FADE_MS = 320
-/** Debounce between activeIndex settling and the hint firing — lets the
- *  vertical snap-scroll complete before the teach plays. */
-const HINT_ARM_DELAY_MS = 500
-
 export function MobilePortfolio({ projects }: MobilePortfolioProps) {
   const deckRef = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLElement | null)[]>([])
@@ -60,77 +49,16 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
     offset: number
     active: boolean
   }>({ slug: null, offset: 0, active: false })
-  const [hintQueueSlot, setHintQueueSlot] = useState<number | null>(null)
-  const [hintSlot, setHintSlot] = useState<number | null>(null)
-  // Keep the initial server and client render identical; we decide whether to
-  // run the hint only after mount once browser APIs are available.
-  const [hintPending, setHintPending] = useState(false)
-  const [hintReady, setHintReady] = useState(false)
-
   // total slots = about (index 0) + each project
   const total = projects.length + 1
-
-  useEffect(() => {
-    try {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        setHintPending(false)
-        return
-      }
-      setHintPending(true)
-    } catch {
-      setHintPending(false)
-    } finally {
-      setHintReady(true)
-    }
-  }, [])
-
-  // Lock the teach-in to the first project slide before paint so its action
-  // buttons never flash in ahead of the indicator.
-  useLayoutEffect(() => {
-    if (!hintReady) return
-    if (!hintPending) return
-    if (hintQueueSlot !== null) return
-    if (hintSlot !== null) return // already in-flight
-    if (activeIndex < 1) return
-
-    setHintQueueSlot(1)
-  }, [activeIndex, hintPending, hintQueueSlot, hintReady, hintSlot])
-
-  // First time the user lands on any project slide, wait for the snap to
-  // settle and then play the action-bar hint on that slide.
-  useEffect(() => {
-    if (!hintReady) return
-    if (hintQueueSlot === null) return
-
-    const slot = hintQueueSlot
-    let revealTimer: number | null = null
-    let cleanupTimer: number | null = null
-    const armTimer = window.setTimeout(() => {
-      setHintSlot(slot)
-      // Start the button fade so it completes exactly as the overlay exits.
-      revealTimer = window.setTimeout(
-        () => setHintPending(false),
-        HINT_CYCLE_MS - HINT_BUTTON_FADE_MS,
-      )
-      cleanupTimer = window.setTimeout(() => {
-        setHintSlot((prev) => (prev === slot ? null : prev))
-        setHintQueueSlot((prev) => (prev === slot ? null : prev))
-      }, HINT_CYCLE_MS)
-    }, HINT_ARM_DELAY_MS)
-
-    return () => {
-      window.clearTimeout(armTimer)
-      if (revealTimer !== null) window.clearTimeout(revealTimer)
-      if (cleanupTimer !== null) window.clearTimeout(cleanupTimer)
-    }
-  }, [hintQueueSlot, hintReady])
 
   const jumpTo = useCallback((slotIndex: number) => {
     const deck = deckRef.current
     if (!deck) return
     const target = slideRefs.current[slotIndex]
     if (!target) return
-    deck.scrollTo({ top: target.offsetTop, behavior: 'smooth' })
+    const inset = parseFloat(getComputedStyle(deck).scrollPaddingTop) || 0
+    deck.scrollTo({ top: Math.max(0, target.offsetTop - inset), behavior: 'smooth' })
   }, [])
 
   useEffect(() => {
@@ -144,8 +72,9 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
         let index = 0
+        const inset = (parseFloat(getComputedStyle(deck).scrollPaddingTop) || 0) + 24
         for (let i = 1; i < slides.length; i++) {
-          if (slides[i].offsetTop <= deck.scrollTop + 80) index = i
+          if (slides[i].offsetTop <= deck.scrollTop + inset) index = i
         }
         setActiveIndex(index)
       })
@@ -242,7 +171,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
       <div className="m-browser-edge m-browser-edge-bottom" aria-hidden="true" />
 
       {/* Top chrome — always visible (brand hidden on about slide) */}
-      <header className="m-topbar">
+      <header className={cn('m-topbar', viewingProject && 'm-topbar-project')}>
         <button
           type="button"
           className={cn('m-topbar-brand', !viewingProject && 'm-topbar-brand-hidden')}
@@ -286,7 +215,6 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
 
         {projects.map((project, i) => {
           const slotIndex = i + 1
-          const teachSlide = slotIndex === 1
           return (
             <ProjectSlide
               key={project.slug}
@@ -296,8 +224,6 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
               project={project}
               index={i}
               total={projects.length}
-              showHint={hintSlot === slotIndex}
-              hintPending={teachSlide && (!hintReady || hintPending)}
               onDeepDive={() => {
                 haptic(8)
                 clearSwipePreviewNow()
@@ -375,8 +301,7 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
         <p className="m-about-name">Layken Varholdt</p>
 
         <div className="m-about-role">
-          Software Engineer <span className="sep">·</span>{' '}
-          <span className="accent">@ DOL</span>
+          Software engineer
         </div>
 
         <FounderIntro />
@@ -441,8 +366,6 @@ interface ProjectSlideProps {
   project: Project
   index: number
   total: number
-  showHint: boolean
-  hintPending: boolean
   onDeepDive: () => void
   onSwipePreview: (offset: number) => void
   onSwipePreviewEnd: (commit: boolean, offset: number) => void
@@ -453,14 +376,10 @@ function ProjectSlide({
   project,
   index,
   total,
-  showHint,
-  hintPending,
   onDeepDive,
   onSwipePreview,
   onSwipePreviewEnd,
 }: ProjectSlideProps) {
-  const actionsHidden = hintPending
-  const actionsBlocked = hintPending || showHint
   const gesture = useRef<{
     startX: number
     startY: number
@@ -469,7 +388,6 @@ function ProjectSlide({
     axis: 'x' | 'y' | null
     active: boolean
   }>({ startX: 0, startY: 0, startT: 0, deltaX: 0, axis: null, active: false })
-  const [hintOn, setHintOn] = useState(false)
 
   const onTouchStart = (e: ReactTouchEvent) => {
     const t = e.touches[0]
@@ -502,7 +420,6 @@ function ProjectSlide({
       } else if (hadLeftSwipe) {
         onSwipePreview(0)
       }
-      setHintOn(dx < -40)
       if (e.cancelable) e.preventDefault()
     }
   }
@@ -517,7 +434,6 @@ function ProjectSlide({
       const elapsed = performance.now() - startT
       const vx = dx / Math.max(elapsed, 1)
       gesture.current.deltaX = 0
-      setHintOn(false)
       if (dx < -80 || vx < -0.5) {
         onSwipePreviewEnd(true, Math.min(-dx, window.innerWidth))
         return
@@ -525,7 +441,6 @@ function ProjectSlide({
       onSwipePreviewEnd(false, 0)
     }
     gesture.current.deltaX = 0
-    setHintOn(false)
   }
 
   return (
@@ -576,21 +491,13 @@ function ProjectSlide({
           </div>
 
           <div className="m-card-actions">
-            <div
-              className={cn(
-                'm-card-actions-ui',
-                actionsHidden && 'pending',
-                actionsBlocked && 'blocked',
-              )}
-            >
+            <div className="m-card-actions-ui">
               {project.links.live ? (
                 <a
                   href={project.links.live}
                   target="_blank"
                   rel="noreferrer noopener"
                   className="m-btn"
-                  tabIndex={actionsBlocked ? -1 : undefined}
-                  aria-hidden={actionsBlocked || undefined}
                   onClick={(e) => e.stopPropagation()}
                 >
                   <ExternalLink className="h-[14px] w-[14px]" />
@@ -601,8 +508,6 @@ function ProjectSlide({
               )}
               <button
                 className="m-btn m-btn-primary"
-                disabled={actionsBlocked}
-                aria-hidden={actionsBlocked || undefined}
                 onClick={(e) => {
                   e.stopPropagation()
                   onDeepDive()
@@ -618,8 +523,6 @@ function ProjectSlide({
                   rel="noreferrer noopener"
                   className="m-btn"
                   aria-label="Source code"
-                  tabIndex={actionsBlocked ? -1 : undefined}
-                  aria-hidden={actionsBlocked || undefined}
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Github className="h-[16px] w-[16px]" />
@@ -628,25 +531,9 @@ function ProjectSlide({
               )}
             </div>
 
-            {/* One-shot action-bar hint — covers the button row on first
-                project-slide arrival, then slides off to the left to
-                demonstrate the swipe-for-deep-dive gesture. pointer-events
-                is none so taps fall through to the buttons below. */}
-            {showHint && (
-              <div className="m-actions-hint" aria-hidden="true">
-                <span className="m-actions-hint-chev">
-                  <ChevronLeft className="h-[14px] w-[14px]" strokeWidth={3} />
-                </span>
-                <span className="m-actions-hint-text">Swipe for deep dive</span>
-              </div>
-            )}
           </div>
         </div>
 
-        {/* Swipe-left hint */}
-        <span className={cn('m-swipe-hint', hintOn && 'on')} aria-hidden="true">
-          Swipe ← for details
-        </span>
       </div>
     </section>
   )

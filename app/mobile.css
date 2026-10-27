@@ -4,9 +4,8 @@
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* Animated hamburger menu */
+/* Mobile navigation */
 .hamburger {
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -19,36 +18,6 @@
   cursor: pointer;
 }
 
-.hamburger svg {
-  height: 32px;
-  width: 32px;
-  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.line {
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2.5;
-  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-              stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.line-top-bottom {
-  stroke-dasharray: 12 63;
-}
-
-.hamburger[aria-expanded='true'] svg {
-  transform: rotate(-45deg);
-}
-
-.hamburger[aria-expanded='true'] svg .line-top-bottom {
-  stroke-dasharray: 20 300;
-  stroke-dashoffset: -32.42;
-}
-
-/* Mobile navigation */
 .m-menu-dialog {
   position: fixed;
   inset: 0;
@@ -162,6 +131,13 @@
   transition: opacity 280ms ease, transform 280ms ease;
 }
 .m-topbar > * { pointer-events: auto; }
+.m-topbar-project::before {
+  content: '';
+  position: absolute;
+  inset: -80px 0 -10px;
+  z-index: -1;
+  background: var(--background);
+}
 .m-topbar-hidden {
   opacity: 0;
   transform: translateY(-8px);
@@ -197,12 +173,10 @@
 }
 
 .m-topbar-brand:focus-visible {
-  outline: 2px solid hsl(var(--blue-strong) / 0.34);
+  outline: 2px solid var(--foreground);
   outline-offset: 2px;
 }
-html.dark .m-topbar-brand:focus-visible {
-  outline-color: hsl(var(--blue-soft) / 0.30);
-}
+
 .m-topbar-brand-hidden {
   opacity: 0;
   transform: translateY(-8px);
@@ -230,6 +204,7 @@ html.dark .m-topbar-brand:focus-visible {
   overflow-y: auto;
   overflow-x: hidden;
   scroll-snap-type: y mandatory;
+  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 64px);
   scroll-behavior: smooth;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
@@ -347,8 +322,9 @@ html.dark .m-topbar-brand:focus-visible {
   padding: 0 14px;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: transparent;
+  background: var(--accent-soft);
   color: var(--foreground);
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
   text-decoration: none;
 }
 .m-cta-icon,
@@ -430,10 +406,7 @@ html.dark .m-topbar-brand:focus-visible {
   justify-content: center;
   color: var(--muted);
 }
-@keyframes m-scroll-bob {
-  0%, 100% { transform: translateY(0); opacity: 0.7; }
-  50% { transform: translateY(4px); opacity: 1; }
-}
+
 
 /* ── Project slide ───────────────────────────────────── */
 .m-project {
@@ -453,7 +426,7 @@ html.dark .m-topbar-brand:focus-visible {
 .m-card-inner {
   position: relative;
   z-index: 1;
-  padding: calc(env(safe-area-inset-top, 0px) + 64px) 20px
+  padding: 16px 20px
            calc(env(safe-area-inset-bottom, 0px) + 24px);
   display: flex;
   flex-direction: column;
@@ -520,7 +493,7 @@ html.dark .m-topbar-brand:focus-visible {
   font-size: clamp(32px, 9vw, 44px);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 0.98;
+  line-height: 1.05;
   color: var(--foreground);
   margin: 0;
   text-wrap: balance;
@@ -562,12 +535,7 @@ html.dark .m-topbar-brand:focus-visible {
   gap: 8px;
   transition: opacity 320ms ease;
 }
-.m-card-actions-ui.pending {
-  opacity: 0;
-}
-.m-card-actions-ui.blocked {
-  pointer-events: none;
-}
+
 @media (max-width: 360px) {
   .m-card-actions-ui .m-btn { padding: 0 8px; gap: 6px; font-size: 12px; }
 }
@@ -587,15 +555,14 @@ html.dark .m-topbar-brand:focus-visible {
   background: hsl(var(--card) / 0.8);
   color: var(--foreground);
   text-decoration: none;
-  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+  transition: background 120ms ease, border-color 120ms ease;
   user-select: none;
   white-space: nowrap;
 }
-.m-btn:active { transform: scale(0.96); }
 .m-btn-primary {
-  background: var(--foreground);
-  color: var(--background);
-  border-color: var(--foreground);
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
 }
 .m-btn-primary:active { opacity: 0.88; }
 .m-btn-icon {
@@ -607,87 +574,6 @@ html.dark .m-topbar-brand:focus-visible {
   background: transparent;
   opacity: 0.6;
 }
-
-/* ── Action-bar swipe hint ──────────────────────────────
-   Minimal one-shot teach that slides in from the right, holds, then
-   slides out to the LEFT — the exit direction silently demonstrates
-   the swipe-for-deep-dive gesture. No background, no border, just
-   monospaced text with blue accent chevrons marching left. */
-.m-actions-hint {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  height: 48px;
-  pointer-events: none; /* taps pass through to the real buttons */
-  color: hsl(var(--foreground-hsl) / 0.82);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  will-change: transform, opacity;
-  animation: m-actions-hint-cycle 2600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.m-actions-hint-chev {
-  display: inline-flex;
-  align-items: center;
-  gap: 1px;
-  color: hsl(var(--blue-strong));
-}
-html.dark .m-actions-hint-chev { color: hsl(var(--blue-soft)); }
-
-.m-actions-hint-chev > svg {
-  opacity: 0;
-  transform: translateX(6px);
-  animation: m-hint-chev-march 1.3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-.m-actions-hint-chev > svg:nth-child(1) { animation-delay: 0ms; }
-.m-actions-hint-chev > svg:nth-child(2) { animation-delay: 160ms; }
-.m-actions-hint-chev > svg:nth-child(3) { animation-delay: 320ms; }
-
-/* Master lifecycle: slide in from right → hold → slide out to left.
-   The asymmetric out-direction is the whole point — it silently
-   demonstrates the gesture the user should use. */
-@keyframes m-actions-hint-cycle {
-  0%   { transform: translateX(108%);  opacity: 0; }
-  14%  { transform: translateX(0);     opacity: 1; } /* in by ~365ms */
-  80%  { transform: translateX(0);     opacity: 1; } /* hold through ~2080ms */
-  100% { transform: translateX(-112%); opacity: 0; } /* out by 2600ms */
-}
-
-/* Chevron march — staggered fade-in + leftward drift creates a
-   continuous "flowing" feel inside the text strip. */
-@keyframes m-hint-chev-march {
-  0%   { opacity: 0; transform: translateX(8px); }
-  35%  { opacity: 1; transform: translateX(-1px); }
-  65%  { opacity: 1; transform: translateX(-4px); }
-  100% { opacity: 0; transform: translateX(-12px); }
-}
-
-/* Swipe hint overlay */
-.m-swipe-hint {
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%) rotate(180deg);
-  writing-mode: vertical-rl;
-  z-index: 2;
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 9px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--foreground);
-  opacity: 0;
-  transition: opacity 200ms ease;
-  pointer-events: none;
-}
-.m-swipe-hint.on { opacity: 0.7; }
 
 /* Right-rail page indicator */
 .m-rail {
@@ -760,7 +646,6 @@ html.dark .m-actions-hint-chev { color: hsl(var(--blue-soft)); }
   gap: 6px;
   cursor: pointer;
 }
-.m-sheet-back:active { transform: scale(0.96); }
 
 .m-sheet-crumb {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
@@ -775,8 +660,7 @@ html.dark .m-actions-hint-chev { color: hsl(var(--blue-soft)); }
   white-space: nowrap;
 }
 .m-sheet-crumb .sep { opacity: 0.4; margin: 0 6px; }
-.m-sheet-crumb .accent { color: hsl(var(--blue-strong)); opacity: 1; }
-html.dark .m-sheet-crumb .accent { color: hsl(var(--blue-soft)); }
+.m-sheet-crumb .accent { color: var(--foreground); }
 
 .m-sheet-inner {
   position: relative;
@@ -840,10 +724,8 @@ html.dark .m-sheet-crumb .accent { color: hsl(var(--blue-soft)); }
   content: '';
   width: 18px;
   height: 1px;
-  background: hsl(var(--blue-strong));
-  opacity: 0.6;
+  background: var(--border);
 }
-html.dark .m-sheet-label::before { background: hsl(var(--blue-soft)); }
 
 .m-sheet-body {
   font-size: 16px;
@@ -864,13 +746,9 @@ html.dark .m-sheet-label::before { background: hsl(var(--blue-soft)); }
 .m-sheet-links .m-btn:only-child { grid-column: span 2; }
 
 @media (prefers-reduced-motion: reduce) {
-  .m-scroll-indicator .chev { animation: none; }
   .mobile-deck { scroll-behavior: auto; }
   .m-sheet { transition: none; }
   .m-card-inner { transition: none; }
-  /* For reduced-motion users, skip the teach-in entirely — the button
-     label and tap target are already sufficient. */
-  .m-actions-hint { display: none; }
 }
 
 .mobile-portfolio button:focus-visible,

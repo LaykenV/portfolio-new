@@ -15,6 +15,7 @@ Keep Layken's portrait, seven projects, project URLs, blog facts, founder identi
 - GPT-6.1 Terra through Codex, `reasoningEffort: high`.
 - DeepSeek V4.1 Flash 1017 through OpenRouter/OpenCode, `variant: high`, read-only plan agent.
 - Muse Spark 1.3 Contributor through OpenRouter/OpenCode, `variant: high`, read-only plan agent. Layken requested the Contributor variant and then asked to keep all three judges.
+- Claude Opus 5.5 through Claude, `effort: high`. Layken added it after the round-4 preview and authorized continuing without it if usage runs out.
 
 Each round uses fresh, read-only delegates. They do not see other answers or earlier scores. They inspect every listed image, then read source to give exact fixes. A missing image or unavailable vision is reported, never replaced with an invented observation or grade.
 
@@ -36,7 +37,7 @@ Score each category from 0 to 10 to one decimal. Overall is their arithmetic mea
 | Clarity | Who Layken is, what he builds and how to reach him |
 | Distinctiveness | An identity grounded in his work rather than a template |
 
-A 10 means the judge cannot justify a concrete improvement in that category from the evidence. Do not round a 9.x up, lower the bar, reward promises, or invent findings to avoid a high score. The requested target is 10.0 in every category from all three visual judges on the same candidate. An unavailable grade cannot satisfy it.
+A 10 means the judge cannot justify a concrete improvement in that category from the evidence. Do not round a 9.x up, lower the bar, reward promises, or invent findings to avoid a high score. The requested target is 10.0 in every category from the active council on the same candidate. Layken permits skipping Opus when its usage runs out; other missing grades remain unresolved.
 
 References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots calibrate craft; their identities and layouts are not templates to copy.
 
@@ -55,6 +56,10 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 3 | Terra | 7.5 | 7.5 | 7.0 | 7.0 | 8.5 | 8.0 | 7.5 | 8.0 | 7.0 | 7.6 |
 | 3 | DeepSeek, OpenCode | 8.8 | 8.7 | 8.5 | 8.4 | 9.0 | 8.8 | 8.5 | 8.8 | 8.2 | 8.6 |
 | 3 | Muse Contributor | 8.5 | 8.0 | 8.0 | 8.5 | 8.5 | 8.5 | 8.0 | 8.5 | 7.5 | 8.2 |
+| 4 | Terra | 7.7 | 7.5 | 7.3 | 7.3 | 8.0 | 7.8 | 7.1 | 8.0 | 6.8 | 7.5 |
+| 4 | DeepSeek, OpenCode | 8.5 | 8.6 | 8.6 | 8.4 | 8.2 | 8.7 | 8.0 | 9.0 | 7.7 | 8.4 |
+| 4 | Muse Contributor | 8.2 | 7.8 | 8.3 | 8.0 | 8.1 | 8.5 | 7.6 | 8.2 | 7.3 | 8.0 |
+| 4 | Opus 5.5 | 8.0 | 7.8 | 8.0 | 7.8 | 7.0 | 8.4 | 7.7 | 8.4 | 6.6 | 7.7 |
 
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
@@ -95,6 +100,18 @@ Remove the duplicate desktop role heading. Recognition follows the project title
 Declined findings: a wider rail at 1024px would take more width from the already compressed work. The selected rail has a visible rule and heavier title, so it does not rely on the fill alone. Increasing chip padding would make wrapping worse. The expanded desktop account already uses 17px, above the requested 16px floor. DeepSeek's round-3 report contains its full score table and candidate deductions but ends midway through a reference discussion; no ranked-fix section was returned.
 
 Round-4 proof: lint, production build and the browser suite pass. The 1024px image is 640px wide. The native picker and rail switch at 1280px. All seven mobile positions and action labels work at 320, 390 and 430px; touch swipes still open details. Menu focus stays inside, Escape restores the trigger, the background is inert, and theme switching works while the menu is open. The seven project accounts preserve every original word, with paragraph boundaries added. Fresh captures include dark writing pages.
+
+## Round 5
+
+Layken said the neutral previews were bland and light mode was too bright. He authorized removing excess motion and said he likes mobile swipes. That feedback supersedes earlier recommendations to keep the monochrome palette. Opus joined round 4 on the same screenshots with this newer feedback; the other three had already received their original brief.
+
+Use a sage canvas and forest accents. Light canvas is #D7DFD6, ink #202C2A, muted #52615B, surface #E6ECE3 and accent #315D50. Dark canvas is #141C1A, ink #E6ECE6, muted #ACBDB0, surface #1C2823 and accent #9BC5AE. Contact and primary detail actions carry the accent; selected project navigation stays neutral. Remove the left selection bar. The new light canvas has 23.2% less relative luminance than #F7F8FA. Muted text contrast is 4.79:1 in light and 8.80:1 in dark.
+
+Remove screenshot hover reveals and the seam, the circular theme wipe, the animated menu icon and the swipe teach-in that hid actions. Keep the direct screenshot switch, its keyboard controls, actual mobile swipes, drag preview and sheet motion. Use scroll padding and an opaque header surface to give snapped project titles clearance while shortening the gap between cards.
+
+Fix dark article step fills with a properly scoped override. Raise small labels, give rail text more edge room, align mobile blog arrows to titles, and place the tablet picker after the founder block. Use Software engineer on both role lines, with the full employment details still available in the resume. Menu email aligns with the link list.
+
+Round-5 proof: lint, production build and browser checks pass. Normal-motion checks cover all seven positions and immediate actions at 320, 390 and 430px, plus real touch swipes, click/keyboard screenshot switching, no hover reveal, no theme view transition and plain article steps in both themes. The existing suite also checks contrast, browser chrome, menu focus and navigation.
 
 ## Round protocol
 
