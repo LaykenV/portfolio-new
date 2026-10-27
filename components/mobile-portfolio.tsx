@@ -708,7 +708,7 @@ function DeepDiveSheet({
           </div>
         )}
 
-        <div className="m-sheet-label">The work</div>
+        <div className="m-sheet-label m-sheet-work-label">The work</div>
         <div className="m-sheet-body">
           {displayProject.longDescription.split('\n\n').map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>

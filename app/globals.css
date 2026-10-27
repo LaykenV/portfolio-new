@@ -1328,7 +1328,10 @@ html.dark .stack-icon {
   --foreground: #202C2A;
   --foreground-hsl: 170 15.79% 14.9%;
   --muted: #52615B;
-  --border: #A9BBAE;
+  --border: #93A89A;
+  --control-border: #55796C;
+  --label: #52615B;
+  --tag-border: color-mix(in srgb, var(--border) 60%, transparent);
   --surface: #E6ECE3;
   --card: 100 19.15% 90.78%;
   --accent: #315D50;
@@ -1348,6 +1351,8 @@ html.dark .writing-theme {
   --foreground-hsl: 120 13.64% 91.37%;
   --muted: #ACBDB0;
   --border: #344A40;
+  --control-border: #5D7B6C;
+  --label: #C2D2C6;
   --surface: #1C2823;
   --card: 155 17.65% 13.33%;
   --accent: #9BC5AE;
@@ -1385,6 +1390,7 @@ html.dark .writing-theme {
   min-width: 0;
 }
 .dp-control-col { padding-inline: var(--rail-inset); }
+.dp-project-index { padding-inline: var(--rail-inset); }
 .dp-identity-section { position: relative; }
 .dp-identity-section::after {
   content: '';
@@ -1440,7 +1446,7 @@ html.dark .writing-theme {
   appearance: none;
   min-height: 48px;
   padding: 0 36px 0 12px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--control-border);
   border-radius: 10px;
   color: var(--foreground);
   background: var(--background);
@@ -1582,13 +1588,13 @@ html.dark .writing-theme {
 .dp-nav-item {
   position: relative;
   display: grid;
-  grid-template-columns: 1.35rem 3rem minmax(0, 1fr);
+  grid-template-columns: 1.1rem 3rem minmax(0, 1fr);
   align-items: center;
-  gap: 0.6rem;
+  gap: 8px;
   width: 100%;
   min-height: 44px;
   text-align: left;
-  padding: 0.4rem 0.55rem;
+  padding: 0.4rem 0.5rem;
   border-radius: 0.6rem;
   cursor: pointer;
   transition:
@@ -1915,7 +1921,7 @@ html.dark .dp-root .avatar-ring {
 .writing-theme .tech-badge-compact,
 html.dark .dp-root .tech-badge-compact,
 html.dark .writing-theme .tech-badge-compact {
-  border-color: var(--border);
+  border-color: var(--tag-border);
   background: transparent;
   color: var(--muted);
   border-radius: 6px;
@@ -1932,13 +1938,21 @@ html.dark .writing-theme .tech-badge-compact {
   line-height: 1.5;
   color: var(--muted);
 }
+.dp-identity-name {
+  font-size: 28px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  white-space: nowrap;
+}
 .dp-tagline {
   max-width: 60ch;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.45;
   color: var(--muted);
 }
 .dp-summary { max-width: 36rem; }
+.dp-details .dp-body { max-width: min(60ch, 36rem); }
 .dp-details summary {
   display: inline-flex;
   align-items: center;
@@ -2055,7 +2069,7 @@ html.dark .writing-theme .post-code-inline { background: var(--surface); border-
   align-items: baseline;
   justify-content: space-between;
   gap: 8px;
-  padding: 0 0.6rem;
+  padding: 0;
   margin-bottom: 0.45rem;
 }
 .dp-rail-heading .dp-rail-label { margin: 0; padding: 0; }
@@ -2100,4 +2114,21 @@ html.dark .writing-theme .nav-link:focus-visible {
 }
 @media (max-width: 389px) {
   .writing-back-label { display: none; }
+}
+
+.dp-root .dp-eyebrow,
+.dp-root .dp-rail-label,
+.dp-root .dp-panel-label,
+.dp-root .dp-meta-k,
+.dp-root .dp-nav-num,
+.dp-root .mono-accent,
+.dp-root .dp-rail-heading > .dp-mono,
+.writing-theme .mono-accent,
+.writing-theme .section-eyebrow,
+.mobile-portfolio .m-counter,
+.mobile-portfolio .m-sheet-crumb,
+.mobile-portfolio .m-sheet-label {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--label);
 }

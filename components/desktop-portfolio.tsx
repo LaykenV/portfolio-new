@@ -254,7 +254,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
             <AnimatedThemeToggler className="dp-theme-toggle" />
           </div>
           <div className="min-w-0">
-            <p className="text-[26px] font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
+            <p className="dp-identity-name">{IDENTITY.name}</p>
             <p className="dp-identity-role mt-1">
               {IDENTITY.role}
             </p>
@@ -262,7 +262,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
           <FounderIntro />
         </div>
 
-        <nav className="dp-scroll flex-1 min-h-0 px-2.5 pt-5" aria-label="Project index">
+        <nav className="dp-project-index dp-scroll flex-1 min-h-0 pt-5" aria-label="Project index">
           {TIER_LABELS.map(([tier, label]) => {
             const group = projects.filter((p) => p.tier === tier)
             if (group.length === 0) return null

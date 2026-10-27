@@ -230,7 +230,7 @@
   position: relative;
   z-index: 1;
   padding: calc(env(safe-area-inset-top, 0px) + 32px) 20px
-           calc(env(safe-area-inset-bottom, 0px) + 24px);
+           calc(env(safe-area-inset-bottom, 0px) + 16px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -277,7 +277,7 @@
 .m-about-role .accent { color: var(--muted); opacity: 1; }
 
 .m-about .founder-intro {
-  margin: 12px 0 4px;
+  margin: 8px 0 0;
   max-width: 30ch;
 }
 .m-about .founder-description {
@@ -287,7 +287,7 @@
 }
 
 .m-about-cta-stack {
-  margin-top: 20px;
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -300,7 +300,7 @@
     gap: 7px;
   }
   .m-about-portrait { width: 88px; height: 88px; }
-  .m-about-cta-stack { margin-top: 16px; }
+  .m-about-cta-stack { margin-top: 12px; }
 }
 
 /* Primary contact stays a single quiet row. */
@@ -514,7 +514,7 @@
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 13px;
   line-height: 1.4;
-  border: 1px solid var(--border);
+  border: 1px solid var(--tag-border);
   background: transparent;
   color: var(--muted);
 }
@@ -545,7 +545,7 @@
   justify-content: center;
   gap: 8px;
   cursor: pointer;
-  border: 1px solid var(--border);
+  border: 1px solid var(--control-border);
   background: hsl(var(--card) / 0.8);
   color: var(--foreground);
   text-decoration: none;
@@ -660,7 +660,8 @@ html.dark .m-btn-primary {
   justify-content: flex-start;
   gap: 6px;
   width: 100%;
-  min-height: 48px;
+  min-height: 56px;
+  padding-bottom: 8px;
   border-bottom: 1px solid var(--border);
   color: var(--accent);
   font-size: 14px;
@@ -706,6 +707,7 @@ html.dark .m-btn-primary {
   height: 1px;
   background: var(--border);
 }
+.m-sheet-work-label { margin-top: 32px; }
 
 .m-sheet-body {
   font-size: 16px;

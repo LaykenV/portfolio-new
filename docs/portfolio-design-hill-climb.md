@@ -88,6 +88,11 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 10 | Muse Contributor | 8.0 | 7.5 | 8.0 | 8.0 | 8.5 | 8.5 | 8.0 | 8.5 | 7.5 | 8.1 |
 | 10 | Opus 5.5 | 8.5 | 8.4 | 8.1 | 8.4 | 8.4 | 8.4 | 8.3 | 8.8 | 7.6 | 8.3 |
 
+| 11 | Terra | 8.4 | 8.5 | 8.2 | 8.0 | 8.7 | 8.5 | 8.3 | 8.6 | 8.0 | 8.4 |
+| 11 | DeepSeek, OpenCode | 8.8 | 9.0 | 8.9 | 8.8 | 8.5 | 8.9 | 8.7 | 9.0 | 8.5 | 8.8 |
+| 11 | Muse Contributor | 8.5 | 8.0 | 8.5 | 8.0 | 8.5 | 8.5 | 8.0 | 8.5 | 8.0 | 8.3 |
+| 11 | Opus 5.5 | 8.4 | 8.1 | 8.1 | 8.3 | 8.5 | 8.4 | 8.3 | 8.5 | 7.6 | 8.2 |
+
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
 ## Round 1
@@ -213,6 +218,18 @@ Use a 20px content inset for identity and control-column rules. Give rail rows a
 Declined findings: labels already use 12px, not 10px or 11px. The project summary is 17px at a 36rem cap, not 18px at 688px. The index and article already share the same emphasized title rule. Numbered-list dividers align with their text inside an intentional gutter. Preserve the View projects scroll button, which uses an arrow rather than an accordion chevron. Keep work-first desktop order and the actual seven-name tablet picker.
 
 Round-11 proof: lint and production build pass. Browser suites cover all seven cards and actions, real touch swipes, direct screenshot tabs, both themes, meta colors, keyboard focus and menu state. Focused checks measure all counter/title/image gaps, one active theme control, menu inert restoration, names on one line and shared rail insets. All 32 candidate states are captured again.
+
+## Round 12
+
+Recover 24px from the tall-phone intro's founder and contact margins and bottom padding. Keep the portrait, copy and contact targets intact. Give the image action and The work label another 8px of separation in deep dives.
+
+Separate border jobs. Light structural rules use #93A89A. Outlined buttons and the native picker use #55796C in light and #5D7B6C in dark. Static technology tags use a softer mix of the structural border. This addresses the conflicting requests for clearer controls and quieter metadata without giving every chip a control edge.
+
+Keep labels at 12px and increase weight to 600 with 0.08em tracking. Dark labels use #C2D2C6; body muted text stays unchanged. Use a 28px/650 wide name and a 16px desktop tagline, preserving the larger work title. Bring navigation row edges onto the 20px rail inset and keep the 48px previews. Cap expanded accounts at 36rem and 60ch without changing screenshots.
+
+Declined findings: the article already uses a verified 36rem/17px reading measure, and metadata is already 12px. The screenshot tab's underline is a 2px border, so text-underline-offset would not change it. The +N count already stays with its preceding chip. Keep the one-row centered writing header, centered phone introduction and work-first tablet order. A navigation header can be wider than its prose column. Do not turn structural or static-tag hairlines into mandatory control borders.
+
+Round-12 proof: lint and production build pass. Browser checks retain themes, meta colors, seven project routes, real touch swipes, menu focus/inert state and short-phone action fit. Focused measurements cover control-edge contrast, all rail-title fits, the shared 20px edge, earlier phone work, single-line names and the counter/title/image rhythm. All 32 candidate states are captured again.
 
 ## Round protocol
 
