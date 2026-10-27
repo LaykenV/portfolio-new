@@ -251,11 +251,12 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
         <div className="dp-identity px-5 pb-6 border-b dp-hairline flex-shrink-0">
           <Portrait size={64} />
           <div className="min-w-0">
-            <p className="text-[1.4rem] font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
+            <p className="text-2xl font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
             <p className="dp-identity-role mt-1">
               {IDENTITY.role}
             </p>
           </div>
+          <FounderIntro />
         </div>
 
         <nav className="dp-scroll flex-1 min-h-0 px-2.5 pt-5" aria-label="Project index">
@@ -278,7 +279,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
                     >
                       <span className="dp-nav-num">{pad(position.get(p.slug) ?? 0)}</span>
                       <span className="dp-nav-thumb">
-                        <Image src={p.image} alt="" fill sizes="48px" />
+                        <Image src={p.image} alt="" fill sizes="96px" />
                       </span>
                       <span className="dp-nav-title">
                         <span>{p.title}</span>
@@ -292,7 +293,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
         </nav>
 
         <div className="px-5 pt-4 mt-3 border-t dp-hairline flex-shrink-0">
-          <span className="dp-mono text-xs opacity-40 tabular-nums">
+          <span className="dp-mono text-xs text-[var(--muted)] tabular-nums">
             {pad(activePosition)} / {pad(projects.length)}
           </span>
         </div>
@@ -396,9 +397,9 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
       <div className="dp-col dp-scroll relative px-4 xl:px-5 py-7">
         {/* Below xl the identity and compact project index share this column. */}
         <div className="xl:hidden flex items-center gap-3 mb-4 px-1">
-          <Portrait size={48} />
+          <Portrait size={56} />
           <div className="min-w-0">
-            <p className="text-lg font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
+            <p className="text-xl font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
             <p className="dp-identity-role mt-1">
               {IDENTITY.role}
             </p>
@@ -432,15 +433,17 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
 function ControlPanel({ projectPicker }: { projectPicker: ReactNode }) {
   return (
     <div className="dp-panel">
-      <section className="dp-panel-section relative">
-        <AnimatedThemeToggler className="dp-theme-toggle absolute right-3 top-3" />
+      <section className="dp-panel-section xl:hidden">
         <FounderIntro />
       </section>
 
       {projectPicker}
 
       <section className="dp-panel-section">
-        <p className="dp-panel-label">Contact</p>
+        <div className="dp-contact-heading">
+          <p className="dp-panel-label">Contact</p>
+          <AnimatedThemeToggler className="dp-theme-toggle" />
+        </div>
         <p className="dp-panel-availability">Open to software engineering roles</p>
 
         <a href={IDENTITY.email} className="dp-panel-row dp-panel-row-primary">

@@ -21,7 +21,7 @@ export function MobileMenu({ open, onClose, children }: MobileMenuProps) {
     if (!panel) return
     const background = Array.from(
       panel.closest('.mobile-portfolio')?.querySelectorAll<HTMLElement>(
-        '.mobile-deck, .m-rail, .m-topbar-brand, .hamburger',
+        '.mobile-deck, .m-topbar-brand, .hamburger',
       ) ?? [],
     )
     const previousInert = background.map((element) => element.inert)

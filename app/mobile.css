@@ -152,10 +152,10 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0;
+  font-weight: 600;
   color: var(--foreground);
   opacity: 0.75;
   padding: 6px 12px 6px 6px;
@@ -255,7 +255,7 @@
 }
 
 .m-about-portrait {
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   width: 96px;
   height: 96px;
   border-radius: 50%;
@@ -379,7 +379,7 @@
 
 /* The work control follows contact without a reserved blank area. */
 .m-scroll-indicator {
-  margin-top: 20px;
+  margin-top: 12px;
   margin-bottom: 0;
   align-self: stretch;
   min-height: 48px;
@@ -575,32 +575,6 @@
   opacity: 0.6;
 }
 
-/* Right-rail page indicator */
-.m-rail {
-  position: absolute;
-  right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  pointer-events: none;
-}
-.m-rail-dot {
-  width: 3px;
-  height: 6px;
-  border-radius: 2px;
-  background: var(--foreground);
-  opacity: 0.3;
-  transition: height 200ms ease, opacity 200ms ease;
-}
-.m-rail-dot.active {
-  height: 16px;
-  background: var(--foreground);
-  opacity: 1;
-}
-
 /* ── Deep-dive sheet ─────────────────────────────────── */
 .m-sheet {
   position: fixed;
@@ -688,6 +662,16 @@
   margin: 22px 0 6px;
   font-weight: 800;
   letter-spacing: -0.03em;
+}
+.m-sheet-image-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: var(--accent);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .m-sheet-tagline {

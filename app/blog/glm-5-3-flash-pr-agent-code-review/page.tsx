@@ -1,8 +1,7 @@
 import Link from 'next/link'
-import { WritingIdentity } from '@/components/writing-identity'
+import { WritingHeader } from '@/components/writing-header'
 import {
   ArrowLeft,
-  ArrowRight,
   ArrowUpRight,
   Bot,
   CheckCircle2,
@@ -119,16 +118,7 @@ export default function GlmFlashPrAgentCodeReviewPost() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
-      <div className="flex items-center justify-between">
-        <Link href="/blog" className="nav-link">
-          <ArrowLeft className="h-3.5 w-3.5" />
-          All posts
-        </Link>
-        <Link href="/" className="nav-link writing-wordmark">
-          <WritingIdentity />
-          <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
-      </div>
+      <WritingHeader />
 
       <header className="flex flex-col gap-4">
         <div className="section-eyebrow">

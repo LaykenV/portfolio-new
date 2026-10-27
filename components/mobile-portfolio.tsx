@@ -224,6 +224,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
               project={project}
               index={i}
               total={projects.length}
+              active={activeIndex === slotIndex}
               onDeepDive={() => {
                 haptic(8)
                 clearSwipePreviewNow()
@@ -245,16 +246,6 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
           )
         })}
       </div>
-
-      {/* Right-rail page indicator (project slides only) */}
-      {viewingProject && (
-        <div className="m-rail" aria-hidden="true">
-          {projects.map((p, i) => {
-            const isActive = i + 1 === activeIndex
-            return <span key={p.slug} className={cn('m-rail-dot', isActive && 'active')} />
-          })}
-        </div>
-      )}
 
       {/* Deep-dive slide-in sheet */}
       <DeepDiveSheet
@@ -366,6 +357,7 @@ interface ProjectSlideProps {
   project: Project
   index: number
   total: number
+  active: boolean
   onDeepDive: () => void
   onSwipePreview: (offset: number) => void
   onSwipePreviewEnd: (commit: boolean, offset: number) => void
@@ -376,6 +368,7 @@ function ProjectSlide({
   project,
   index,
   total,
+  active,
   onDeepDive,
   onSwipePreview,
   onSwipePreviewEnd,
@@ -444,7 +437,7 @@ function ProjectSlide({
   }
 
   return (
-    <section ref={ref} className="m-slide m-project">
+    <section ref={ref} className="m-slide m-project" data-active={active}>
       <div className="m-card-bg" aria-hidden="true" />
       <div
         className="m-card-inner"
@@ -699,6 +692,15 @@ function DeepDiveSheet({
           />
         </div>
 
+        <a
+          href={displayProject.secondaryImage}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="m-sheet-image-link"
+        >
+          Open full-size image
+          <ArrowUpRight size={14} aria-hidden="true" />
+        </a>
         <h2 className="m-sheet-title">{displayProject.title}</h2>
         <div className="m-sheet-tagline">{displayProject.tagline}</div>
 

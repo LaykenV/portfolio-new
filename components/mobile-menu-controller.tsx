@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { MobileMenu } from '@/components/mobile-menu'
-import { Github, Linkedin, FileText, BookOpen, Mail, Menu } from 'lucide-react'
+import { Github, Linkedin, FileText, BookOpen, Mail, Menu, ArrowUpRight, CalendarClock, Send } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface MobileMenuControllerProps {
@@ -35,10 +35,23 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
             href="mailto:layken@varholdt.com?subject=Software%20Engineering%20role"
             className="m-cta-email w-full"
           >
-            <Mail className="h-4 w-4" />
-            layken@varholdt.com
+            <span className="m-cta-icon" aria-hidden="true"><Mail size={18} /></span>
+            <b className="m-cta-email-addr">layken@varholdt.com</b>
+            <span className="arrow" aria-hidden="true"><ArrowUpRight size={16} /></span>
           </a>
           <nav className="m-menu-links" aria-label="Portfolio links">
+            <a href="https://cal.com/layken-varholdt" className="m-menu-link" target="_blank" rel="noreferrer">
+              <CalendarClock size={16} />
+              Book a call
+            </a>
+            <a href="https://t.me/LLVarholdt" className="m-menu-link" target="_blank" rel="noreferrer">
+              <Send size={16} />
+              Telegram
+            </a>
+            <a href="https://www.varholdt.com/" className="m-menu-link" target="_blank" rel="noreferrer">
+              <ArrowUpRight size={16} />
+              Varholdt AI
+            </a>
             <a href="/blog" className="m-menu-link">
               <BookOpen className="h-4 w-4" />
               Blog

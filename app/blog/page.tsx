@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { WritingIdentity } from '@/components/writing-identity'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { WritingHeader } from '@/components/writing-header'
+import { ArrowRight } from 'lucide-react'
 
 import type { Metadata } from 'next'
 
@@ -84,13 +84,7 @@ const posts = [
 export default function BlogIndex() {
   return (
     <div className="font-sans mx-auto max-w-3xl min-h-dvh px-6 py-14 md:py-20 flex flex-col gap-8 md:gap-10">
-      <div className="flex items-center justify-between">
-        <Link href="/" className="nav-link">
-          <ArrowLeft className="h-3.5 w-3.5" />
-          Home
-        </Link>
-        <span className="writing-wordmark"><WritingIdentity /></span>
-      </div>
+      <WritingHeader backHref="/" backLabel="Home" />
 
       <div className="flex flex-col gap-3">
         <div className="section-eyebrow">Writing</div>

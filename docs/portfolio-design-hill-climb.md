@@ -60,6 +60,10 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 4 | DeepSeek, OpenCode | 8.5 | 8.6 | 8.6 | 8.4 | 8.2 | 8.7 | 8.0 | 9.0 | 7.7 | 8.4 |
 | 4 | Muse Contributor | 8.2 | 7.8 | 8.3 | 8.0 | 8.1 | 8.5 | 7.6 | 8.2 | 7.3 | 8.0 |
 | 4 | Opus 5.5 | 8.0 | 7.8 | 8.0 | 7.8 | 7.0 | 8.4 | 7.7 | 8.4 | 6.6 | 7.7 |
+| 5 | Terra | 7.8 | 7.6 | 7.5 | 7.5 | 8.3 | 8.0 | 7.8 | 8.1 | 7.2 | 7.8 |
+| 5 | DeepSeek, OpenCode | 8.6 | 8.5 | 8.4 | 8.4 | 8.8 | 8.2 | 8.3 | 8.8 | 8.4 | 8.5 |
+| 5 | Muse Contributor, retry | 8.5 | 8.0 | 8.5 | 8.5 | 8.5 | 8.5 | 8.0 | 9.0 | 7.5 | 8.3 |
+| 5 | Opus 5.5 | 8.4 | 8.2 | 8.3 | 8.2 | 8.1 | 8.5 | 8.2 | 8.6 | 7.6 | 8.2 |
 
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
@@ -112,6 +116,22 @@ Remove screenshot hover reveals and the seam, the circular theme wipe, the anima
 Fix dark article step fills with a properly scoped override. Raise small labels, give rail text more edge room, align mobile blog arrows to titles, and place the tablet picker after the founder block. Use Software engineer on both role lines, with the full employment details still available in the resume. Menu email aligns with the link list.
 
 Round-5 proof: lint, production build and browser checks pass. Normal-motion checks cover all seven positions and immediate actions at 320, 390 and 430px, plus real touch swipes, click/keyboard screenshot switching, no hover reveal, no theme view transition and plain article steps in both themes. The existing suite also checks contrast, browser chrome, menu focus and navigation.
+
+## Round 6
+
+Put the desktop name, role and founder story together in the index rail. Contact keeps its own region. The tablet layout retains the same story above its project picker. Only one founder block is visible at each width.
+
+Use full muted color on the rail counter and strengthen neutral selection without a left bar. Enlarge screenshot thumbnails to 48px and give the stack column enough room for Atlas's seven chips in one row. Remove the redundant mobile dot rail, keeping counts, swipe gestures and position tracking.
+
+Use a shared writing header with portrait, name and theme control. Keep code chips in the route palette, align article rules with text, and match the tablet picker inset to its section. Add the existing booking, Telegram and Varholdt AI links to the mobile menu. Match its email row and name styling to the other mobile views.
+
+Add a full-size image link to deep dives. Original screenshots are 2200–2816px wide and open in the browser for zoom; the card keeps the complete image. This preserves evidence that a fixed crop would hide.
+
+Declined findings: availability was already ink, not a warm accent. Altering the surface token alone would not change the selected fill. More chip padding would worsen wrapping. The requested deep-dive title selector did not exist and the actual title already had a 22px margin. Muse's first round-5 attempt returned only progress text, so it has no grade; the fresh retry is recorded above.
+
+Round-6 proof: lint and production build pass. Browser checks cover all seven positions and real touch swipes, menu focus, screenshot switching, one visible founder block at each width, the full-resolution image link, theme switching on writing pages and 320px header fit. At 1440px all seven Atlas stack chips fit in one row.
+
+The final counter, position-number and screenshot-control text audit is at least 4.79:1 in light and 6.79:1 in dark. Inline code uses the actual route surface in both themes, including the stronger dark selector. All 28 candidate screenshots were captured again after these styles settled.
 
 ## Round protocol
 
