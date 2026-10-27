@@ -419,7 +419,7 @@ function ProjectSlide({
             src={project.image}
             alt={project.title}
             fill
-            className="object-cover object-top scale-[1.01]"
+            className="object-contain scale-[1.01]"
             sizes="100vw"
             draggable={false}
           />

@@ -248,12 +248,14 @@ html.dark .m-about-email {
 
 
 /* ── Project slide ───────────────────────────────────── */
-/* One project fills the screen under the header, so a swipe moves exactly
-   one project. */
+/* Projects are as tall as their content. Each swipe still stops at the next
+   one, and its heading shows below the current project's actions. */
 .m-project {
   padding: 0;
-  height: calc(100dvh - var(--site-header-h));
+  height: auto;
 }
+/* The last project needs a full screen to reach its snap position. */
+.m-project:last-child { min-height: calc(100dvh - var(--site-header-h)); }
 .m-card-bg {
   position: absolute;
   inset: 0;
@@ -264,9 +266,7 @@ html.dark .m-about-email {
 .m-card-inner {
   position: relative;
   z-index: 1;
-  height: 100%;
-  padding: 16px 20px
-           calc(env(safe-area-inset-bottom, 0px) + 24px);
+  padding: 16px 20px 40px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -306,13 +306,10 @@ html.dark .m-about-email {
 .m-card-image {
   position: relative;
   width: 100%;
-  /* 16:9 when there is room. On short screens the shot gives up height
-     first, cropping from the bottom, so the actions stay on screen. */
-  height: calc((100vw - 40px) * 9 / 16);
-  min-height: 120px;
+  aspect-ratio: 16 / 9;
   border-radius: 10px;
   overflow: hidden;
-  flex-shrink: 1;
+  flex-shrink: 0;
   background: hsl(var(--card));
   border: 1px solid var(--border);
 }
@@ -334,9 +331,6 @@ html.dark .m-about-email {
   gap: 8px;
   padding-top: 16px;
 }
-/* Tall screens keep the actions at the bottom, near the thumb. */
-.m-project .m-card-body { flex: 1 0 auto; }
-.m-project .m-card-actions { margin-top: auto; }
 
 .m-card-title {
   font-size: clamp(32px, 9vw, 44px);
