@@ -1,7 +1,7 @@
 import Link from 'next/link'
+import { WritingHeader } from '@/components/writing-header'
 import {
   ArrowLeft,
-  ArrowUpRight,
   Layers,
   Database,
   ShieldCheck,
@@ -121,23 +121,14 @@ export default function DefaultStackPost() {
   }
 
   return (
-    <article className="font-sans mx-auto max-w-3xl min-h-dvh px-6 py-14 md:py-20 flex flex-col gap-10">
+    <article className="font-sans mx-auto max-w-3xl min-h-dvh px-5 pb-14 pt-5 md:px-6 md:py-20 flex flex-col gap-6 md:gap-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
       {/* Top nav */}
-      <div className="flex items-center justify-between">
-        <Link href="/blog" className="nav-link">
-          <ArrowLeft className="h-3.5 w-3.5" />
-          All posts
-        </Link>
-        <Link href="/" className="nav-link">
-          Home
-          <ArrowUpRight className="h-3.5 w-3.5" />
-        </Link>
-      </div>
+      <WritingHeader />
 
       {/* Hero */}
       <header className="flex flex-col gap-4">
@@ -152,7 +143,7 @@ export default function DefaultStackPost() {
           architectural patterns from Theo Browne&rsquo;s open-source Lawn repo
           that make them work together.
         </p>
-        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs opacity-65">
+        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
           <span className="mono-accent">By Layken Varholdt</span>
           <span aria-hidden="true">·</span>
           <span className="mono-accent">~10 min read</span>
