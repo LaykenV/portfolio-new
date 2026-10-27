@@ -434,20 +434,19 @@
 
 .m-project-heading {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  column-gap: 12px;
-  row-gap: 8px;
+  gap: 8px;
   margin-bottom: 16px;
 }
-.m-project-heading .m-card-title { font-size: clamp(28px, 8vw, 36px); flex: 1 1 max-content; }
+.m-project-heading .m-card-title { font-size: clamp(28px, 8vw, 36px); }
 .m-counter {
-  margin-left: auto;
-  padding-top: 6px;
   flex-shrink: 0;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
   letter-spacing: 0.1em;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
@@ -493,7 +492,7 @@
   text-wrap: balance;
 }
 .m-card-desc {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--muted);
   margin: 0;
@@ -506,13 +505,14 @@
   gap: 8px;
   margin-top: 10px;
 }
+.m-stack-ending { display: inline-flex; gap: 8px; }
 .m-chip {
   display: inline-flex;
   align-items: center;
-  padding: 4px 8px;
+  padding: 4px 6px;
   border-radius: 6px;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.4;
   border: 1px solid var(--border);
   background: transparent;
@@ -559,6 +559,11 @@
   border-color: var(--accent);
 }
 .m-btn-primary:active { opacity: 0.88; }
+html.dark .m-btn-primary {
+  background: var(--accent-soft);
+  color: var(--foreground);
+  border-color: var(--accent);
+}
 .m-btn-icon {
   width: 48px;
   padding: 0;
@@ -731,7 +736,8 @@
   outline: 2px solid var(--foreground);
   outline-offset: -2px;
 }
-.mobile-portfolio .m-menu-dialog .btn-icon {
+.mobile-portfolio .m-menu-dialog .btn-icon,
+.mobile-portfolio .m-topbar .m-topbar-theme {
   min-width: 44px;
   min-height: 44px;
   border-color: transparent;

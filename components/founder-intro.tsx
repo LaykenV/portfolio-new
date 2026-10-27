@@ -7,7 +7,7 @@ export function FounderIntro() {
       <h2 className="founder-name">
         <a href="https://www.varholdt.com/" target="_blank" rel="noreferrer noopener">
           Varholdt AI
-          <ArrowUpRight aria-hidden="true" size={20} />
+          <ArrowUpRight aria-hidden="true" size={14} />
         </a>
       </h2>
       <p className="founder-description">

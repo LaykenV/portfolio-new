@@ -24,6 +24,7 @@ import type { Project } from '@/types/project'
 import { MobileMenuController } from '@/components/mobile-menu-controller'
 import { FounderIntro } from '@/components/founder-intro'
 import { WritingIdentity } from '@/components/writing-identity'
+import { AnimatedThemeToggler } from '@/components/animated-theme-toggler'
 import { cn } from '@/lib/utils'
 
 interface MobilePortfolioProps {
@@ -185,7 +186,10 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
         >
           <WritingIdentity />
         </button>
-        <MobileMenuController className="m-topbar-menu" />
+        <div className="flex items-center gap-2">
+          <AnimatedThemeToggler className="m-topbar-theme" />
+          <MobileMenuController className="m-topbar-menu" />
+        </div>
       </header>
 
       {/* Deck: vertical snap scroller (about slide + project slides) */}
@@ -303,7 +307,7 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
             </span>
           </a>
 
-          <nav className="m-contact-links" aria-label="Contact and GitHub">
+          <nav className="m-contact-links" aria-label="Contact links">
             <a
               href="https://cal.com/layken-varholdt"
               target="_blank"
@@ -317,13 +321,6 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
               rel="noreferrer noopener"
             >
               Telegram
-            </a>
-            <a
-              href="https://github.com/laykenV"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              GitHub
             </a>
           </nav>
         </div>
@@ -439,12 +436,12 @@ function ProjectSlide({
         onTouchCancel={onTouchEnd}
       >
         <div className="m-project-heading">
-          <h2 className="m-card-title">{project.title}</h2>
           <span className="m-counter">
             <b>{String(index + 1).padStart(2, '0')}</b>
             <span className="sep"> / </span>
             {String(total).padStart(2, '0')}
           </span>
+          <h2 className="m-card-title">{project.title}</h2>
         </div>
 
         <div className="m-card-image">
@@ -468,14 +465,19 @@ function ProjectSlide({
           <p className="m-card-desc">{project.mobileSummary}</p>
 
           <div className="m-card-stack">
-            {project.techStack.slice(0, 4).map((tech) => (
+            {project.techStack.slice(0, 3).map((tech) => (
               <span key={tech} className="m-chip">
                 {tech}
               </span>
             ))}
-            {project.techStack.length > 4 && (
-              <span className="m-chip" aria-label={`${project.techStack.length - 4} more technologies in Deep dive`}>
-                +{project.techStack.length - 4}
+            {project.techStack.length > 3 && (
+              <span className="m-stack-ending">
+                <span className="m-chip">{project.techStack[3]}</span>
+                {project.techStack.length > 4 && (
+                  <span className="m-chip" aria-label={`${project.techStack.length - 4} more technologies in Deep dive`}>
+                    +{project.techStack.length - 4}
+                  </span>
+                )}
               </span>
             )}
           </div>

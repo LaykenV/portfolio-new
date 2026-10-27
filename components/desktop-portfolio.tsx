@@ -248,8 +248,11 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
     <div className="dp-root dp-grid hidden md:grid mx-auto max-w-[130rem]">
       {/* ---------- Index rail (lg+) ---------- */}
       <aside className="dp-col hidden xl:flex flex-col border-r dp-hairline py-7 overflow-hidden">
-        <div className="dp-identity px-5 pb-6 border-b dp-hairline flex-shrink-0">
-          <Portrait size={64} />
+        <div className="dp-identity dp-identity-section px-5 pb-6 flex-shrink-0">
+          <div className="flex w-full items-center justify-between">
+            <Portrait size={64} />
+            <AnimatedThemeToggler className="dp-theme-toggle" />
+          </div>
           <div className="min-w-0">
             <p className="text-[26px] font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
             <p className="dp-identity-role mt-1">
@@ -396,17 +399,19 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
       </main>
 
       {/* ---------- Floating control panel ---------- */}
-      <div className="dp-col dp-scroll relative px-4 xl:px-5 py-7">
+      <div className="dp-col dp-control-col dp-scroll relative py-7">
         {/* Below xl the identity and compact project index share this column. */}
-        <div className="dp-compact-identity xl:hidden flex items-start gap-3 mb-4 px-3">
-          <Portrait size={56} />
-          <div className="min-w-0 flex-1">
-            <p className="text-[22px] font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
+        <div className="dp-compact-identity xl:hidden flex flex-col gap-3 mb-3">
+          <div className="flex w-full items-center justify-between">
+            <Portrait size={64} />
+            <AnimatedThemeToggler className="dp-theme-toggle" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-[22px] font-bold tracking-tight leading-tight whitespace-nowrap">{IDENTITY.name}</p>
             <p className="dp-identity-role mt-1">
               {IDENTITY.role}
             </p>
           </div>
-          <AnimatedThemeToggler className="dp-theme-toggle mt-2 shrink-0" />
         </div>
 
         <ControlPanel
@@ -445,7 +450,6 @@ function ControlPanel({ projectPicker }: { projectPicker: ReactNode }) {
       <section className="dp-panel-section">
         <div className="dp-contact-heading">
           <p className="dp-panel-label">Contact</p>
-          <span className="hidden xl:block"><AnimatedThemeToggler className="dp-theme-toggle" /></span>
         </div>
         <p className="dp-panel-availability">Open to software engineering roles</p>
 
@@ -503,7 +507,7 @@ function ControlPanel({ projectPicker }: { projectPicker: ReactNode }) {
 
         <a href={IDENTITY.x} target="_blank" rel="noreferrer" className="dp-panel-row">
           <span className="dp-panel-icon">
-            <XIcon className="h-[0.95rem] w-[0.95rem]" />
+            <XIcon className="h-3.5 w-3.5" />
           </span>
           <span>Twitter / X</span>
           <ArrowUpRight className="dp-panel-arrow h-3.5 w-3.5" />

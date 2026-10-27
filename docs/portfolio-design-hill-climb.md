@@ -83,6 +83,11 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 9 | Muse Contributor | 8.5 | 8.0 | 8.5 | 8.0 | 8.5 | 8.5 | 8.0 | 8.5 | 7.5 | 8.2 |
 | 9 | Opus 5.5 | 8.4 | 8.3 | 8.2 | 8.1 | 8.6 | 8.4 | 8.2 | 8.8 | 7.6 | 8.3 |
 
+| 10 | Terra | 8.2 | 8.4 | 8.1 | 7.9 | 8.6 | 8.4 | 8.3 | 8.7 | 7.8 | 8.3 |
+| 10 | DeepSeek, OpenCode | 8.7 | 8.5 | 8.5 | 8.5 | 8.5 | 8.3 | 8.4 | 8.8 | 8.5 | 8.5 |
+| 10 | Muse Contributor | 8.0 | 7.5 | 8.0 | 8.0 | 8.5 | 8.5 | 8.0 | 8.5 | 7.5 | 8.1 |
+| 10 | Opus 5.5 | 8.5 | 8.4 | 8.1 | 8.4 | 8.4 | 8.4 | 8.3 | 8.8 | 7.6 | 8.3 |
+
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
 ## Round 1
@@ -196,6 +201,18 @@ Let project headings use the full width when needed, with an 8px gap before a wr
 Declined findings: measured project actions are 48px, not 40px. Their unequal widths allow room for the longer Deep dive label. The disclosure has no open-state underline when the pointer is moved away. Inline code has a 24.6px line box inside the body's 28.9px leading. Labels already use 12px/0.08em. Preserve the email priority, neutral selection and tablet picker. Do not turn Blog into an external arrow, shrink targets, remove founder copy or add a new visual layer.
 
 Round-10 proof: lint and production build pass. Browser checks retain all seven projects, short-phone action fit, real swipes, direct tabs, theme/meta sync, focus, menu Escape and flat article steps. Focused measurements check equal tablet insets, one theme control, identical phone brand coordinates, centered writing headers without overlap, text hover/focus and detail spacing. The capture packet adds light/dark long-title project states.
+
+## Round 11
+
+Give every phone project the same counter-above-title arrangement with an 8px gap. Titles keep the full width and the image follows by 16px. Use 16px summaries and 13px chips with slightly narrower padding. Keep the fourth chip and +N count together so the count does not wrap alone. Keep all three 48px actions. Dark Deep dive uses the existing soft accent, accent border and ink text, reducing the bright repeated fill.
+
+Stack the tablet portrait and theme control above the full-width name and role. Wide desktop also puts the theme control beside personal identity. The phone has a direct header theme control. The menu makes that background control inert and restores it on close. Writing retains its header theme control.
+
+Use a 20px content inset for identity and control-column rules. Give rail rows a 44px minimum while keeping the 48px previews. Strengthen metadata and numbers with 500 weight, and use smaller founder and X marks. The phone hero keeps booking and Telegram as direct contact links; GitHub remains in the menu and desktop Elsewhere.
+
+Declined findings: labels already use 12px, not 10px or 11px. The project summary is 17px at a 36rem cap, not 18px at 688px. The index and article already share the same emphasized title rule. Numbered-list dividers align with their text inside an intentional gutter. Preserve the View projects scroll button, which uses an arrow rather than an accordion chevron. Keep work-first desktop order and the actual seven-name tablet picker.
+
+Round-11 proof: lint and production build pass. Browser suites cover all seven cards and actions, real touch swipes, direct screenshot tabs, both themes, meta colors, keyboard focus and menu state. Focused checks measure all counter/title/image gaps, one active theme control, menu inert restoration, names on one line and shared rail insets. All 32 candidate states are captured again.
 
 ## Round protocol
 

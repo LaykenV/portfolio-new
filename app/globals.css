@@ -1364,6 +1364,7 @@ html.dark .writing-theme {
    ========================================================================== */
 
 .dp-root {
+  --rail-inset: 20px;
   height: 100dvh;
   overflow: hidden;
   color: var(--foreground);
@@ -1382,6 +1383,16 @@ html.dark .writing-theme {
 .dp-col {
   min-height: 0;
   min-width: 0;
+}
+.dp-control-col { padding-inline: var(--rail-inset); }
+.dp-identity-section { position: relative; }
+.dp-identity-section::after {
+  content: '';
+  position: absolute;
+  left: var(--rail-inset);
+  right: var(--rail-inset);
+  bottom: 0;
+  border-bottom: 1px solid var(--border);
 }
 
 .dp-hairline {
@@ -1423,7 +1434,7 @@ html.dark .writing-theme {
   color: var(--foreground);
 }
 .dp-account p + p { margin-top: 12px; }
-.dp-project-picker { margin: 0 0.75rem 20px; }
+.dp-project-picker { margin: 0 0 20px; }
 .dp-project-picker select {
   width: 100%;
   appearance: none;
@@ -1575,7 +1586,7 @@ html.dark .writing-theme {
   align-items: center;
   gap: 0.6rem;
   width: 100%;
-  min-height: 2.5rem;
+  min-height: 44px;
   text-align: left;
   padding: 0.4rem 0.55rem;
   border-radius: 0.6rem;
@@ -1606,6 +1617,7 @@ html.dark .dp-nav-item.dp-nav-active {
 .dp-nav-num {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 12px;
+  font-weight: 500;
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
   color: var(--muted);
@@ -1725,14 +1737,14 @@ html.dark .dp-nav-item.dp-nav-active {
 
 .dp-panel-section {
   position: relative;
-  padding: 0.8rem 0.75rem;
+  padding: 0.8rem 0;
 }
 .dp-panel-section + .dp-panel-section::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0.75rem;
-  right: 0.75rem;
+  left: 0;
+  right: 0;
   border-top: 1px solid var(--border);
 }
 
@@ -1760,6 +1772,8 @@ html.dark .dp-nav-item.dp-nav-active {
 }
 
 .dp-root .dp-theme-toggle {
+  width: 44px;
+  height: 44px;
   border-color: transparent;
   background: transparent;
   box-shadow: none;
@@ -1837,6 +1851,7 @@ html.dark .dp-nav-item.dp-nav-active {
 .dp-meta-k {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 0.75rem;
+  font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
