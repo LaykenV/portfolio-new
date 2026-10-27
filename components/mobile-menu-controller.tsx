@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { MobileMenu } from '@/components/mobile-menu'
-import { AnimatedThemeToggler } from '@/components/animated-theme-toggler'
 import { Github, Linkedin, FileText, BookOpen, Mail } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -35,43 +34,37 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
 
       <MobileMenu open={open} onClose={() => setOpen(false)}>
         <div className="flex flex-col gap-3">
-          <div className="flex items-center justify-end mb-1">
-            <div className="flex items-center gap-2">
-              <a
-                href="/blog"
-                className="nav-link"
-              >
-                <BookOpen className="h-3.5 w-3.5" />
-                Blog
-              </a>
-              <AnimatedThemeToggler className="btn-icon" />
-            </div>
-          </div>
-          <div className="h-px" style={{ background: 'var(--border)' }} />
           <a
             href="mailto:layken@varholdt.com?subject=Software%20Engineering%20role"
-            className="cta-primary w-full"
+            className="m-cta-email w-full justify-center"
           >
             <Mail className="h-4 w-4" />
             layken@varholdt.com
           </a>
-          <div className="flex flex-wrap items-center gap-2">
-            <a href="https://github.com/laykenV" aria-label="GitHub" className="btn-icon" target="_blank" rel="noreferrer">
+          <nav className="m-menu-links" aria-label="Portfolio links">
+            <a href="/blog" className="m-menu-link">
+              <BookOpen className="h-4 w-4" />
+              Blog
+            </a>
+            <a href="/Layken-Varholdt-Software-Engineer-Resume.pdf" className="m-menu-link" target="_blank" rel="noreferrer">
+              <FileText className="h-4 w-4" />
+              Résumé
+            </a>
+            <a href="https://github.com/laykenV" className="m-menu-link" target="_blank" rel="noreferrer">
               <Github className="h-4 w-4" />
+              GitHub
             </a>
-            <a href="https://www.linkedin.com/in/layken-varholdt-a78687230/" aria-label="LinkedIn" className="btn-icon" target="_blank" rel="noreferrer">
+            <a href="https://www.linkedin.com/in/layken-varholdt-a78687230/" className="m-menu-link" target="_blank" rel="noreferrer">
               <Linkedin className="h-4 w-4" />
+              LinkedIn
             </a>
-            <a href="https://x.com/LLVarholdt" aria-label="Twitter" className="btn-icon" target="_blank" rel="noreferrer">
+            <a href="https://x.com/LLVarholdt" className="m-menu-link" target="_blank" rel="noreferrer">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-twitter-x" viewBox="0 0 16 16">
                 <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
               </svg>
+              X
             </a>
-            <a href="/Layken-Varholdt-Software-Engineer-Resume.pdf" aria-label="Résumé" title="Résumé" className="btn text-xs ml-auto" target="_blank" rel="noreferrer">
-              <FileText className="h-4 w-4" />
-              <span>Résumé</span>
-            </a>
-          </div>
+          </nav>
         </div>
       </MobileMenu>
     </div>

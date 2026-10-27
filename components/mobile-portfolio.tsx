@@ -12,9 +12,9 @@ import {
 import Image from 'next/image'
 import {
   ArrowLeft,
+  ArrowDown,
   ArrowRight,
   ArrowUpRight,
-  ChevronDown,
   ChevronLeft,
   ExternalLink,
   Github,
@@ -139,19 +139,25 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
     const slides = slideRefs.current.filter(Boolean) as HTMLElement[]
     if (slides.length === 0) return
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
-            const idx = slides.indexOf(entry.target as HTMLElement)
-            if (idx !== -1) setActiveIndex(idx)
-          }
+    let frame = 0
+    const update = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        let index = 0
+        for (let i = 1; i < slides.length; i++) {
+          if (slides[i].offsetTop <= deck.scrollTop + 80) index = i
         }
-      },
-      { root: deck, threshold: [0.5, 0.6, 0.75] },
-    )
-    slides.forEach((s) => io.observe(s))
-    return () => io.disconnect()
+        setActiveIndex(index)
+      })
+    }
+    update()
+    deck.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      cancelAnimationFrame(frame)
+      deck.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
   }, [total])
 
   const currentProject = useMemo(
@@ -420,7 +426,7 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
         >
           <span className="label">View projects</span>
           <span className="chev" aria-hidden="true">
-            <ChevronDown className="h-[16px] w-[16px]" strokeWidth={2.5} />
+            <ArrowDown className="h-[16px] w-[16px]" />
           </span>
         </button>
       </div>
@@ -610,13 +616,14 @@ function ProjectSlide({
                   href={project.links.github}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="m-btn m-btn-icon"
+                  className="m-btn"
                   aria-label="Source code"
                   tabIndex={actionsBlocked ? -1 : undefined}
                   aria-hidden={actionsBlocked || undefined}
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Github className="h-[16px] w-[16px]" />
+                  Source
                 </a>
               )}
             </div>
@@ -817,7 +824,9 @@ function DeepDiveSheet({
 
         <div className="m-sheet-label">The work</div>
         <div className="m-sheet-body">
-          <p>{displayProject.longDescription}</p>
+          {displayProject.longDescription.split('\n\n').map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
 
         <div className="m-sheet-label">Stack</div>

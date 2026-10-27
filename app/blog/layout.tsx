@@ -1,5 +1,18 @@
 import type { ReactNode } from 'react'
+import { ArrowUpRight } from 'lucide-react'
 
 export default function BlogLayout({ children }: { children: ReactNode }) {
-  return <div className="writing-theme">{children}</div>
+  return (
+    <div className="writing-theme">
+      {children}
+      <footer className="mx-auto max-w-3xl px-6 pb-12">
+        <div className="border-t border-[var(--border)] pt-6">
+          <a href="mailto:layken@varholdt.com" className="nav-link min-h-11">
+            layken@varholdt.com
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </a>
+        </div>
+      </footer>
+    </div>
+  )
 }

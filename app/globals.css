@@ -1367,11 +1367,6 @@ html.dark .writing-theme {
 .dp-grid {
   grid-template-columns: minmax(0, 1fr) 19rem;
 }
-@media (min-width: 1024px) {
-  .dp-grid {
-    grid-template-columns: 15rem minmax(0, 1fr) 18rem;
-  }
-}
 @media (min-width: 1280px) {
   .dp-grid {
     grid-template-columns: 18rem minmax(0, 1fr) 21rem;
@@ -1420,6 +1415,23 @@ html.dark .writing-theme {
   font-size: 17px;
   line-height: 1.7;
   color: var(--foreground);
+}
+.dp-account p + p { margin-top: 12px; }
+.dp-project-picker { margin: 0 4px 20px; }
+.dp-project-picker select {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--foreground);
+  background: var(--background);
+  font: inherit;
+  font-size: 14px;
+}
+.dp-project-picker select:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
 }
 
 .dp-eyebrow {
@@ -1877,8 +1889,8 @@ html.dark .dp-nav-item.dp-nav-active {
 }
 
 .dp-band + .dp-band {
-  margin-top: 3.5rem;
-  padding-top: 3.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
   border-top: 1px solid var(--border);
 }
 
@@ -2021,6 +2033,10 @@ html.dark .writing-theme .tech-badge-compact {
   color: var(--muted);
 }
 .writing-theme .post-step-icon { display: none; }
+
+@media (min-width: 640px) {
+  .writing-theme .post-row-arrow { margin-top: 26px; }
+}
 
 @media (max-width: 639px) {
   .writing-theme .post-steps { padding-left: 20px; }

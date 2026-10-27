@@ -83,7 +83,7 @@ const posts = [
 
 export default function BlogIndex() {
   return (
-    <div className="font-sans mx-auto max-w-3xl min-h-dvh px-6 py-14 md:py-20 flex flex-col gap-10">
+    <div className="font-sans mx-auto max-w-3xl min-h-dvh px-6 py-14 md:py-20 flex flex-col gap-8 md:gap-10">
       <div className="flex items-center justify-between">
         <Link href="/" className="nav-link">
           <ArrowLeft className="h-3.5 w-3.5" />

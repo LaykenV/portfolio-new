@@ -52,6 +52,9 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 2 | Terra | 7.7 | 7.5 | 7.1 | 7.0 | 8.2 | 7.6 | 7.5 | 7.8 | 6.8 | 7.5 |
 | 2 | DeepSeek, OpenCode | 8.7 | 8.8 | 8.5 | 8.5 | 9.1 | 8.9 | 8.6 | 9.2 | 8.4 | 8.7 |
 | 2 | Muse Contributor | 8.0 | 8.5 | 8.0 | 7.5 | 8.5 | 8.5 | 7.5 | 8.5 | 7.0 | 8.0* |
+| 3 | Terra | 7.5 | 7.5 | 7.0 | 7.0 | 8.5 | 8.0 | 7.5 | 8.0 | 7.0 | 7.6 |
+| 3 | DeepSeek, OpenCode | 8.8 | 8.7 | 8.5 | 8.4 | 9.0 | 8.8 | 8.5 | 8.8 | 8.2 | 8.6 |
+| 3 | Muse Contributor | 8.5 | 8.0 | 8.0 | 8.5 | 8.5 | 8.5 | 8.0 | 8.5 | 7.5 | 8.2 |
 
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
@@ -80,6 +83,18 @@ Carry the portrait into writing headers. Widen the mobile menu, use matching out
 Declined findings: the mobile tagline and action borders were already neutral in round 2. Earlier blue rules were overridden; round 3 consolidates those rules. Rail text fits at 1440px but Acadiana's 132px title had 120px available at 1024px, so wrapping addresses the measured case. A full-viewport minimum intro would hide work again. A 40px project inset would overlap the fixed menu. Use content-driven height and a 64px inset instead.
 
 Round-3 proof: lint, production build and the browser suite pass at five widths in both themes. At 390 × 844 the first project title starts at 643px and its image starts at 690px, compared with 774px for the previous image. The 320px view keeps its work control visible and every project action reachable by scrolling. Fresh captures include both themes at 1024px to show the rail wrapping.
+
+## Round 4
+
+Use two desktop columns below 1280px, with a native project picker beside the identity. The seven-item rail remains on wider screens. Give mobile project slides their natural height and determine the active item from its leading position. Keep the last project tall enough to reach its snap position. Label Source alongside Live and Deep dive.
+
+Replace the mobile dropdown with an opaque navigation surface. It has one email action, a close control, focus containment and an inert background. Keep the portrait and name visible in the menu. Split full accounts into paragraphs in both project detail views without changing their words. Use 12px mobile crumbs and counters, and an arrow for the scroll action.
+
+Remove the duplicate desktop role heading. Recognition follows the project title and tagline; its redundant rail glyph is removed. Tighten desktop project separation and the mobile blog introduction. Give writing pages a direct email footer. Include dark writing views in the screenshot packet.
+
+Declined findings: a wider rail at 1024px would take more width from the already compressed work. The selected rail has a visible rule and heavier title, so it does not rely on the fill alone. Increasing chip padding would make wrapping worse. The expanded desktop account already uses 17px, above the requested 16px floor. DeepSeek's round-3 report contains its full score table and candidate deductions but ends midway through a reference discussion; no ranked-fix section was returned.
+
+Round-4 proof: lint, production build and the browser suite pass. The 1024px image is 640px wide. The native picker and rail switch at 1280px. All seven mobile positions and action labels work at 320, 390 and 430px; touch swipes still open details. Menu focus stays inside, Escape restores the trigger, the background is inert, and theme switching works while the menu is open. The seven project accounts preserve every original word, with paragraph boundaries added. Fresh captures include dark writing pages.
 
 ## Round protocol
 

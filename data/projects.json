@@ -6,7 +6,7 @@
       "title": "Atlas Outbound",
       "tagline": "AI sales agent that books meetings using scraped agency intel",
       "description": "Context-aware AI voice agent that scrapes an agency's own case studies to build trust on live calls and book qualified discovery meetings. 1st place at the Convex Modern Stack Hackathon — built in 12 days.",
-      "longDescription": "Atlas Outbound won 1st place at the Convex Modern Stack Hackathon ($10k cash + ~$3k in additional prizes), built end-to-end in 12 days. The system combines a lead-sourcing pipeline (Google Places + Firecrawl marketing-gap analysis + OpenAI intelligence) with a Vapi-powered voice agent whose context is dynamically assembled from the hiring agency's own case studies — so pitches reference real customers, not generic copy. Convex drives a real-time dashboard that surfaces every stage of the funnel, from prospect discovery through meeting booked. The prize wasn't for the demo — it was for shipping a coherent system under a 12-day constraint.",
+      "longDescription": "Atlas Outbound won 1st place at the Convex Modern Stack Hackathon ($10k cash + ~$3k in additional prizes), built end-to-end in 12 days. The system combines a lead-sourcing pipeline (Google Places + Firecrawl marketing-gap analysis + OpenAI intelligence) with a Vapi-powered voice agent whose context is dynamically assembled from the hiring agency's own case studies — so pitches reference real customers, not generic copy.\n\nConvex drives a real-time dashboard that surfaces every stage of the funnel, from prospect discovery through meeting booked. The prize wasn't for the demo — it was for shipping a coherent system under a 12-day constraint.",
       "image": "/atlasOutbound.webp",
       "secondaryImage": "/atlasOutboundSecondary.webp",
       "techStack": [
@@ -34,7 +34,7 @@
       "title": "Acadiana Web Design",
       "tagline": "Production WaaS platform with real customers and recurring revenue",
       "description": "A full Website-as-a-Service platform I run as a real business — clickwrap legal agreements, Stripe recurring billing, admin/client RBAC, and a real-time ticketing portal.",
-      "longDescription": "Acadiana Web Design is a production WaaS platform with paying customers, not a demo. The backend (Convex) coordinates the full client lifecycle: magic-link auth, enforced digital clickwrap agreements, Stripe subscription state, RBAC for the admin dashboard, a client portal with real-time status, file uploads with instant previews, and a ticketing system for edit requests. Cal.com handles scheduling; Resend handles transactional mail. Every complex state transition — trial to active, failed payment to grace period, agreement revision — is modeled explicitly rather than papered over.",
+      "longDescription": "Acadiana Web Design is a production WaaS platform with paying customers, not a demo. The backend (Convex) coordinates the full client lifecycle: magic-link auth, enforced digital clickwrap agreements, Stripe subscription state, RBAC for the admin dashboard, a client portal with real-time status, file uploads with instant previews, and a ticketing system for edit requests.\n\nCal.com handles scheduling; Resend handles transactional mail. Every complex state transition — trial to active, failed payment to grace period, agreement revision — is modeled explicitly rather than papered over.",
       "image": "/awd.webp",
       "secondaryImage": "/awdSecondary.webp",
       "techStack": [
@@ -58,7 +58,7 @@
       "title": "Public Parish",
       "tagline": "Louisiana local decisions, with receipts",
       "description": "Free, open-source civic app that connects local-government decisions to the official record, public deadlines, and what happens next.",
-      "longDescription": "Public Parish turns official Louisiana government records into resident-readable decision updates without asking people to trust a black box. Firecrawl retrieves the source material, Convex stores immutable snapshots and runs a durable extraction workflow, and separate OpenAI passes extract and review every cited fact. Deterministic checks then publish the record in full, limit it to what the evidence supports, or withhold it. The responsive resident interface makes those records free to browse and keeps the official source one click away.",
+      "longDescription": "Public Parish turns official Louisiana government records into resident-readable decision updates without asking people to trust a black box. Firecrawl retrieves the source material, Convex stores immutable snapshots and runs a durable extraction workflow, and separate OpenAI passes extract and review every cited fact.\n\nDeterministic checks then publish the record in full, limit it to what the evidence supports, or withhold it. The responsive resident interface makes those records free to browse and keeps the official source one click away.",
       "image": "/publicParish16x9.webp",
       "secondaryImage": "/publicParishSecondary16x9.webp",
       "techStack": [
@@ -82,7 +82,7 @@
       "title": "Mesh Mind",
       "tagline": "Multi-model debate-and-synthesize orchestration",
       "description": "A multi-model orchestration layer that coordinates GPT, Claude, and Gemini through a two-round protocol — parallel initial responses, peer-informed refinement, then a synthesized summary.",
-      "longDescription": "Mesh Mind is an exploration of what multi-model orchestration looks like when you treat it as a first-class system problem instead of a prompt trick. Users pick a 'master' model plus secondaries; the app runs a parallel first round, then feeds each model its peers' responses for a debate round, then collapses everything into a single synthesized answer — all on Convex scheduled functions with token-level streaming and file-based grounding. The whole thing sits behind a lightweight subscription and usage-tracking model so the cost surface actually matches the compute surface.",
+      "longDescription": "Mesh Mind is an exploration of what multi-model orchestration looks like when you treat it as a first-class system problem instead of a prompt trick. Users pick a 'master' model plus secondaries; the app runs a parallel first round, then feeds each model its peers' responses for a debate round, then collapses everything into a single synthesized answer — all on Convex scheduled functions with token-level streaming and file-based grounding.\n\nThe whole thing sits behind a lightweight subscription and usage-tracking model so the cost surface actually matches the compute surface.",
       "image": "/MeshMind.webp",
       "secondaryImage": "/MeshMindSecondary.webp",
       "techStack": [
@@ -104,7 +104,7 @@
       "title": "Civicly",
       "tagline": "RAG pipeline over U.S. congressional bills",
       "description": "Real-time legislative data engine: cron-driven ingestion of govinfo.gov manifests, XML parsing, GPT-4o summarization/categorization, and vector search for RAG over every active bill.",
-      "longDescription": "Civicly is a fully implemented data pipeline on Convex. Cron jobs discover new bill manifests from govinfo.gov, a worker parses the XML, GPT-4o produces summaries and categorizations, and the enriched documents are embedded into a vector index for semantic search. The user-facing side is a chat interface that does RAG over the corpus — but the interesting work is the ingestion layer: idempotency, backoff, dedup, and keeping the index in sync with an upstream source that publishes at its own pace.",
+      "longDescription": "Civicly is a fully implemented data pipeline on Convex. Cron jobs discover new bill manifests from govinfo.gov, a worker parses the XML, GPT-4o produces summaries and categorizations, and the enriched documents are embedded into a vector index for semantic search.\n\nThe user-facing side is a chat interface that does RAG over the corpus — but the interesting work is the ingestion layer: idempotency, backoff, dedup, and keeping the index in sync with an upstream source that publishes at its own pace.",
       "image": "/civicly.webp",
       "secondaryImage": "/civiclySecondary.webp",
       "techStack": [
@@ -126,7 +126,7 @@
       "title": "FoodTruckFlow",
       "tagline": "Multi-tenant B2B SaaS on Supabase RLS",
       "description": "Complete digital stack for mobile food businesses — multi-tenant isolation via Supabase RLS, custom-domain mapping via the Vercel API, JSON-configured live site builder, and Stripe billing tiers.",
-      "longDescription": "FoodTruckFlow is a full SaaS platform with hard multi-tenant isolation using Supabase Row-Level Security — every query is scoped by tenant, enforced at the database layer. It handles automatic subdomain generation, custom domain mapping via the Vercel API, and a JSON-driven configuration that powers a live website builder. Freemium and pro tiers are wired through Stripe with recurring billing and webhook-driven state.",
+      "longDescription": "FoodTruckFlow is a full SaaS platform with hard multi-tenant isolation using Supabase Row-Level Security — every query is scoped by tenant, enforced at the database layer. It handles automatic subdomain generation, custom domain mapping via the Vercel API, and a JSON-driven configuration that powers a live website builder.\n\nFreemium and pro tiers are wired through Stripe with recurring billing and webhook-driven state.",
       "image": "/FoodTruckFlowSS.webp",
       "secondaryImage": "/FoodTruckFlowSecondary.webp",
       "techStack": [
@@ -148,7 +148,7 @@
       "title": "OmniBid",
       "tagline": "Federal RFP parser for traceable compliance matrices",
       "description": "Focused MVP that takes a SAM.gov link, solicitation number, or PDF and turns it into a structured compliance matrix with each requirement traced back to the source document.",
-      "longDescription": "OmniBid is built around one narrow workflow: ingest a federal RFP and return a usable compliance matrix fast. The current app uses TanStack Start on React 19 with Convex as the real-time backend, and leans on Gemini's native PDF understanding instead of a brittle multi-service parsing chain. The pipeline resolves the solicitation, extracts requirements from the source document, validates and organizes them, then presents the result as an interactive checklist. The real engineering problem is making messy procurement documents feel deterministic enough to trust.",
+      "longDescription": "OmniBid is built around one narrow workflow: ingest a federal RFP and return a usable compliance matrix fast. The current app uses TanStack Start on React 19 with Convex as the real-time backend, and leans on Gemini's native PDF understanding instead of a brittle multi-service parsing chain.\n\nThe pipeline resolves the solicitation, extracts requirements from the source document, validates and organizes them, then presents the result as an interactive checklist. The real engineering problem is making messy procurement documents feel deterministic enough to trust.",
       "image": "/omnibid.webp",
       "secondaryImage": "/omnibidSecondary.webp",
       "techStack": [

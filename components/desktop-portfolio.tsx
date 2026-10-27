@@ -31,7 +31,6 @@ const TIER_LABELS: Array<[ProjectTier, string]> = [
 const IDENTITY = {
   name: 'Layken Varholdt',
   role: 'Software engineer · DOL',
-  headline: 'Software engineer & founder',
   email: 'mailto:layken@varholdt.com?subject=Software%20Engineering%20role',
   emailLabel: 'layken@varholdt.com',
   resume: '/Layken-Varholdt-Software-Engineer-Resume.pdf',
@@ -283,7 +282,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
   return (
     <div className="dp-root dp-grid hidden md:grid mx-auto max-w-[130rem]">
       {/* ---------- Index rail (lg+) ---------- */}
-      <aside className="dp-col hidden lg:flex flex-col border-r dp-hairline py-7 overflow-hidden">
+      <aside className="dp-col hidden xl:flex flex-col border-r dp-hairline py-7 overflow-hidden">
         <div className="dp-identity px-5 pb-6 border-b dp-hairline flex-shrink-0">
           <Portrait size={64} />
           <div className="min-w-0">
@@ -318,11 +317,6 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
                       </span>
                       <span className="dp-nav-title">
                         <span>{p.title}</span>
-                        {p.award && (
-                          <span aria-label={p.award.label} title={p.award.label}>
-                            <Trophy size={12} aria-hidden="true" />
-                          </span>
-                        )}
                       </span>
                     </button>
                   )
@@ -355,18 +349,18 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
             >
               <div className="flex items-start justify-between gap-8">
                 <div className="min-w-0">
+                  <h2 id={`band-${project.slug}`} className="dp-display">
+                    {project.title}
+                  </h2>
+                  <p className="dp-tagline mt-2">{project.tagline}</p>
                   {project.award && (
-                    <div className="mb-3">
+                    <div className="mt-3">
                       <span className="dp-award">
                         <Trophy size={14} aria-hidden="true" />
                         {project.award.label}
                       </span>
                     </div>
                   )}
-                  <h2 id={`band-${project.slug}`} className="dp-display">
-                    {project.title}
-                  </h2>
-                  <p className="dp-tagline mt-2">{project.tagline}</p>
                 </div>
               </div>
 
@@ -379,7 +373,11 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
                     How it works
                     <ChevronDown size={14} aria-hidden="true" />
                   </summary>
-                  <p className="dp-body mt-3">{project.longDescription}</p>
+                  <div className="dp-account mt-3">
+                    {project.longDescription.split('\n\n').map((paragraph) => (
+                      <p key={paragraph} className="dp-body">{paragraph}</p>
+                    ))}
+                  </div>
                 </details>
               </div>
 
@@ -431,8 +429,8 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
 
       {/* ---------- Floating control panel ---------- */}
       <div className="dp-col dp-scroll relative px-4 xl:px-5 py-7">
-        {/* Below lg the index rail is hidden, so identity lives here instead. */}
-        <div className="lg:hidden flex items-center gap-3 mb-4 px-1">
+        {/* Below xl the identity and compact project index share this column. */}
+        <div className="xl:hidden flex items-center gap-3 mb-4 px-1">
           <Portrait size={48} />
           <div className="min-w-0">
             <p className="text-base font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
@@ -442,6 +440,20 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
           </div>
         </div>
 
+        <label className="dp-project-picker block xl:hidden">
+          <span className="dp-panel-label">Selected work</span>
+          <select
+            value={activeSlug}
+            onChange={(event) => scrollTo(event.target.value)}
+            aria-label="Choose a project"
+          >
+            {projects.map((project, index) => (
+              <option key={project.slug} value={project.slug}>
+                {pad(index + 1)} {project.title}
+              </option>
+            ))}
+          </select>
+        </label>
         <ControlPanel />
       </div>
     </div>
@@ -451,12 +463,8 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
 function ControlPanel() {
   return (
     <div className="dp-panel">
-      <section className="dp-panel-section flex items-start justify-between gap-3">
-        <p className="dp-panel-headline">{IDENTITY.headline}</p>
-        <AnimatedThemeToggler className="dp-theme-toggle flex-shrink-0" />
-      </section>
-
-      <section className="dp-panel-section">
+      <section className="dp-panel-section relative">
+        <AnimatedThemeToggler className="dp-theme-toggle absolute right-3 top-3" />
         <FounderIntro />
       </section>
 
