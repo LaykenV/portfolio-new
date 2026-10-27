@@ -108,9 +108,8 @@ export default function BlogIndex() {
             Notes on <em>shipping AI</em>.
           </h1>
           <p className="hero-sub">
-            Long-form pieces on multi-agent orchestration, document intelligence
-            pipelines, and the infrastructure work behind AI systems that actually
-            reach production.
+            On multi-agent orchestration, document intelligence pipelines and
+            production AI infrastructure.
           </p>
         </div>
 
@@ -137,9 +136,10 @@ export default function BlogIndex() {
                   </div>
                   <PostTitle title={post.title} />
                   <p className="post-row-desc">{post.description}</p>
-                  <div className="flex flex-wrap gap-2.5 pt-1">
-                    {post.tags.map((tag) => (
+                  <div className="flex flex-wrap gap-x-2 gap-y-1 pt-1">
+                    {post.tags.map((tag, i) => (
                       <span key={tag} className="tech-badge-compact">
+                        {i > 0 && <span className="tag-sep" aria-hidden="true">·</span>}
                         {tag}
                       </span>
                     ))}

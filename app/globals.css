@@ -2151,3 +2151,6 @@ html.dark .writing-theme .nav-link:focus-visible {
     gap: 12px;
   }
 }
+
+/* Tags read as separate items, not one phrase. */
+.writing-theme .tag-sep { margin: 0 8px 0 0; color: var(--muted); }

@@ -601,8 +601,8 @@ html.dark .m-btn-primary {
   gap: 10px;
   min-height: 44px;
   color: var(--foreground);
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 650;
   letter-spacing: -0.01em;
   text-decoration: none;
   white-space: nowrap;
@@ -699,17 +699,17 @@ html.menu-open { overflow: hidden; }
   .site-menu-links a:hover { color: var(--accent); }
 }
 .site-menu-ext {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   color: var(--muted);
   stroke-width: 2;
 }
 
 .site-menu-bottom {
   display: grid;
-  gap: 14px;
+  gap: 18px;
   margin-top: auto;
-  padding-top: 22px;
+  padding-top: 24px;
   border-top: 1px solid var(--border);
 }
 .site-menu-cta {
@@ -755,7 +755,7 @@ html.dark .site-menu-cta {
 .site-theme-switch {
   display: inline-flex;
   padding: 2px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--control-border);
   border-radius: 12px;
 }
 .site-theme-switch button {
@@ -772,7 +772,6 @@ html.dark .site-menu-cta {
 }
 html:not(.dark) .site-theme-switch [data-theme-option="light"],
 html.dark .site-theme-switch [data-theme-option="dark"] {
-  box-shadow: inset 0 0 0 1px var(--accent);
   background: var(--accent-soft);
   color: var(--foreground);
   font-weight: 600;
