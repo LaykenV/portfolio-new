@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Script from 'next/script'
 import {
   ArrowLeft,
+  ArrowRight,
   ArrowUpRight,
   Workflow,
   Network,
@@ -99,9 +100,9 @@ export default function MeshMindDebatePost() {
           <ArrowLeft className="h-3.5 w-3.5" />
           All posts
         </Link>
-        <Link href="/" className="nav-link">
-          Home
-          <ArrowUpRight className="h-3.5 w-3.5" />
+        <Link href="/" className="nav-link writing-wordmark">
+          Layken Varholdt
+          <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </div>
 
@@ -117,7 +118,7 @@ export default function MeshMindDebatePost() {
           How I rebuilt MIT and Google Brain&rsquo;s multi-agent debate paper as
           a chat product, end to end on Convex.
         </p>
-        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs opacity-65">
+        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
           <span className="mono-accent">By Layken Varholdt</span>
           <span aria-hidden="true">·</span>
           <span className="mono-accent">~12 min read</span>

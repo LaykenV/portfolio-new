@@ -12,12 +12,14 @@ import {
 import Image from 'next/image'
 import {
   ArrowLeft,
+  ArrowRight,
   ArrowUpRight,
   ChevronDown,
   ChevronLeft,
   ExternalLink,
   Github,
   Mail,
+  Trophy,
 } from 'lucide-react'
 
 import type { Project } from '@/types/project'
@@ -416,7 +418,7 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
           className="m-scroll-indicator"
           onClick={onScrollToProjects}
         >
-          <span className="label">Swipe for work</span>
+          <span className="label">View projects</span>
           <span className="chev" aria-hidden="true">
             <ChevronDown className="h-[16px] w-[16px]" strokeWidth={2.5} />
           </span>
@@ -552,7 +554,7 @@ function ProjectSlide({
         <div className="m-card-body">
           {project.award && (
             <div className="m-ribbon">
-              <span aria-hidden="true">{project.award.icon ?? '🥇'}</span>
+              <Trophy size={14} aria-hidden="true" />
               <span>{project.award.label}</span>
             </div>
           )}
@@ -561,7 +563,7 @@ function ProjectSlide({
           <p className="m-card-desc">{project.description}</p>
 
           <div className="m-card-stack">
-            {project.techStack.slice(0, 5).map((tech) => (
+            {project.techStack.slice(0, 4).map((tech) => (
               <span key={tech} className="m-chip">
                 {tech}
               </span>
@@ -581,7 +583,7 @@ function ProjectSlide({
                   href={project.links.live}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="m-btn m-btn-primary"
+                  className="m-btn"
                   tabIndex={actionsBlocked ? -1 : undefined}
                   aria-hidden={actionsBlocked || undefined}
                   onClick={(e) => e.stopPropagation()}
@@ -593,7 +595,7 @@ function ProjectSlide({
                 <span className="m-btn m-btn-ghost-empty" aria-hidden="true" />
               )}
               <button
-                className="m-btn"
+                className="m-btn m-btn-primary"
                 disabled={actionsBlocked}
                 aria-hidden={actionsBlocked || undefined}
                 onClick={(e) => {
@@ -602,7 +604,7 @@ function ProjectSlide({
                 }}
               >
                 Deep dive
-                <ArrowUpRight className="h-[14px] w-[14px]" />
+                <ArrowRight className="h-[14px] w-[14px]" />
               </button>
               {project.links.github && (
                 <a
@@ -627,8 +629,6 @@ function ProjectSlide({
             {showHint && (
               <div className="m-actions-hint" aria-hidden="true">
                 <span className="m-actions-hint-chev">
-                  <ChevronLeft className="h-[14px] w-[14px]" strokeWidth={3} />
-                  <ChevronLeft className="h-[14px] w-[14px]" strokeWidth={3} />
                   <ChevronLeft className="h-[14px] w-[14px]" strokeWidth={3} />
                 </span>
                 <span className="m-actions-hint-text">Swipe for deep dive</span>
@@ -811,7 +811,7 @@ function DeepDiveSheet({
 
         {displayProject.award && (
           <div className="m-sheet-award">
-            <span aria-hidden="true">{displayProject.award.icon ?? '🥇'}</span>
+            <Trophy size={14} aria-hidden="true" />
             {displayProject.award.label}
           </div>
         )}

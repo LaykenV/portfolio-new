@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import {
   ArrowLeft,
+  ArrowRight,
   ArrowUpRight,
   Bot,
   CheckCircle2,
@@ -122,9 +123,9 @@ export default function GlmFlashPrAgentCodeReviewPost() {
           <ArrowLeft className="h-3.5 w-3.5" />
           All posts
         </Link>
-        <Link href="/" className="nav-link">
-          Home
-          <ArrowUpRight className="h-3.5 w-3.5" />
+        <Link href="/" className="nav-link writing-wordmark">
+          Layken Varholdt
+          <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </div>
 
@@ -140,7 +141,7 @@ export default function GlmFlashPrAgentCodeReviewPost() {
           and two repository-local Codex skills into a review loop that still
           asks me before merge.
         </p>
-        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs opacity-65">
+        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
           <span className="mono-accent">By Layken Varholdt</span>
           <span aria-hidden="true">&middot;</span>
           <span className="mono-accent">~9 min read</span>

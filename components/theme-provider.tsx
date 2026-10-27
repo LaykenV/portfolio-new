@@ -31,8 +31,10 @@ function ThemeColorSync() {
         document.querySelectorAll<HTMLElement>('.dp-root, .mobile-portfolio, .writing-theme')
       ).find((element) => element.getClientRects().length > 0);
       if (meta) {
+        // The token is the target color. backgroundColor can still report the
+        // previous color while a CSS transition is starting.
         meta.content = surface
-          ? getComputedStyle(surface).backgroundColor
+          ? getComputedStyle(surface).getPropertyValue('--background').trim()
           : THEME_COLORS[resolvedTheme] ?? THEME_COLORS.dark;
       }
     });

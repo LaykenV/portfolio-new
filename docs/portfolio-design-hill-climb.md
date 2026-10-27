@@ -13,12 +13,12 @@ Keep Layken's portrait, seven projects, project URLs, blog facts, founder identi
 ## Judges and evidence
 
 - GPT-6.1 Terra through Codex, `reasoningEffort: high`.
-- Muse Spark 1.3 Contributor through OpenRouter/OpenCode, `variant: high`, read-only plan agent. Layken requested the Contributor variant.
-- Round 0 used DeepSeek V4.1 Flash 1017 through Cursor, `reasoning_effort: high`. It is retired from the visual council.
+- DeepSeek V4.1 Flash 1017 through OpenRouter/OpenCode, `variant: high`, read-only plan agent.
+- Muse Spark 1.3 Contributor through OpenRouter/OpenCode, `variant: high`, read-only plan agent. Layken requested the Contributor variant and then asked to keep all three judges.
 
-Each round uses fresh, read-only delegates. They do not see the other judge's answer or earlier scores. They inspect every listed image, then read source to give exact fixes. A missing image or unavailable vision is reported, never replaced with an invented observation or grade.
+Each round uses fresh, read-only delegates. They do not see other answers or earlier scores. They inspect every listed image, then read source to give exact fixes. A missing image or unavailable vision is reported, never replaced with an invented observation or grade.
 
-DeepSeek's round-0 image tool returned generated captions rather than pixels. It found false claims in the captions and declined to issue visual grades. Its report contains ungraded source and pixel measurements. Layken replaced that seat with Muse Contributor for round 1. No visual score from DeepSeek counts toward the target.
+DeepSeek's round-0 Cursor image tool returned generated captions rather than pixels. It declined to issue visual grades. Layken requested an OpenCode retry, and that run confirmed actual pixel access and produced a valid visual grade. The three judges evaluated the same round-1 candidate. The initial Muse run had already received a cancellation request when Layken asked to retain it, so a fresh Contributor review replaced that run.
 
 ## Fixed rubric
 
@@ -36,7 +36,7 @@ Score each category from 0 to 10 to one decimal. Overall is their arithmetic mea
 | Clarity | Who Layken is, what he builds and how to reach him |
 | Distinctiveness | An identity grounded in his work rather than a template |
 
-A 10 means the judge cannot justify a concrete improvement in that category from the evidence. Do not round a 9.x up, lower the bar, reward promises, or invent findings to avoid a high score. The requested target is 10.0 in every category from both visual judges on the same candidate. An unavailable grade cannot satisfy it.
+A 10 means the judge cannot justify a concrete improvement in that category from the evidence. Do not round a 9.x up, lower the bar, reward promises, or invent findings to avoid a high score. The requested target is 10.0 in every category from all three visual judges on the same candidate. An unavailable grade cannot satisfy it.
 
 References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots calibrate craft; their identities and layouts are not templates to copy.
 
@@ -46,6 +46,9 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 0 | Terra | 6.5 | 6.5 | 6.0 | 6.0 | 6.5 | 6.5 | 6.0 | 7.0 | 6.0 | 6.3 |
 | 0 | DeepSeek | no score | no score | no score | no score | no score | no score | no score | no score | no score | no score |
+| 1 | Terra | 7.5 | 7.2 | 6.8 | 6.7 | 7.8 | 7.2 | 7.2 | 7.5 | 6.6 | 7.2 |
+| 1 | DeepSeek, OpenCode | 7.4 | 7.4 | 7.6 | 7.5 | 7.6 | 7.4 | 7.3 | 8.0 | 7.6 | 7.5 |
+| 1 | Muse Contributor | 7.5 | 6.5 | 7.0 | 6.5 | 7.5 | 7.0 | 6.5 | 7.5 | 6.0 | 6.9 |
 
 ## Round 1
 
@@ -53,7 +56,15 @@ Remove decorative glows and competing surfaces. Give the homepage the same font 
 
 Do not assume that every border needs 3:1 contrast; distinguish hairlines from a control's identifying information. Verify focus rings and actual text contrast in the browser. Do not replace the blog type with a serif or move the desktop panel merely to fill unused column space without visual evidence.
 
-Round-1 proof: lint and the production build pass. Browser checks cover light/dark at widths 1440, 1024, 768, 390 and 320, changed-label contrast, theme-color synchronization, project navigation, screenshot switching, focus, mobile project actions/deep dives and blog navigation. Fresh screenshot review is still pending.
+Round-1 proof: lint and the production build pass. Browser checks cover light/dark at widths 1440, 1024, 768, 390 and 320, changed-label contrast, theme-color synchronization, project navigation, screenshot switching, focus, mobile project actions/deep dives and blog navigation. All three visual reviews are recorded above.
+
+## Round 2
+
+Improve reading order and identity. Remove the decorative numeral and faux browser dots, show the short project description first with the full account in a native disclosure, use consistent recognition and internal-link arrows, and flatten article steps into a numbered sequence. Give writing pages a plain name in the header. Shorten the intro on taller phones so work begins in the first viewport, and make the in-page project detail action primary.
+
+Keep the cool neutral palette. Do not restore old global colors based on source citations that ignore the scoped route tokens. Do not turn the mobile text links into tiles; Layken rejected those. The 390 × 844 round-1 project actions had 146.8px clearance, so there is no bottom collision to fix by squeezing all spacing. The measured 238.5px below the intro's work cue is real and is addressed by shortening that slide.
+
+Round-2 proof: lint, production build and browser checks pass. The native project disclosure opens and preserves the full account; all mobile project actions remain reachable at 320px. The menu opens from the keyboard and closes on Escape. Theme-color uses the target CSS token, avoiding an intermediate transition color. Fresh captures include the screenshot reveal, expanded account, menu states and the original review surfaces.
 
 ## Round protocol
 

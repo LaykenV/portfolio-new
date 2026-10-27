@@ -1417,7 +1417,7 @@ html.dark .writing-theme {
 }
 
 .dp-body {
-  font-size: clamp(0.9375rem, 0.24vw + 0.82rem, 1.0625rem);
+  font-size: 17px;
   line-height: 1.7;
   color: var(--muted);
 }
@@ -1435,15 +1435,6 @@ html.dark .writing-theme {
   font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-.dp-numeral {
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 0.78;
-  opacity: 0.1;
-  font-size: clamp(3rem, 5vw, 5.5rem);
-}
-
 /* --- Screenshot in browser chrome ---------------------------------------- */
 .dp-shot {
   position: relative;
@@ -1459,33 +1450,21 @@ html.dark .writing-theme {
 .dp-chrome {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 12px;
   flex: 0 0 auto;
-  height: 3.25rem;
-  padding: 0 0.7rem 0 0.85rem;
+  min-height: 44px;
+  padding: 4px 12px;
   border-bottom: 1px solid var(--border);
-  background: hsl(var(--foreground-hsl) / 0.045);
 }
-.dp-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 999px;
-  background: hsl(var(--foreground-hsl) / 0.18);
-  flex: 0 0 auto;
-}
+
 /* Scenery only — an address bar that tracks whichever view is showing. */
 .dp-chrome-url {
   display: flex;
   align-items: center;
   flex: 1 1 auto;
   min-width: 0;
-  height: 1.85rem;
-  margin-left: 0.55rem;
-  padding: 0 0.7rem;
-  border-radius: 6px;
-  background: hsl(var(--foreground-hsl) / 0.04);
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.6875rem;
+  font-size: 12px;
   color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
@@ -1533,23 +1512,21 @@ html.dark .dp-shot-switch::before {
   position: relative;
   z-index: 1;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  min-height: 2.1rem;
-  padding: 0 0.85rem;
-  font-size: 0.7rem;
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   border-radius: 999px;
-  color: inherit;
+  color: var(--muted);
   cursor: pointer;
-  opacity: 0.55;
   white-space: nowrap;
-  transition: opacity 180ms ease;
 }
 .dp-shot-seg:hover {
   opacity: 0.85;
 }
 .dp-shot-seg[aria-pressed='true'] {
-  opacity: 1;
+  color: var(--foreground);
   font-weight: 600;
 }
 .dp-shot-seg:focus-visible {
@@ -1605,20 +1582,11 @@ html.dark .dp-shot-switch::before {
 .dp-award {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  border: 1px solid hsl(var(--gold-strong) / 0.4);
-  background: hsl(var(--gold-soft) / 0.35);
-  color: var(--foreground);
-  white-space: nowrap;
-}
-html.dark .dp-award {
-  background: hsl(var(--gold-strong) / 0.16);
-  border-color: hsl(var(--gold-strong) / 0.3);
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--muted);
 }
 
 /* --- Index rail ---------------------------------------------------------- */
@@ -1675,11 +1643,10 @@ html.dark .dp-nav-item.dp-nav-active {
 
 .dp-nav-num {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.64rem;
-  letter-spacing: 0.06em;
+  font-size: 12px;
+  letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
   color: var(--muted);
-  transition: opacity 180ms ease;
 }
 .dp-nav-active .dp-nav-num {
   opacity: 0.85;
@@ -1891,8 +1858,9 @@ html.dark .dp-nav-item.dp-nav-active {
 /* --- Metadata table + band rhythm ---------------------------------------- */
 .dp-meta {
   display: grid;
-  grid-template-columns: 7.5rem minmax(0, 1fr);
-  column-gap: 1.5rem;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  column-gap: 1rem;
+  max-width: 38rem;
 }
 .dp-meta-k,
 .dp-meta-v {
@@ -1911,8 +1879,8 @@ html.dark .dp-nav-item.dp-nav-active {
 }
 
 .dp-band + .dp-band {
-  margin-top: 4.5rem;
-  padding-top: 4.5rem;
+  margin-top: 3.5rem;
+  padding-top: 3.5rem;
   border-top: 1px solid var(--border);
 }
 
@@ -1969,3 +1937,85 @@ html.dark .writing-theme .tech-badge-compact {
   color: var(--muted);
   border-radius: 6px;
 }
+
+.dp-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.dp-identity-role {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.dp-tagline {
+  max-width: 60ch;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.dp-summary { max-width: 38rem; }
+.dp-details summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--foreground);
+  cursor: pointer;
+  list-style: none;
+}
+.dp-details summary::-webkit-details-marker { display: none; }
+.dp-details[open] summary svg { transform: rotate(180deg); }
+.dp-details summary:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+.writing-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.writing-theme .hero-title {
+  max-width: 22ch;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  line-height: 1.12;
+}
+.writing-theme .hero-sub { max-width: 40rem; }
+.writing-theme .prose-block {
+  max-width: 36rem;
+  font-size: 17px;
+  line-height: 1.7;
+}
+.writing-theme .post-h2 { font-size: clamp(1.25rem, 2.2vw, 1.5rem); }
+.writing-theme .post-row-title { font-size: 20px; font-weight: 650; }
+.writing-theme .post-row-desc { font-size: 15px; line-height: 1.6; }
+.writing-theme .tech-badge-compact,
+.dp-root .tech-badge-compact {
+  font-size: 12px;
+  padding: 4px 8px;
+  opacity: 1;
+}
+.writing-theme .post-steps {
+  display: block;
+  list-style: decimal;
+  padding-left: 24px;
+}
+.writing-theme .post-steps > li {
+  display: list-item;
+  padding: 16px 0 16px 12px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+}
+.writing-theme .post-steps > li::marker {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+.writing-theme .post-step-icon { display: none; }

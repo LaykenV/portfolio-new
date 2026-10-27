@@ -13,20 +13,25 @@ interface MobileMenuControllerProps {
 export function MobileMenuController({ className }: MobileMenuControllerProps) {
   const [open, setOpen] = useState(false)
   return (
-    <div className={cn(className, 'z-50')}>
-      <label className="hamburger" aria-label="Open menu">
-        <input
-          type="checkbox"
-          checked={open}
-          onChange={() => setOpen(!open)}
-          aria-checked={open}
-          aria-controls="mobile-menu"
-        />
+    <div
+      className={cn(className, 'z-50')}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') setOpen(false)
+      }}
+    >
+      <button
+        type="button"
+        className="hamburger"
+        aria-label={open ? 'Close menu' : 'Open menu'}
+        aria-expanded={open}
+        aria-controls="mobile-menu"
+        onClick={() => setOpen(!open)}
+      >
         <svg viewBox="0 0 32 32" aria-hidden="true" width="32" height="32">
           <path className="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
           <path className="line" d="M7 16 27 16"></path>
         </svg>
-      </label>
+      </button>
 
       <MobileMenu open={open} onClose={() => setOpen(false)}>
         <div className="flex flex-col gap-3">
@@ -34,8 +39,7 @@ export function MobileMenuController({ className }: MobileMenuControllerProps) {
             <div className="flex items-center gap-2">
               <a
                 href="/blog"
-                className="cta-primary"
-                style={{ padding: '0.4rem 0.7rem', fontSize: '0.78rem', borderRadius: '0.55rem' }}
+                className="nav-link"
               >
                 <BookOpen className="h-3.5 w-3.5" />
                 Blog

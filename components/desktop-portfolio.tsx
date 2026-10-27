@@ -7,10 +7,12 @@ import {
   ArrowUpRight,
   BookOpen,
   CalendarClock,
+  ChevronDown,
   FileText,
   Github,
   Linkedin,
   Mail,
+  Trophy,
 } from 'lucide-react'
 
 import { AnimatedThemeToggler } from '@/components/animated-theme-toggler'
@@ -27,7 +29,7 @@ const TIER_LABELS: Array<[ProjectTier, string]> = [
 /* Identity content shared by the rail and the control panel. */
 const IDENTITY = {
   name: 'Layken Varholdt',
-  role: 'Software Engineer · @ DOL',
+  role: 'Software engineer · DOL',
   headline: 'Software engineer & founder',
   email: 'mailto:layken@varholdt.com?subject=Software%20Engineering%20role',
   emailLabel: 'layken@varholdt.com',
@@ -94,10 +96,8 @@ const SHOT_VIEWS: Array<[ShotView, string]> = [
 ]
 
 /**
- * The screenshot pair inside faux browser chrome. The dots and address bar are
- * scenery — the address just tracks whichever view is showing. The real control
- * is the segmented switch on the right, which reads as a control rather than as
- * more URL. Hovering the inactive half slides the seam between the two shots
+ * The screenshot pair shares a plain hostname and a view switch. Hovering the
+ * inactive half slides the seam between the two shots
  * toward it, uncovering a strip of the other view, so the switch demonstrates
  * itself before you commit to a click.
  *
@@ -169,13 +169,9 @@ function ProjectShot({
     activePeek === 'app' ? 70 : activePeek === 'landing' ? 30 : view === 'app' ? 0 : 100
 
   return (
-    <figure className="dp-shot mt-7 max-w-[50rem]">
+    <figure className="dp-shot mt-6 max-w-[50rem]">
       <div className="dp-chrome">
-        <span className="dp-dot" aria-hidden="true" />
-        <span className="dp-dot" aria-hidden="true" />
-        <span className="dp-dot" aria-hidden="true" />
-
-        {/* Scenery: reads as an address bar, tracks the active view. */}
+        {/* The hostname follows the selected screenshot. */}
         <span className="dp-chrome-url" aria-hidden="true">
           {domain}
           {view === 'app' && <span className="dp-chrome-path">/app</span>}
@@ -287,11 +283,11 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
     <div className="dp-root dp-grid hidden md:grid mx-auto max-w-[130rem]">
       {/* ---------- Index rail (lg+) ---------- */}
       <aside className="dp-col hidden lg:flex flex-col border-r dp-hairline py-7 overflow-hidden">
-        <div className="flex items-center gap-3.5 px-5 pb-6 border-b dp-hairline flex-shrink-0">
+        <div className="dp-identity px-5 pb-6 border-b dp-hairline flex-shrink-0">
           <Portrait size={64} />
           <div className="min-w-0">
             <p className="text-[1.15rem] font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
-            <p className="dp-eyebrow mt-1">
+            <p className="dp-identity-role mt-1">
               {IDENTITY.role}
             </p>
           </div>
@@ -323,7 +319,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
                         <span>{p.title}</span>
                         {p.award && (
                           <span aria-label={p.award.label} title={p.award.label}>
-                            {p.award.icon ?? '🏅'}
+                            <Trophy size={12} aria-hidden="true" />
                           </span>
                         )}
                       </span>
@@ -345,7 +341,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
       {/* ---------- Reading column ---------- */}
       <main ref={scrollRef} className="dp-col dp-scroll px-6 lg:px-10 xl:px-16 py-10 xl:py-12">
         <div className="max-w-[58rem]">
-          {projects.map((project, i) => (
+          {projects.map((project) => (
             <section
               key={project.slug}
               data-slug={project.slug}
@@ -361,7 +357,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
                   {project.award && (
                     <div className="mb-3">
                       <span className="dp-award">
-                        <span aria-hidden="true">{project.award.icon ?? '🏅'}</span>
+                        <Trophy size={14} aria-hidden="true" />
                         {project.award.label}
                       </span>
                     </div>
@@ -369,18 +365,24 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
                   <h2 id={`band-${project.slug}`} className="dp-display">
                     {project.title}
                   </h2>
-                  <p className="mono-accent mt-2 block">{project.tagline}</p>
+                  <p className="dp-tagline mt-2">{project.tagline}</p>
                 </div>
-                <span className="dp-numeral tabular-nums flex-shrink-0" aria-hidden="true">
-                  {pad(i + 1)}
-                </span>
               </div>
 
               <ProjectShot project={project} view={shotView} onViewChange={setShotView} />
 
-              <p className="dp-body mt-7 max-w-[65ch]">{project.longDescription}</p>
+              <div className="dp-summary mt-6">
+                <p className="dp-body">{project.description}</p>
+                <details className="dp-details mt-2">
+                  <summary>
+                    How it works
+                    <ChevronDown size={14} aria-hidden="true" />
+                  </summary>
+                  <p className="dp-body mt-3">{project.longDescription}</p>
+                </details>
+              </div>
 
-              <dl className="dp-meta mt-8">
+              <dl className="dp-meta mt-6">
                 <dt className="dp-meta-k">Stack</dt>
                 <dd className="dp-meta-v">
                   <div className="flex flex-wrap gap-1.5">
@@ -433,7 +435,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
           <Portrait size={48} />
           <div className="min-w-0">
             <p className="text-base font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
-            <p className="dp-eyebrow mt-1">
+            <p className="dp-identity-role mt-1">
               {IDENTITY.role}
             </p>
           </div>

@@ -25,7 +25,7 @@ export function MobileMenu({ open, onClose, children }: MobileMenuProps) {
     if (!open) return
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element
-      if (panelRef.current && !panelRef.current.contains(target) && !target.closest('label.hamburger')) {
+      if (panelRef.current && !panelRef.current.contains(target) && !target.closest('.hamburger')) {
         onClose()
       }
     }
@@ -46,8 +46,8 @@ export function MobileMenu({ open, onClose, children }: MobileMenuProps) {
       id="mobile-menu"
       className="md:hidden absolute right-0 top-[calc(100%+12px)] w-[min(92vw,20rem)]"
       ref={panelRef}
-      aria-modal="true"
       role="dialog"
+      aria-label="Navigation"
     >
       <div className={cn(
         'relative rounded-2xl p-4 outline-none',

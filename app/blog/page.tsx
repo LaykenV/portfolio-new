@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 import type { Metadata } from 'next'
 
@@ -83,10 +83,13 @@ const posts = [
 export default function BlogIndex() {
   return (
     <div className="font-sans mx-auto max-w-3xl min-h-dvh px-6 py-14 md:py-20 flex flex-col gap-10">
-      <Link href="/" className="nav-link self-start">
-        <ArrowLeft className="h-3.5 w-3.5" />
-        Back
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link href="/" className="nav-link">
+          <ArrowLeft className="h-3.5 w-3.5" />
+          Home
+        </Link>
+        <span className="writing-wordmark">Layken Varholdt</span>
+      </div>
 
       <div className="flex flex-col gap-3">
         <div className="section-eyebrow">Writing</div>
@@ -132,7 +135,7 @@ export default function BlogIndex() {
                 </div>
               </div>
               <span className="post-row-arrow" aria-hidden="true">
-                <ArrowUpRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4" />
               </span>
             </Link>
           </li>

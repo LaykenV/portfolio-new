@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import {
   ArrowLeft,
-  ArrowUpRight,
+  ArrowRight,
   Smartphone,
   Eye,
   Palette,
@@ -121,9 +121,9 @@ export default function SafariIPhoneThemeSyncPost() {
           <ArrowLeft className="h-3.5 w-3.5" />
           All posts
         </Link>
-        <Link href="/" className="nav-link">
-          Home
-          <ArrowUpRight className="h-3.5 w-3.5" />
+        <Link href="/" className="nav-link writing-wordmark">
+          Layken Varholdt
+          <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </div>
 
@@ -140,7 +140,7 @@ export default function SafariIPhoneThemeSyncPost() {
           Safari&rsquo;s toolbar and learned to feed it instead, without giving
           up the swipe/snap deck UX.
         </p>
-        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs opacity-65">
+        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
           <span className="mono-accent">By Layken Varholdt</span>
           <span aria-hidden="true">&middot;</span>
           <span className="mono-accent">~7 min read</span>
