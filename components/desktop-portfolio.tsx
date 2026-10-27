@@ -435,7 +435,8 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
 function ControlPanel({ projectPicker }: { projectPicker: ReactNode }) {
   return (
     <div className="dp-panel">
-      <section className="dp-panel-section xl:hidden">
+      <section className="dp-panel-section relative xl:hidden">
+        <AnimatedThemeToggler className="dp-theme-toggle absolute right-3 top-3" />
         <FounderIntro />
       </section>
 
@@ -444,7 +445,7 @@ function ControlPanel({ projectPicker }: { projectPicker: ReactNode }) {
       <section className="dp-panel-section">
         <div className="dp-contact-heading">
           <p className="dp-panel-label">Contact</p>
-          <AnimatedThemeToggler className="dp-theme-toggle" />
+          <span className="hidden xl:block"><AnimatedThemeToggler className="dp-theme-toggle" /></span>
         </div>
         <p className="dp-panel-availability">Open to software engineering roles</p>
 

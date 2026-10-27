@@ -679,12 +679,12 @@ function DeepDiveSheet({
         </button>
         <div className="m-sheet-crumb">
           <span>Deep dive</span>
-          <span className="sep">/</span>
-          <span className="accent">{displayProject.title}</span>
         </div>
       </div>
 
       <div className="m-sheet-inner">
+        <h2 className="m-sheet-title">{displayProject.title}</h2>
+        <div className="m-sheet-tagline">{displayProject.tagline}</div>
         <div className="m-sheet-hero">
           <Image
             src={displayProject.secondaryImage}
@@ -706,8 +706,6 @@ function DeepDiveSheet({
           Open full-size image
           <ArrowUpRight size={14} aria-hidden="true" />
         </a>
-        <h2 className="m-sheet-title">{displayProject.title}</h2>
-        <div className="m-sheet-tagline">{displayProject.tagline}</div>
 
         {displayProject.award && (
           <div className="m-sheet-award">

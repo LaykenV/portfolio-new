@@ -1821,7 +1821,7 @@ html.dark .dp-nav-item.dp-nav-active {
   display: grid;
   grid-template-columns: 4rem minmax(0, 1fr);
   column-gap: 0;
-  max-width: 38rem;
+  max-width: 50rem;
 }
 .dp-meta-k,
 .dp-meta-v {
@@ -1917,7 +1917,7 @@ html.dark .writing-theme .tech-badge-compact {
   line-height: 1.5;
   color: var(--muted);
 }
-.dp-summary { max-width: 38rem; }
+.dp-summary { max-width: 36rem; }
 .dp-details summary {
   display: inline-flex;
   align-items: center;
@@ -1952,6 +1952,7 @@ html.dark .writing-theme .tech-badge-compact {
   line-height: 1.12;
 }
 .writing-theme .hero-sub { max-width: 40rem; }
+.writing-theme article .hero-sub { max-width: 36rem; }
 .writing-theme .prose-block {
   max-width: 36rem;
   font-size: 17px;
@@ -1959,7 +1960,7 @@ html.dark .writing-theme .tech-badge-compact {
 }
 .writing-theme .post-h2 { font-size: clamp(1.25rem, 2.2vw, 1.5rem); }
 .writing-theme .post-row-title { font-size: 20px; font-weight: 650; }
-.writing-theme .post-row-desc { font-size: 15px; line-height: 1.6; }
+.writing-theme .post-row-desc { max-width: 36rem; font-size: 16px; line-height: 1.65; }
 .writing-theme .tech-badge-compact,
 .dp-root .tech-badge-compact {
   font-size: 12px;
@@ -2005,7 +2006,7 @@ html.dark .writing-theme .post-steps > li {
 }
 
 @media (max-width: 639px) {
-  .writing-theme .post-steps { padding-left: 28px; }
+  .writing-theme .post-steps { padding-left: 20px; }
   .writing-theme .post-steps > li { padding-left: 0; }
 }
 .writing-theme .post-code-inline,

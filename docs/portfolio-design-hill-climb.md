@@ -73,6 +73,11 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 7 | Muse Contributor, retry | 7.5 | 7.5 | 8.0 | 7.5 | 8.0 | 8.0 | 7.5 | 8.5 | 7.0 | 7.7 |
 | 7 | Opus 5.5 | 8.4 | 8.2 | 8.4 | 8.2 | 8.4 | 8.4 | 8.0 | 8.7 | 7.6 | 8.3 |
 
+| 8 | Terra | 8.0 | 8.2 | 7.8 | 7.7 | 8.5 | 8.0 | 7.8 | 8.2 | 7.5 | 8.0 |
+| 8 | DeepSeek, OpenCode | 8.6 | 8.8 | 8.7 | 8.6 | 8.4 | 8.7 | 8.5 | 9.0 | 8.8 | 8.7 |
+| 8 | Muse Contributor | 8.0 | 8.0 | 8.5 | 7.5 | 8.5 | 8.0 | 8.0 | 9.0 | 7.5 | 8.1 |
+| 8 | Opus 5.5 | 8.4 | 8.2 | 8.1 | 8.0 | 8.6 | 8.6 | 8.1 | 8.8 | 7.6 | 8.3 |
+
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
 ## Round 1
@@ -164,6 +169,16 @@ Disclose the omitted mobile stack with a compact +N count; the complete list rem
 Declined findings: selected navigation and email have different effective backgrounds in both themes. Do not hide the tablet founder story or add chip padding that would undo the measured one-row stack. Keep the inline editorial arrows instead of returning them to a distant desktop column. The desktop remains work-first by design, with grouped identity and contact always visible. Muse's first round-7 run returned progress text only; the fresh retry's actual grades are recorded above.
 
 Round-8 proof: lint, production build and browser suites pass. Wrapped title arrows stay with the final words at 320, 390, 768, 1024 and 1440px. All seven +N counts match project data. The plain mobile mark measures x=20px, 14px type and full opacity after the project snap. All actions remain reachable on short phones, and real swipes still open details. Metadata, position and tab text have at least 4.79:1 light /6.79:1 dark contrast in the measured states.
+
+## Round 9
+
+Name the project before its detail image. The top bar now says Deep dive without repeating or truncating the title. Keep the complete screenshot and full-size action. Make mobile project titles less heavy, and give article list text more width.
+
+Use 20px mobile edges across writing, the hero and the menu. Bring the writing header up to the same top region as the home controls. Cap summaries, excerpts and article deks at 36rem; use 16px/1.65 for index excerpts. Let metadata rules reach the screenshot edge. Move the tablet theme control beside the founder block, near identity, with one visible control at each breakpoint.
+
+Declined findings: the supplied dark rail shows readable near-white More work titles. The saved pixel probe and browser style audit do not reproduce DeepSeek's reported near-black text. Do not claim a fix for that finding. Keep the neutral selection without a colored left bar, the work-first desktop order, the founder message and complete project images. Selected navigation and the email still use different effective fills. Do not add another index eyebrow or change the title palette for its own sake.
+
+Round-9 proof: lint and production build pass. The existing browser suites cover both themes at five widths, all seven project positions and actions, real touch swipes, menu focus and Escape, direct screenshot tabs, theme-color sync and flat article steps. Focused checks cover the detail reading order, short header, mobile writing edges and tablet control placement. Fresh captures include all 30 candidate states.
 
 ## Round protocol
 
