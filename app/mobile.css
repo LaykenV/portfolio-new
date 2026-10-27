@@ -52,6 +52,7 @@
   align-items: center;
   gap: 12px;
   min-height: 52px;
+  padding-left: 17px;
   border-bottom: 1px solid var(--border);
   color: var(--foreground);
   font-size: 16px;
@@ -277,10 +278,10 @@
 }
 
 .m-about-role {
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
   color: var(--muted);
 }
 .m-about-role .sep { opacity: 0.4; margin: 0 6px; }
@@ -354,14 +355,14 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 4px 20px;
+  gap: 4px 16px;
 }
 .m-contact-links a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
   padding: 4px;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
   text-decoration: underline;
   text-decoration-color: hsl(var(--foreground-hsl) / 0.3);
@@ -444,13 +445,14 @@
 
 .m-project-heading {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 16px;
 }
 .m-project-heading .m-card-title { font-size: clamp(28px, 8vw, 36px); }
 .m-counter {
+  padding-top: 6px;
   flex-shrink: 0;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 12px;
@@ -666,10 +668,14 @@
 .m-sheet-image-link {
   display: inline-flex;
   align-items: center;
+  justify-content: space-between;
   gap: 6px;
-  min-height: 44px;
+  width: 100%;
+  min-height: 48px;
+  border-bottom: 1px solid var(--border);
   color: var(--accent);
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
 }

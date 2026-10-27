@@ -119,7 +119,12 @@ export default function BlogIndex() {
                     ~{post.readMinutes} min read
                   </span>
                 </div>
-                <h2 className="post-row-title">{post.title}</h2>
+                <div className="post-row-heading">
+                  <h2 className="post-row-title">{post.title}</h2>
+                  <span className="post-row-arrow" aria-hidden="true">
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
+                </div>
                 <p className="post-row-desc">{post.description}</p>
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   {post.tags.map((tag) => (
@@ -129,9 +134,6 @@ export default function BlogIndex() {
                   ))}
                 </div>
               </div>
-              <span className="post-row-arrow" aria-hidden="true">
-                <ArrowRight className="h-4 w-4" />
-              </span>
             </Link>
           </li>
         ))}

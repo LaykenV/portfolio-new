@@ -9,13 +9,13 @@ export function WritingHeader({ backHref = '/blog', backLabel = 'All posts' }: {
 }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3">
-      <Link href={backHref} className="nav-link min-h-11">
+      <Link href={backHref} className="nav-link writing-back min-h-11">
         <ArrowLeft size={14} aria-hidden="true" />
         {backLabel}
       </Link>
-      <div className="flex items-center gap-2">
+      <div className="ml-auto flex items-center gap-2">
         <Link href="/" className="nav-link writing-wordmark"><WritingIdentity /></Link>
-        <AnimatedThemeToggler />
+        <AnimatedThemeToggler className="writing-theme-toggle" />
       </div>
     </div>
   )

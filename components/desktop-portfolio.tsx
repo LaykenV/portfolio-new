@@ -251,7 +251,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
         <div className="dp-identity px-5 pb-6 border-b dp-hairline flex-shrink-0">
           <Portrait size={64} />
           <div className="min-w-0">
-            <p className="text-2xl font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
+            <p className="text-[26px] font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
             <p className="dp-identity-role mt-1">
               {IDENTITY.role}
             </p>
@@ -267,7 +267,14 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
             // owns the document outline; this just names a nav group.
             return (
               <div key={tier} className="dp-rail-group" role="group" aria-label={label}>
-                <p className="dp-rail-label">{label}</p>
+                <div className="dp-rail-heading">
+                  <p className="dp-rail-label">{label}</p>
+                  {tier === 'hero' && (
+                    <span className="dp-mono text-xs text-[var(--muted)] tabular-nums">
+                      {pad(activePosition)} / {pad(projects.length)}
+                    </span>
+                  )}
+                </div>
                 {group.map((p) => {
                   const isActive = p.slug === activeSlug
                   return (
@@ -292,11 +299,6 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
           })}
         </nav>
 
-        <div className="px-5 pt-4 mt-3 border-t dp-hairline flex-shrink-0">
-          <span className="dp-mono text-xs text-[var(--muted)] tabular-nums">
-            {pad(activePosition)} / {pad(projects.length)}
-          </span>
-        </div>
       </aside>
 
       {/* ---------- Reading column ---------- */}
@@ -399,7 +401,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
         <div className="xl:hidden flex items-center gap-3 mb-4 px-1">
           <Portrait size={56} />
           <div className="min-w-0">
-            <p className="text-xl font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
+            <p className="text-[22px] font-bold tracking-tight leading-tight">{IDENTITY.name}</p>
             <p className="dp-identity-role mt-1">
               {IDENTITY.role}
             </p>
@@ -502,7 +504,7 @@ function ControlPanel({ projectPicker }: { projectPicker: ReactNode }) {
           <span className="dp-panel-icon">
             <XIcon className="h-[0.95rem] w-[0.95rem]" />
           </span>
-          <span>X</span>
+          <span>Twitter / X</span>
           <ArrowUpRight className="dp-panel-arrow h-3.5 w-3.5" />
         </a>
 

@@ -64,6 +64,10 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 5 | DeepSeek, OpenCode | 8.6 | 8.5 | 8.4 | 8.4 | 8.8 | 8.2 | 8.3 | 8.8 | 8.4 | 8.5 |
 | 5 | Muse Contributor, retry | 8.5 | 8.0 | 8.5 | 8.5 | 8.5 | 8.5 | 8.0 | 9.0 | 7.5 | 8.3 |
 | 5 | Opus 5.5 | 8.4 | 8.2 | 8.3 | 8.2 | 8.1 | 8.5 | 8.2 | 8.6 | 7.6 | 8.2 |
+| 6 | Terra | 8.0 | 7.5 | 7.5 | 7.8 | 8.5 | 8.0 | 8.0 | 8.2 | 7.5 | 7.9 |
+| 6 | DeepSeek, OpenCode | 8.5 | 8.4 | 8.6 | 8.6 | 8.6 | 8.4 | 8.5 | 8.7 | 8.0 | 8.5 |
+| 6 | Muse Contributor | 8.0 | 7.8 | 7.8 | 7.5 | 8.3 | 8.2 | 7.6 | 8.5 | 7.8 | 7.9 |
+| 6 | Opus 5.5 | 8.3 | 8.2 | 8.3 | 8.2 | 8.5 | 8.3 | 8.1 | 8.9 | 7.4 | 8.2 |
 
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
@@ -132,6 +136,18 @@ Declined findings: availability was already ink, not a warm accent. Altering the
 Round-6 proof: lint and production build pass. Browser checks cover all seven positions and real touch swipes, menu focus, screenshot switching, one visible founder block at each width, the full-resolution image link, theme switching on writing pages and 320px header fit. At 1440px all seven Atlas stack chips fit in one row.
 
 The final counter, position-number and screenshot-control text audit is at least 4.79:1 in light and 6.79:1 in dark. Inline code uses the actual route surface in both themes, including the stronger dark selector. All 28 candidate screenshots were captured again after these styles settled.
+
+## Round 7
+
+Make the personal name clearly larger than the business link at both desktop breakpoints. Use the same sans role style on mobile, circular portrait crops, and a stronger writing wordmark. Move the index position beside its label and remove the isolated footer counter.
+
+Align writing controls to the column's optical edges while preserving their tap targets. Put blog arrows beside their headlines. Use the existing emphasized title phrases in the forest accent. The installed Next font catalog supports only normal Geist, so this pass adds no invalid italic option or dependency upgrade.
+
+Replace the screenshot capsule with plain direct tabs. Keep click, keyboard and shared state; add no reveal motion. Strengthen the full-size-image action, fix the company menu glyph, label Twitter / X, and align menu icons with the email row. Reduce the article list's initial gap and align mobile counters to the first title line.
+
+Declined findings: quick links already have 44px targets, Atlas's seven chips fit in one row, numeric counters are tabular, and the full-size underline offset was already 3px. A 1fr grid with a narrower arrow column would not solve the claimed distance; an inline headline group does. Keep the 1024px reading order instead of reversing it solely for a preference.
+
+Round-7 proof: lint, production build and the browser suites pass. Names measure 26px wide /22px tablet, above the 19px founder link. Phone quick links stay on one line with 44px targets at 320 and 390px. Blog arrows are 8px from their title boxes. All seven project positions, real touch swipes, direct screenshot tabs, themes, menu focus and short-phone fit remain checked. The packet includes actual writing-header hover states in both themes.
 
 ## Round protocol
 

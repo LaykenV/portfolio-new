@@ -1493,50 +1493,24 @@ html.dark .writing-theme {
   font-weight: 600;
 }
 
-/* The real control: a segmented switch that reads as a control, not as URL. */
+/* Direct screenshot tabs. */
 .dp-shot-switch {
-  position: relative;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
+  display: flex;
   flex: 0 0 auto;
+  gap: 4px;
   margin-left: 0.55rem;
-  padding: 0.2rem;
-  border-radius: 999px;
-  background: hsl(var(--foreground-hsl) / 0.07);
-  border: 1px solid transparent;
-}
-/* Pill slides between the two equal-width segments. */
-.dp-shot-switch::before {
-  content: '';
-  position: absolute;
-  top: 0.2rem;
-  bottom: 0.2rem;
-  left: 0.2rem;
-  width: calc(50% - 0.2rem);
-  border-radius: 999px;
-  background: hsl(var(--card));
-  border: 1px solid var(--border);
-  box-shadow: 0 1px 3px hsl(var(--foreground-hsl) / 0.14);
-  transition: transform 160ms ease;
-}
-.dp-shot-switch[data-view='app']::before {
-  transform: translateX(100%);
-}
-html.dark .dp-shot-switch::before {
-  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
 }
 
 .dp-shot-seg {
   position: relative;
   z-index: 1;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  min-height: 32px;
+  min-height: 36px;
   padding: 0 12px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.02em;
-  border-radius: 999px;
+  border-bottom: 2px solid transparent;
   color: var(--foreground);
   cursor: pointer;
   white-space: nowrap;
@@ -1545,7 +1519,8 @@ html.dark .dp-shot-switch::before {
   color: var(--foreground);
 }
 .dp-shot-seg[aria-pressed='true'] {
-  color: var(--foreground);
+  border-bottom-color: var(--accent);
+  color: var(--accent);
   font-weight: 600;
 }
 .dp-shot-seg:focus-visible {
@@ -1966,9 +1941,9 @@ html.dark .writing-theme .tech-badge-compact {
 .writing-wordmark {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 650;
 }
 .writing-theme .hero-title {
   max-width: 22ch;
@@ -2047,3 +2022,33 @@ html.dark .writing-theme .post-code-inline { background: var(--surface); border-
 .dp-identity .founder-name { font-size: 22px; }
 .dp-contact-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .dp-contact-heading .dp-panel-label { margin-bottom: 0; }
+
+/* Personal identity leads the founder link at desktop widths. */
+.dp-root .founder-name { font-size: 19px; font-weight: 650; }
+.dp-root .avatar-ring,
+.dp-root .avatar-ring > * { border-radius: 50%; }
+.dp-rail-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 0.6rem;
+  margin-bottom: 0.45rem;
+}
+.dp-rail-heading .dp-rail-label { margin: 0; padding: 0; }
+.writing-back { margin-left: -0.55rem; }
+.writing-theme-toggle { margin-right: -12px; }
+.writing-theme .hero-title em { color: var(--accent); font-weight: 600; }
+.writing-theme .post-row { display: block; }
+.post-row-heading { display: flex; align-items: baseline; gap: 8px; }
+.post-row-heading .post-row-title { min-width: 0; }
+.writing-theme .post-row-arrow { position: static; margin: 0; width: 16px; height: 20px; }
+.writing-theme .post-row > div > div:first-child { padding-right: 0; }
+.writing-theme .post-steps { margin-top: 0; }
+.writing-theme .post-steps > li:first-child { padding-top: 8px; }
+.writing-theme .nav-link:hover,
+.writing-theme .nav-link:focus-visible,
+html.dark .writing-theme .nav-link:hover,
+html.dark .writing-theme .nav-link:focus-visible {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
