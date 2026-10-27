@@ -236,6 +236,16 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
 
   return (
     <div className="dp-root dp-grid hidden md:grid mx-auto max-w-[130rem]">
+      {/* Below xl the identity leads, in a full-width row above work and contact. */}
+      <div className="dp-compact-identity dp-compact-identity-row xl:hidden">
+        <Portrait size={56} />
+        <div className="min-w-0">
+          <p className="text-[22px] font-bold tracking-tight leading-tight whitespace-nowrap">{IDENTITY.name}</p>
+          <p className="dp-identity-role">{IDENTITY.role}</p>
+        </div>
+        <AnimatedThemeToggler className="dp-theme-toggle" />
+      </div>
+
       {/* ---------- Index rail (lg+) ---------- */}
       <aside className="dp-col hidden xl:flex flex-col border-r dp-hairline py-7 overflow-hidden">
         <div className="dp-identity dp-identity-section px-5 pb-6 flex-shrink-0">
@@ -370,13 +380,6 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
       {/* ---------- Floating control panel ---------- */}
       <div className="dp-col dp-control-col dp-scroll relative py-7">
         {/* Below xl the identity and compact project index share this column. */}
-        <div className="dp-compact-identity dp-compact-identity-row xl:hidden mb-3">
-          <Portrait size={56} />
-          <div className="min-w-0">
-            <p className="text-[22px] font-bold tracking-tight leading-tight whitespace-nowrap">{IDENTITY.name}</p>
-            <p className="dp-identity-role">{IDENTITY.role}</p>
-          </div>
-        </div>
 
         <ControlPanel
           projectPicker={
@@ -414,8 +417,6 @@ function ControlPanel({ projectPicker }: { projectPicker: ReactNode }) {
       <section className="dp-panel-section">
         <div className="dp-contact-heading">
           <p className="dp-panel-label">Contact</p>
-          {/* At xl the toggle sits in the rail beside the portrait. */}
-          <AnimatedThemeToggler className="dp-theme-toggle xl:hidden" />
         </div>
         <p className="dp-panel-availability">Open to software engineering roles</p>
 

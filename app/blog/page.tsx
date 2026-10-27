@@ -101,7 +101,7 @@ export default function BlogIndex() {
     <div className="font-sans mx-auto max-w-3xl min-h-dvh px-5 pb-14 pt-5 md:px-6 md:py-20 flex flex-col gap-8 md:gap-10">
       <WritingHeader backHref="/" backLabel="Home" />
 
-      <section className="flex flex-col gap-6">
+      <section className="flex flex-col gap-3 md:gap-6">
         <div className="flex flex-col gap-3">
           <div className="section-eyebrow">Writing</div>
           <h1 className="hero-title">

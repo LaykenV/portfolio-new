@@ -2105,21 +2105,22 @@ html.dark .writing-theme .nav-link:focus-visible {
   color: var(--label);
 }
 
-/* Below xl the identity shares the right column with contact. Put the
-   portrait beside the name so the column reaches its links sooner. */
+/* Below xl the identity leads in a full-width row above the work and
+   contact columns, with the theme toggle at its right end. */
 @media (max-width: 1279px) {
+  .dp-grid { grid-template-rows: auto minmax(0, 1fr); }
   .dp-compact-identity-row {
+    grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: 56px minmax(0, 1fr);
+    grid-template-columns: 56px minmax(0, 1fr) auto;
     align-items: center;
     gap: 12px;
+    padding: 16px var(--rail-inset) 16px 24px;
+    border-bottom: 1px solid var(--border);
   }
-  .dp-contact-heading .dp-theme-toggle { margin: -12px -10px -12px 0; }
 }
-/* .btn-icon sets display, so xl:hidden alone loses. The rail has the
-   toggle at this width. */
-@media (min-width: 1280px) {
-  .dp-contact-heading .dp-theme-toggle { display: none; }
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .dp-compact-identity-row { padding-left: 40px; }
 }
 
 /* Tags read as separate items, not one phrase. */

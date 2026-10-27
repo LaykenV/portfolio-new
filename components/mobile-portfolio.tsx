@@ -42,7 +42,6 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
   const previewResetRef = useRef<number | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const flightRef = useRef<HTMLDivElement>(null)
-  const [deckScrolled, setDeckScrolled] = useState(false)
   // The hero already shows the portrait and name; the header brand takes
   // over when the first project arrives, so the two never show together.
   const [heroPassed, setHeroPassed] = useState(false)
@@ -90,7 +89,6 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
         }
         setActiveIndex(index)
         const firstStop = slides[1].offsetTop - (parseFloat(getComputedStyle(deck).scrollPaddingTop) || 0)
-        setDeckScrolled(deck.scrollTop > 8)
         setHeroPassed(deck.scrollTop >= firstStop - 2)
       })
     }
@@ -154,9 +152,11 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
       flyName.style.transform =
         `translate3d(${name.dx * nameSlide}px, ${name.dy * nameEase}px, 0) scale(${Math.pow(name.k, nameEase)})`
       // Both names share weight and tracking, so the large one lands on the
-      // small one almost exactly. A short fade covers font hinting.
-      const handoff = Math.min(1, Math.max(0, (p - 0.94) / 0.06))
-      flyName.style.opacity = String(1 - handoff)
+      // small one almost exactly.
+      // The header name fades in underneath; the flying one stays opaque on
+      // top until it is fully in, so the name never dims.
+      const handoff = Math.min(1, Math.max(0, (p - 0.94) / 0.05))
+      flyName.style.opacity = handoff < 1 ? '1' : '0'
       brandName.style.opacity = String(handoff)
       const dock = p >= 0.995 ? 1 : 0
       flyPortrait.style.opacity = String(1 - dock)
@@ -311,7 +311,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
 
       <SiteHeader
         className="m-site-header"
-        scrolled={deckScrolled}
+        scrolled={heroPassed}
         brandHidden={!heroPassed}
         onHomeClick={() => {
           haptic(6)
