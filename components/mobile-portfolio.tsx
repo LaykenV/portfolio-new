@@ -16,15 +16,11 @@ import {
   ArrowUpRight,
   ExternalLink,
   Github,
-  Mail,
   Trophy,
 } from 'lucide-react'
 
 import type { Project } from '@/types/project'
-import { MobileMenuController } from '@/components/mobile-menu-controller'
-import { FounderIntro } from '@/components/founder-intro'
-import { WritingIdentity } from '@/components/writing-identity'
-import { AnimatedThemeToggler } from '@/components/animated-theme-toggler'
+import { SiteHeader } from '@/components/site-header'
 import { cn } from '@/lib/utils'
 
 interface MobilePortfolioProps {
@@ -44,6 +40,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
   const slideRefs = useRef<(HTMLElement | null)[]>([])
   const previewResetRef = useRef<number | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [deckScrolled, setDeckScrolled] = useState(false)
   const [deepDiveSlug, setDeepDiveSlug] = useState<string | null>(null)
   const [entryPreview, setEntryPreview] = useState<{ slug: string; offset: number } | null>(null)
   const [swipePreview, setSwipePreview] = useState<{
@@ -54,14 +51,22 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
   // total slots = about (index 0) + each project
   const total = projects.length + 1
 
-  const jumpTo = useCallback((slotIndex: number) => {
+  const jumpTo = useCallback((slotIndex: number, behavior: ScrollBehavior = 'smooth') => {
     const deck = deckRef.current
     if (!deck) return
     const target = slideRefs.current[slotIndex]
     if (!target) return
     const inset = parseFloat(getComputedStyle(deck).scrollPaddingTop) || 0
-    deck.scrollTo({ top: Math.max(0, target.offsetTop - inset), behavior: 'smooth' })
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    deck.scrollTo({ top: Math.max(0, target.offsetTop - inset), behavior: reduce ? 'auto' : behavior })
   }, [])
+
+  // The menu's Work link from other pages lands on /#work.
+  useEffect(() => {
+    if (window.location.hash !== '#work') return
+    jumpTo(1, 'auto')
+    history.replaceState(null, '', window.location.pathname + window.location.search)
+  }, [jumpTo])
 
   useEffect(() => {
     const deck = deckRef.current
@@ -79,6 +84,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
           if (slides[i].offsetTop <= deck.scrollTop + inset) index = i
         }
         setActiveIndex(index)
+        setDeckScrolled(deck.scrollTop > 8)
       })
     }
     update()
@@ -159,38 +165,27 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
   useEffect(() => {
     if (!currentProject) return
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setDeepDiveSlug(null)
+      // Escape inside the open menu closes only the menu.
+      if (e.key === 'Escape' && !document.querySelector('dialog[open]')) setDeepDiveSlug(null)
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [currentProject])
-
-  const viewingProject = activeIndex > 0
 
   return (
     <div className="mobile-portfolio">
       <div className="m-browser-edge m-browser-edge-top" aria-hidden="true" />
       <div className="m-browser-edge m-browser-edge-bottom" aria-hidden="true" />
 
-      {/* Top chrome — always visible (brand hidden on about slide) */}
-      <header className={cn('m-topbar', viewingProject && 'm-topbar-project')}>
-        <button
-          type="button"
-          className={cn('m-topbar-brand', !viewingProject && 'm-topbar-brand-hidden')}
-          onClick={() => {
-            haptic(6)
-            jumpTo(0)
-          }}
-          tabIndex={viewingProject ? 0 : -1}
-          aria-label="Scroll back to the about section"
-        >
-          <WritingIdentity />
-        </button>
-        <div className="flex items-center gap-2">
-          <AnimatedThemeToggler className="m-topbar-theme" />
-          <MobileMenuController className="m-topbar-menu" />
-        </div>
-      </header>
+      <SiteHeader
+        className="m-site-header"
+        scrolled={deckScrolled}
+        onHomeClick={() => {
+          haptic(6)
+          jumpTo(0)
+        }}
+        onWorkClick={() => jumpTo(1)}
+      />
 
       {/* Deck: vertical snap scroller (about slide + project slides) */}
       <div
@@ -256,6 +251,7 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
           clearEntryPreview()
           setDeepDiveSlug(null)
         }}
+        onHome={() => jumpTo(0, 'auto')}
       />
     </div>
   )
@@ -273,62 +269,37 @@ function AboutSlide({ ref, onScrollToProjects }: AboutSlideProps) {
     <section ref={ref} className="m-slide m-about">
       <div className="m-about-bg" aria-hidden="true" />
       <div className="m-about-inner">
-        <div className="m-about-portrait">
-          <Image
-            src="/portrait.jpeg"
-            alt="Layken Varholdt"
-            width={240}
-            height={240}
-            draggable={false}
-          />
-        </div>
-
-        {/* Not an h1 — the page's single h1 lives in app/page.tsx so the two
-            shells don't each contribute one. */}
-        <p className="m-about-name">Layken Varholdt</p>
-
-        <div className="m-about-role">
-          Software engineer
-        </div>
-
-        <FounderIntro />
+        {/* The header carries the name and portrait. The page's single h1
+            lives in app/page.tsx so the two shells don't each add one. */}
+        <p className="m-about-headline">
+          Software engineer and founder of{' '}
+          <a href="https://www.varholdt.com/" target="_blank" rel="noreferrer noopener">
+            Varholdt&nbsp;AI
+          </a>
+          .
+        </p>
+        <p className="m-about-sub">
+          Varholdt AI is the AI engineer for businesses that don’t have one.
+        </p>
 
         <div className="m-about-cta-stack">
           <a
             href="mailto:layken@varholdt.com?subject=Software%20Engineering%20role"
-            className="m-cta-email"
+            className="m-about-email"
           >
-            <span className="m-cta-icon" aria-hidden="true">
-              <Mail className="h-[18px] w-[18px]" />
-            </span>
-            <b className="m-cta-email-addr">layken@varholdt.com</b>
-            <span className="arrow">
-              <ArrowUpRight className="h-4 w-4" />
-            </span>
+            Email layken@varholdt.com
           </a>
-
           <nav className="m-contact-links" aria-label="Contact links">
-            <a
-              href="https://cal.com/layken-varholdt"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
+            <a href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer noopener">
               Book a call
             </a>
-            <a
-              href="https://t.me/LLVarholdt"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
+            <a href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer noopener">
               Telegram
             </a>
           </nav>
         </div>
 
-        <button
-          className="m-scroll-indicator"
-          onClick={onScrollToProjects}
-        >
+        <button className="m-scroll-indicator" onClick={onScrollToProjects}>
           <span className="label">Scroll to projects</span>
           <span className="chev" aria-hidden="true">
             <ArrowDown className="h-[14px] w-[14px]" />
@@ -541,6 +512,7 @@ interface DeepDiveSheetProps {
   entryPreview: { slug: string; offset: number } | null
   onEntryPreviewConsumed: () => void
   onClose: () => void
+  onHome: () => void
 }
 
 function DeepDiveSheet({
@@ -551,11 +523,13 @@ function DeepDiveSheet({
   entryPreview,
   onEntryPreviewConsumed,
   onClose,
+  onHome,
 }: DeepDiveSheetProps) {
   const sheetRef = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
   const [dragX, setDragX] = useState(0)
   const [dragging, setDragging] = useState(false)
+  const [bodyScrolled, setBodyScrolled] = useState(false)
   const entryPreviewRef = useRef(entryPreview)
   const startRef = useRef({
     x: 0,
@@ -601,14 +575,16 @@ function DeepDiveSheet({
     if (!sheet) return
     const previous = document.activeElement as HTMLElement | null
     const background = Array.from(
-      sheet.closest('.mobile-portfolio')?.querySelectorAll<HTMLElement>('.mobile-deck, .m-topbar') ?? [],
+      sheet.closest('.mobile-portfolio')?.querySelectorAll<HTMLElement>('.mobile-deck, .m-site-header') ?? [],
     )
     const previousInert = background.map((element) => element.inert)
     background.forEach((element) => { element.inert = true })
     const frame = requestAnimationFrame(() => sheet.querySelector<HTMLButtonElement>('.m-sheet-back')?.focus({ preventScroll: true }))
     const containFocus = (event: KeyboardEvent) => {
-      if (event.key !== 'Tab') return
+      // The open menu is a modal dialog and contains focus itself.
+      if (event.key !== 'Tab' || document.querySelector('dialog[open]')) return
       const controls = Array.from(sheet.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'))
+        .filter((control) => !control.closest('dialog'))
       const first = controls[0]
       const last = controls[controls.length - 1]
       if (event.shiftKey && document.activeElement === first) {
@@ -694,22 +670,29 @@ function DeepDiveSheet({
       onTouchEnd={onTouchEnd}
       onTouchCancel={onTouchEnd}
     >
-      <div className="m-sheet-topbar">
-        <button
-          className="m-sheet-back"
-          onClick={() => {
-            haptic(6)
-            requestClose()
-          }}
-          aria-label="Back"
-        >
-          <ArrowLeft className="h-[14px] w-[14px]" />
-          <span>Back</span>
-        </button>
-        <AnimatedThemeToggler className="m-sheet-theme" />
-      </div>
+      <SiteHeader
+        className="m-sheet-header"
+        scrolled={bodyScrolled}
+        leading={
+          <button
+            className="m-sheet-back"
+            onClick={() => {
+              haptic(6)
+              requestClose()
+            }}
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            <span>Back</span>
+          </button>
+        }
+        onHomeClick={() => {
+          onHome()
+          requestClose()
+        }}
+        onWorkClick={requestClose}
+      />
 
-      <div className="m-sheet-inner">
+      <div className="m-sheet-inner" onScroll={(event) => setBodyScrolled(event.currentTarget.scrollTop > 8)}>
         <h2 className="m-sheet-title">{displayProject.title}</h2>
         <div className="m-sheet-tagline">{displayProject.tagline}</div>
         <div className="m-sheet-hero">

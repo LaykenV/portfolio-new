@@ -8,7 +8,7 @@ export function WritingHeader({ backHref = '/blog', backLabel = 'All posts' }: {
   backLabel?: string
 }) {
   return (
-    <div className="writing-header">
+    <div className="writing-header" data-home-back={backHref === '/' || undefined}>
       <Link href={backHref} className="nav-link writing-back min-h-11" aria-label={backLabel}>
         <ArrowLeft size={14} aria-hidden="true" />
         <span className="writing-back-label">{backLabel}</span>

@@ -1323,7 +1323,8 @@ html.dark .stack-icon {
 /* Shared portfolio and writing palette. Project screenshots carry the color. */
 .dp-root,
 .mobile-portfolio,
-.writing-theme {
+.writing-theme,
+.site-menu {
   --background: #D7DFD6;
   --foreground: #202C2A;
   --foreground-hsl: 170 15.79% 14.9%;
@@ -1345,7 +1346,8 @@ html.dark .stack-icon {
 }
 html.dark .dp-root,
 html.dark .mobile-portfolio,
-html.dark .writing-theme {
+html.dark .writing-theme,
+html.dark .site-menu {
   --background: #141C1A;
   --foreground: #E6ECE6;
   --foreground-hsl: 120 13.64% 91.37%;
@@ -2104,8 +2106,12 @@ html.dark .writing-theme .nav-link:focus-visible {
   .writing-theme .post-h2 { text-wrap: normal; }
   .writing-theme article > header + .prose-block { margin-top: -16px; }
 }
-@media (max-width: 389px) {
-  .writing-back-label { display: none; }
+@media (max-width: 767px) {
+  /* The shared site header carries the brand, menu and theme on phones. */
+  .writing-header[data-home-back] { display: none; }
+  .writing-header { display: flex; margin-bottom: -16px; }
+  .writing-header .writing-wordmark,
+  .writing-header .writing-theme-toggle { display: none; }
 }
 
 .dp-root .dp-eyebrow,
