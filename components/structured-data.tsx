@@ -91,9 +91,6 @@ export function StructuredData({ projects }: StructuredDataProps) {
     'acadiana-web-design': 'BusinessApplication',
     'public-parish': 'ReferenceApplication',
     'mesh-mind': 'DeveloperApplication',
-    civicly: 'ReferenceApplication',
-    'food-truck-flow': 'BusinessApplication',
-    omnibid: 'BusinessApplication',
   }
 
   // ItemList schema for projects showcase. Use narrower types where the

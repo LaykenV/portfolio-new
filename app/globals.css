@@ -1560,10 +1560,7 @@ html.dark .site-menu {
 }
 .dp-shot-img-top { pointer-events: none; }
 
-/* --- Rail tier groups ---------------------------------------------------- */
-.dp-rail-group + .dp-rail-group {
-  margin-top: 1.35rem;
-}
+/* --- Rail project list ------------------------------------------------- */
 .dp-rail-label {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 0.75rem;
@@ -1571,8 +1568,13 @@ html.dark .site-menu {
   text-transform: uppercase;
   font-weight: 500;
   color: var(--muted);
-  padding: 0 0.6rem;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.75rem;
+}
+/* A hairline track on the left. The active project lights its segment. */
+.dp-rail-list {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--border);
 }
 
 /* --- Award chip ---------------------------------------------------------- */
@@ -1590,77 +1592,51 @@ html.dark .site-menu {
 .dp-nav-item {
   position: relative;
   display: grid;
-  grid-template-columns: 1rem minmax(0, 1fr);
+  grid-template-columns: 1.5rem minmax(0, 1fr);
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   width: 100%;
   min-height: 44px;
   text-align: left;
-  padding: 6px 7px;
-  border-radius: 0.6rem;
+  padding: 6px 0 6px 16px;
+  margin-left: -1px;
+  border-left: 2px solid transparent;
   cursor: pointer;
-  transition:
-    background 180ms ease,
-    transform 180ms ease;
+  color: var(--muted);
+  transition: color 160ms ease, border-color 160ms ease;
 }
-
-.dp-nav-item:hover {
-  background: hsl(var(--foreground-hsl) / 0.04);
-}
+.dp-nav-item:hover { color: var(--foreground); }
 .dp-nav-item:focus-visible {
-  outline: 2px solid hsl(var(--foreground-hsl) / 0.5);
+  outline: 2px solid var(--foreground);
   outline-offset: -2px;
-  background: hsl(var(--foreground-hsl) / 0.06);
 }
-
 .dp-nav-item.dp-nav-active {
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--border);
+  color: var(--foreground);
+  border-left-color: var(--accent);
 }
-html.dark .dp-nav-item.dp-nav-active {
-  background: hsl(var(--foreground-hsl) / 0.1);
-  box-shadow: inset 0 0 0 1px var(--control-border);
-}
-
 
 .dp-nav-num {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
-  color: var(--muted);
 }
-.dp-nav-active .dp-nav-num {
-  opacity: 1;
-}
+.dp-nav-active .dp-nav-num { color: var(--accent); }
 
 .dp-nav-title {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
   min-width: 0;
   font-size: 15px;
   font-weight: 500;
-  letter-spacing: 0;
   line-height: 1.25;
-  opacity: 0.9;
-  transition: opacity 180ms ease;
 }
 .dp-nav-title > span:first-child {
-  padding-right: 2px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.dp-nav-active .dp-nav-title {
-  opacity: 1;
-  font-weight: 650;
-}
-.dp-nav-item:hover .dp-nav-title {
-  opacity: 1;
-}
+.dp-nav-active .dp-nav-title { font-weight: 600; }
 
 /* --- Floating control panel ---------------------------------------------- */
 .founder-intro {
@@ -2068,15 +2044,6 @@ html.dark .writing-theme .post-code-inline { background: var(--surface); border-
 .dp-root .founder-name { font-size: 19px; font-weight: 650; }
 .dp-root .avatar-ring,
 .dp-root .avatar-ring > * { border-radius: 50%; }
-.dp-rail-heading {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 0;
-  margin-bottom: 0.45rem;
-}
-.dp-rail-heading .dp-rail-label { margin: 0; padding: 0; }
 .writing-back { margin-left: -0.55rem; }
 .writing-theme-toggle { margin-right: -12px; }
 .writing-theme .hero-title em { color: var(--accent); font-weight: 600; }
@@ -2129,9 +2096,7 @@ html.dark .writing-theme .nav-link:focus-visible {
 .dp-root .dp-rail-label,
 .dp-root .dp-panel-label,
 .dp-root .dp-meta-k,
-.dp-root .dp-nav-num,
 .dp-root .mono-accent,
-.dp-root .dp-rail-heading > .dp-mono,
 .writing-theme .mono-accent,
 .writing-theme .section-eyebrow,
 .mobile-portfolio .m-counter,
@@ -2157,7 +2122,6 @@ html.dark .writing-theme .nav-link:focus-visible {
 .writing-theme .tag-sep { margin: 0 8px 0 0; color: var(--muted); }
 
 .dp-panel-row-primary { font-size: 0.9375rem; }
-.dp-picker-label { justify-content: space-between; }
 
 /* Live and source links sit with the title, ahead of the screenshot. */
 .dp-links {

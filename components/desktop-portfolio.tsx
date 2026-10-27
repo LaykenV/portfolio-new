@@ -18,14 +18,7 @@ import {
 
 import { AnimatedThemeToggler } from '@/components/animated-theme-toggler'
 import { FounderIntro } from '@/components/founder-intro'
-import type { Project, ProjectTier } from '@/types/project'
-
-/** Rail groupings, in render order. */
-const TIER_LABELS: Array<[ProjectTier, string]> = [
-  ['hero', 'Selected work'],
-  ['featured', 'More work'],
-  ['more', 'Also built'],
-]
+import type { Project } from '@/types/project'
 
 /* Identity content shared by the rail and the control panel. */
 const IDENTITY = {
@@ -240,9 +233,6 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
     root.scrollTo({ top: el.offsetTop - 24, behavior: 'smooth' })
   }
 
-  const activePosition = projects.findIndex((p) => p.slug === activeSlug) + 1
-  // Rail items are grouped by tier but keep their overall position number.
-  const position = new Map(projects.map((p, i) => [p.slug, i + 1]))
 
   return (
     <div className="dp-root dp-grid hidden md:grid mx-auto max-w-[130rem]">
@@ -263,40 +253,25 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
         </div>
 
         <nav className="dp-project-index dp-scroll flex-1 min-h-0 pt-5" aria-label="Project index">
-          {TIER_LABELS.map(([tier, label]) => {
-            const group = projects.filter((p) => p.tier === tier)
-            if (group.length === 0) return null
-            // The label is deliberately not a heading — the reading column
-            // owns the document outline; this just names a nav group.
-            return (
-              <div key={tier} className="dp-rail-group" role="group" aria-label={label}>
-                <div className="dp-rail-heading">
-                  <p className="dp-rail-label">{label}</p>
-                  {tier === 'hero' && (
-                    <span className="dp-mono text-xs text-[var(--muted)] tabular-nums">
-                      {pad(activePosition)} / {pad(projects.length)}
-                    </span>
-                  )}
-                </div>
-                {group.map((p) => {
-                  const isActive = p.slug === activeSlug
-                  return (
-                    <button
-                      key={p.slug}
-                      className={`dp-nav-item ${isActive ? 'dp-nav-active' : ''}`}
-                      onClick={() => scrollTo(p.slug)}
-                      aria-current={isActive}
-                    >
-                      <span className="dp-nav-num">{pad(position.get(p.slug) ?? 0)}</span>
-                      <span className="dp-nav-title">
-                        <span>{p.title}</span>
-                      </span>
-                    </button>
-                  )
-                })}
-              </div>
-            )
-          })}
+          <p className="dp-rail-label">Work</p>
+          <div className="dp-rail-list">
+            {projects.map((p, index) => {
+              const isActive = p.slug === activeSlug
+              return (
+                <button
+                  key={p.slug}
+                  className={`dp-nav-item ${isActive ? 'dp-nav-active' : ''}`}
+                  onClick={() => scrollTo(p.slug)}
+                  aria-current={isActive}
+                >
+                  <span className="dp-nav-num">{pad(index + 1)}</span>
+                  <span className="dp-nav-title">
+                    <span>{p.title}</span>
+                  </span>
+                </button>
+              )
+            })}
+          </div>
         </nav>
 
       </aside>
@@ -407,10 +382,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
         <ControlPanel
           projectPicker={
           <label className="dp-project-picker relative block xl:hidden">
-            <span className="dp-panel-label dp-picker-label">
-              Selected work
-              <span>{pad(activePosition)} / {pad(projects.length)}</span>
-            </span>
+            <span className="dp-panel-label dp-picker-label">Work</span>
             <select
               value={activeSlug}
               onChange={(event) => scrollTo(event.target.value)}

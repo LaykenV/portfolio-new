@@ -577,7 +577,9 @@ function DeepDiveSheet({
     )
     const previousInert = background.map((element) => element.inert)
     background.forEach((element) => { element.inert = true })
-    const frame = requestAnimationFrame(() => sheet.querySelector<HTMLButtonElement>('.m-sheet-back')?.focus({ preventScroll: true }))
+    // Focus the sheet itself. Focusing the back button after a tap would draw
+    // its keyboard focus ring.
+    const frame = requestAnimationFrame(() => sheet.focus({ preventScroll: true }))
     const containFocus = (event: KeyboardEvent) => {
       // The open menu is a modal dialog and contains focus itself.
       if (event.key !== 'Tab' || document.querySelector('dialog[open]')) return
@@ -585,7 +587,7 @@ function DeepDiveSheet({
         .filter((control) => !control.closest('dialog'))
       const first = controls[0]
       const last = controls[controls.length - 1]
-      if (event.shiftKey && document.activeElement === first) {
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === sheet)) {
         event.preventDefault()
         last?.focus()
       } else if (!event.shiftKey && document.activeElement === last) {
@@ -663,6 +665,7 @@ function DeepDiveSheet({
       aria-modal={isInteractive ? 'true' : undefined}
       aria-label={isInteractive ? `${displayProject.title} deep dive` : undefined}
       aria-hidden={isPreviewing || undefined}
+      tabIndex={isInteractive ? -1 : undefined}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}

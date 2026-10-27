@@ -30,6 +30,7 @@
    ============================================================ */
 
 .mobile-portfolio {
+  -webkit-tap-highlight-color: transparent;
   position: fixed;
   inset: 0;
   z-index: 40;
@@ -69,7 +70,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   scroll-snap-type: y mandatory;
-  scroll-padding-top: var(--site-header-h);
   scroll-behavior: smooth;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
@@ -89,11 +89,7 @@
 }
 
 /* ── About slide ─────────────────────────────────────── */
-.m-about {
-  padding: 0;
-  height: auto;
-  min-height: 0;
-}
+.m-about { padding: 0; }
 .m-about-bg {
   position: absolute;
   inset: 0;
@@ -104,6 +100,8 @@
 .m-about-inner {
   position: relative;
   z-index: 1;
+  height: 100%;
+  justify-content: safe center;
   padding: calc(var(--site-header-h) + 16px) 20px
            calc(env(safe-area-inset-bottom, 0px) + 8px);
   display: flex;
@@ -245,13 +243,8 @@ html.dark .m-about-email {
 
 
 /* ── Project slide ───────────────────────────────────── */
-.m-project {
-  padding: 0;
-  height: auto;
-  min-height: 0;
-}
-/* The last item needs enough room to reach its snap position. */
-.m-project:last-child { min-height: 100dvh; }
+/* One project per screen, so a swipe moves exactly one project. */
+.m-project { padding: 0; }
 .m-card-bg {
   position: absolute;
   inset: 0;
@@ -262,10 +255,12 @@ html.dark .m-about-email {
 .m-card-inner {
   position: relative;
   z-index: 1;
-  padding: 16px 20px
+  height: 100%;
+  padding: calc(var(--site-header-h) + 16px) 20px
            calc(env(safe-area-inset-bottom, 0px) + 24px);
   display: flex;
   flex-direction: column;
+  justify-content: safe center;
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
@@ -436,6 +431,7 @@ html.dark .m-btn-primary {
 .m-sheet.dragging { transition: none; }
 .m-sheet.open { transform: translateX(0); }
 .m-sheet.preview { pointer-events: none; }
+.m-sheet:focus { outline: none; }
 
 .m-sheet-back {
   min-height: 44px;
