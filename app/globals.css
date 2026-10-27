@@ -1358,7 +1358,7 @@ html.dark .site-menu {
   --surface: #1C2823;
   --card: 155 17.65% 13.33%;
   --accent: #9BC5AE;
-  --accent-soft: #2A4638;
+  --accent-soft: #3B5547;
   --on-accent: #14251D;
   --mobile-edge-top: #141C1A;
   --mobile-edge-bottom: #141C1A;
@@ -2158,3 +2158,23 @@ html.dark .writing-theme .nav-link:focus-visible {
 
 .dp-panel-row-primary { font-size: 0.9375rem; }
 .dp-picker-label { justify-content: space-between; }
+
+/* Live and source links sit with the title, ahead of the screenshot. */
+.dp-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 16px;
+  margin: 4px 0 -4px;
+  font-size: 14px;
+}
+.dp-links a,
+.dp-links span { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Dark primaries are a real fill; the border only softens the edge. */
+html.dark .dp-root .dp-panel-row-primary,
+html.dark .mobile-portfolio .m-btn-primary,
+html.dark .mobile-portfolio .m-about-email,
+html.dark .site-menu-cta {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}

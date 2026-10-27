@@ -15,7 +15,7 @@ const SOCIAL_LINKS = [
   ['Telegram', 'https://t.me/LLVarholdt'],
   ['GitHub', 'https://github.com/laykenV'],
   ['LinkedIn', 'https://www.linkedin.com/in/layken-varholdt-a78687230/'],
-  ['X', 'https://x.com/LLVarholdt'],
+  ['Twitter / X', 'https://x.com/LLVarholdt'],
 ] as const
 
 /** Two lines. Inside the open menu, CSS folds them into an X. */
@@ -164,6 +164,7 @@ export function SiteMenu({ onHomeClick, onWorkClick }: {
           <nav className="site-menu-links" aria-label="Site">
             <Link
               href="/#work"
+              aria-current={pathname === '/' ? 'page' : undefined}
               onClick={(event) => {
                 if (!onWorkClick) return finish()
                 event.preventDefault()

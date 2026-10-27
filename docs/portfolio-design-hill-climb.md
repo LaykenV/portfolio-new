@@ -107,6 +107,21 @@ References: Brittany Chiang, Lee Robinson and Rauno Freiberg. Their screenshots 
 | 15 | Terra | 8.5 | 8.5 | 8.4 | 8.1 | 9.0 | 8.7 | 8.5 | 9.0 | 8.3 | 8.6 |
 | 15 | DeepSeek, OpenCode retry | 9.0 | 9.1 | 8.8 | 8.6 | 9.0 | 9.0 | 8.8 | 9.3 | 8.9 | 8.9 |
 | 15 | Muse Contributor | 8.5 | 8.5 | 8.5 | 8.0 | 8.5 | 8.0 | 8.0 | 9.0 | 7.5 | 8.3 |
+| 17 | Sol | 9.3 | 9.2 | 9.0 | 9.0 | 10 | 10 | 10 | 9.3 | 10 | 9.5 |
+| 17 | DeepSeek, OpenCode | 8.9 | 8.6 | 8.6 | 8.8 | 9.0 | 8.8 | 8.4 | 9.1 | 8.2 | 8.7 |
+| 17 | Muse Contributor | 9.0 | 8.5 | 9.0 | 8.5 | 9.0 | 9.0 | 9.0 | 9.0 | 8.5 | 8.8 |
+| 18 | Sol | 10 | 9.4 | 9.6 | 9.3 | 10 | 10 | 9.6 | 9.8 | 10 | 9.7 |
+| 18 | DeepSeek, OpenCode | 8.8 | 8.9 | 9.0 | 9.0 | 8.6 | 8.9 | 8.5 | 9.0 | 8.7 | 8.8 |
+| 18 | Muse Contributor | 8.5 | 9.0 | 9.0 | 8.5 | 9.5 | 9.5 | 9.0 | 9.0 | 8.5 | 9.0 |
+| 19 | Sol | 8.9 | 9.0 | 10 | 9.0 | 10 | 10 | 9.2 | 9.0 | 10 | 9.5 |
+| 19 | DeepSeek, OpenCode | 9.2 | 9.1 | 8.8 | 8.8 | 8.7 | 9.1 | 8.7 | 9.1 | 8.4 | 8.9 |
+| 19 | Muse Contributor | 9.0 | 9.0 | 8.5 | 8.5 | 9.0 | 9.0 | 8.5 | 9.5 | 8.0 | 8.8 |
+| 21 | Sol | 10 | 9.0 | 9.3 | 9.0 | 10 | 10 | 9.3 | 9.0 | 10 | 9.5 |
+| 21 | DeepSeek, OpenCode | 8.3 | 8.5 | 8.5 | 8.5 | 8.6 | 8.5 | 8.3 | 8.9 | 8.6 | 8.5 |
+| 21 | Muse Contributor | 8.5 | 8.5 | 8.5 | 8.0 | 9.0 | 9.0 | 8.5 | 9.0 | 8.0 | 8.6 |
+| 22 | Sol | 10 | 9.0 | 9.2 | 10 | 10 | 10 | 9.5 | 9.3 | 10 | 9.7 |
+| 22 | DeepSeek, OpenCode | 9.0 | 8.7 | 8.8 | 8.8 | 8.7 | 9.0 | 8.7 | 9.0 | 8.7 | 8.8 |
+| 22 | Muse Contributor | 8.5 | 8.5 | 8.5 | 8.5 | 9.0 | 9.0 | 8.0 | 9.0 | 8.5 | 8.6 |
 
 Muse reported 7.8 overall for round 2. Its nine displayed category scores sum to 72, so the rubric's arithmetic mean is 8.0. Preserve both figures in the evidence ledger.
 
@@ -304,3 +319,7 @@ Round-16 proof: lint and production build pass. Browser suites retain all seven 
 6. Record the actual scores and continue. Do not claim the requested target while a grade or visual seat is missing.
 
 Working artifacts live under `/tmp/portfolio-hill-climb-20261026/`: the frozen brief, per-round reports and plans, capture scripts, screenshot manifests, and state ledger. Keep that evidence out of the product interface. Put the score history, preview and declined asks in the final PR. Design rounds are preview work until Layken approves a release.
+
+From round 17, Claude Opus 5.5 drives the loop and GPT-6.1 Sol through Codex (`reasoningEffort: high`) replaces Terra. DeepSeek and Muse Contributor keep their seats. The target is 9.5 from every judge. The phone header and menu follow varholdt.com and Public Parish at Layken's request. Round 20 was cancelled after Layken's feedback on the phone hero, rail and header. Round 23 was not graded.
+
+DeepSeek and Muse reported several measurable defects that the rendered page did not show, such as 12px labels that measure 13px and contrast below 3:1 that measures 3.55:1. Later briefs list those measurements.

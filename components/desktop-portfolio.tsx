@@ -329,6 +329,31 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
                       </span>
                     </div>
                   )}
+                  <div className="dp-links">
+                    {project.links.live && (
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="post-link"
+                      >
+                        {shotDomain(project)}
+                      </a>
+                    )}
+                    {project.links.github && (
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="post-link"
+                      >
+                        Source
+                      </a>
+                    )}
+                    {!project.links.live && !project.links.github && (
+                      <span className="opacity-50">Private</span>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -361,34 +386,6 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
                   </div>
                 </dd>
 
-                <dt className="dp-meta-k">Links</dt>
-                <dd className="dp-meta-v">
-                  <div className="flex flex-wrap items-center gap-4">
-                    {project.links.live && (
-                      <a
-                        href={project.links.live}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="post-link"
-                      >
-                        {shotDomain(project)}
-                      </a>
-                    )}
-                    {project.links.github && (
-                      <a
-                        href={project.links.github}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="post-link"
-                      >
-                        Source
-                      </a>
-                    )}
-                    {!project.links.live && !project.links.github && (
-                      <span className="opacity-50">Private</span>
-                    )}
-                  </div>
-                </dd>
               </dl>
             </section>
           ))}
