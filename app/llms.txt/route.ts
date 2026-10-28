@@ -29,7 +29,7 @@ export async function GET() {
 
   const body = `# Layken Varholdt
 
-> Software engineer and founder of Varholdt AI. Building production web applications with React, TypeScript, Java, and applied AI. U.S. Department of Labor contractor and 1st-place Convex hackathon winner. Open to new roles.
+> Software engineer and founder of Varholdt Labs. Building production web applications with React, TypeScript, Java, and applied AI. U.S. Department of Labor contractor and 1st-place Convex hackathon winner. Open to new roles.
 
 - Site: ${BASE}
 - Résumé: ${BASE}/Layken-Varholdt-Software-Engineer-Resume.pdf
@@ -38,9 +38,9 @@ export async function GET() {
 - X: https://x.com/LLVarholdt
 - Email: layken@varholdt.com
 
-## Varholdt AI
+## Varholdt Labs
 
-Layken founded [Varholdt AI](https://www.varholdt.com/), the AI engineer for businesses that don't have one. AI workflows, custom software, and team AI training.
+Layken founded [Varholdt Labs](https://www.varholdt.com/), the AI engineer for businesses that don't have one. AI workflows, custom software, and team AI training.
 
 ${sections.filter(Boolean).join('\n')}
 ## Writing

@@ -17,14 +17,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.laykenvarholdt.com'),
   title: {
-    default: 'Layken Varholdt - Software Engineer & Founder of Varholdt AI',
+    default: 'Layken Varholdt - Software Engineer & Founder of Varholdt Labs',
     template: '%s — Layken Varholdt',
   },
   description:
-    'Software engineer and founder of Varholdt AI. Building web applications and AI systems. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
+    'Software engineer and founder of Varholdt Labs. Building web applications and AI systems. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
   keywords: [
     'Layken Varholdt',
-    'Varholdt AI',
+    'Varholdt Labs',
     'Software engineer',
     'Full-stack engineer',
     'multi-agent orchestration',
@@ -48,9 +48,9 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Layken Varholdt - Software Engineer & Founder of Varholdt AI',
+    title: 'Layken Varholdt - Software Engineer & Founder of Varholdt Labs',
     description:
-      'Software engineer and founder of Varholdt AI. Building web applications and AI systems. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
+      'Software engineer and founder of Varholdt Labs. Building web applications and AI systems. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
     url: '/',
     siteName: 'Layken Varholdt',
     locale: 'en_US',
@@ -60,15 +60,15 @@ export const metadata: Metadata = {
         url: 'https://www.laykenvarholdt.com/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Layken Varholdt, software engineer and founder of Varholdt AI. Portrait on a sage green background.',
+        alt: 'Layken Varholdt, software engineer and founder of Varholdt Labs. Portrait on a sage green background.',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Layken Varholdt - Software Engineer & Founder of Varholdt AI',
+    title: 'Layken Varholdt - Software Engineer & Founder of Varholdt Labs',
     description:
-      'Software engineer and founder of Varholdt AI. Building web applications and AI systems.',
+      'Software engineer and founder of Varholdt Labs. Building web applications and AI systems.',
     creator: '@LLVarholdt',
     images: ['https://www.laykenvarholdt.com/twitter-image'],
   },

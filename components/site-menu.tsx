@@ -12,7 +12,6 @@ const EMAIL = 'layken@varholdt.com'
 const CLOSE_MS = 220
 
 const SOCIAL_LINKS = [
-  ['Book a call', 'https://cal.com/layken-varholdt'],
   ['Telegram', 'https://t.me/LLVarholdt'],
   ['GitHub', 'https://github.com/laykenV'],
   ['LinkedIn', 'https://www.linkedin.com/in/layken-varholdt-a78687230/'],
@@ -184,7 +183,7 @@ export function SiteMenu({ onHomeClick, onWorkClick }: {
               Writing
             </Link>
             <a href="https://www.varholdt.com/" target="_blank" rel="noreferrer" onClick={finish}>
-              Varholdt AI
+              Varholdt Labs
               <ArrowUpRight className="site-menu-ext" aria-hidden="true" />
             </a>
             <a href="/Layken-Varholdt-Software-Engineer-Resume.pdf" target="_blank" rel="noreferrer" onClick={finish}>
