@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import { ArrowUpRight } from 'lucide-react'
 import { WritingIdentity } from '@/components/writing-identity'
+import { pulseBrowserEdges } from '@/components/theme-provider'
 
 const EMAIL = 'layken@varholdt.com'
 const CLOSE_MS = 220
@@ -59,6 +60,7 @@ export function SiteMenu({ onHomeClick, onWorkClick }: {
     if (menu?.open) menu.close()
     document.documentElement.classList.remove('menu-open')
     setOpen(false)
+    pulseBrowserEdges()
   }, [])
 
   // Keyboard users return to the menu button. After a tap nothing keeps focus,
@@ -136,6 +138,9 @@ export function SiteMenu({ onHomeClick, onWorkClick }: {
           close(false, true)
         }}
       >
+        {/* A dialog is in the top layer, above the page's edge samplers. */}
+        <div className="m-browser-edge m-browser-edge-top" aria-hidden="true" />
+        <div className="m-browser-edge m-browser-edge-bottom" aria-hidden="true" />
         <div className="site-menu-head">
           <Link
             href="/"

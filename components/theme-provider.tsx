@@ -12,6 +12,21 @@ const THEME_COLORS: Record<string, string> = {
   dark: '#0A0A0A',
 };
 
+let pulseFrame = 0;
+
+/** Make Safari re-sample fixed edge colors after a theme or dialog change. */
+export function pulseBrowserEdges() {
+  const root = document.documentElement;
+  cancelAnimationFrame(pulseFrame);
+  root.dataset.edgePulse = '';
+  pulseFrame = requestAnimationFrame(() => {
+    pulseFrame = requestAnimationFrame(() => {
+      delete root.dataset.edgePulse;
+      pulseFrame = 0;
+    });
+  });
+}
+
 /**
  * Keeps the browser chrome in step with the in-page theme. The static meta tag
  * in the layout covers the default; this corrects it once the stored
@@ -26,6 +41,7 @@ function ThemeColorSync() {
     // next-themes applies the html class in its own effect. Read the surface
     // on the next frame so its computed color belongs to the selected theme.
     const frame = requestAnimationFrame(() => {
+      pulseBrowserEdges();
       const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
       const surface = Array.from(
         document.querySelectorAll<HTMLElement>('.dp-root, .mobile-portfolio, .writing-theme')
