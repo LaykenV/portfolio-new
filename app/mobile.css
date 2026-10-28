@@ -5,6 +5,20 @@
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* Safari samples the page canvas as well as the fixed mobile shell when
+   coloring its toolbars. Keep both surfaces on the same palette. */
+@media (max-width: 767px) {
+  html:has(.mobile-portfolio),
+  body:has(.mobile-portfolio) {
+    background: #D7DFD6;
+  }
+
+  html.dark:has(.mobile-portfolio),
+  html.dark body:has(.mobile-portfolio) {
+    background: #141C1A;
+  }
+}
+
 /* Fullscreen project modal on mobile — kills the desktop centered/bordered treatment */
 @media (max-width: 767px) {
   .project-modal {
