@@ -12,48 +12,11 @@ import {
 } from 'lucide-react'
 
 import type { Metadata } from 'next'
+import { posts, postMetadata, postSchema } from '@/lib/posts'
 
-const postTitle = 'Code review for less than a cent'
-const postDescription =
-  'How I wired GLM 5.3 Flash, open-source PR-Agent, GitHub Actions, and two repository-local Codex skills into a review loop that still asks me before merge.'
-const postUrl = '/blog/glm-5-3-flash-pr-agent-code-review'
-const postPath = 'https://www.laykenvarholdt.com' + postUrl
-const publishedISO = '2026-08-28T00:00:00.000Z'
-const publishedReadable = 'August 28, 2026'
-const modifiedISO = '2026-08-29T00:00:00.000Z'
-const modifiedReadable = 'August 29, 2026'
+const post = posts['glm-5-3-flash-pr-agent-code-review']
 
-export const metadata: Metadata = {
-  title: postTitle,
-  description: postDescription,
-  alternates: { canonical: postUrl },
-  openGraph: {
-    title: postTitle + ' | Layken Varholdt',
-    description: postDescription,
-    url: postUrl,
-    siteName: 'Layken Varholdt',
-    locale: 'en_US',
-    type: 'article',
-    publishedTime: publishedISO,
-    modifiedTime: modifiedISO,
-    authors: ['Layken Varholdt'],
-    images: [
-      {
-        url: 'https://www.laykenvarholdt.com/opengraph-image',
-        width: 1200,
-        height: 630,
-        alt: 'A sub-cent pull request review loop using GLM 5.3 Flash',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: postTitle + ' | Layken Varholdt',
-    description: postDescription,
-    creator: '@LLVarholdt',
-    images: ['https://www.laykenvarholdt.com/twitter-image'],
-  },
-}
+export const metadata: Metadata = postMetadata(post)
 
 const systemParts = [
   {
@@ -79,37 +42,7 @@ const systemParts = [
 ]
 
 export default function GlmFlashPrAgentCodeReviewPost() {
-  const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    headline: postTitle,
-    description: postDescription,
-    image: ['https://www.laykenvarholdt.com/opengraph-image'],
-    datePublished: publishedISO,
-    dateModified: modifiedISO,
-    author: {
-      '@type': 'Person',
-      name: 'Layken Varholdt',
-      url: 'https://www.laykenvarholdt.com',
-    },
-    publisher: {
-      '@type': 'Person',
-      name: 'Layken Varholdt',
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': postPath,
-    },
-    keywords: [
-      'GLM 5.3 Flash',
-      'PR-Agent',
-      'code review',
-      'GitHub Actions',
-      'Codex skills',
-      'OpenRouter',
-      'CI',
-    ].join(', '),
-  }
+  const articleSchema = postSchema(post)
 
   return (
     <article className="font-sans mx-auto max-w-3xl min-h-dvh px-5 pb-14 pt-5 md:px-6 md:py-20 flex flex-col gap-6 md:gap-10">
@@ -122,7 +55,7 @@ export default function GlmFlashPrAgentCodeReviewPost() {
 
       <header className="flex flex-col gap-4">
         <div className="section-eyebrow">
-          Engineering notes &middot; {publishedReadable}
+          Engineering notes &middot; {post.publishedReadable}
         </div>
         <h1 className="hero-title">
           Code review for <em>less than a cent.</em>
@@ -135,7 +68,7 @@ export default function GlmFlashPrAgentCodeReviewPost() {
         <div className="writing-meta flex flex-wrap items-center gap-2 pt-1 text-xs">
           <span className="mono-accent">By Layken Varholdt</span>
           <span aria-hidden="true">&middot;</span>
-          <span className="mono-accent">~9 min read</span>
+          <span className="mono-accent">~{post.readMinutes} min read</span>
         </div>
       </header>
 
@@ -573,7 +506,7 @@ persistent_comment = true`}</code>
 
       <footer className="border-t border-black/10 dark:border-white/10 pt-8 flex flex-col gap-4">
         <p className="text-sm opacity-70">
-          Published {publishedReadable}. Updated {modifiedReadable}.
+          Published {post.publishedReadable}. Updated {post.modifiedReadable}.
         </p>
         <div className="flex items-center justify-between gap-4">
           <Link href="/blog" className="nav-link self-start">

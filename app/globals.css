@@ -3,8 +3,6 @@
 :root {
   /* color-scheme is owned by the html.dark / html:not(.dark) rules below,
      which next-themes also mirrors onto the element's inline style. */
-  --background: #ffffff;
-  --foreground: #171717;
   /* Palette — Light mode (off-white base, charcoal text) */
   --background: #FAF9F6; /* off-white neutral */
   --foreground: #222222; /* charcoal */
@@ -48,8 +46,6 @@
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
   /* Palette — Dark mode (off-black base, soft light text) */
   --background: #0A0A0A; /* off-black */
   --foreground: #EDEDED; /* soft light */

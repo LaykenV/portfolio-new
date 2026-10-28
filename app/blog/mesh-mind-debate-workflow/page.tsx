@@ -14,78 +14,14 @@ import {
 } from 'lucide-react'
 
 import type { Metadata } from 'next'
+import { posts, postMetadata, postSchema } from '@/lib/posts'
 
-const postTitle = 'Three models, one answer'
-const postDescription =
-  'How I rebuilt the MIT and Google Brain multi-agent debate paper as a chat product, end to end on Convex — sub-threads per model, two parallel rounds, a hidden synthesis prompt, and a Zod-validated summary.'
-const postUrl = '/blog/mesh-mind-debate-workflow'
-const postPath = 'https://www.laykenvarholdt.com' + postUrl
-const publishedISO = '2026-04-16T00:00:00.000Z'
-const publishedReadable = 'April 16, 2026'
+const post = posts['mesh-mind-debate-workflow']
 
-export const metadata: Metadata = {
-  title: postTitle,
-  description: postDescription,
-  alternates: { canonical: postUrl },
-  openGraph: {
-    title: postTitle + ' — Layken Varholdt',
-    description: postDescription,
-    url: postUrl,
-    siteName: 'Layken Varholdt',
-    locale: 'en_US',
-    type: 'article',
-    publishedTime: publishedISO,
-    authors: ['Layken Varholdt'],
-    images: [
-      {
-        url: 'https://www.laykenvarholdt.com/MeshMind-og.png',
-        width: 1200,
-        height: 630,
-        alt: 'Mesh Mind multi-model debate UI',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: postTitle + ' — Layken Varholdt',
-    description: postDescription,
-    creator: '@LLVarholdt',
-    images: ['https://www.laykenvarholdt.com/MeshMind-og.png'],
-  },
-}
+export const metadata: Metadata = postMetadata(post)
 
 export default function MeshMindDebatePost() {
-  const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    headline: postTitle,
-    description: postDescription,
-    image: ['https://www.laykenvarholdt.com/MeshMind-og.png'],
-    datePublished: publishedISO,
-    dateModified: publishedISO,
-    author: {
-      '@type': 'Person',
-      name: 'Layken Varholdt',
-      url: 'https://www.laykenvarholdt.com',
-    },
-    publisher: {
-      '@type': 'Person',
-      name: 'Layken Varholdt',
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': postPath,
-    },
-    keywords: [
-      'multi-agent debate',
-      'multi-model orchestration',
-      'Convex',
-      'Next.js',
-      'AI engineering',
-      'Mesh Mind',
-      'Du et al.',
-    ].join(', '),
-  }
+  const articleSchema = postSchema(post)
 
   return (
     <article className="font-sans mx-auto max-w-3xl min-h-dvh px-5 pb-14 pt-5 md:px-6 md:py-20 flex flex-col gap-6 md:gap-10">
@@ -100,7 +36,7 @@ export default function MeshMindDebatePost() {
       {/* Hero */}
       <header className="flex flex-col gap-4">
         <div className="section-eyebrow">
-          Engineering notes · {publishedReadable}
+          Engineering notes · {post.publishedReadable}
         </div>
         <h1 className="hero-title">
           Three models, <em>one answer.</em>
@@ -112,7 +48,7 @@ export default function MeshMindDebatePost() {
         <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
           <span className="mono-accent">By Layken Varholdt</span>
           <span aria-hidden="true">·</span>
-          <span className="mono-accent">~12 min read</span>
+          <span className="mono-accent">~{post.readMinutes} min read</span>
         </div>
       </header>
 
