@@ -1,37 +1,10 @@
 import projectsData from '@/data/projects.json'
 import type { Project } from '@/types/project'
+import { postList } from '@/lib/posts'
 
 export const dynamic = 'force-static'
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.laykenvarholdt.com'
-
-/** Kept in step with the list rendered by app/blog/page.tsx. */
-const POSTS = [
-  {
-    slug: 'glm-5-3-flash-pr-agent-code-review',
-    title: 'Code review for less than a cent',
-    description:
-      'How GLM 5.3 Flash, open-source PR-Agent, GitHub Actions, and two repository-local Codex skills form a review loop with an explicit human merge gate.',
-  },
-  {
-    slug: 'safari-iphone-theme-sync',
-    title: 'The Safari theme-sync quirk no AI could fix',
-    description:
-      'Why iPhone Safari would not sync the toolbar on theme switch in a fixed-shell mobile portfolio, and the workaround that did work.',
-  },
-  {
-    slug: 'my-default-app-stack',
-    title: 'The stack I am building everything on now',
-    description:
-      'TanStack Start, Convex, and Clerk, plus the architectural patterns that make them work together.',
-  },
-  {
-    slug: 'mesh-mind-debate-workflow',
-    title: 'Three models, one answer',
-    description:
-      'Rebuilding the MIT and Google Brain multi-agent debate paper as a chat product, end to end on Convex.',
-  },
-] as const
 
 const TIER_HEADINGS: Array<[Project['tier'], string]> = [
   ['hero', 'Selected work'],
@@ -72,7 +45,7 @@ Layken founded [Varholdt AI](https://www.varholdt.com/), the AI engineer for bus
 ${sections.filter(Boolean).join('\n')}
 ## Writing
 
-${POSTS.map((p) => `- [${p.title}](${BASE}/blog/${p.slug}): ${p.description}`).join('\n')}
+${postList.map((p) => `- [${p.title}](${BASE}/blog/${p.slug}): ${p.summary}`).join('\n')}
 `
 
   return new Response(body, {

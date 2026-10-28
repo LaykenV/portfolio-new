@@ -12,45 +12,11 @@ import {
 } from 'lucide-react'
 
 import type { Metadata } from 'next'
+import { posts, postMetadata, postSchema } from '@/lib/posts'
 
-const postTitle = 'The stack I’m building everything on now'
-const postDescription =
-  'TanStack Start, Convex, and Clerk — and the specific architectural patterns from Theo Browne’s open-source Lawn repo that make them work together.'
-const postUrl = '/blog/my-default-app-stack'
-const postPath = 'https://www.laykenvarholdt.com' + postUrl
-const publishedISO = '2026-04-17T00:00:00.000Z'
-const publishedReadable = 'April 17, 2026'
+const post = posts['my-default-app-stack']
 
-export const metadata: Metadata = {
-  title: postTitle,
-  description: postDescription,
-  alternates: { canonical: postUrl },
-  openGraph: {
-    title: postTitle + ' — Layken Varholdt',
-    description: postDescription,
-    url: postUrl,
-    siteName: 'Layken Varholdt',
-    locale: 'en_US',
-    type: 'article',
-    publishedTime: publishedISO,
-    authors: ['Layken Varholdt'],
-    images: [
-      {
-        url: 'https://www.laykenvarholdt.com/opengraph-image',
-        width: 1200,
-        height: 630,
-        alt: 'A modern web app stack: TanStack Start, Convex, and Clerk',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: postTitle + ' — Layken Varholdt',
-    description: postDescription,
-    creator: '@LLVarholdt',
-    images: ['https://www.laykenvarholdt.com/twitter-image'],
-  },
-}
+export const metadata: Metadata = postMetadata(post)
 
 const stackItems = [
   {
@@ -86,39 +52,7 @@ const stackItems = [
 ]
 
 export default function DefaultStackPost() {
-  const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    headline: postTitle,
-    description: postDescription,
-    image: ['https://www.laykenvarholdt.com/opengraph-image'],
-    datePublished: publishedISO,
-    dateModified: publishedISO,
-    author: {
-      '@type': 'Person',
-      name: 'Layken Varholdt',
-      url: 'https://www.laykenvarholdt.com',
-    },
-    publisher: {
-      '@type': 'Person',
-      name: 'Layken Varholdt',
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': postPath,
-    },
-    keywords: [
-      'TanStack Start',
-      'Convex',
-      'Clerk',
-      'Lawn',
-      'Theo Browne',
-      'AI engineering',
-      'modern web stack',
-      'SPA',
-      'prerendering',
-    ].join(', '),
-  }
+  const articleSchema = postSchema(post)
 
   return (
     <article className="font-sans mx-auto max-w-3xl min-h-dvh px-5 pb-14 pt-5 md:px-6 md:py-20 flex flex-col gap-6 md:gap-10">
@@ -133,7 +67,7 @@ export default function DefaultStackPost() {
       {/* Hero */}
       <header className="flex flex-col gap-4">
         <div className="section-eyebrow">
-          Engineering notes · {publishedReadable}
+          Engineering notes · {post.publishedReadable}
         </div>
         <h1 className="hero-title">
           The stack I&rsquo;m building <em>everything</em> on now.
@@ -146,7 +80,7 @@ export default function DefaultStackPost() {
         <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
           <span className="mono-accent">By Layken Varholdt</span>
           <span aria-hidden="true">·</span>
-          <span className="mono-accent">~10 min read</span>
+          <span className="mono-accent">~{post.readMinutes} min read</span>
         </div>
       </header>
 
