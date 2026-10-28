@@ -59,21 +59,30 @@
   position: fixed;
   left: 0;
   right: 0;
+  /* Full-screen fixed layers keep Safari's cached tint. These frontmost,
+     empty bars supply a fresh computed color without painting any pixels. */
+  z-index: 1000;
+  height: 11px;
   pointer-events: none;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 .m-browser-edge-top {
   top: 0;
-  z-index: 0;
-  height: calc(env(safe-area-inset-top, 0px) + 64px);
-  background: var(--mobile-edge-top);
+  background-color: var(--mobile-edge-top);
 }
 
 .m-browser-edge-bottom {
   bottom: 0;
-  z-index: 0;
-  height: calc(env(safe-area-inset-bottom, 0px) + 72px);
-  background: var(--mobile-edge-bottom);
+  background-color: var(--mobile-edge-bottom);
+}
+
+/* Stay above WebKit's 10px cutoff and change geometry for a painted frame. */
+html[data-edge-pulse] .m-browser-edge { height: 12px; }
+
+@media (min-width: 768px) {
+  .m-browser-edge { display: none; }
 }
 
 /* Deck: CSS scroll-snap vertical */
