@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { brand } from '@/lib/brand'
 
-export const ogCardAlt = 'Layken Varholdt, software engineer and founder of Varholdt AI. Portrait on a sage green background.'
+export const ogCardAlt = 'Layken Varholdt, software engineer and founder of Varholdt Labs. Portrait on a sage green background.'
 export const ogCardSize = { width: 1200, height: 630 }
 
 export async function renderOgCard() {
@@ -31,7 +31,7 @@ export async function renderOgCard() {
               <span>Varholdt</span>
             </div>
             <div style={{ display: 'flex', marginTop: 25, fontSize: 28, color: brand.accent }}>
-              Founder of Varholdt AI
+              Founder of Varholdt Labs
             </div>
             <div style={{ display: 'flex', marginTop: 12, fontSize: 23, color: brand.muted }}>
               Web applications and AI systems.

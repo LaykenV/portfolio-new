@@ -13,7 +13,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
     '@type': 'Person',
     '@id': `${baseUrl}/#person`,
     name: 'Layken Varholdt',
-    jobTitle: 'Software Engineer and Founder of Varholdt AI',
+    jobTitle: 'Software Engineer and Founder of Varholdt Labs',
     worksFor: [
       { '@type': 'Organization', name: 'Zyxware Technologies' },
       { '@id': 'https://www.varholdt.com/#business' },
@@ -44,14 +44,14 @@ export function StructuredData({ projects }: StructuredDataProps) {
       'Gemini',
     ],
     description:
-      'Software engineer and founder of Varholdt AI. Building web applications and AI systems. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
+      'Software engineer and founder of Varholdt Labs. Building web applications and AI systems. U.S. Department of Labor contractor and 1st-place Convex hackathon winner.',
   }
 
   const businessSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': 'https://www.varholdt.com/#business',
-    name: 'Varholdt AI',
+    name: 'Varholdt Labs',
     url: 'https://www.varholdt.com/',
     slogan: 'The AI engineer for businesses that don’t have one.',
     description: 'AI workflows, custom software, and team AI training.',
@@ -69,7 +69,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
       name: 'Layken Varholdt',
     },
     description:
-      'Portfolio of Layken Varholdt, software engineer and founder of Varholdt AI. Web applications, workflow systems, and applied AI.',
+      'Portfolio of Layken Varholdt, software engineer and founder of Varholdt Labs. Web applications, workflow systems, and applied AI.',
   }
 
   // ProfilePage schema
@@ -80,7 +80,7 @@ export function StructuredData({ projects }: StructuredDataProps) {
       '@type': 'Person',
       '@id': `${baseUrl}/#person`,
       name: 'Layken Varholdt',
-      jobTitle: 'Software Engineer and Founder of Varholdt AI',
+      jobTitle: 'Software Engineer and Founder of Varholdt Labs',
       url: baseUrl,
       image: `${baseUrl}/portrait.jpeg`,
     },

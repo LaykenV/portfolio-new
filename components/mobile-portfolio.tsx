@@ -429,8 +429,8 @@ function AboutSlide({ ref, onNext }: AboutSlideProps) {
             Email layken@varholdt.com
           </a>
           <nav className="m-contact-links" aria-label="Contact links">
-            <a href="https://cal.com/layken-varholdt" target="_blank" rel="noreferrer noopener">
-              Book a call
+            <a href="mailto:layken@varholdt.com?subject=Arrange%20a%20call">
+              Arrange a call by email
             </a>
             <a href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer noopener">
               Telegram

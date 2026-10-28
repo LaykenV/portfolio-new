@@ -144,7 +144,7 @@ SEO component providing:
 - 🌐 Website: [laykenvarholdt.com](https://www.laykenvarholdt.com)
 - 🐦 Twitter: [@LLVarholdt](https://x.com/LLVarholdt)
 - 💼 LinkedIn: [Layken Varholdt](https://www.linkedin.com/in/layken-varholdt-a78687230/)
-- 📧 Email: Via [Cal.com](https://cal.com/layken-varholdt) or [Telegram](https://t.me/LLVarholdt)
+- 📧 Email: [layken@varholdt.com](mailto:layken@varholdt.com) or [Telegram](https://t.me/LLVarholdt)
 
 ---
 

@@ -30,7 +30,6 @@ const IDENTITY = {
   x: 'https://x.com/LLVarholdt',
   github: 'https://github.com/laykenV',
   linkedin: 'https://www.linkedin.com/in/layken-varholdt-a78687230/',
-  cal: 'https://cal.com/layken-varholdt',
   telegram: 'https://t.me/LLVarholdt',
   blog: '/blog',
 } as const
@@ -428,11 +427,11 @@ function ControlPanel({ projectPicker }: { projectPicker: ReactNode }) {
           <ArrowUpRight className="dp-panel-arrow h-3.5 w-3.5" />
         </a>
 
-        <a href={IDENTITY.cal} target="_blank" rel="noreferrer" className="dp-panel-row">
+        <a href="mailto:layken@varholdt.com?subject=Arrange%20a%20call" className="dp-panel-row">
           <span className="dp-panel-icon">
             <CalendarClock className="h-[0.95rem] w-[0.95rem]" />
           </span>
-          <span>Book a call</span>
+          <span>Arrange a call by email</span>
           <ArrowUpRight className="dp-panel-arrow h-3.5 w-3.5" />
         </a>
 
