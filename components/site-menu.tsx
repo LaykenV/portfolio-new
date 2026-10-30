@@ -193,7 +193,7 @@ export function SiteMenu({ onHomeClick, onWorkClick }: {
           </nav>
 
           <div className="site-menu-bottom">
-            <a className="site-menu-cta" href={`mailto:${EMAIL}?subject=Software%20Engineering%20role`}>
+            <a className="site-menu-cta" href={`mailto:${EMAIL}`}>
               Email {EMAIL}
             </a>
             <p className="site-menu-meta">

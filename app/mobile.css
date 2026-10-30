@@ -175,11 +175,6 @@ html[data-edge-pulse] .m-browser-edge { height: 12px; }
   margin: 10px 0 0;
   max-width: 30ch;
 }
-.m-about .founder-description {
-  margin-top: 0.5rem;
-  font-size: 16px;
-  text-wrap: balance;
-}
 
 .m-about-cta-stack {
   margin-top: 16px;

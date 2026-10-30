@@ -10,9 +10,6 @@ export function FounderIntro() {
           <ArrowUpRight aria-hidden="true" size={14} />
         </a>
       </h2>
-      <p className="founder-description">
-        The AI engineer for businesses that don’t have one.
-      </p>
     </div>
   )
 }

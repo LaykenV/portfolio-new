@@ -6,7 +6,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   BookOpen,
-  CalendarClock,
   ChevronDown,
   FileText,
   Github,
@@ -24,7 +23,7 @@ import type { Project } from '@/types/project'
 const IDENTITY = {
   name: 'Layken Varholdt',
   role: 'Software engineer',
-  email: 'mailto:layken@varholdt.com?subject=Software%20Engineering%20role',
+  email: 'mailto:layken@varholdt.com',
   emailLabel: 'layken@varholdt.com',
   resume: '/Layken-Varholdt-Software-Engineer-Resume.pdf',
   x: 'https://x.com/LLVarholdt',
@@ -83,7 +82,7 @@ function shotDomain(project: Project): string {
 type ShotView = 'landing' | 'app'
 
 const SHOT_VIEWS: Array<[ShotView, string]> = [
-  ['landing', 'Landing'],
+  ['landing', 'Homepage'],
   ['app', 'The app'],
 ]
 
@@ -171,7 +170,7 @@ function ProjectShot({
       <div className="dp-shot-media aspect-[16/9]">
         <Image
           src={project.image}
-          alt={`${project.title} landing page`}
+          alt={`${project.title} homepage`}
           fill
           className="dp-shot-img"
           style={{ opacity: view === 'landing' ? 1 : 0 }}
@@ -414,24 +413,13 @@ function ControlPanel({ projectPicker }: { projectPicker: ReactNode }) {
       {projectPicker}
 
       <section className="dp-panel-section">
-        <div className="dp-contact-heading">
-          <p className="dp-panel-label">Contact</p>
-        </div>
-        <p className="dp-panel-availability">Open to software engineering roles</p>
+        <p className="dp-panel-label">Contact</p>
 
         <a href={IDENTITY.email} className="dp-panel-row dp-panel-row-primary">
           <span className="dp-panel-icon">
             <Mail className="h-[0.95rem] w-[0.95rem]" />
           </span>
           <span>{IDENTITY.emailLabel}</span>
-          <ArrowUpRight className="dp-panel-arrow h-3.5 w-3.5" />
-        </a>
-
-        <a href="mailto:layken@varholdt.com?subject=Arrange%20a%20call" className="dp-panel-row">
-          <span className="dp-panel-icon">
-            <CalendarClock className="h-[0.95rem] w-[0.95rem]" />
-          </span>
-          <span>Arrange a call by email</span>
           <ArrowUpRight className="dp-panel-arrow h-3.5 w-3.5" />
         </a>
 

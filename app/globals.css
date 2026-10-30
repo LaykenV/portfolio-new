@@ -1677,21 +1677,8 @@ html.dark .site-menu {
   color: var(--muted);
   flex-shrink: 0;
 }
-.founder-description {
-  margin-top: 0.65rem;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--muted);
-  text-wrap: pretty;
-}
 .dp-panel .founder-intro {
   padding: 0.35rem 0;
-}
-.dp-panel-availability {
-  margin: 0.5rem 0 0.6rem;
-  font-size: 0.75rem;
-  line-height: 1.5;
-  color: var(--muted);
 }
 
 .dp-panel {
@@ -2010,7 +1997,6 @@ html:not(.dark) .dp-root .dp-panel-row-primary:hover {
 html:not(.dark) .dp-root .dp-panel-row-primary .dp-panel-icon,
 html:not(.dark) .dp-root .dp-panel-row-primary .dp-panel-arrow { color: var(--on-accent); }
 .dp-panel-row-primary { padding-left: calc(0.3rem - 1px); }
-.dp-panel-availability { color: var(--foreground); font-weight: 500; }
 .writing-theme .section-eyebrow::before { background: var(--accent); }
 
 @media (min-width: 640px) {
@@ -2034,8 +2020,6 @@ html.dark .writing-theme .post-code-inline { background: var(--surface); border-
 }
 .dp-identity .founder-intro { margin-top: 8px; }
 .dp-identity .founder-name { font-size: 22px; }
-.dp-contact-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.dp-contact-heading .dp-panel-label { margin-bottom: 0; }
 
 /* Personal identity leads the founder link at desktop widths. */
 .dp-root .founder-name { font-size: 19px; font-weight: 650; }

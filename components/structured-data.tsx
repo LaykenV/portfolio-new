@@ -53,7 +53,6 @@ export function StructuredData({ projects }: StructuredDataProps) {
     '@id': 'https://www.varholdt.com/#business',
     name: 'Varholdt Labs',
     url: 'https://www.varholdt.com/',
-    slogan: 'The AI engineer for businesses that don’t have one.',
     description: 'AI workflows, custom software, and team AI training.',
     founder: { '@id': `${baseUrl}/#person` },
   }
