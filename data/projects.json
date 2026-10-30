@@ -29,38 +29,14 @@
       }
     },
     {
-      "slug": "acadiana-web-design",
-      "mobileSummary": "The website business I run, with recurring billing, signed agreements and a client portal for edit requests.",
-      "title": "Acadiana Web Design",
-      "tagline": "Production WaaS platform with real customers and recurring revenue",
-      "description": "A full Website-as-a-Service platform I run as a real business — clickwrap legal agreements, Stripe recurring billing, admin/client RBAC, and a real-time ticketing portal.",
-      "longDescription": "Acadiana Web Design is a production WaaS platform with paying customers, not a demo. The backend (Convex) coordinates the full client lifecycle: magic-link auth, enforced digital clickwrap agreements, Stripe subscription state, RBAC for the admin dashboard, a client portal with real-time status, file uploads with instant previews, and a ticketing system for edit requests.\n\nCal.com handles scheduling; Resend handles transactional mail. Every complex state transition — trial to active, failed payment to grace period, agreement revision — is modeled explicitly rather than papered over.",
-      "image": "/awd.webp",
-      "secondaryImage": "/awdSecondary.webp",
-      "techStack": [
-        "Next.js",
-        "Convex",
-        "TypeScript",
-        "Stripe",
-        "Resend",
-        "Better-Auth",
-        "Cal.com"
-      ],
-      "tier": "hero",
-      "links": {
-        "github": "https://github.com/LaykenV/agency-site",
-        "live": "https://acadianawebdesign.com"
-      }
-    },
-    {
       "slug": "public-parish",
       "mobileSummary": "Free civic app connecting Louisiana government decisions to official records, deadlines and next steps.",
       "title": "Public Parish",
       "tagline": "Louisiana local decisions, with receipts",
       "description": "Free, open-source civic app that connects local-government decisions to the official record, public deadlines, and what happens next.",
       "longDescription": "Public Parish turns official Louisiana government records into resident-readable decision updates without asking people to trust a black box. Firecrawl retrieves the source material, Convex stores immutable snapshots and runs a durable extraction workflow, and separate OpenAI passes extract and review every cited fact.\n\nDeterministic checks then publish the record in full, limit it to what the evidence supports, or withhold it. The responsive resident interface makes those records free to browse and keeps the official source one click away.",
-      "image": "/publicParish16x9.webp",
-      "secondaryImage": "/publicParishSecondary16x9.webp",
+      "image": "/public-parish-landing.webp",
+      "secondaryImage": "/public-parish-explore.webp",
       "techStack": [
         "TanStack Start",
         "React 19",
@@ -96,6 +72,30 @@
       "links": {
         "github": "https://github.com/LaykenV/master-prompt",
         "live": "https://meshmind.chat"
+      }
+    },
+    {
+      "slug": "acadiana-web-design",
+      "mobileSummary": "The website business I run, with recurring billing, signed agreements and a client portal for edit requests.",
+      "title": "Acadiana Web Design",
+      "tagline": "Production WaaS platform with real customers and recurring revenue",
+      "description": "A full Website-as-a-Service platform I run as a real business — clickwrap legal agreements, Stripe recurring billing, admin/client RBAC, and a real-time ticketing portal.",
+      "longDescription": "Acadiana Web Design is a production WaaS platform with paying customers, not a demo. The backend (Convex) coordinates the full client lifecycle: magic-link auth, enforced digital clickwrap agreements, Stripe subscription state, RBAC for the admin dashboard, a client portal with real-time status, file uploads with instant previews, and a ticketing system for edit requests.\n\nCal.com handles scheduling; Resend handles transactional mail. Every complex state transition — trial to active, failed payment to grace period, agreement revision — is modeled explicitly rather than papered over.",
+      "image": "/awd.webp",
+      "secondaryImage": "/awdSecondary.webp",
+      "techStack": [
+        "Next.js",
+        "Convex",
+        "TypeScript",
+        "Stripe",
+        "Resend",
+        "Better-Auth",
+        "Cal.com"
+      ],
+      "tier": "hero",
+      "links": {
+        "github": "https://github.com/LaykenV/agency-site",
+        "live": "https://acadianawebdesign.com"
       }
     }
   ]
