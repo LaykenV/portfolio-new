@@ -100,7 +100,7 @@ export default function MeshMindDebatePost() {
           benchmark and put it inside a chat app a real person can use. So I
           built{' '}
           <a
-            href="https://meshmind.chat"
+            href="https://master-prompt-ten.vercel.app/"
             target="_blank"
             rel="noreferrer"
             className="post-link"
@@ -626,12 +626,12 @@ position, justify it against the alternatives.`}</code>
         <p>
           Mesh Mind is live at{' '}
           <a
-            href="https://meshmind.chat"
+            href="https://master-prompt-ten.vercel.app/"
             target="_blank"
             rel="noreferrer"
             className="post-link"
           >
-            meshmind.chat
+            master-prompt-ten.vercel.app
           </a>
           . Source is at{' '}
           <a
