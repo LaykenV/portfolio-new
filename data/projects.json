@@ -21,7 +21,7 @@
       "tier": "hero",
       "links": {
         "github": "https://github.com/LaykenV/modern-hack",
-        "live": "https://atlasoutbound.app"
+        "live": "https://modern-hack-mu.vercel.app/"
       },
       "award": {
         "label": "$10k Hackathon Winner",
@@ -71,7 +71,7 @@
       "tier": "hero",
       "links": {
         "github": "https://github.com/LaykenV/master-prompt",
-        "live": "https://meshmind.chat"
+        "live": "https://master-prompt-ten.vercel.app/"
       }
     },
     {

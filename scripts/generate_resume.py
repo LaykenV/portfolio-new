@@ -230,7 +230,7 @@ def build_resume() -> None:
         section_heading("Selected projects"),
         project(
             "Atlas Outbound",
-            "https://atlasoutbound.app",
+            "https://modern-hack-mu.vercel.app/",
             "TypeScript, Convex, TanStack, AI SDK, Twilio",
             "Built an end-to-end prospecting and calling platform in 14 days. Won 1st place in the Convex Modern Stack Hackathon ($10K) among hundreds of teams. Integrated real-time Twilio voice calls and structured agent workflows on Convex.",
         ),
@@ -248,7 +248,7 @@ def build_resume() -> None:
         ),
         project(
             "Mesh Mind",
-            "https://meshmind.chat",
+            "https://master-prompt-ten.vercel.app/",
             "TypeScript, Convex, AI SDK",
             "Built a multi-model research interface with inspectable critic-and-synthesizer stages, scheduled jobs, retries, and structured handoffs between independent services.",
         ),
