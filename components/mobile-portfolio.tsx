@@ -423,15 +423,12 @@ function AboutSlide({ ref, onNext }: AboutSlideProps) {
 
         <div className="m-about-cta-stack">
           <a
-            href="mailto:layken@varholdt.com?subject=Software%20Engineering%20role"
+            href="mailto:layken@varholdt.com"
             className="m-about-email"
           >
             Email layken@varholdt.com
           </a>
           <nav className="m-contact-links" aria-label="Contact links">
-            <a href="mailto:layken@varholdt.com?subject=Arrange%20a%20call">
-              Arrange a call by email
-            </a>
             <a href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer noopener">
               Telegram
             </a>
