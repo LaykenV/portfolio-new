@@ -432,6 +432,15 @@ function AboutSlide({ ref, onNext }: AboutSlideProps) {
             <a href="https://t.me/LLVarholdt" target="_blank" rel="noreferrer noopener">
               Telegram
             </a>
+            <a href="https://github.com/laykenV" target="_blank" rel="noreferrer noopener">
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/layken-varholdt-a78687230/" target="_blank" rel="noreferrer noopener">
+              LinkedIn
+            </a>
+            <a href="https://x.com/LLVarholdt" target="_blank" rel="noreferrer noopener">
+              Twitter / X
+            </a>
           </nav>
         </div>
       </div>
