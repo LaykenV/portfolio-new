@@ -36,22 +36,145 @@ function haptic(ms = 8) {
   } catch {}
 }
 
+/* ─────────────────────────── Sheet motion ──────────────────────────────────── */
+
+// x is the sheet's left edge in px: 0 is open, the sheet width is closed.
+// Gestures write it straight to the element. Releases finish with a spring
+// on requestAnimationFrame, so a finger can stop it anywhere.
+type SheetTarget = 'open' | 'closed'
+interface SettleOptions {
+  /** Finger velocity at release in px/ms. Only set after a drag. */
+  velocity?: number
+  /** A drag applied force, so the spring may bounce. Buttons pass false. */
+  drag?: boolean
+  onDone?: () => void
+}
+type SheetMotion = ReturnType<typeof createSheetMotion>
+
+const FLICK = 0.35 // px/ms
+const RUBBER = 0.2
+
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
+// Past the open edge the sheet moves a fraction of the finger's travel.
+function rubberBand(x: number, width: number) {
+  if (x >= 0) return x
+  const d = -x
+  return -(d * width * RUBBER) / (width + RUBBER * d)
+}
+
+// Finger velocity over the last 100ms, in px/ms. A finger that stopped
+// before lifting has no recent samples and reads as 0.
+interface Sample { t: number; x: number }
+function trackSample(samples: Sample[], x: number) {
+  const t = performance.now()
+  samples.push({ t, x })
+  while (samples.length > 2 && t - samples[0].t > 100) samples.shift()
+}
+function releaseVelocity(samples: Sample[]) {
+  const now = performance.now()
+  const recent = samples.filter((s) => now - s.t <= 100)
+  if (recent.length < 2) return 0
+  const a = recent[0]
+  const b = recent[recent.length - 1]
+  return (b.x - a.x) / Math.max(b.t - a.t, 1)
+}
+
+function createSheetMotion() {
+  let el: HTMLElement | null = null
+  let x: number | null = null // null rests at the CSS closed position
+  let frame = 0
+  let running: SheetTarget | null = null
+
+  const width = () => el?.offsetWidth || window.innerWidth
+  const get = () => x ?? width()
+  const write = () => {
+    if (el) el.style.transform = x === null ? '' : `translate3d(${x}px, 0, 0)`
+  }
+  const finish = (target: SheetTarget, onDone?: () => void) => {
+    running = null
+    x = target === 'open' ? 0 : null
+    write()
+    onDone?.()
+  }
+
+  return {
+    width,
+    get,
+    attach(node: HTMLElement | null) {
+      el = node
+      write()
+    },
+    /** Stop any settle where it is and say where it was heading. */
+    stop() {
+      cancelAnimationFrame(frame)
+      const target = running
+      running = null
+      return { x: get(), target }
+    },
+    set(next: number) {
+      cancelAnimationFrame(frame)
+      running = null
+      x = next
+      write()
+    },
+    settle(target: SheetTarget, { velocity = 0, drag = false, onDone }: SettleOptions = {}) {
+      cancelAnimationFrame(frame)
+      running = target
+      const to = target === 'open' ? 0 : width()
+      const from = get()
+      const reduce = prefersReducedMotion()
+      if (reduce && !drag) return finish(target, onDone)
+
+      let pos = from
+      let v = Math.max(-5000, Math.min(5000, velocity * 1000)) // px/s
+      // Critically damped after a button, a little bounce after a drag.
+      const duration = drag ? 0.45 : 0.4
+      const omega = (2 * Math.PI) / duration
+      const zeta = drag ? 0.9 : 1
+      const start = performance.now()
+      let last = start
+
+      const step = (now: number) => {
+        if (reduce) {
+          // Reduced motion: no momentum or bounce, a short ease-out slide.
+          const p = Math.min(1, Math.max(0, (now - start) / 160))
+          pos = from + (to - from) * (1 - Math.pow(1 - p, 3))
+          if (p >= 1) return finish(target, onDone)
+        } else {
+          let dt = Math.min((now - last) / 1000, 1 / 30)
+          while (dt > 0) {
+            const h = Math.min(dt, 1 / 240)
+            v += (-omega * omega * (pos - to) - 2 * zeta * omega * v) * h
+            pos += v * h
+            dt -= h
+          }
+          if (Math.abs(pos - to) < 0.5 && Math.abs(v) < 20) return finish(target, onDone)
+        }
+        last = now
+        x = pos
+        write()
+        frame = requestAnimationFrame(step)
+      }
+      frame = requestAnimationFrame(step)
+    },
+  }
+}
+
 export function MobilePortfolio({ projects }: MobilePortfolioProps) {
   const deckRef = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLElement | null)[]>([])
-  const previewResetRef = useRef<number | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const flightRef = useRef<HTMLDivElement>(null)
   // The hero already shows the portrait and name; the header brand takes
   // over when the first project arrives, so the two never show together.
   const [heroPassed, setHeroPassed] = useState(false)
   const [deepDiveSlug, setDeepDiveSlug] = useState<string | null>(null)
-  const [entryPreview, setEntryPreview] = useState<{ slug: string; offset: number } | null>(null)
-  const [swipePreview, setSwipePreview] = useState<{
-    slug: string | null
-    offset: number
-    active: boolean
-  }>({ slug: null, offset: 0, active: false })
+  // The project a card swipe is pulling in, before the sheet opens.
+  const [previewSlug, setPreviewSlug] = useState<string | null>(null)
+  const [sheetMotion] = useState(createSheetMotion)
   // total slots = about (index 0) + each project
   const total = projects.length + 1
 
@@ -231,51 +354,34 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
     [projects, deepDiveSlug],
   )
   const previewProject = useMemo(
-    () => projects.find((p) => p.slug === swipePreview.slug) ?? null,
-    [projects, swipePreview.slug],
+    () => projects.find((p) => p.slug === previewSlug) ?? null,
+    [projects, previewSlug],
   )
 
-  const clearPreviewReset = useCallback(() => {
-    if (previewResetRef.current !== null) {
-      window.clearTimeout(previewResetRef.current)
-      previewResetRef.current = null
-    }
-  }, [])
+  useEffect(() => () => void sheetMotion.stop(), [sheetMotion])
 
-  const clearSwipePreviewNow = useCallback(() => {
-    clearPreviewReset()
-    setSwipePreview({ slug: null, offset: 0, active: false })
-  }, [clearPreviewReset])
-
-  const clearEntryPreview = useCallback(() => {
-    setEntryPreview(null)
-  }, [])
-
-  const previewSwipe = useCallback(
-    (slug: string, offset: number) => {
-      clearPreviewReset()
-      setSwipePreview({ slug, offset, active: true })
+  const openSheet = useCallback(
+    (slug: string, options?: SettleOptions) => {
+      setPreviewSlug(null)
+      setDeepDiveSlug(slug)
+      sheetMotion.settle('open', options)
     },
-    [clearPreviewReset],
+    [sheetMotion],
   )
 
-  const settleSwipePreview = useCallback(
-    (slug?: string, delay = 340) => {
-      clearPreviewReset()
-      setSwipePreview((prev) => ({
-        slug: slug ?? prev.slug,
-        offset: 0,
-        active: false,
-      }))
-      previewResetRef.current = window.setTimeout(() => {
-        setSwipePreview({ slug: null, offset: 0, active: false })
-        previewResetRef.current = null
-      }, delay)
+  // The sheet stays mounted and modal until it is fully off screen.
+  const closeSheet = useCallback(
+    (options?: SettleOptions) => {
+      sheetMotion.settle('closed', {
+        ...options,
+        onDone: () => {
+          setDeepDiveSlug(null)
+          setPreviewSlug(null)
+        },
+      })
     },
-    [clearPreviewReset],
+    [sheetMotion],
   )
-
-  useEffect(() => () => clearPreviewReset(), [clearPreviewReset])
 
   // Lock body when deep dive is open
   useEffect(() => {
@@ -295,11 +401,11 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
     if (!currentProject) return
     const onKey = (e: KeyboardEvent) => {
       // Escape inside the open menu closes only the menu.
-      if (e.key === 'Escape' && !document.querySelector('dialog[open]')) setDeepDiveSlug(null)
+      if (e.key === 'Escape' && !document.querySelector('dialog[open]')) closeSheet()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [currentProject])
+  }, [currentProject, closeSheet])
 
   return (
     <div className="mobile-portfolio">
@@ -350,22 +456,19 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
               index={i}
               total={projects.length}
               active={activeIndex === slotIndex}
+              sheet={sheetMotion}
               onDeepDive={() => {
                 haptic(8)
-                clearSwipePreviewNow()
-                clearEntryPreview()
-                setDeepDiveSlug(project.slug)
+                openSheet(project.slug)
               }}
-              onSwipePreview={(offset) => previewSwipe(project.slug, offset)}
-              onSwipePreviewEnd={(commit, offset) => {
-                if (commit) {
+              onSwipeStart={() => setPreviewSlug(project.slug)}
+              onSwipeEnd={(open, velocity) => {
+                if (open) {
                   haptic(8)
-                  clearSwipePreviewNow()
-                  setEntryPreview({ slug: project.slug, offset })
-                  setDeepDiveSlug(project.slug)
+                  openSheet(project.slug, { velocity, drag: true })
                   return
                 }
-                settleSwipePreview()
+                sheetMotion.settle('closed', { velocity, drag: true, onDone: () => setPreviewSlug(null) })
               }}
             />
           )
@@ -383,15 +486,8 @@ export function MobilePortfolio({ projects }: MobilePortfolioProps) {
       <DeepDiveSheet
         project={currentProject}
         previewProject={previewProject}
-        previewOffset={swipePreview.offset}
-        previewActive={swipePreview.active}
-        entryPreview={entryPreview}
-        onEntryPreviewConsumed={clearEntryPreview}
-        onClose={() => {
-          clearSwipePreviewNow()
-          clearEntryPreview()
-          setDeepDiveSlug(null)
-        }}
+        motion={sheetMotion}
+        onClose={closeSheet}
         onHome={() => jumpTo(0, 'auto')}
       />
     </div>
@@ -460,9 +556,10 @@ interface ProjectSlideProps {
   index: number
   total: number
   active: boolean
+  sheet: SheetMotion
   onDeepDive: () => void
-  onSwipePreview: (offset: number) => void
-  onSwipePreviewEnd: (commit: boolean, offset: number) => void
+  onSwipeStart: () => void
+  onSwipeEnd: (open: boolean, velocity: number) => void
 }
 
 function ProjectSlide({
@@ -471,71 +568,68 @@ function ProjectSlide({
   index,
   total,
   active,
+  sheet,
   onDeepDive,
-  onSwipePreview,
-  onSwipePreviewEnd,
+  onSwipeStart,
+  onSwipeEnd,
 }: ProjectSlideProps) {
-  const gesture = useRef<{
-    startX: number
-    startY: number
-    startT: number
-    deltaX: number
-    axis: 'x' | 'y' | null
-    active: boolean
-  }>({ startX: 0, startY: 0, startT: 0, deltaX: 0, axis: null, active: false })
+  // A left swipe on the card pulls the sheet in from the right edge.
+  const gesture = useRef({
+    id: -1,
+    startX: 0,
+    startY: 0,
+    axis: null as 'x' | 'y' | null,
+    pulling: false,
+    base: 0,
+    samples: [] as Sample[],
+  })
 
   const onTouchStart = (e: ReactTouchEvent) => {
-    const t = e.touches[0]
+    // A second finger never takes over a gesture already in progress.
+    if (gesture.current.id !== -1) return
+    const t = e.changedTouches[0]
     gesture.current = {
+      id: t.identifier,
       startX: t.clientX,
       startY: t.clientY,
-      startT: performance.now(),
-      deltaX: 0,
       axis: null,
-      active: true,
+      pulling: false,
+      base: 0,
+      samples: [],
     }
   }
 
   const onTouchMove = (e: ReactTouchEvent) => {
-    if (!gesture.current.active) return
-    const t = e.touches[0]
-    const dx = t.clientX - gesture.current.startX
-    const dy = t.clientY - gesture.current.startY
+    const g = gesture.current
+    const t = Array.from(e.touches).find((touch) => touch.identifier === g.id)
+    if (!t) return
+    const dx = t.clientX - g.startX
+    const dy = t.clientY - g.startY
 
-    if (!gesture.current.axis && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
-      gesture.current.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'
+    if (!g.axis && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+      g.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'
     }
+    if (g.axis !== 'x') return
 
-    if (gesture.current.axis === 'x') {
-      const hadLeftSwipe = gesture.current.deltaX < 0
-      const clamped = dx < 0 ? dx : dx / 4
-      gesture.current.deltaX = clamped
-      if (dx < 0) {
-        onSwipePreview(Math.min(-dx, window.innerWidth))
-      } else if (hadLeftSwipe) {
-        onSwipePreview(0)
-      }
-      if (e.cancelable) e.preventDefault()
+    if (!g.pulling) {
+      if (dx >= 0) return
+      // Catch a sheet that is still sliding back out, right where it is.
+      g.pulling = true
+      g.base = sheet.stop().x - dx
+      onSwipeStart()
     }
+    trackSample(g.samples, t.clientX)
+    sheet.set(Math.min(sheet.width(), rubberBand(g.base + dx, sheet.width())))
   }
 
-  const onTouchEnd = () => {
-    if (!gesture.current.active) return
-    const { startT, axis } = gesture.current
-    gesture.current.active = false
-
-    if (axis === 'x') {
-      const dx = gesture.current.deltaX
-      const elapsed = performance.now() - startT
-      const vx = dx / Math.max(elapsed, 1)
-      gesture.current.deltaX = 0
-      if (dx < -80 || vx < -0.5) {
-        onSwipePreviewEnd(true, Math.min(-dx, window.innerWidth))
-        return
-      }
-      onSwipePreviewEnd(false, 0)
-    }
-    gesture.current.deltaX = 0
+  const onTouchEnd = (e: ReactTouchEvent) => {
+    const g = gesture.current
+    if (!Array.from(e.changedTouches).some((touch) => touch.identifier === g.id)) return
+    g.id = -1
+    if (!g.pulling) return
+    const v = releaseVelocity(g.samples)
+    const pulledIn = sheet.get() < sheet.width() * 0.6
+    onSwipeEnd(v < -FLICK || (pulledIn && v < 0.1), v)
   }
 
   return (
@@ -651,67 +745,43 @@ function ProjectSlide({
 interface DeepDiveSheetProps {
   project: Project | null
   previewProject: Project | null
-  previewOffset: number
-  previewActive: boolean
-  entryPreview: { slug: string; offset: number } | null
-  onEntryPreviewConsumed: () => void
-  onClose: () => void
+  motion: SheetMotion
+  onClose: (options?: SettleOptions) => void
   onHome: () => void
 }
 
 function DeepDiveSheet({
   project,
   previewProject,
-  previewOffset,
-  previewActive,
-  entryPreview,
-  onEntryPreviewConsumed,
+  motion,
   onClose,
   onHome,
 }: DeepDiveSheetProps) {
-  const sheetRef = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-  const [dragX, setDragX] = useState(0)
-  const [dragging, setDragging] = useState(false)
+  const sheetRef = useRef<HTMLDivElement | null>(null)
   const [bodyScrolled, setBodyScrolled] = useState(false)
-  const entryPreviewRef = useRef(entryPreview)
-  const startRef = useRef({
-    x: 0,
-    y: 0,
-    t: 0,
+  const gesture = useRef({
+    id: -1,
+    startX: 0,
+    startY: 0,
     axis: null as 'x' | 'y' | null,
-    fromEdge: false,
+    dragging: false,
+    base: 0,
+    resume: null as SheetTarget | null,
+    samples: [] as Sample[],
   })
   const displayProject = project ?? previewProject
   const isPreviewing = !project && !!previewProject
   const isInteractive = !!project
-  const openingOffset =
-    project && !visible && entryPreview?.slug === project.slug ? entryPreview.offset : null
 
-  useEffect(() => {
-    entryPreviewRef.current = entryPreview
-  }, [entryPreview])
+  const attach = useCallback(
+    (node: HTMLDivElement | null) => {
+      sheetRef.current = node
+      motion.attach(node)
+    },
+    [motion],
+  )
 
-  useEffect(() => {
-    if (!project) {
-      setVisible(false)
-      return
-    }
-    setVisible(false)
-    const openedFromSwipe = entryPreviewRef.current?.slug === project.slug
-    const id = requestAnimationFrame(() => {
-      setVisible(true)
-      if (openedFromSwipe) {
-        onEntryPreviewConsumed()
-      }
-    })
-    return () => cancelAnimationFrame(id)
-  }, [onEntryPreviewConsumed, project])
-
-  const requestClose = useCallback(() => {
-    setVisible(false)
-    window.setTimeout(onClose, 340)
-  }, [onClose])
+  const requestClose = () => onClose()
 
   useEffect(() => {
     if (!isInteractive) return
@@ -751,62 +821,66 @@ function DeepDiveSheet({
   }, [isInteractive])
 
   const onTouchStart = (e: ReactTouchEvent) => {
-    const t = e.touches[0]
+    // A second finger never takes over a gesture already in progress.
+    if (gesture.current.id !== -1) return
+    const t = e.changedTouches[0]
     const fromEdge = t.clientX <= 28
-    startRef.current = {
-      x: t.clientX,
-      y: t.clientY,
-      t: performance.now(),
+    // A finger on a sheet that is still moving holds it in place.
+    const caught = motion.stop()
+    gesture.current = {
+      id: t.identifier,
+      startX: t.clientX,
+      startY: t.clientY,
       axis: fromEdge ? 'x' : null,
-      fromEdge,
+      dragging: false,
+      base: caught.x,
+      resume: caught.target,
+      samples: [],
     }
-    setDragging(true)
   }
   const onTouchMove = (e: ReactTouchEvent) => {
-    const t = e.touches[0]
-    const dx = t.clientX - startRef.current.x
-    const dy = t.clientY - startRef.current.y
-    if (!startRef.current.axis && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
-      startRef.current.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'
+    const g = gesture.current
+    const t = Array.from(e.touches).find((touch) => touch.identifier === g.id)
+    if (!t) return
+    const dx = t.clientX - g.startX
+    const dy = t.clientY - g.startY
+    if (!g.axis && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+      g.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'
     }
-    if (startRef.current.axis === 'x' && dx > 0) {
-      setDragX(dx)
+    if (g.axis !== 'x') return
+    if (!g.dragging) {
+      g.dragging = true
+      g.base -= dx
     }
+    trackSample(g.samples, t.clientX)
+    motion.set(Math.min(motion.width(), rubberBand(g.base + dx, motion.width())))
   }
-  const onTouchEnd = () => {
-    const dx = dragX
-    const elapsed = performance.now() - startRef.current.t
-    const vx = dx / Math.max(elapsed, 1)
-    const threshold = startRef.current.fromEdge ? 60 : 120
-    setDragging(false)
-    setDragX(0)
-    if (startRef.current.axis === 'x' && (dx > threshold || vx > 0.5)) {
+  const onTouchEnd = (e: ReactTouchEvent) => {
+    const g = gesture.current
+    if (!Array.from(e.changedTouches).some((touch) => touch.identifier === g.id)) return
+    g.id = -1
+    if (!g.dragging) {
+      // A tap or a vertical scroll lets a caught sheet carry on.
+      if (g.resume === 'closed') onClose()
+      else if (g.resume === 'open') motion.settle('open')
+      return
+    }
+    const v = releaseVelocity(g.samples)
+    const pastThreshold = motion.get() > motion.width() * 0.4
+    if (v > FLICK || (pastThreshold && v > -0.1)) {
       haptic(8)
-      requestClose()
+      onClose({ velocity: v, drag: true })
+    } else {
+      motion.settle('open', { velocity: v, drag: true })
     }
   }
 
   if (!displayProject) return null
 
-  const style =
-    dragging && dragX > 0
-      ? { transform: `translateX(${dragX}px)` }
-      : isPreviewing
-        ? { transform: `translateX(calc(100% - ${previewOffset}px))` }
-        : openingOffset !== null
-          ? { transform: `translateX(calc(100% - ${openingOffset}px))` }
-          : { transform: visible ? 'translateX(0)' : 'translateX(100%)' }
-
   return (
     <div
-      ref={sheetRef}
-      className={cn(
-        'm-sheet',
-        visible && 'open',
-        (dragging || previewActive) && 'dragging',
-        isPreviewing && 'preview',
-      )}
-      style={style}
+      ref={attach}
+      className={cn('m-sheet', isPreviewing && 'preview')}
       role={isInteractive ? 'dialog' : undefined}
       aria-modal={isInteractive ? 'true' : undefined}
       aria-label={isInteractive ? `${displayProject.title} deep dive` : undefined}
