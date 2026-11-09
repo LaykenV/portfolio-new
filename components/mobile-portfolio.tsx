@@ -65,8 +65,8 @@ function rubberBand(x: number, width: number) {
   return -(d * width * RUBBER) / (width + RUBBER * d)
 }
 
-// Finger velocity over the last 100ms, in px/ms. A finger that stopped
-// before lifting has no recent samples and reads as 0.
+// Finger velocity over the last 100ms, in px/ms. Touchstart and release are
+// sampled too, so a hold before lifting counts as time without movement.
 interface Sample { t: number; x: number }
 function trackSample(samples: Sample[], x: number) {
   const t = performance.now()
@@ -597,6 +597,7 @@ function ProjectSlide({
       base: 0,
       samples: [],
     }
+    trackSample(gesture.current.samples, t.clientX)
   }
 
   const onTouchMove = (e: ReactTouchEvent) => {
@@ -614,8 +615,9 @@ function ProjectSlide({
     if (!g.pulling) {
       if (dx >= 0) return
       // Catch a sheet that is still sliding back out, right where it is.
+      // Only the 8px of slop is absorbed, so one large first move still counts.
       g.pulling = true
-      g.base = sheet.stop().x - dx
+      g.base = sheet.stop().x + Math.min(-dx, 8)
       onSwipeStart()
     }
     trackSample(g.samples, t.clientX)
@@ -624,9 +626,11 @@ function ProjectSlide({
 
   const onTouchEnd = (e: ReactTouchEvent) => {
     const g = gesture.current
-    if (!Array.from(e.changedTouches).some((touch) => touch.identifier === g.id)) return
+    const released = Array.from(e.changedTouches).find((touch) => touch.identifier === g.id)
+    if (!released) return
     g.id = -1
     if (!g.pulling) return
+    trackSample(g.samples, released.clientX)
     const v = releaseVelocity(g.samples)
     const pulledIn = sheet.get() < sheet.width() * 0.6
     onSwipeEnd(v < -FLICK || (pulledIn && v < 0.1), v)
@@ -837,6 +841,7 @@ function DeepDiveSheet({
       resume: caught.target,
       samples: [],
     }
+    trackSample(gesture.current.samples, t.clientX)
   }
   const onTouchMove = (e: ReactTouchEvent) => {
     const g = gesture.current
@@ -850,14 +855,16 @@ function DeepDiveSheet({
     if (g.axis !== 'x') return
     if (!g.dragging) {
       g.dragging = true
-      g.base -= dx
+      // Only the 8px of slop is absorbed, so one large first move still counts.
+      g.base -= Math.sign(dx) * Math.min(Math.abs(dx), 8)
     }
     trackSample(g.samples, t.clientX)
     motion.set(Math.min(motion.width(), rubberBand(g.base + dx, motion.width())))
   }
   const onTouchEnd = (e: ReactTouchEvent) => {
     const g = gesture.current
-    if (!Array.from(e.changedTouches).some((touch) => touch.identifier === g.id)) return
+    const released = Array.from(e.changedTouches).find((touch) => touch.identifier === g.id)
+    if (!released) return
     g.id = -1
     if (!g.dragging) {
       // A tap or a vertical scroll lets a caught sheet carry on.
@@ -865,6 +872,7 @@ function DeepDiveSheet({
       else if (g.resume === 'open') motion.settle('open')
       return
     }
+    trackSample(g.samples, released.clientX)
     const v = releaseVelocity(g.samples)
     const pastThreshold = motion.get() > motion.width() * 0.4
     if (v > FLICK || (pastThreshold && v > -0.1)) {
