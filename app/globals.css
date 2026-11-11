@@ -2131,3 +2131,176 @@ html.dark .mobile-portfolio .m-about-email,
 html.dark .site-menu-cta {
   border-color: color-mix(in srgb, var(--accent) 55%, transparent);
 }
+
+/* ============================================================
+   "A QA loop run by four models": stats, role cards, the two
+   machines and the loop ring. Colors come from .writing-theme.
+   ============================================================ */
+.qa-eyebrow {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+.prose-block .qa-eyebrow { opacity: 1; }
+
+.qa-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 1.1rem;
+  margin-top: 0.6rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.qa-stats div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  padding: 0.95rem 0 0.85rem;
+}
+.qa-stats dd {
+  font-size: 2.5rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.qa-stats dt {
+  margin-top: 0.5rem;
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.qa-roles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0.35rem 0;
+}
+.qa-roles li,
+.qa-machine {
+  padding: 1rem 1.05rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  background: var(--surface);
+}
+.qa-roles svg { color: var(--accent); margin-bottom: 0.75rem; }
+.prose-block .qa-role-model { margin-top: 0.15rem; font-weight: 650; letter-spacing: -0.01em; opacity: 1; }
+.prose-block .qa-role-does { margin-top: 0.4rem; font-size: 0.9rem; line-height: 1.55; }
+.prose-block .qa-role-where {
+  margin-top: 0.7rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--label);
+  opacity: 1;
+}
+
+.qa-machines {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  margin: 0.35rem 0;
+}
+.qa-machine svg {
+  margin-bottom: 0.75rem;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.qa-machine ul { margin-top: 0.5rem; font-size: 0.9rem; }
+.qa-machine li { padding: 0.4rem 0; border-top: 1px solid var(--border); }
+.qa-wire {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  align-self: center;
+  color: var(--label);
+}
+.qa-wire::before,
+.qa-wire::after { content: ''; width: 0.75rem; height: 1px; background: var(--control-border); }
+
+.qa-loop {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: 0.5rem 1.6rem;
+  align-items: center;
+  margin: 0.35rem 0;
+}
+.qa-ring { width: 100%; height: auto; overflow: visible; }
+.qa-ring-track { fill: none; stroke: var(--control-border); stroke-width: 1.5; stroke-dasharray: 2 8; stroke-linecap: round; }
+.qa-runner { transform-origin: 180px 150px; }
+.qa-runner circle { fill: var(--accent); }
+.qa-node circle { fill: var(--surface); stroke: var(--accent); stroke-width: 1.5; }
+.qa-node text {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 13px;
+  font-weight: 500;
+  text-anchor: middle;
+  fill: var(--foreground);
+}
+.qa-ring-label { font-size: 14px; font-weight: 650; text-anchor: middle; fill: var(--foreground); }
+.qa-ring-label.qa-start { text-anchor: start; }
+.qa-ring-label.qa-end { text-anchor: end; }
+.qa-ring-core {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-anchor: middle;
+  fill: var(--label);
+}
+.qa-steps { display: flex; flex-direction: column; gap: 0.55rem; counter-reset: qa; font-size: 0.92rem; line-height: 1.5; }
+.qa-steps li { counter-increment: qa; position: relative; padding-left: 1.5rem; }
+.qa-steps li::before {
+  content: counter(qa);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.74rem;
+  line-height: 1.9;
+  color: var(--accent);
+}
+.post-list.qa-numbered li { list-style: decimal; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .qa-runner { animation: qa-lap 18s linear infinite; }
+  .qa-ring-track { animation: qa-march 18s linear infinite; }
+  .qa-node circle { animation: qa-pass 18s linear infinite; }
+  .qa-node:nth-of-type(3) circle { animation-delay: 3s; }
+  .qa-node:nth-of-type(4) circle { animation-delay: 6s; }
+  .qa-node:nth-of-type(5) circle { animation-delay: 9s; }
+  .qa-node:nth-of-type(6) circle { animation-delay: 12s; }
+  .qa-node:nth-of-type(7) circle { animation-delay: 15s; }
+}
+@keyframes qa-lap { to { transform: rotate(360deg); } }
+@keyframes qa-march { to { stroke-dashoffset: -200; } }
+@keyframes qa-pass {
+  0%, 100% { fill: var(--accent-soft); }
+  10%, 94% { fill: var(--surface); }
+}
+
+@media (max-width: 640px) {
+  .qa-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .qa-stats div:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+  .qa-roles { grid-template-columns: minmax(0, 1fr); }
+  .qa-machines { grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }
+  .qa-wire { justify-content: center; }
+  .qa-loop { grid-template-columns: minmax(0, 1fr); }
+  .qa-ring { max-width: 320px; margin: 0 auto; }
+}

@@ -20,6 +20,35 @@ interface Post {
 }
 
 export const posts = {
+  'four-model-qa-loop': {
+    slug: 'four-model-qa-loop',
+    title: 'A QA loop run by four models',
+    description: 'How one orchestrator, a computer-use tester, a fixer per bug and three reviewers found, fixed, shipped and re-tested eighteen bugs in an evening, across a MacBook and a headless Dell.',
+    listingDescription: 'One orchestrator, a computer-use tester, a fixer per bug and three reviewers, split across a MacBook and a headless Dell. Eighteen bugs found, fixed, shipped and re-tested in an evening, and the five ways the setup fell over.',
+    summary: 'A multi-model QA loop in T3 Code: Claude Fable orchestrates, GPT Terra tests with computer use, Claude Opus fixes, and GPT Sol reviews.',
+    publishedISO: '2026-11-11T00:00:00.000Z',
+    publishedReadable: 'November 11, 2026',
+    readMinutes: 8,
+    tags: [
+      'Multi-agent',
+      'QA',
+      'Computer use'
+    ],
+    socialTitle: 'A QA loop run by four models | Layken Varholdt',
+    ogImage: 'https://www.laykenvarholdt.com/opengraph-image',
+    ogAlt: 'A QA loop run by four AI models across two machines',
+    twitterImage: 'https://www.laykenvarholdt.com/twitter-image',
+    keywords: [
+      'multi-agent orchestration',
+      'QA automation',
+      'computer use',
+      'T3 Code',
+      'Claude Code',
+      'Codex',
+      'code review',
+      'Convex'
+    ]
+  },
   'glm-5-3-flash-pr-agent-code-review': {
     slug: 'glm-5-3-flash-pr-agent-code-review',
     title: 'Code review for less than a cent',
