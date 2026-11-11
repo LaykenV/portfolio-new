@@ -125,7 +125,7 @@ export default function FourModelQaLoopPost() {
             Varholdt Field
           </a>
           , my field reporting app: an office web app and a crew app on
-          Convex. One admin account, no data. I wanted a full QA pass before
+          Convex. One admin account, no jobs. I wanted a full QA pass before
           anyone else got a login.
         </p>
         <p>
@@ -241,8 +241,7 @@ export default function FourModelQaLoopPost() {
       <section className="prose-block">
         <h2 className="post-h2">The loop</h2>
         <p>
-          Fable never polls. It starts a child, ends its turn, and the child
-          finishing wakes it up. The orchestrator thread ran more than forty
+          Fable starts a child and ends its turn. The child finishing wakes it up. The orchestrator thread ran more than forty
           short turns over the evening.
         </p>
 
@@ -301,10 +300,9 @@ export default function FourModelQaLoopPost() {
           checks, and that version finished.
         </p>
         <p>
-          The briefs that worked had the same three parts: about ten to
-          twenty concrete checks, a results table the tester had to fill in,
+          The briefs that worked had the same three parts: a numbered list of concrete checks, a results table the tester had to fill in,
           and a rule that a check it didn&apos;t perform is never a pass.
-          These rows are from the last re-test on production.
+          These rows are from the re-test on production.
         </p>
 
         <div className="post-table-wrap">
@@ -444,7 +442,7 @@ export default function FourModelQaLoopPost() {
         <p>
           Everything ran as the admin in desktop Chrome. Nobody clicked
           through as a foreman. Nobody carried a report into a second day.
-          The native build has never run on a phone. Fable listed all of that
+          The native build was not tested on a phone. Fable listed all of that
           in its report without being asked and said plainly that the phone
           app was not proven.
         </p>
