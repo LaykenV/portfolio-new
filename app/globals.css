@@ -1383,6 +1383,9 @@ html.dark .site-menu {
   }
 }
 
+.dp-reading { max-width: 58rem; }
+.dp-shot { max-width: 50rem; }
+
 .dp-col {
   min-height: 0;
   min-width: 0;
@@ -1403,24 +1406,14 @@ html.dark .site-menu {
   border-color: var(--border);
 }
 
+/* Columns scroll with the wheel, trackpad and keyboard, but show no bar. */
 .dp-scroll {
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: hsl(var(--foreground-hsl) / 0.25) transparent;
+  scrollbar-width: none;
 }
 .dp-scroll::-webkit-scrollbar {
-  width: 8px;
-}
-.dp-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-.dp-scroll::-webkit-scrollbar-thumb {
-  background: hsl(var(--foreground-hsl) / 0.25);
-  border-radius: 999px;
-}
-.dp-scroll::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--foreground-hsl) / 0.4);
+  display: none;
 }
 
 /* --- Type ramp ----------------------------------------------------------- */
@@ -2303,4 +2296,25 @@ html.dark .site-menu-cta {
   .qa-wire { justify-content: center; }
   .qa-loop { grid-template-columns: minmax(0, 1fr); }
   .qa-ring { max-width: 320px; margin: 0 auto; }
+}
+
+/* Big screens (24in iMac is 2240px wide). The reading column stops growing at
+   72rem and the three columns center, so the contact panel sits next to the
+   work instead of across a wide empty gap. The work itself gets bigger. */
+@media (min-width: 1600px) {
+  .dp-grid {
+    grid-template-columns: 20rem minmax(0, 72rem) 22rem;
+    justify-content: center;
+  }
+  .dp-reading { max-width: 64rem; }
+  .dp-shot { max-width: none; }
+  .dp-meta { max-width: none; }
+  .dp-summary { max-width: 42rem; }
+  .dp-details .dp-body { max-width: 42rem; }
+  .dp-body { font-size: 18px; }
+  .dp-tagline { font-size: 18px; }
+  .dp-links { font-size: 15px; }
+  .dp-band + .dp-band { margin-top: 3.5rem; padding-top: 3.5rem; }
+  .dp-nav-item { font-size: 15px; }
+  .dp-panel-row { font-size: 15px; }
 }

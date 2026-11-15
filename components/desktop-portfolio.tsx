@@ -129,7 +129,7 @@ function ProjectShot({
   }
 
   return (
-    <figure className="dp-shot mt-6 max-w-[50rem]">
+    <figure className="dp-shot mt-6">
       <div className="dp-chrome">
         {/* The hostname follows the selected screenshot. */}
         <span className="dp-chrome-url" aria-hidden="true">
@@ -175,7 +175,7 @@ function ProjectShot({
           className="dp-shot-img"
           style={{ opacity: view === 'landing' ? 1 : 0 }}
           aria-hidden={view !== 'landing'}
-          sizes="(min-width: 1280px) 800px, 60vw"
+          sizes="(min-width: 1600px) 1024px, (min-width: 1280px) 800px, 60vw"
         />
         {appMounted && (
           <>
@@ -186,7 +186,7 @@ function ProjectShot({
               className="dp-shot-img dp-shot-img-top"
               style={{ opacity: view === 'app' ? 1 : 0 }}
               aria-hidden={view !== 'app'}
-              sizes="(min-width: 1280px) 800px, 60vw"
+              sizes="(min-width: 1600px) 1024px, (min-width: 1280px) 800px, 60vw"
             />
 
           </>
@@ -233,7 +233,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
 
 
   return (
-    <div className="dp-root dp-grid hidden md:grid mx-auto max-w-[130rem]">
+    <div className="dp-root dp-grid hidden md:grid">
       {/* Below xl the identity leads, in a full-width row above work and contact. */}
       <div className="dp-compact-identity dp-compact-identity-row xl:hidden">
         <Portrait size={56} />
@@ -286,7 +286,7 @@ export function DesktopPortfolio({ projects }: { projects: Project[] }) {
 
       {/* ---------- Reading column ---------- */}
       <main ref={scrollRef} className="dp-col dp-scroll px-6 lg:px-10 xl:px-16 py-10 xl:py-12">
-        <div className="max-w-[58rem]">
+        <div className="dp-reading">
           {projects.map((project) => (
             <section
               key={project.slug}
