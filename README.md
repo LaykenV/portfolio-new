@@ -2,6 +2,8 @@
 
 My personal portfolio showcasing software engineering projects built with cutting-edge web technologies.
 
+> Since November 2026 laykenvarholdt.com redirects to [varholdt.com](https://www.varholdt.com/about/). The rules are in `vercel.json`: each blog post goes to its essay on varholdt.com and every other path goes to the About page. Delete `vercel.json` to bring this site back.
+
 [![Live Site](https://img.shields.io/badge/Live-laykenvarholdt.com-blue?style=for-the-badge)](https://www.laykenvarholdt.com)
 [![Next.js](https://img.shields.io/badge/Next.js-15.5-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.1-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
