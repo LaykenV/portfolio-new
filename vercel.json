@@ -1,12 +1,13 @@
 {
   "redirects": [
-    { "source": "/blog/four-model-qa-loop", "destination": "https://www.varholdt.com/essays/qa-loop/", "statusCode": 301 },
-    { "source": "/blog/glm-5-3-flash-pr-agent-code-review", "destination": "https://www.varholdt.com/essays/code-review-under-a-cent/", "statusCode": 301 },
-    { "source": "/blog/safari-iphone-theme-sync", "destination": "https://www.varholdt.com/essays/safari-theme-sync/", "statusCode": 301 },
-    { "source": "/blog/my-default-app-stack", "destination": "https://www.varholdt.com/essays/app-stack/", "statusCode": 301 },
-    { "source": "/blog/mesh-mind-debate-workflow", "destination": "https://www.varholdt.com/essays/model-debate/", "statusCode": 301 },
-    { "source": "/blog/:path*", "destination": "https://www.varholdt.com/essays/", "statusCode": 301 },
-    { "source": "/blog", "destination": "https://www.varholdt.com/essays/", "statusCode": 301 },
-    { "source": "/:path*", "destination": "https://www.varholdt.com/about/", "statusCode": 301 }
+    {"source": "/blog/four-model-qa-loop", "destination": "https://www.varholdt.com/essays/qa-loop/", "statusCode": 301},
+    {"source": "/blog/glm-5-3-flash-pr-agent-code-review", "destination": "https://www.varholdt.com/essays/code-review-under-a-cent/", "statusCode": 301},
+    {"source": "/blog/safari-iphone-theme-sync", "destination": "https://www.varholdt.com/essays/safari-theme-sync/", "statusCode": 301},
+    {"source": "/blog/my-default-app-stack", "destination": "https://www.varholdt.com/essays/app-stack/", "statusCode": 301},
+    {"source": "/blog/mesh-mind-debate-workflow", "destination": "https://www.varholdt.com/essays/model-debate/", "statusCode": 301},
+    {"source": "/blog/:path*", "destination": "https://www.varholdt.com/essays/", "statusCode": 301},
+    {"source": "/blog", "destination": "https://www.varholdt.com/essays/", "statusCode": 301},
+    {"source": "/", "destination": "https://www.varholdt.com/about/", "statusCode": 301},
+    {"source": "/:path*", "destination": "https://www.varholdt.com/about/", "statusCode": 301}
   ]
 }
